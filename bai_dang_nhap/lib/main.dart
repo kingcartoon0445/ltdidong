@@ -133,7 +133,31 @@ class _LoginPage extends State<LoginPage> {
           height: 35,
           width: double.infinity,
           child: RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                if (_email.text.isEmpty || _password.text.isEmpty) {
+                  showAlertDialog(
+                    context,
+                    'Thông báo',
+                    'Chưa nhập đầy đủ thông tin!',
+                  );
+                } else if (_email.text != _password.text) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ErrorPage()),
+                  );
+                } else {
+                  _loading = true;
+                  _fieldvisible = false;
+                  Future.delayed(Duration(seconds: 3), () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MailPage()),
+                    );
+                  });
+                }
+              });
+            },
             child: Text(
               'SIGN IN',
               style: TextStyle(fontSize: 15, color: Colors.white),
@@ -161,6 +185,76 @@ class _LoginPage extends State<LoginPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ErrorPage extends StatefulWidget {
+  const ErrorPage({Key? key}) : super(key: key);
+  @override
+  State<ErrorPage> createState() => _ErrorPage();
+}
+
+class _ErrorPage extends State<ErrorPage> {
+  @override
+  Widget build(BuildContext context) {
+    Widget TopSection = Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: Image.asset(
+            "assets/img/logo.png",
+            scale: 8.0,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: Text("UPS... couldn't Sign in",
+              style: TextStyle(fontSize: 25, color: Colors.white)),
+        ),
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: Text("Your username and password don't match.",
+              style: TextStyle(fontSize: 20, color: Colors.black)),
+        ),
+        Padding(
+          padding: EdgeInsets.all(15),
+          child: Text("Please try again.",
+              style: TextStyle(fontSize: 20, color: Colors.black)),
+        ),
+      ],
+    );
+
+    Widget ReturnButton = Padding(
+      padding: EdgeInsets.all(15),
+      child: Container(
+        height: 35,
+        width: double.infinity,
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          },
+          child: Text(
+            'TRY AGAIN',
+            style: TextStyle(fontSize: 15, color: Colors.white),
+          ),
+          color: Colors.black,
+        ),
+      ),
+    );
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          TopSection,
+          SizedBox(height: 100),
+          ReturnButton,
+        ]),
       ),
     );
   }
