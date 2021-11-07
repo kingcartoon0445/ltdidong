@@ -165,3 +165,125 @@ class _LoginPage extends State<LoginPage> {
     );
   }
 }
+
+class MailPage extends StatefulWidget {
+  const MailPage({Key? key}) : super(key: key);
+  @override
+  State<MailPage> createState() => _MailPage();
+}
+
+class _MailPage extends State<MailPage> {
+  Container Mail_Header(String header_name) {
+    return Container(
+      color: Colors.grey.shade200,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Text(
+            header_name,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey.shade600,
+            ),
+          ),
+        ],
+      ),
+      padding: EdgeInsets.all(10),
+    );
+  }
+
+  Map<String, bool> _Types = {
+    'All inboxes': false,
+    'ICloud': false,
+    'Gmail': false,
+    'Hotmail': false,
+    'VIP': false,
+    'Secure': false,
+    'Notifications': false,
+  };
+
+  CheckboxListTile Mail_Content(String content_name, int amount) {
+    return CheckboxListTile(
+      value: _Types[content_name],
+      onChanged: (bool? value) {
+        setState(() {
+          _Types[content_name] = value!;
+        });
+      },
+      title: Wrap(
+        spacing: 12,
+        children: [Icon(Icons.mail), Text(content_name)],
+      ),
+      secondary: Text(amount.toString()),
+      controlAffinity: ListTileControlAffinity.leading,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> text = ['All inboxes', 'ICloud'];
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          },
+          icon: Icon(Icons.logout),
+          color: Colors.blue,
+        ),
+        backgroundColor: Colors.grey.shade200,
+        actions: [
+          Padding(
+            padding: EdgeInsets.all(18),
+            child: TextButton(
+              onPressed: () {},
+              child: Text('Done', style: TextStyle(fontSize: 15)),
+            ),
+          ),
+        ],
+        title: Text('Mailboxes', style: TextStyle(color: Colors.black)),
+        centerTitle: true,
+      ),
+      body: ListView(
+        children: ListTile.divideTiles(context: context, tiles: [
+          Mail_Header('Mailboxes'),
+          Mail_Content('All inboxes', 10),
+          Mail_Content('ICloud', 10),
+          Mail_Content('Gmail', 10),
+          Mail_Content('Hotmail', 10),
+          Mail_Content('VIP', 10),
+          Mail_Header('Special folders'),
+          Mail_Content('Secure', 10),
+          Mail_Content('Notifications', 10),
+        ]).toList(),
+      ),
+      bottomNavigationBar: Container(
+        height: 55,
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Colors.blue, width: 2),
+          ),
+        ),
+        child: OutlinedButton(
+          onPressed: () {},
+          style: OutlinedButton.styleFrom(
+            backgroundColor: Colors.grey[300],
+            primary: Colors.black,
+          ),
+          child: ListTile(
+            title: Center(
+              child: Text(
+                'Update just now',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            trailing: Icon(Icons.upgrade),
+          ),
+        ),
+      ),
+    );
+  }
+}
