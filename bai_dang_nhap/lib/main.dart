@@ -1,3 +1,7 @@
+//Thanh Duy
+//Đạt Thuận
+//Hoàng
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +19,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+// Tạo thông báo khi không nhập gì
 showAlertDialog(BuildContext context, String _title, String _content) {
   AlertDialog alert = AlertDialog(
     title: Text(_title),
@@ -38,6 +42,7 @@ showAlertDialog(BuildContext context, String _title, String _content) {
   );
 }
 
+// Tạo trang login
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -46,8 +51,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPage extends State<LoginPage> {
-  bool _loading = false;
-  bool _fieldvisible = true;
+  bool _loading = false; // nếu true thì sẽ chạy màng hình loading, false thì ngược lại  
+  bool _fieldvisible = true; // nếu true thì chạy màng hình đăng nhập,false th2i ngược lại
 
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -190,6 +195,7 @@ class _LoginPage extends State<LoginPage> {
   }
 }
 
+//Trang lỗi khi đăng nhập sai
 class ErrorPage extends StatefulWidget {
   const ErrorPage({Key? key}) : super(key: key);
   @override
@@ -204,8 +210,8 @@ class _ErrorPage extends State<ErrorPage> {
         Padding(
           padding: EdgeInsets.all(15),
           child: Image.asset(
-            "assets/img/logo.png",
-            scale: 8.0,
+            "assets/img/dis2.png",
+            
           ),
         ),
         Padding(
@@ -260,6 +266,7 @@ class _ErrorPage extends State<ErrorPage> {
   }
 }
 
+//Trang mailbox
 class MailPage extends StatefulWidget {
   const MailPage({Key? key}) : super(key: key);
   @override
@@ -333,7 +340,11 @@ class _MailPage extends State<MailPage> {
           Padding(
             padding: EdgeInsets.all(18),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {   showAlertDialog(
+                    context,
+                    'Thông báo',
+                    'Đợi bản update sau nhé :v',
+                  );},
               child: Text('Done', style: TextStyle(fontSize: 15)),
             ),
           ),
@@ -362,7 +373,11 @@ class _MailPage extends State<MailPage> {
           ),
         ),
         child: OutlinedButton(
-          onPressed: () {},
+          onPressed: () {   showAlertDialog(
+                    context,
+                    'Thông báo',
+                    'Đợi bản update sau nhé :v',
+                  );},
           style: OutlinedButton.styleFrom(
             backgroundColor: Colors.grey[300],
             primary: Colors.black,
