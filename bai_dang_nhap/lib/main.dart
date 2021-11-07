@@ -36,11 +36,11 @@ showAlertDialog(BuildContext context, String _title, String _content) {
       return alert;
     },
   );
-}  
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
-  
+
   @override
   State<LoginPage> createState() => _LoginPage();
 }
