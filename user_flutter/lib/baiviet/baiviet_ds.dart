@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({ Key? key }) : super(key: key);
@@ -14,23 +15,33 @@ Widget baiviet(){
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          backgroundColor: Colors.white,
-          title: Text("Danh sách",style: TextStyle(color: Colors.black),),
-          centerTitle: true,
-          leading: Icon(Icons.ac_unit,color: Colors.black,),
-          actions: [CircleAvatar(child: Text("D"),)],
-        ),
-       SliverToBoxAdapter(
-         child: ListView(
-           children: [
-             baiviet(),
-           ],
-         ),
-       )
-      ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,  
+        elevation: 0.0,
+        leading:Image.asset('assets/logo/logo.png'),
+        title: Text("Danh sách bài viết",style: TextStyle(color: Colors.black),),
+        centerTitle: true,
+        actions: [CircleAvatar(child: Text("D"),)],
+      ),
+      body: Column(
+        children: [
+          Stack(
+                children: [
+                  Container(
+                width: 400,
+                height: 200,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(23),
+                image: DecorationImage(image: AssetImage("assets/imgs/baiviets/test.jpg"),
+                fit: BoxFit.cover),
+                ),
+              ),
+            Text("data",style: TextStyle(color: Colors.black),),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
