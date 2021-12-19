@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:user_flutter/baiviet/baiviet_ds.dart';
+import 'package:user_flutter/login/LoginPage.dart';
 
 class Background extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _BackgroundState extends State<Background> {
         return MyApp();
         break;
       case 2:
-        return MyApp();
+        return LoginPage();
         break;
     }
     return Text("null");
@@ -28,6 +29,25 @@ class _BackgroundState extends State<Background> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        leading: Image.asset(
+          'assets/logo/logo.png',
+          width: 50,
+          height: 50,
+        ),
+        title: Text(
+          "Danh sách bài viết",
+          style: TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+        actions: [
+          CircleAvatar(
+            child: Text("D"),
+          )
+        ],
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         index: 0,
