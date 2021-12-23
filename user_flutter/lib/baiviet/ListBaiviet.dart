@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'baiviet_ds.dart';
+import 'baiviet_chitiet.dart';
 class Lst_baiviet extends StatefulWidget {
   const Lst_baiviet({ Key? key }) : super(key: key);
 
@@ -32,7 +33,12 @@ class card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){ Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ChiTiet(),
+                      ),
+                    );},
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: 20, vertical: 20 * 0.75),
@@ -43,7 +49,7 @@ class card extends StatelessWidget {
                 Container(height: 68,
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.all(20),
-                            width: double.maxFinite*0.4,
+                            width: 144,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(23), 
                     image: DecorationImage(
@@ -59,7 +65,7 @@ class card extends StatelessWidget {
           children: [
           TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Colors.black,fontWeight:FontWeight.bold,fontSize: 15),)), //#5
           ElevatedButton.icon(onPressed: (){},style:  ElevatedButton.styleFrom(primary: Colors.white,elevation: 0), icon: Icon(Icons.location_on_outlined,color: Color(0xFF4C56CE),), label: Text("Hạ Long, Quảng Ninh",style: TextStyle(fontSize: 12,color: Color(0xFF828282)),)),
-        
+          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Color(0xFF828282),fontSize: 12),),),
         ],)),
           ],
         ),

@@ -5,14 +5,14 @@ class chuoidecu extends StatefulWidget {
 }
 
 class _chuoidecuState extends State<chuoidecu> {
-  List<String> ds_Decu=["Tất cả","Nhiều người thích","Nhiều lượt xem"];
+  List<String> ds_Decu=["Tất cả","Nhiều người thích","Nhiều lượt xem","của tôi"];
   int selectedIndex=0;
   @override
     Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: SizedBox(
-        height: 25,
+        height: 28,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: ds_Decu.length,
