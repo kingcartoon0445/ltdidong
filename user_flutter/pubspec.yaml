@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^1.0.0
-
+  smooth_star_rating: 1.1.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -40,6 +40,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   curved_navigation_bar: ^1.0.1
+  
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -67,6 +68,7 @@ flutter:
      - assets/imgs/login/login.jpg
      - assets/imgs/login/register.jpg
      - assets/imgs/login/forgot.jpg
+     - assets/imgs/diadanh/VungTau.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -27,8 +27,8 @@ class _MyAppState extends State<MyApp> {
               'Bài viết nổi bật',
               style: TextStyle(),
             ),
-             bv_decu(),
-             bv_chuoidecu(),
+            bv_decu(),
+            bv_chuoidecu(),
           ],
         ),
       ),
@@ -48,7 +48,7 @@ class bv_chuoidecu extends StatelessWidget {
       "Bài viết của bạn"
     ];
     return Container();
-    }
+  }
 }
 
 class bv_decu extends StatefulWidget {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:user_flutter/baiviet/baiviet_ds.dart';
+import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
+import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
 import 'package:user_flutter/login/LoginPage.dart';
 
 class Background extends StatefulWidget {
@@ -14,7 +16,7 @@ class _BackgroundState extends State<Background> {
   Widget Page(int p) {
     switch (p) {
       case 0:
-        return MyApp();
+        return DanhSachDiaDanh();
         break;
       case 1:
         return MyApp();
