@@ -36,7 +36,7 @@ class _chuoidecuState extends State<chuoidecu> {
             Text(
               ds_Decu[index],
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontFamily: 'Cabin_B',fontWeight:FontWeight.bold,
                 fontSize: 14,
                 color: selectedIndex == index ? Color(0xFF4C56CE) : Colors.grey,
               ),

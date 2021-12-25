@@ -24,10 +24,6 @@ class _MyAppState extends State<MyApp> {
       backgroundColor: Colors.white,
       body:  Column(
           children: [
-            Text(
-              'Bài viết nổi bật',
-              style: TextStyle(),
-            ),
               bv_decu(),
              chuoidecu(),
              Lst_baiviet(),
@@ -89,24 +85,24 @@ class _bv_decuState extends State<bv_decu> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
-                                fontWeight: FontWeight.w700),
+                                fontFamily: 'Cabin_B',fontWeight:FontWeight.bold
+                                ),
                           ),
                           Spacer(),
                           Row(
                             children: [
-                              Icon(
-                                Icons.place_outlined,
+                             SvgPicture.asset("assets/imgs/svg/gps.svg",
                                 color: Colors.white,
-                                size: 15,
+                                height: 15,width: 15,
                               ),
                               Text(
                                 "Hạ Long, Quảng Ninh",
-                                style: TextStyle(color: Colors.white,fontSize: 10,),
+                                style: TextStyle(color: Colors.white,fontSize: 10,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),
                               ),
                               Spacer(),
                               Text(
                                 'data',
-                                style: TextStyle(color: Colors.white,fontSize: 10,),
+                                style: TextStyle(color: Colors.white,fontSize: 10,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),
                               ),
                             ],
                           )
@@ -121,41 +117,5 @@ class _bv_decuState extends State<bv_decu> {
         ],
       ),
     );
-  }
-}
-
-class gt_baiviet extends StatelessWidget {
-  const gt_baiviet({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return 
-    Container(
-      margin: EdgeInsets.all(20),
-       height: 68,
-      child:Row(
-        children: [
-        Container(
-          alignment: Alignment.topLeft,
-          padding: EdgeInsets.all(20),
-                    width: 144,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(23), 
-             image: DecorationImage(
-                      image: AssetImage("assets/imgs/baiviets/test.jpg"),
-                      fit: BoxFit.cover,),
-          ),
-        ),
-        Expanded(child:  Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Colors.black,fontWeight:FontWeight.bold,fontSize: 15),)), //#5
-          ElevatedButton.icon(onPressed: (){},style:  ElevatedButton.styleFrom(primary: Colors.white,elevation: 0), icon: Icon(Icons.location_on_outlined,color: Color(0xFF4C56CE),), label: Text("Hạ Long, Quảng Ninh",style: TextStyle(fontSize: 12,color: Color(0xFF828282)),)),
-        
-        ],)),
-      ],
-    ),
-  );
   }
 }
