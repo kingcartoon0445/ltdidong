@@ -33,6 +33,7 @@ class AnhDiaDanh extends StatelessWidget {
       width: double.infinity,
       height: 200,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
             flex: 3,

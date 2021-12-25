@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:user_flutter/colorplush.dart';
+import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 
 class DanhSachDiaDanh extends StatefulWidget {
   const DanhSachDiaDanh({Key? key}) : super(key: key);
@@ -113,7 +114,7 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 80,
+                      height: 100,
                       padding:
                           EdgeInsets.symmetric(horizontal: 23, vertical: 5),
                       decoration: BoxDecoration(
@@ -123,19 +124,28 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                         color: kCardInfoBG.withOpacity(0.5),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "Vũng Tàu",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700),
+                          SizedBox(
+                            height: 40,
+                            width: double.infinity,
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChiTietDiaDanh()),
+                                );
+                              },
+                              child: Text(
+                                "Vũng Tàu",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ),
                           ),
-                          Spacer(),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -196,103 +206,104 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-        crossAxisCount: 2,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.all(10),
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.2,
-        children: List.generate(4, (index) {
-          return GestureDetector(
-            onTap: () {},
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Stack(
-                children: [
-                  Hero(
-                    tag: "Demotag",
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        "assets/imgs/diadanh/VungTau.png",
-                        width: double.infinity,
-                        height: 400,
-                        fit: BoxFit.cover,
-                      ),
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.all(10),
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
+      childAspectRatio: 1.2,
+      children: List.generate(4, (index) {
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Stack(
+              children: [
+                Hero(
+                  tag: "btn$index",
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      "assets/imgs/diadanh/VungTau.png",
+                      width: double.infinity,
+                      height: 400,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 55,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(23),
-                              bottomRight: Radius.circular(23)),
-                          color: kCardInfoBG.withOpacity(0.5),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Vũng Tàu",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.place_outlined,
-                                      color: Colors.white,
-                                      size: 10,
-                                    ),
-                                    Text(
-                                      "Bà Rịa - Vũng Tàu",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 10),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    SmoothStarRating(
-                                        allowHalfRating: false,
-                                        onRated: (v) {},
-                                        starCount: 5,
-                                        rating: 4,
-                                        size: 12.0,
-                                        isReadOnly: true,
-                                        color: Colors.yellow,
-                                        borderColor: Colors.yellow,
-                                        spacing: 0.0),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 55,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(23),
+                            bottomRight: Radius.circular(23)),
+                        color: kCardInfoBG.withOpacity(0.5),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Vũng Tàu",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.place_outlined,
+                                    color: Colors.white,
+                                    size: 10,
+                                  ),
+                                  Text(
+                                    "Bà Rịa - Vũng Tàu",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 10),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SmoothStarRating(
+                                      allowHalfRating: false,
+                                      onRated: (v) {},
+                                      starCount: 5,
+                                      rating: 4,
+                                      size: 12.0,
+                                      isReadOnly: true,
+                                      color: Colors.yellow,
+                                      borderColor: Colors.yellow,
+                                      spacing: 0.0),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-          );
-        }));
+          ),
+        );
+      }),
+    );
   }
 }
