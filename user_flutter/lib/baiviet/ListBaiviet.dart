@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'baiviet_ds.dart';
 import 'baiviet_chitiet.dart';
 class Lst_baiviet extends StatefulWidget {
@@ -63,9 +64,9 @@ class card extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Colors.black,fontWeight:FontWeight.bold,fontSize: 15),)), //#5
-          ElevatedButton.icon(onPressed: (){},style:  ElevatedButton.styleFrom(primary: Colors.white,elevation: 0), icon: Icon(Icons.location_on_outlined,color: Color(0xFF4C56CE),), label: Text("Hạ Long, Quảng Ninh",style: TextStyle(fontSize: 12,color: Color(0xFF828282)),)),
-          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Color(0xFF828282),fontSize: 12),),),
+          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Colors.black,fontFamily: 'Cabin_B',fontWeight: FontWeight.bold,fontSize: 15),)), //#5
+          ElevatedButton.icon(onPressed: (){},style:  ElevatedButton.styleFrom(primary: Colors.white,elevation: 0), icon:  SvgPicture.asset('assets/imgs/svg/gps.svg',color: Color(0xFF4C56CE),height: 15,width: 15,), label: Text("Hạ Long, Quảng Ninh",style: TextStyle(fontSize: 12,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold,color: Color(0xFF828282)),)),
+          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Color(0xFF828282),fontSize: 12,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),),),
         ],)),
           ],
         ),
