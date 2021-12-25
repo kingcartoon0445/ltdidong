@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:user_flutter/login/LoginPage.dart';
 import 'package:user_flutter/login/WelcomePage.dart';
 import 'background.dart';
 
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       home: Background(),
     );
   }

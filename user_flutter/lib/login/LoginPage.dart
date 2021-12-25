@@ -40,7 +40,7 @@ class LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Login',
+                          'Đăng nhập',
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
@@ -106,7 +106,7 @@ class LoginPageState extends State<LoginPage> {
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 20),
                                     border: InputBorder.none,
-                                    hintText: 'Password',
+                                    hintText: 'Mật khẩu',
                                     prefixIcon: Padding(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 20),
@@ -140,7 +140,7 @@ class LoginPageState extends State<LoginPage> {
                                 );
                               },
                               child: Text(
-                                'Forgot Passwords?',
+                                'Quên mật khẩu?',
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.white,
@@ -168,7 +168,7 @@ class LoginPageState extends State<LoginPage> {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: Text(
-                                  'Login',
+                                  'Đăng nhập',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
@@ -189,7 +189,7 @@ class LoginPageState extends State<LoginPage> {
                                   );
                                 },
                                 child: Text(
-                                  'Register Now',
+                                  'Chưa có tài khoản?',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Colors.white,
