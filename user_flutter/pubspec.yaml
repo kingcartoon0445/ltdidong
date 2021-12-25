@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^1.0.0
+  smooth_star_rating: 1.1.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -67,6 +68,7 @@ flutter:
      - assets/imgs/login/login.jpg
      - assets/imgs/login/register.jpg
      - assets/imgs/login/forgot.jpg
+     - assets/imgs/diadanh/VungTau.png
      #icon
      - assets/imgs/svg/
   #   - images/a_dot_ham.jpeg
