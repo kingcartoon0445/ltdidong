@@ -17,13 +17,14 @@ class WelcomePageState extends State<WelcomePage> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/imgs/login/login.jpg'),
+              image: AssetImage('assets/imgs/login/welcome.jpg'),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
             ),
           ),
         ),
         Scaffold(
+          backgroundColor: Colors.transparent,
           body: SafeArea(
             child: Container(
               width: double.infinity,
@@ -36,10 +37,26 @@ class WelcomePageState extends State<WelcomePage> {
                   Column(
                     children: [
                       Text(
-                        'Welcome',
+                        'TIN TỨC DU LỊCH',
                         style: TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Text(
+                        'Theo dõi, chia sẻ và tìm kiếm những',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        'địa điểm du lịch lí tưởng',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
                         ),
                       ),
                     ],
@@ -64,12 +81,13 @@ class WelcomePageState extends State<WelcomePage> {
                         minWidth: double.infinity,
                         height: 60,
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.black),
+                          side: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(50),
                         ),
                         child: Text(
-                          'Login',
+                          'Đăng nhập',
                           style: TextStyle(
+                            color: Colors.white,
                             fontWeight: FontWeight.w600,
                             fontSize: 18,
                           ),
@@ -91,7 +109,7 @@ class WelcomePageState extends State<WelcomePage> {
                           borderRadius: BorderRadius.circular(50),
                         ),
                         child: Text(
-                          'Register',
+                          'Đăng ký',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
