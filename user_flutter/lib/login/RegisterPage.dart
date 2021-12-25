@@ -38,7 +38,7 @@ class RegisterPageState extends State<RegisterPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Register',
+                          'Đăng ký',
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
@@ -104,7 +104,7 @@ class RegisterPageState extends State<RegisterPage> {
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 20),
                                     border: InputBorder.none,
-                                    hintText: 'Password',
+                                    hintText: 'Mật khẩu',
                                     prefixIcon: Padding(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 20),
@@ -140,7 +140,7 @@ class RegisterPageState extends State<RegisterPage> {
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 20),
                                     border: InputBorder.none,
-                                    hintText: 'Confirm Password',
+                                    hintText: 'Xác nhận mật khẩu',
                                     prefixIcon: Padding(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 20),
@@ -185,7 +185,7 @@ class RegisterPageState extends State<RegisterPage> {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: Text(
-                                  'Register',
+                                  'Đăng ký',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
