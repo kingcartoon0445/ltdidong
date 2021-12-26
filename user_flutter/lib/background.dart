@@ -5,8 +5,8 @@ import 'package:user_flutter/baiviet/baiviet_chitiet.dart';
 import 'package:user_flutter/baiviet/baiviet_ds.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
-import 'package:user_flutter/login/LoginPage.dart';
 import 'package:user_flutter/linhtinh/thongtin.dart';
+import 'Hoang/login/LoginPage.dart';
 
 class Background extends StatefulWidget {
   @override
@@ -25,7 +25,7 @@ class _BackgroundState extends State<Background> {
         return MyApp();
         break;
       case 2:
-        return LoginPage();
+        return DanhSachDiaDanh();
         break;
       case 3:
         return LoginPage();

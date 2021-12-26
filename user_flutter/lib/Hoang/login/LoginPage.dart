@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../background.dart';
 import 'ForgotPasswordPage.dart';
 import 'RegisterPage.dart';
 
@@ -159,7 +160,14 @@ class LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: MaterialButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Background(),
+                                    ),
+                                  );
+                                },
                                 minWidth: double.infinity,
                                 height: 60,
                                 color: Color.fromRGBO(125, 130, 188, 1),

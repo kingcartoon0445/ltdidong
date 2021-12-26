@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 
@@ -162,21 +161,6 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SmoothStarRating(
-                                      allowHalfRating: false,
-                                      onRated: (v) {},
-                                      starCount: 5,
-                                      rating: 4,
-                                      size: 20.0,
-                                      isReadOnly: true,
-                                      color: Colors.yellow,
-                                      borderColor: Colors.yellow,
-                                      spacing: 0.0)
-                                ],
-                              )
                             ],
                           ),
                         ],
@@ -275,21 +259,6 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 10),
                                   ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SmoothStarRating(
-                                      allowHalfRating: false,
-                                      onRated: (v) {},
-                                      starCount: 5,
-                                      rating: 4,
-                                      size: 12.0,
-                                      isReadOnly: true,
-                                      color: Colors.yellow,
-                                      borderColor: Colors.yellow,
-                                      spacing: 0.0),
                                 ],
                               ),
                             ],
