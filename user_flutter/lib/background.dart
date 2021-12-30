@@ -6,8 +6,7 @@ import 'package:user_flutter/baiviet/baiviet_ds.dart';
 import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
-import 'package:user_flutter/linhtinh/thongthin2.dart';
-import 'package:user_flutter/linhtinh/thongtin.dart';
+import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Hoang/login/LoginPage.dart';
 import 'colorplush.dart';
 
@@ -79,7 +78,7 @@ class _BackgroundState extends State<Background> {
                        nut_Icon(CircleAvatar(child: Text("s"),radius: 20,),
                                 Text("daat",style: cabin_B(Colors.black, 15),),
                                 Navigator.push(context,
-                                MaterialPageRoute(builder:(context)=> thongtin2()
+                                MaterialPageRoute(builder:(context)=> thongtin()
                                   ),
                                 ),
                               ),

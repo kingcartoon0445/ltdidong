@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
-
 import '../class_chung.dart';
 import '../colorplush.dart';
 
 
 
-class thongtin2 extends StatefulWidget {
-  const thongtin2({Key? key}) : super(key: key);
+class thongtin extends StatefulWidget {
+  const thongtin({Key? key}) : super(key: key);
 
   @override
-  State<thongtin2> createState() => _thongtin2State();
+  State<thongtin> createState() => _thongtinState();
 }
 
-class _thongtin2State extends State<thongtin2> {
+class _thongtinState extends State<thongtin> {
   List<int> top = <int>[];
   List<int> bottom = <int>[0,1,2,3,4,5,6,7];
 
