@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:user_flutter/Hoang/search/SearchPage.dart';
 import 'package:user_flutter/baiviet/baiviet_chitiet.dart';
 import 'package:user_flutter/baiviet/baiviet_ds.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
@@ -19,7 +20,7 @@ class _BackgroundState extends State<Background> {
   Widget Page(int p) {
     switch (p) {
       case 0:
-        return DanhSachDiaDanh();
+        return SearchPage();
         break;
       case 1:
         return MyApp();
@@ -64,7 +65,11 @@ class _BackgroundState extends State<Background> {
         index: 0,
         height: 60.0,
         items: <Widget>[
-          Icon(Icons.search_outlined, color: Colors.white, size: 30),
+          Icon(
+            Icons.search_outlined,
+            color: Colors.white,
+            size: 30,
+          ),
           SvgPicture.asset(
             'assets/imgs/svg/home.svg',
             color: Colors.white,
