@@ -22,6 +22,7 @@ class _chuoidecuState extends State<chuoidecu> {
     );
   }
     Widget buildCategory(int index) {
+      Size size=MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -44,8 +45,8 @@ class _chuoidecuState extends State<chuoidecu> {
             Container(
               alignment: Alignment.bottomCenter,
               margin: EdgeInsets.only(top: 5), //top padding 5
-              height: 2,
-              width: 30,
+              height: 2*size.height/640,
+              width: 30*size.width/360,
               color: selectedIndex == index ? Colors.black : Colors.transparent,
             )
           ],

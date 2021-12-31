@@ -7,6 +7,7 @@ import 'package:user_flutter/baiviet/baiviet_ds.dart';
 import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
+import 'package:user_flutter/linhtinh/caidat.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Hoang/login/LoginPage.dart';
 import 'colorplush.dart';
@@ -33,9 +34,6 @@ class _BackgroundState extends State<Background> {
       case 3:
         return LoginPage();
         break;
-      case 4:
-        return thongtin();
-        break;
     }
     return Text("null");
   }
@@ -46,66 +44,29 @@ class _BackgroundState extends State<Background> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        leading: Image.asset(
+        leading: IconButton(onPressed: (){
+            Navigator.push(context,
+                                MaterialPageRoute(builder:(context)=> CaiDat()
+                                  ),
+                                );
+        },icon:Image.asset(
           'assets/logo/logo.png',
           width: 50,
           height: 50,
-        ),
+        ),),
         title: Text(
           "Danh sách bài viết",
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         actions: [
-          PopupMenuButton(
-            shape:RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(23),
-                bottomLeft: Radius.circular(23),
-                bottomRight:  Radius.circular(23))
-              ),
-            child:CircleAvatar(
-                child: Text("D"),
-             ),
-            itemBuilder: (context)=>[
-              PopupMenuItem(
-                
-                  child: Container(
-                    height: 180, width: 180,child: 
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                       nut_Icon(CircleAvatar(child: Text("s"),radius: 20,),
-                                Text("daat",style: cabin_B(Colors.black, 15),),
-                                Navigator.push(context,
+          IconButton(onPressed: (){
+              Navigator.push(context,
                                 MaterialPageRoute(builder:(context)=> thongtin()
-                                  ),
-                                ),
-                              ),
-                        Container(
-                        padding: EdgeInsets.only(right: 40),
-                        child: nut_Icon(
-                          Icon(Icons.settings_outlined,size: 25,),
-                          Text("Cài đặt",style: cabin_B(Colors.black, 15),),
-                         context
-                          ),),
-                        OutlinedButton(
-                          onPressed: (){},
-                          style: ButtonStyle(
-                            backgroundColor:MaterialStateProperty.all<Color>(Color(0xFF7D82BC)),
-                            fixedSize: MaterialStateProperty.all(Size(150, 50)) ,
-                            shape:MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(23.0))),
-                          ),
-                          child: Row(
-                            children: [
-                          Icon(Icons.logout_outlined,size: 25,color: Colors.white,),
-                          Text("Đăng xuất",style: cabin_B(Colors.white, 15),)
-                        ],))
-                        ],),
-                       )),
-                    ],
-          ),
+                                  ),);
+          }, icon: CircleAvatar(
+            child: Text("D"),
+          ),)
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -122,7 +83,7 @@ class _BackgroundState extends State<Background> {
             'assets/imgs/svg/home.svg',
             color: Colors.white,
             width: 30,
-            height: 30,
+            height: 30, 
           ),
           SvgPicture.asset(
             'assets/imgs/svg/gps.svg',
@@ -132,12 +93,6 @@ class _BackgroundState extends State<Background> {
           ),
           SvgPicture.asset(
             'assets/imgs/svg/gpsplush.svg',
-            color: Colors.white,
-            width: 30,
-            height: 30,
-          ),
-          SvgPicture.asset(
-            'assets/imgs/svg/user.svg',
             color: Colors.white,
             width: 30,
             height: 30,

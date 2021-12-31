@@ -21,6 +21,11 @@ class _thongtinState extends State<thongtin> {
   Widget build(BuildContext context) {
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Color(0xFF7D82BC),
+        elevation: 0.0,
+      ),
       body: CustomScrollView(
         center: centerKey,
         slivers: <Widget>[
@@ -35,7 +40,7 @@ class _thongtinState extends State<thongtin> {
                         bottomRight: Radius.circular(40),
                         bottomLeft: Radius.circular(40)),
                   ),
-                  height: 170,
+                  height: 150,
                   width: 360,
                   child: Padding(
                     padding: EdgeInsets.all(15),
@@ -46,21 +51,21 @@ class _thongtinState extends State<thongtin> {
                         Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              CircleAvatar(radius: 50, child: Text("s")),
+                              CircleAvatar(radius: 60, backgroundImage:AssetImage("assets/imgs/baiviets/test.jpg"),)
                             ]),
                         Text(
                           "Đen vâu",
-                          style: cabin_B(Colors.white, 25),
+                          style: cabin_B(Colors.white, 30.0),
                         )
                       ],
                     ),
                   ),
                 ),
                    Container(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: 20,top: 10),
                   child: Text(
                     "Thông tin",
-                    style: cabin_B(Colors.black, 20),
+                    style: cabin_B(Colors.black, 20.0),
                   ),
                 ),
                 Container(
@@ -79,7 +84,7 @@ class _thongtinState extends State<thongtin> {
                           ),
                           Text(
                             "Địa điểm đã đến",
-                            style: cabin(Color(0xFF4C56CE), 15),
+                            style: cabin(Color(0xFF4C56CE), 15.0),
                           ),
                           context),
                       //nút địa chỉ
@@ -91,7 +96,7 @@ class _thongtinState extends State<thongtin> {
                           ),
                           Text(
                             "Địa chỉ",
-                            style: cabin(Color(0xFF4C56CE), 15),
+                            style: cabin(Color(0xFF4C56CE), 15.0),
                           ),
                           context),
                       //nút số điện thoại
@@ -103,7 +108,7 @@ class _thongtinState extends State<thongtin> {
                           ),
                           Text(
                             "031289412",
-                            style: cabin(Color(0xFF4C56CE), 15),
+                            style: cabin(Color(0xFF4C56CE), 15.0),
                           ),
                           context),
                     ],

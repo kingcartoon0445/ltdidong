@@ -33,6 +33,7 @@ class card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
     return InkWell(
       onTap: (){ Navigator.push(
                       context,
@@ -45,29 +46,25 @@ class card extends StatelessWidget {
             horizontal: 20, vertical: 20 * 0.75),
         child: Row(
           children: [
-            Stack(
-              children: [
-                Container(height: 68,
+                Container(
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.all(20),
-                            width: 144,
+                  width: 144*size.width/360,
+                  height: 100*size.height/640,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(23), 
                     image: DecorationImage(
-                              image: AssetImage("assets/imgs/baiviets/test.jpg"),
+                              image: AssetImage("assets/imgs/baiviets/vhlong.jpg"),
                               fit: BoxFit.cover,),
                   ),
                 ),
-              ],
-            ),
-            Expanded(child:  Column(
+            Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Colors.black,fontFamily: 'Cabin_B',fontWeight: FontWeight.bold,fontSize: 15),)), //#5
-          ElevatedButton.icon(onPressed: (){},style:  ElevatedButton.styleFrom(primary: Colors.white,elevation: 0), icon:  SvgPicture.asset('assets/imgs/svg/gps.svg',color: Color(0xFF4C56CE),height: 15,width: 15,), label: Text("Hạ Long, Quảng Ninh",style: TextStyle(fontSize: 12,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold,color: Color(0xFF828282)),)),
-          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Color(0xFF828282),fontSize: 12,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),),),
-        ],)),
+          Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Colors.black,fontFamily: 'Cabin_B',fontWeight: FontWeight.bold,fontSize: 20),), //#5
+          ElevatedButton.icon(onPressed: (){},style:  ElevatedButton.styleFrom(primary: Colors.white,elevation: 0), icon:  SvgPicture.asset('assets/imgs/svg/gps.svg',color: Color(0xFF4C56CE),height: 15*size.height/640,width: 15*size.width/360,), label: Text("Hạ Long, Quảng Ninh",style: TextStyle(fontSize: 15,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold,color: Color(0xFF828282)),)),
+          TextButton(onPressed: (){}, child: Text("Vẻ đẹp Vịnh Hạ Long",style: TextStyle(color: Color(0xFF828282),fontSize: 15,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),),),
+        ],)
           ],
         ),
       ),
