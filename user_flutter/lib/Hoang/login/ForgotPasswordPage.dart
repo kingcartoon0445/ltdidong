@@ -88,11 +88,9 @@ class ForgotPageState extends State<ForgotPage> {
                               _currentStep = step;
                             });
                           },
-<<<<<<< HEAD:user_flutter/lib/Hoang/login/ForgotPasswordPage.dart
+
                           controlsBuilder: (context,ControlsDetails controls) {
-=======
-                          controlsBuilder: (context, ControlsDetails controls) {
->>>>>>> origin/Thuan:user_flutter/lib/login/ForgotPasswordPage.dart
+
                             final _isLastStep =
                                 _currentStep == _mySteps().length - 1;
                             return Container(
@@ -122,11 +120,7 @@ class ForgotPageState extends State<ForgotPage> {
                                   SizedBox(width: 12),
                                   Expanded(
                                     child: MaterialButton(
-<<<<<<< HEAD:user_flutter/lib/Hoang/login/ForgotPasswordPage.dart
                                       onPressed:controls.onStepCancel,
-=======
-                                      onPressed: controls.onStepCancel,
->>>>>>> origin/Thuan:user_flutter/lib/login/ForgotPasswordPage.dart
                                       minWidth: double.infinity,
                                       height: 40,
                                       color: Colors.grey.shade300,
