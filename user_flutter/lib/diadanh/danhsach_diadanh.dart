@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 
@@ -165,16 +165,19 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SmoothStarRating(
-                                      allowHalfRating: false,
-                                      onRated: (v) {},
-                                      starCount: 5,
-                                      rating: 4,
-                                      size: 20.0,
-                                      isReadOnly: true,
-                                      color: Colors.yellow,
-                                      borderColor: Colors.yellow,
-                                      spacing: 0.0)
+                                  RatingBar.builder(
+                                    initialRating: 3,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  )
                                 ],
                               )
                             ],
@@ -280,16 +283,19 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SmoothStarRating(
-                                      allowHalfRating: false,
-                                      onRated: (v) {},
-                                      starCount: 5,
-                                      rating: 4,
-                                      size: 12.0,
-                                      isReadOnly: true,
-                                      color: Colors.yellow,
-                                      borderColor: Colors.yellow,
-                                      spacing: 0.0),
+                                  RatingBar.builder(
+                                    initialRating: 3,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  )
                                 ],
                               ),
                             ],
