@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 
 Widget baiviet() {
   return ListTile(
-    leading: Image.asset("assets/imgs/baiviets/test.jpg"),
+    leading: Image.asset("assets/imgs/baiviets/vhlong.jpg"),
   );
 }
 
@@ -42,9 +42,10 @@ class bv_decu extends StatefulWidget {
 class _bv_decuState extends State<bv_decu> {
   @override
   Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
     return SizedBox(
       width: double.infinity,
-      height: 150,
+      height: 130*size.height/640,
       child: Column(
         children: [
           Expanded(
@@ -55,11 +56,11 @@ class _bv_decuState extends State<bv_decu> {
               itemCount: 3, //đếm ảnh
               itemBuilder: (context, index) => Container(
                 margin: EdgeInsets.only(right: 14),
-                width: 356,
+                width: 330*size.width/360,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(23),
                     image: DecorationImage(
-                      image: AssetImage("assets/imgs/baiviets/test.jpg"),
+                      image: AssetImage("assets/imgs/baiviets/vhlong.jpg"),
                       fit: BoxFit.cover,
                     )),
                 child: Column(
@@ -67,7 +68,7 @@ class _bv_decuState extends State<bv_decu> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 51,
+                      height: 51*size.height/640,
                       padding:
                           EdgeInsets.symmetric(horizontal: 23, vertical: 5),
                       decoration: BoxDecoration(
@@ -84,7 +85,7 @@ class _bv_decuState extends State<bv_decu> {
                             "Vẽ đẹp vịnh hạ long",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 15,
+                                fontSize: 20,
                                 fontFamily: 'Cabin_B',fontWeight:FontWeight.bold
                                 ),
                           ),
@@ -93,16 +94,16 @@ class _bv_decuState extends State<bv_decu> {
                             children: [
                              SvgPicture.asset("assets/imgs/svg/gps.svg",
                                 color: Colors.white,
-                                height: 15,width: 15,
+                                height: 15*size.height/640,width: 15*size.width/360,
                               ),
                               Text(
                                 "Hạ Long, Quảng Ninh",
-                                style: TextStyle(color: Colors.white,fontSize: 10,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),
+                                style: TextStyle(color: Colors.white,fontSize: 15,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),
                               ),
                               Spacer(),
                               Text(
                                 'data',
-                                style: TextStyle(color: Colors.white,fontSize: 10,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),
+                                style: TextStyle(color: Colors.white,fontSize: 15,fontFamily: 'Cabin_B',fontWeight:FontWeight.bold),
                               ),
                             ],
                           )

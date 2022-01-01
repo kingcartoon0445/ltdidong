@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:user_flutter/Hoang/search/SearchPage.dart';
 import 'package:user_flutter/baiviet/baiviet_chitiet.dart';
 import 'package:user_flutter/baiviet/baiviet_ds.dart';
+import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
-import 'package:user_flutter/login/LoginPage.dart';
-import 'package:user_flutter/linhtinh/thongtin.dart';
+import 'package:user_flutter/linhtinh/caidat.dart';
+import 'package:user_flutter/linhtinh/thongthin.dart';
+import 'Hoang/login/LoginPage.dart';
+import 'colorplush.dart';
 
 class Background extends StatefulWidget {
   @override
@@ -19,19 +23,16 @@ class _BackgroundState extends State<Background> {
   Widget Page(int p) {
     switch (p) {
       case 0:
-        return DanhSachDiaDanh();
+        return SearchPage();
         break;
       case 1:
         return MyApp();
         break;
       case 2:
-        return LoginPage();
+        return DanhSachDiaDanh();
         break;
       case 3:
         return LoginPage();
-        break;
-      case 4:
-        return thongtin();
         break;
     }
     return Text("null");
@@ -43,20 +44,29 @@ class _BackgroundState extends State<Background> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        leading: Image.asset(
+        leading: IconButton(onPressed: (){
+            Navigator.push(context,
+                                MaterialPageRoute(builder:(context)=> CaiDat()
+                                  ),
+                                );
+        },icon:Image.asset(
           'assets/logo/logo.png',
           width: 50,
           height: 50,
-        ),
+        ),),
         title: Text(
           "Danh sách bài viết",
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         actions: [
-          CircleAvatar(
+          IconButton(onPressed: (){
+              Navigator.push(context,
+                                MaterialPageRoute(builder:(context)=> thongtin()
+                                  ),);
+          }, icon: CircleAvatar(
             child: Text("D"),
-          )
+          ),)
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -64,12 +74,16 @@ class _BackgroundState extends State<Background> {
         index: 0,
         height: 60.0,
         items: <Widget>[
-          Icon(Icons.search_outlined, color: Colors.white, size: 30),
+          Icon(
+            Icons.search_outlined,
+            color: Colors.white,
+            size: 30,
+          ),
           SvgPicture.asset(
             'assets/imgs/svg/home.svg',
             color: Colors.white,
             width: 30,
-            height: 30,
+            height: 30, 
           ),
           SvgPicture.asset(
             'assets/imgs/svg/gps.svg',
@@ -79,12 +93,6 @@ class _BackgroundState extends State<Background> {
           ),
           SvgPicture.asset(
             'assets/imgs/svg/gpsplush.svg',
-            color: Colors.white,
-            width: 30,
-            height: 30,
-          ),
-          SvgPicture.asset(
-            'assets/imgs/svg/user.svg',
             color: Colors.white,
             width: 30,
             height: 30,
