@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:user_flutter/Object/baivietObject.dart';
 class chuoidecu extends StatefulWidget {
   @override
   _chuoidecuState createState() => _chuoidecuState();
 }
-
 class _chuoidecuState extends State<chuoidecu> {
   List<String> ds_Decu=["Tất cả","Nhiều người thích","Nhiều lượt xem","của tôi"];
   int selectedIndex=0;
