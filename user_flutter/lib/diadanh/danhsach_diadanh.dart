@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+>>>>>>> origin/Thuan
 import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 
@@ -161,6 +165,27 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                                   ),
                                 ],
                               ),
+<<<<<<< HEAD
+=======
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  RatingBar.builder(
+                                    initialRating: 3,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  )
+                                ],
+                              )
+>>>>>>> origin/Thuan
                             ],
                           ),
                         ],
@@ -261,6 +286,27 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                                   ),
                                 ],
                               ),
+<<<<<<< HEAD
+=======
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  RatingBar.builder(
+                                    initialRating: 3,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  )
+                                ],
+                              ),
+>>>>>>> origin/Thuan
                             ],
                           ),
                         ],

@@ -16,7 +16,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+<<<<<<< HEAD
       home: WelcomePage(),
+=======
+      home: Background(),
+>>>>>>> origin/Thuan
     );
   }
 }

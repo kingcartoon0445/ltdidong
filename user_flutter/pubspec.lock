@@ -69,6 +69,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_advanced_switch:
     dependency: "direct main"
     description:
@@ -76,6 +77,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+=======
+>>>>>>> origin/Thuan
   flutter_rating_bar:
     dependency: "direct dev"
     description:
