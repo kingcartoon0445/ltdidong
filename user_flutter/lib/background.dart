@@ -18,7 +18,8 @@ class Background extends StatefulWidget {
 }
 
 class _BackgroundState extends State<Background> {
-  int _page = 0;
+  int _page = 1;
+  String txt="Danh sách bài viết";
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   Widget Page(int p) {
     switch (p) {
@@ -55,7 +56,7 @@ class _BackgroundState extends State<Background> {
           height: 50,
         ),),
         title: Text(
-          "Danh sách bài viết",
+          txt,
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
