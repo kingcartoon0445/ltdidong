@@ -8,9 +8,7 @@ class ChiTiet extends StatefulWidget {
   @override
   _ChiTietState createState() => _ChiTietState();
 }
-
 class _ChiTietState extends State<ChiTiet> {
-  
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
@@ -75,8 +73,7 @@ class _ChiTietState extends State<ChiTiet> {
           ),
           Container(
               child: ListTile(
-            leading: FlatButton.icon(
-              onPressed: () {},
+            leading: ElevatedButton.icon(onPressed: (){},style:  ElevatedButton.styleFrom(primary: Colors.white,elevation: 0),
               icon: SvgPicture.asset(
                 'assets/imgs/svg/gps.svg',
                 color: Color(0xFF4C56CE),
@@ -92,8 +89,7 @@ class _ChiTietState extends State<ChiTiet> {
                     color: Color(0xFF828282)),
               ),
             ),
-            trailing: FlatButton.icon(
-              onPressed: () {},
+            trailing: ElevatedButton.icon(onPressed: (){},style:  ElevatedButton.styleFrom(primary: Colors.white,elevation: 0),
               icon: SvgPicture.asset(
                 'assets/imgs/svg/user.svg',
                 height:size.height*20/640,
@@ -142,8 +138,7 @@ class _ChiTietState extends State<ChiTiet> {
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
               backgroundColor: Colors.white,
-              label: Text(
-                "200",
+              label: Text("200",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
@@ -156,7 +151,8 @@ class _ChiTietState extends State<ChiTiet> {
             ),
             FloatingActionButton.extended(
               onPressed: () {
-                // Add your onPressed code here!
+              setState(() {
+              });
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
