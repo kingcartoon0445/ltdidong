@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'book_data.dart';
-import 'book.dart';
+import 'diadanh_data.dart';
+import 'diadanh_model.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class SearchPage extends StatefulWidget {

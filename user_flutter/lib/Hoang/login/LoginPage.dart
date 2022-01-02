@@ -3,6 +3,8 @@ import '../../background.dart';
 import 'ForgotPasswordPage.dart';
 import 'RegisterPage.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -11,6 +13,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+  final txtEmail = TextEditingController();
+  final txtPassword = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -67,6 +73,7 @@ class LoginPageState extends State<LoginPage> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: TextField(
+                                  controller: txtEmail,
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 20),
@@ -103,6 +110,7 @@ class LoginPageState extends State<LoginPage> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: TextField(
+                                  controller: txtPassword,
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 20),
@@ -160,13 +168,32 @@ class LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: MaterialButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Background(),
-                                    ),
-                                  );
+                                onPressed: () async {
+                                  try {
+                                    final user =
+                                        await _auth.signInWithEmailAndPassword(
+                                            email: txtEmail.text,
+                                            password: txtPassword.text);
+                                    if (user != null) {
+                                      CircularProgressIndicator();
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Background()));
+                                    } else {
+                                      final snackBar = SnackBar(
+                                          content: Text(
+                                              "Email hoặc mật khẩu không đúng!"));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    }
+                                  } catch (e) {
+                                    final snackBar =
+                                        SnackBar(content: Text("$e"));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
                                 },
                                 minWidth: double.infinity,
                                 height: 60,
