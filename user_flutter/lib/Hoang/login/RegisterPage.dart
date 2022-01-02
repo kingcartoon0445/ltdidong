@@ -24,6 +24,30 @@ class RegisterPageState extends State<RegisterPage> {
 
   final _auth = FirebaseAuth.instance;
 
+  File? _image;
+  String? downloadURL;
+
+  Future pickImage() async {
+    final pick = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pick != null) {
+        _image = File(pick.path);
+      } else {
+        final snackBar = SnackBar(
+            content: Text("Chưa chọn ảnh"),
+            duration: Duration(microseconds: 400));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });
+  }
+
+  Future uploadImage() async {
+    Reference ref = FirebaseStorage.instance.ref().child("users_images");
+    await ref.putFile(_image!);
+    downloadURL = await ref.getDownloadURL();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -109,7 +133,9 @@ class RegisterPageState extends State<RegisterPage> {
                                               child: ListBody(
                                                 children: [
                                                   InkWell(
-                                                    onTap: () {},
+                                                    onTap: () {
+                                                      pickImage();
+                                                    },
                                                     splashColor: Colors.blue,
                                                     child: Row(
                                                       children: [
@@ -321,42 +347,51 @@ class RegisterPageState extends State<RegisterPage> {
                               child: MaterialButton(
                                 onPressed: () async {
                                   try {
-                                    final newUser = await _auth
-                                        .createUserWithEmailAndPassword(
-                                            email: txtEmail.text,
-                                            password: txtPassword.text);
-                                    // ignore: unnecessary_null_comparison
-                                    if (newUser != null) {
-                                      User? user =
-                                          FirebaseAuth.instance.currentUser;
+                                    uploadImage();
+                                    if (downloadURL != null) {
+                                      final newUser = await _auth
+                                          .createUserWithEmailAndPassword(
+                                              email: txtEmail.text,
+                                              password: txtPassword.text);
+                                      // ignore: unnecessary_null_comparison
+                                      if (newUser != null) {
+                                        User? user =
+                                            FirebaseAuth.instance.currentUser;
 
-                                      await FirebaseFirestore.instance
-                                          .collection("accounts")
-                                          .doc(user?.uid)
-                                          .set({
-                                        'ID': user?.uid,
-                                        'Hoten': txtHoten.text,
-                                        'Email': txtEmail.text,
-                                        'Password': txtPassword.text,
-                                        'SDT': txtSDT.text,
-                                        'Role': 'user',
-                                        'ImageUrl': '',
-                                        'TimeUp': Timestamp.now(),
-                                        'TrangThai': 1,
-                                      });
+                                        await FirebaseFirestore.instance
+                                            .collection("accounts")
+                                            .doc(user?.uid)
+                                            .set({
+                                          'ID': user?.uid,
+                                          'Hoten': txtHoten.text,
+                                          'Email': txtEmail.text,
+                                          'Password': txtPassword.text,
+                                          'SDT': txtSDT.text,
+                                          'Role': 'user',
+                                          'ImageUrl': downloadURL,
+                                          'TimeUp': Timestamp.now(),
+                                          'TrangThai': 1,
+                                        });
 
-                                      Navigator.pop(
-                                          context, 'Đăng ký thành công!');
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginPage()));
+                                        Navigator.pop(
+                                            context, 'Đăng ký thành công!');
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginPage()));
+                                      } else {
+                                        final snackBar = SnackBar(
+                                          content:
+                                              Text("Tài khoản không tạo được!"),
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                      }
                                     } else {
                                       final snackBar = SnackBar(
-                                        content:
-                                            Text("Tài khoản không tạo được!"),
-                                      );
+                                          content: Text(
+                                              "Lỗi upload ảnh lên database"));
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                     }
