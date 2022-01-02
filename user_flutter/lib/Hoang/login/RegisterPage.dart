@@ -40,10 +40,15 @@ class RegisterPageState extends State<RegisterPage> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     });
+
+    Navigator.pop(context);
   }
 
   Future uploadImage() async {
-    Reference ref = FirebaseStorage.instance.ref().child("users_images");
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child("users_images")
+        .child(txtEmail.text + '.jpg');
     await ref.putFile(_image!);
     downloadURL = await ref.getDownloadURL();
   }
@@ -106,7 +111,9 @@ class RegisterPageState extends State<RegisterPage> {
                                     backgroundColor: Colors.pink,
                                     child: CircleAvatar(
                                       radius: 65,
-                                      backgroundImage: null,
+                                      backgroundImage: _image == null
+                                          ? null
+                                          : FileImage(_image!),
                                     ),
                                   ),
                                 ),
