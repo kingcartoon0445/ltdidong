@@ -261,7 +261,7 @@ class RegisterPageState extends State<RegisterPage> {
                                     fontSize: 15,
                                     color: Colors.white,
                                   ),
-                                  textInputAction: TextInputAction.done,
+                                  textInputAction: TextInputAction.next,
                                   obscureText: _obsecureText,
                                 ),
                               ),
@@ -298,7 +298,7 @@ class RegisterPageState extends State<RegisterPage> {
                                     fontSize: 15,
                                     color: Colors.white,
                                   ),
-                                  keyboardType: TextInputType.emailAddress,
+                                  keyboardType: TextInputType.text,
                                   textInputAction: TextInputAction.next,
                                 ),
                               ),
@@ -335,7 +335,7 @@ class RegisterPageState extends State<RegisterPage> {
                                     fontSize: 15,
                                     color: Colors.white,
                                   ),
-                                  keyboardType: TextInputType.emailAddress,
+                                  keyboardType: TextInputType.phone,
                                   textInputAction: TextInputAction.next,
                                 ),
                               ),
@@ -355,53 +355,35 @@ class RegisterPageState extends State<RegisterPage> {
                                 onPressed: () async {
                                   try {
                                     uploadImage();
-                                    if (_image != null) {
-                                      final newUser = await _auth
-                                          .createUserWithEmailAndPassword(
-                                              email: txtEmail.text,
-                                              password: txtPassword.text);
-                                      // ignore: unnecessary_null_comparison
-                                      if (newUser != null) {
-                                        User? user =
-                                            FirebaseAuth.instance.currentUser;
 
-                                        await FirebaseFirestore.instance
-                                            .collection("accounts")
-                                            .doc(user?.uid)
-                                            .set({
-                                          'ID': user?.uid,
-                                          'Hoten': txtHoten.text,
-                                          'Email': txtEmail.text,
-                                          'Password': txtPassword.text,
-                                          'SDT': txtSDT.text,
-                                          'Role': 'user',
-                                          'ImageUrl': downloadURL,
-                                          'TimeUp': Timestamp.now(),
-                                          'TrangThai': 1,
-                                        });
+                                    final newUser = await _auth
+                                        .createUserWithEmailAndPassword(
+                                            email: txtEmail.text,
+                                            password: txtPassword.text);
+                                    User? user =
+                                        FirebaseAuth.instance.currentUser;
 
-                                        Navigator.pop(
-                                            context, 'Đăng ký thành công!');
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    LoginPage()));
-                                      } else {
-                                        final snackBar = SnackBar(
-                                          content:
-                                              Text("Tài khoản không tạo được!"),
-                                        );
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
-                                      }
-                                    } else {
-                                      final snackBar = SnackBar(
-                                          content: Text(
-                                              "Lỗi upload ảnh lên database"));
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
-                                    }
+                                    await FirebaseFirestore.instance
+                                        .collection("accounts")
+                                        .doc(user?.uid)
+                                        .set({
+                                      'ID': user?.uid,
+                                      'Hoten': txtHoten.text,
+                                      'Email': txtEmail.text,
+                                      'Password': txtPassword.text,
+                                      'SDT': txtSDT.text,
+                                      'Role': 'user',
+                                      'ImageUrl': downloadURL,
+                                      'TimeUp': Timestamp.now(),
+                                      'TrangThai': 1,
+                                    });
+
+                                    Navigator.pop(
+                                        context, 'Đăng ký thành công!');
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
                                   } catch (e) {
                                     final snackBar =
                                         SnackBar(content: Text("$e"));

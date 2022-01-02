@@ -16,6 +16,7 @@ class LoginPageState extends State<LoginPage> {
   final txtEmail = TextEditingController();
   final txtPassword = TextEditingController();
   final _auth = FirebaseAuth.instance;
+  bool _obsecureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +125,20 @@ class LoginPageState extends State<LoginPage> {
                                         color: Colors.white,
                                         size: 25,
                                       ),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _obsecureText
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _obsecureText = !_obsecureText;
+                                        });
+                                      },
                                     ),
                                     hintStyle: TextStyle(
                                       fontSize: 15,
