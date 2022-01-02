@@ -355,7 +355,7 @@ class RegisterPageState extends State<RegisterPage> {
                                 onPressed: () async {
                                   try {
                                     uploadImage();
-                                    if (downloadURL != null) {
+                                    if (_image != null) {
                                       final newUser = await _auth
                                           .createUserWithEmailAndPassword(
                                               email: txtEmail.text,
