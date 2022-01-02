@@ -79,7 +79,7 @@ packages:
     source: hosted
     version: "1.0.4"
   curved_navigation_bar:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: curved_navigation_bar
       url: "https://pub.dartlang.org"
@@ -175,7 +175,7 @@ packages:
     source: hosted
     version: "2.0.5"
   flutter_rating_bar:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: flutter_rating_bar
       url: "https://pub.dartlang.org"
