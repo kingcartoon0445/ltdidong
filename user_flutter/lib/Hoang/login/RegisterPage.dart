@@ -1,4 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import 'package:user_flutter/Hoang/login/LoginPage.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -8,6 +16,14 @@ class RegisterPage extends StatefulWidget {
 }
 
 class RegisterPageState extends State<RegisterPage> {
+  final txtEmail = TextEditingController();
+  final txtPassword = TextEditingController();
+  final txtHoten = TextEditingController();
+  final txtSDT = TextEditingController();
+  bool _obsecureText = true;
+
+  final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -48,14 +64,87 @@ class RegisterPageState extends State<RegisterPage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 120),
+                  SizedBox(height: 50),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
                       children: [
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 30, horizontal: 30),
+                                  child: CircleAvatar(
+                                    radius: 71,
+                                    backgroundColor: Colors.pink,
+                                    child: CircleAvatar(
+                                      radius: 65,
+                                      backgroundImage: null,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 120,
+                                  left: 110,
+                                  child: RawMaterialButton(
+                                    elevation: 10,
+                                    fillColor: Colors.blue.shade50,
+                                    child: Icon(Icons.add_a_photo),
+                                    padding: EdgeInsets.all(15),
+                                    shape: CircleBorder(),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              'Lựa chọn',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            content: SingleChildScrollView(
+                                              child: ListBody(
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {},
+                                                    splashColor: Colors.blue,
+                                                    child: Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Icon(
+                                                            Icons.image,
+                                                            color: Colors
+                                                                .blue.shade100,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "Gallery",
+                                                          style: TextStyle(
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 12),
                               child: Container(
@@ -64,6 +153,7 @@ class RegisterPageState extends State<RegisterPage> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: TextField(
+                                  controller: txtEmail,
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 20),
@@ -100,6 +190,7 @@ class RegisterPageState extends State<RegisterPage> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: TextField(
+                                  controller: txtPassword,
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 20),
@@ -114,6 +205,20 @@ class RegisterPageState extends State<RegisterPage> {
                                         size: 25,
                                       ),
                                     ),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _obsecureText
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _obsecureText = !_obsecureText;
+                                        });
+                                      },
+                                    ),
                                     hintStyle: TextStyle(
                                       fontSize: 15,
                                       color: Colors.white60,
@@ -124,7 +229,7 @@ class RegisterPageState extends State<RegisterPage> {
                                     color: Colors.white,
                                   ),
                                   textInputAction: TextInputAction.done,
-                                  obscureText: true,
+                                  obscureText: _obsecureText,
                                 ),
                               ),
                             ),
@@ -136,16 +241,17 @@ class RegisterPageState extends State<RegisterPage> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: TextField(
+                                  controller: txtHoten,
                                   decoration: InputDecoration(
                                     contentPadding:
                                         EdgeInsets.symmetric(vertical: 20),
                                     border: InputBorder.none,
-                                    hintText: 'Xác nhận mật khẩu',
+                                    hintText: 'Họ tên',
                                     prefixIcon: Padding(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 20),
                                       child: Icon(
-                                        Icons.lock_outline,
+                                        Icons.info_outline,
                                         color: Colors.white,
                                         size: 25,
                                       ),
@@ -159,8 +265,45 @@ class RegisterPageState extends State<RegisterPage> {
                                     fontSize: 15,
                                     color: Colors.white,
                                   ),
-                                  textInputAction: TextInputAction.done,
-                                  obscureText: true,
+                                  keyboardType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.next,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade600.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: TextField(
+                                  controller: txtSDT,
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        EdgeInsets.symmetric(vertical: 20),
+                                    border: InputBorder.none,
+                                    hintText: 'Số điện thoại',
+                                    prefixIcon: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
+                                      child: Icon(
+                                        Icons.phone_android_outlined,
+                                        color: Colors.white,
+                                        size: 25,
+                                      ),
+                                    ),
+                                    hintStyle: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.white60,
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                  keyboardType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.next,
                                 ),
                               ),
                             ),
@@ -176,7 +319,54 @@ class RegisterPageState extends State<RegisterPage> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: MaterialButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  try {
+                                    final newUser = await _auth
+                                        .createUserWithEmailAndPassword(
+                                            email: txtEmail.text,
+                                            password: txtPassword.text);
+                                    // ignore: unnecessary_null_comparison
+                                    if (newUser != null) {
+                                      User? user =
+                                          FirebaseAuth.instance.currentUser;
+
+                                      await FirebaseFirestore.instance
+                                          .collection("accounts")
+                                          .doc(user?.uid)
+                                          .set({
+                                        'ID': user?.uid,
+                                        'Hoten': txtHoten.text,
+                                        'Email': txtEmail.text,
+                                        'Password': txtPassword.text,
+                                        'SDT': txtSDT.text,
+                                        'Role': 'user',
+                                        'ImageUrl': '',
+                                        'TimeUp': Timestamp.now(),
+                                        'TrangThai': 1,
+                                      });
+
+                                      Navigator.pop(
+                                          context, 'Đăng ký thành công!');
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginPage()));
+                                    } else {
+                                      final snackBar = SnackBar(
+                                        content:
+                                            Text("Tài khoản không tạo được!"),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    }
+                                  } catch (e) {
+                                    final snackBar =
+                                        SnackBar(content: Text("$e"));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+                                },
                                 minWidth: double.infinity,
                                 height: 60,
                                 color: Color.fromRGBO(125, 130, 188, 1),
