@@ -16,6 +16,7 @@ class TheloaiController extends Controller
     public function index()
     {
         //
+        return response()->json(theloai::all());
     }
 
     /**
@@ -45,9 +46,10 @@ class TheloaiController extends Controller
      * @param  \App\Models\theloai  $theloai
      * @return \Illuminate\Http\Response
      */
-    public function show(theloai $theloai)
+    public function show(int $id)
     {
         //
+        return Theloai::where('id',$id)->get();
     }
 
     /**

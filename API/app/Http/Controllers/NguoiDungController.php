@@ -45,7 +45,7 @@ class NguoiDungController extends Controller
      * @param  \App\Models\NguoiDung  $nguoiDung
      * @return \Illuminate\Http\Response
      */
-    public function show(BigInteger $id)
+    public function show(int $id)
     {
         //
      return NguoiDung::where('id',$id)->get();
