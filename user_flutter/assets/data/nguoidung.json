@@ -1,0 +1,25 @@
+{
+	"nguoidung": [
+	{
+    "Nd_Ma": "1",
+    "Nd_TenDaiDien": "Thanh Duy",
+    "Nd_Hoten": "Lê Thanh Dui",
+    "Nd_email": "duydui@gmail.com",
+    "Nd_SDT": "",
+    "Nd_AnhNen": "us1.png",
+    "Nd_MatKhau": "123456789",
+    "ND_TimeUp": "2021-12-31 16:07:31",
+    "Nd_TrangThai": "1"
+},
+{
+    "Nd_Ma": "2",
+    "Nd_TenDaiDien": "Thanh Ngân",
+    "Nd_Hoten": "Lê Thanh Ngân",
+    "Nd_email": "Ngan@gmail.com",
+    "Nd_SDT": "09876543578",
+    "Nd_AnhNen": "us2.png",
+    "Nd_MatKhau": "12345678",
+    "ND_TimeUp": "2021-12-31 17:30:05",
+    "Nd_TrangThai": "1"
+}
+]}
