@@ -70,13 +70,13 @@ Widget CardBv(var size,var img,var tieude,var diadanh,var tacgia){
                       width: 15 * size.width / 360,
                     ),
                     label: Text(
-                      diadanh,
+                      diadanh.toString(),
                       style: cabin_B(Color(0xFF828282), 15.0)
                     )),
                 TextButton(
                   onPressed: () {},
                   child: Text(
-                    tacgia,
+                    tacgia.toString(),
                     style: cabin_B(Color(0xFF828282), 15.0)
                   ),
                 ),

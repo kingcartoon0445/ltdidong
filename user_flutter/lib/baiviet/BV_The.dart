@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:user_flutter/Object/baivietObject.dart';
 import 'package:user_flutter/class_chung.dart';
 
 import 'BV_chitiet.dart';
 class card extends StatelessWidget {
-  const card({Key? key}) : super(key: key);
+  final BaiVietObject BV;
+  const card({Key? key,required this.BV}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +15,11 @@ class card extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => ChiTiet(),
+            builder: (_) => ChiTiet(Bai: BV,),
           ),
         );
       },
-      child: CardBv(size, "assets/imgs/baiviets/test.jpg", "Tiêu đề", "Địa danh", "Tác giả"),
+      child: CardBv(size, "assets/imgs/baiviets/test.jpg", BV.Bv_TieuDe, BV.Bv_MaDiaDanh, BV.Bv_MaNguoiDung),
     );
   }
 }

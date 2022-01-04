@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:user_flutter/Object/baivietObject.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
 
 class ChiTiet extends StatefulWidget {
-  const ChiTiet({Key? key}) : super(key: key);
+  final BaiVietObject Bai;
+  const ChiTiet({Key? key,required this.Bai}) : super(key: key);
 
   @override
-  _ChiTietState createState() => _ChiTietState();
+  _ChiTietState createState() {
+    return _ChiTietState(Bai:Bai);
+  }
+
 }
 class _ChiTietState extends State<ChiTiet> {
+  final BaiVietObject Bai;
+  _ChiTietState({required this.Bai});
   @override
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
@@ -47,7 +54,7 @@ class _ChiTietState extends State<ChiTiet> {
                     Container(
             child: ListTile(
                 leading: Text(
-                  "Vẻ đẹp Vịnh Hạ Long",
+                 Bai.Bv_TieuDe,
                   style: TextStyle(
                       fontSize: 25,
                       fontFamily: 'Cabin_B',
@@ -81,7 +88,7 @@ class _ChiTietState extends State<ChiTiet> {
                 width: 20,
               ),
               label: Text(
-                "Vẻ đẹp Vịnh Hạ Long",
+                Bai.Bv_MaDiaDanh.toString(),
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Cabin_B',
@@ -96,7 +103,7 @@ class _ChiTietState extends State<ChiTiet> {
                 width: size. width*20/360,
                 color: Color(0xFF4C56CE),
               ),
-              label: Text(" Thanh Duy",
+              label: Text(Bai.Bv_MaNguoiDung.toString(),
                   style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'Cabin_B',
@@ -112,7 +119,7 @@ class _ChiTietState extends State<ChiTiet> {
                     padding: EdgeInsets.only(
                         right: 30, left: 30, top: 3, bottom: 90),
                     child: Text(
-                      "Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậyNội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậyNội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy Nội dung rất dài luôn không có chổ chứa nữa rồi làm sao đây xuống dòn nè có` bị gì ko vậy",
+                      Bai.Bv_NoiDung,
                       style: TextStyle(
                           fontFamily: 'Cabin_B', overflow: TextOverflow.clip),
                     ),

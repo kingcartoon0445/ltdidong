@@ -122,7 +122,7 @@ class _thongtinState extends State<thongtin> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return card();
+                return Container(); //card();
               },
               childCount: bottom.length,
             ),

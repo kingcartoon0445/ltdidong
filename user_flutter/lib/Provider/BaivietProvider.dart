@@ -1,22 +1,17 @@
 import 'dart:convert';
-
-import 'package:flutter/services.dart';
-import 'package:path/path.dart';
 import 'package:user_flutter/Object/baivietObject.dart';
+import 'package:http/http.dart' as http;
 
 
 class BaiVietProvider{
-  static Future<List<dynamic>> readjson() async{
-    var jstext=await rootBundle.loadString("assets/data/baiviet.json");
-    var data=json.decode(jstext.toString());
-    return data["baiviet"];
-  }
+ static List<BaiVietObject> paraseBaiViet(String reponseBody){
+   final parsed=jsonDecode(reponseBody).cast<Map<String,dynamic>>();
+   return parsed.map<BaiVietObject>((e)=>BaiVietObject.fromjson(e)).toList();
+ }
 
-  static Future<List<BaiVietObject>> getAll() async
-  {
-    List<BaiVietObject> lsResut=[];
-    List<dynamic> data= await readjson();
-    lsResut=data.map((e) => BaiVietObject.fromjson(e)).toList();
-    return lsResut;
-  }
+ static Future<List<BaiVietObject>> fecthBaiViet()async{
+   final response= await http
+   .get(Uri.parse('http://10.0.2.2:8000/api/BaiViet'));
+   return paraseBaiViet(response.body);
+ }
 }
