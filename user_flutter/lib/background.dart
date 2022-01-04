@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:user_flutter/Hoang/search/SearchPage.dart';
-import 'package:user_flutter/baiviet/baiviet_chitiet.dart';
-import 'package:user_flutter/baiviet/baiviet_ds.dart';
+import 'package:user_flutter/baiviet/BV_chitiet.dart';
+import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
 import 'package:user_flutter/linhtinh/caidat.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
-import 'Hoang/login/LoginPage.dart';
+import 'Hoang/login/page_login.dart';
 import 'colorplush.dart';
 
 class Background extends StatefulWidget {
@@ -18,7 +18,8 @@ class Background extends StatefulWidget {
 }
 
 class _BackgroundState extends State<Background> {
-  int _page = 0;
+  int _page = 1;
+  String txt = "Danh sách bài viết";
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   Widget Page(int p) {
     switch (p) {
@@ -26,7 +27,7 @@ class _BackgroundState extends State<Background> {
         return SearchPage();
         break;
       case 1:
-        return MyApp();
+        return BaiViet();
         break;
       case 2:
         return DanhSachDiaDanh();
@@ -58,7 +59,7 @@ class _BackgroundState extends State<Background> {
           ),
         ),
         title: Text(
-          "Danh sách bài viết",
+          txt,
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,

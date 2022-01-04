@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:user_flutter/baiviet/BV_The.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
 import '../class_chung.dart';
 import '../colorplush.dart';
@@ -121,7 +122,7 @@ class _thongtinState extends State<thongtin> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return card();
+                return Container(); //card();
               },
               childCount: bottom.length,
             ),

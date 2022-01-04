@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:user_flutter/Hoang/login/WelcomePage.dart';
+import 'package:user_flutter/Hoang/login/page_login.dart';
+import 'package:user_flutter/Hoang/login/page_welcome.dart';
+import 'package:user_flutter/background.dart';
 
-void main() {
+import 'Hoang/login/page_register.dart';
+
+void main() async {
   runApp(const MyApp());
 }
 

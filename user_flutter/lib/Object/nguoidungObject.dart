@@ -5,7 +5,7 @@ class NguoiDungObject{
   final String Nd_SDT;
   final String Nd_AnhNen;
   final String Nd_MatKhau;
-  final DateTime Nd_TimeUp;
+  final String Nd_TimeUp;
   final int Nd_TrangThai;
   NguoiDungObject(this.Nd_Ma,this.Nd_TenDaiDien,this.Nd_emai,this.Nd_SDT,this.Nd_AnhNen,this.Nd_MatKhau,this.Nd_TimeUp,this.Nd_TrangThai);
   NguoiDungObject.fromjson(Map<String,dynamic>res):
