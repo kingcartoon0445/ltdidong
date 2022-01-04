@@ -9,7 +9,7 @@ import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
 import 'package:user_flutter/linhtinh/caidat.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
-import 'Hoang/login/LoginPage.dart';
+import 'Hoang/login/page_login.dart';
 import 'colorplush.dart';
 
 class Background extends StatefulWidget {
@@ -19,7 +19,7 @@ class Background extends StatefulWidget {
 
 class _BackgroundState extends State<Background> {
   int _page = 1;
-  String txt="Danh sách bài viết";
+  String txt = "Danh sách bài viết";
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   Widget Page(int p) {
     switch (p) {
@@ -45,29 +45,36 @@ class _BackgroundState extends State<Background> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        leading: IconButton(onPressed: (){
-            Navigator.push(context,
-                                MaterialPageRoute(builder:(context)=> CaiDat()
-                                  ),
-                                );
-        },icon:Image.asset(
-          'assets/logo/logo.png',
-          width: 50,
-          height: 50,
-        ),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CaiDat()),
+            );
+          },
+          icon: Image.asset(
+            'assets/logo/logo.png',
+            width: 50,
+            height: 50,
+          ),
+        ),
         title: Text(
           txt,
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: (){
-              Navigator.push(context,
-                                MaterialPageRoute(builder:(context)=> thongtin()
-                                  ),);
-          }, icon: CircleAvatar(
-            child: Text("D"),
-          ),)
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => thongtin()),
+              );
+            },
+            icon: CircleAvatar(
+              child: Text("D"),
+            ),
+          )
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -84,7 +91,7 @@ class _BackgroundState extends State<Background> {
             'assets/imgs/svg/home.svg',
             color: Colors.white,
             width: 30,
-            height: 30, 
+            height: 30,
           ),
           SvgPicture.asset(
             'assets/imgs/svg/gps.svg',

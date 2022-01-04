@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:user_flutter/Hoang/login/WelcomePage.dart';
+import 'package:user_flutter/Hoang/login/page_login.dart';
+import 'package:user_flutter/Hoang/login/page_welcome.dart';
+import 'package:user_flutter/background.dart';
 
-import 'package:firebase_core/firebase_core.dart';
+import 'Hoang/login/page_register.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: FirebaseOptions(
-        apiKey: 'AIzaSyDnUWJo1XdKivU32PdfzUqqYq2hXv4nQrU',
-        appId: '1:822612642755:android:b84fba96d75c1a94910b76',
-        messagingSenderId: '822612642755',
-        projectId: 'csdldulich'),
-  );
-
   runApp(const MyApp());
 }
 
