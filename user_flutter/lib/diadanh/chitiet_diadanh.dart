@@ -100,245 +100,244 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Container(
-      child: SingleChildScrollView(
-        child: Container(
-          child: Positioned(
-            top: 200,
-            child: Container(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-              width: MediaQuery.of(context).size.width,
-              height: 500,
-              /*   decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30), 
-              )), */
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Hạ Long',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.remove_red_eye_outlined,
-                            color: Color(0xFF7D82BC),
-                          ),
-                          Text('200'),
-                        ],
-                      ),
-                    ],
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        child: ListView(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Hạ Long',
+                  style: TextStyle(
+                    fontSize: 22,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.location_on, color: Color(0xFF7D82BC)),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text('Hạ Long,Quảng Ninh')
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Mô tả',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ Tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo thuộc thành phố Hạ Long, thị xã Cẩm Phả và một phần của huyện đảo Vân Đồn. Vịnh Hạ Long giáp đảo Cát Bà với đường bờ biển dài 120 km cùng gần 2000 hòn đảo lớn nhỏ.',
-                    style: TextStyle(
-                      fontSize: 14,
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.remove_red_eye_outlined,
+                      color: Color(0xFF7D82BC),
                     ),
+                    Text('200'),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Icon(Icons.location_on, color: Color(0xFF7D82BC)),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  'Hạ Long,Quảng Ninh',
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  SizedBox(
-                    height: 10,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                RatingBarIndicator(
+                  rating: 4.5,
+                  itemBuilder: (_, __) {
+                    return Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    );
+                  },
+                  itemSize: 25,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Mô tả',
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Loại hình du lịch',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Tham quan',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text(
-                      'Nhà hàng',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ]),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text(
-                      'Nhà hàng Hạ Long',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ]),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text(
-                      'Khách sạn',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ]),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    Text(
-                      'Khách sạn Hạ Long',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ]),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      FloatingActionButton.extended(
-                        onPressed: () {
-                          // Add your onPressed code here!
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side:
-                                BorderSide(color: Color(0xFF7D82BC), width: 3)),
-                        backgroundColor: Colors.white,
-                        label: Text(
-                          "Đã đến",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                            color: Color(0xFF7D82BC),
-                          ),
-                        ),
-                        icon: Icon(
-                          Icons.check,
-                          color: Color(0xFF7D82BC),
-                        ),
-                        heroTag: "fab1",
-                      ),
-                      FloatingActionButton.extended(
-                        onPressed: () {
-                          // Add your onPressed code here!
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side:
-                                BorderSide(color: Color(0xFF7D82BC), width: 3)),
-                        backgroundColor: Colors.white,
-                        label: Text(
-                          "Địa chỉ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                            color: Color(0xFF7D82BC),
-                          ),
-                        ),
-                        icon: Icon(Icons.location_on, color: Color(0xFF7D82BC)),
-                        heroTag: "fab2",
-                      ),
-                      FloatingActionButton.extended(
-                        onPressed: () {
-                          // Add your onPressed code here!
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ChiaSeBaiViet()));
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side:
-                                BorderSide(color: Color(0xFF7D82BC), width: 3)),
-                        backgroundColor: Colors.white,
-                        label: Text(
-                          "200",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                            color: Color(0xFF7D82BC),
-                          ),
-                        ),
-                        icon: Icon(Icons.location_on, color: Color(0xFF7D82BC)),
-                        heroTag: "fab3",
-                      ),
-                    ],
-                  )
-                ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ Tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo thuộc thành phố Hạ Long, thị xã Cẩm Phả và một phần của huyện đảo Vân Đồn. Vịnh Hạ Long giáp đảo Cát Bà với đường bờ biển dài 120 km cùng gần 2000 hòn đảo lớn nhỏ.',
+              style: TextStyle(
+                fontSize: 14,
               ),
             ),
-          ),
+            Text(
+              'Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ Tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo thuộc thành phố Hạ Long, thị xã Cẩm Phả và một phần của huyện đảo Vân Đồn. Vịnh Hạ Long giáp đảo Cát Bà với đường bờ biển dài 120 km cùng gần 2000 hòn đảo lớn nhỏ.',
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+            Text(
+              'Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ Tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo thuộc thành phố Hạ Long, thị xã Cẩm Phả và một phần của huyện đảo Vân Đồn. Vịnh Hạ Long giáp đảo Cát Bà với đường bờ biển dài 120 km cùng gần 2000 hòn đảo lớn nhỏ.',
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Loại hình du lịch',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Tham quan',
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Text(
+                'Nhà hàng',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ]),
+            SizedBox(
+              height: 10,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Text(
+                'Nhà hàng Hạ Long',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ]),
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Text(
+                'Khách sạn',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ]),
+            SizedBox(
+              height: 10,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Text(
+                'Khách sạn Hạ Long',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ]),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FloatingActionButton.extended(
+                  onPressed: () {
+                    // Add your onPressed code here!
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+                  backgroundColor: Colors.white,
+                  label: Text(
+                    "Đã đến",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Color(0xFF7D82BC),
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.check,
+                    color: Color(0xFF7D82BC),
+                  ),
+                  heroTag: "fab1",
+                ),
+                FloatingActionButton.extended(
+                  onPressed: () {
+                    // Add your onPressed code here!
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+                  backgroundColor: Colors.white,
+                  label: Text(
+                    "Địa chỉ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Color(0xFF7D82BC),
+                    ),
+                  ),
+                  icon: Icon(Icons.location_on, color: Color(0xFF7D82BC)),
+                  heroTag: "fab2",
+                ),
+                FloatingActionButton.extended(
+                  onPressed: () {
+                    // Add your onPressed code here!
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChiaSeBaiViet()));
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+                  backgroundColor: Colors.white,
+                  label: Text(
+                    "200",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Color(0xFF7D82BC),
+                    ),
+                  ),
+                  icon: Icon(Icons.share, color: Color(0xFF7D82BC)),
+                  heroTag: "fab3",
+                ),
+              ],
+            )
+          ],
         ),
       ),
-    ));
+    );
   }
 }
