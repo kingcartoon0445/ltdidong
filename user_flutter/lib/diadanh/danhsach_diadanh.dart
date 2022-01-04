@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
+import 'package:user_flutter/diadanh/recommend_diadanh.dart';
 
 class DanhSachDiaDanh extends StatefulWidget {
   const DanhSachDiaDanh({Key? key}) : super(key: key);
@@ -25,51 +26,27 @@ class _DanhSachDiaDanhState extends State<DanhSachDiaDanh> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Nổi bật',
-                    style: TextStyle(),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Miền',
-                    style: TextStyle(),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Đã đến',
-                    style: TextStyle(),
-                  ),
-                ),
-              ],
-            ),
+            RecommendDiaDanh(),
             TatCaDiaDanh(),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    TextButton(
-                      onPressed: () {},
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       child: Text(
-                        'Đề cử',
+                        'Top lượt share',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 18,
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
-                DeCuDiaDanh(),
+                TopLuotShareDiaDanh(),
               ],
             ),
           ],
@@ -114,9 +91,9 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 100,
+                      height: 95,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 23, vertical: 5),
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(23),
@@ -137,6 +114,9 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                                       builder: (context) => ChiTietDiaDanh()),
                                 );
                               },
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.all(2),
+                              ),
                               child: Text(
                                 "Vũng Tàu",
                                 style: TextStyle(
@@ -165,19 +145,16 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  RatingBar.builder(
-                                    initialRating: 3,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                    onRatingUpdate: (rating) {
-                                      print(rating);
+                                  RatingBarIndicator(
+                                    rating: 4.5,
+                                    itemBuilder: (_, __) {
+                                      return Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      );
                                     },
-                                  )
+                                    itemSize: 20,
+                                  ),
                                 ],
                               )
                             ],
@@ -196,16 +173,16 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
   }
 }
 
-class DeCuDiaDanh extends StatefulWidget {
-  const DeCuDiaDanh({Key? key}) : super(key: key);
+class TopLuotShareDiaDanh extends StatefulWidget {
+  const TopLuotShareDiaDanh({Key? key}) : super(key: key);
 
   @override
-  _DeCuDiaDanhState createState() => _DeCuDiaDanhState();
+  _TopLuotShareDiaDanhState createState() => _TopLuotShareDiaDanhState();
 }
 
 class AnhDeCu {}
 
-class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
+class _TopLuotShareDiaDanhState extends State<TopLuotShareDiaDanh> {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
@@ -243,9 +220,9 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 55,
+                      height: 85,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(23),
@@ -255,48 +232,54 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            "Vũng Tàu",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChiTietDiaDanh()),
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              minimumSize: Size(1, 1),
+                              padding: EdgeInsets.all(5),
+                              side: BorderSide(width: 2, color: Colors.blue),
+                            ),
+                            child: Text(
+                              "Vũng Tàu",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700),
+                            ),
                           ),
-                          Column(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.place_outlined,
-                                    color: Colors.white,
-                                    size: 10,
-                                  ),
-                                  Text(
-                                    "Bà Rịa - Vũng Tàu",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 10),
-                                  ),
-                                ],
+                              Icon(
+                                Icons.place_outlined,
+                                color: Colors.white,
+                                size: 10,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  RatingBar.builder(
-                                    initialRating: 3,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                    onRatingUpdate: (rating) {
-                                      print(rating);
-                                    },
-                                  )
-                                ],
+                              Text(
+                                "Bà Rịa - Vũng Tàu",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              RatingBarIndicator(
+                                rating: 4.5,
+                                itemBuilder: (_, __) {
+                                  return Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  );
+                                },
+                                itemSize: 15,
                               ),
                             ],
                           ),

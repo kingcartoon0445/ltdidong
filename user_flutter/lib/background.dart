@@ -44,29 +44,36 @@ class _BackgroundState extends State<Background> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        leading: IconButton(onPressed: (){
-            Navigator.push(context,
-                                MaterialPageRoute(builder:(context)=> CaiDat()
-                                  ),
-                                );
-        },icon:Image.asset(
-          'assets/logo/logo.png',
-          width: 50,
-          height: 50,
-        ),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CaiDat()),
+            );
+          },
+          icon: Image.asset(
+            'assets/logo/logo.png',
+            width: 50,
+            height: 50,
+          ),
+        ),
         title: Text(
           "Danh sách bài viết",
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: (){
-              Navigator.push(context,
-                                MaterialPageRoute(builder:(context)=> thongtin()
-                                  ),);
-          }, icon: CircleAvatar(
-            child: Text("D"),
-          ),)
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => thongtin()),
+              );
+            },
+            icon: CircleAvatar(
+              child: Text("D"),
+            ),
+          )
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -83,7 +90,7 @@ class _BackgroundState extends State<Background> {
             'assets/imgs/svg/home.svg',
             color: Colors.white,
             width: 30,
-            height: 30, 
+            height: 30,
           ),
           SvgPicture.asset(
             'assets/imgs/svg/gps.svg',

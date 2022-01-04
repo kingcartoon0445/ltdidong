@@ -73,6 +73,7 @@ flutter:
      - assets/imgs/login/register.jpg
      - assets/imgs/login/forgot.jpg
      - assets/imgs/diadanh/VungTau.png
+     - assets/imgs/diadanh/noimage.jpg
      - assets/imgs/login/welcome.jpg
      - assets/imgs/baiviets/
      #icon
