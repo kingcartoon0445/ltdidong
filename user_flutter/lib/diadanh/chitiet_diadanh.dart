@@ -168,25 +168,13 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                 Text(
                   'Mô tả',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                   ),
                 ),
               ],
             ),
             SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ Tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo thuộc thành phố Hạ Long, thị xã Cẩm Phả và một phần của huyện đảo Vân Đồn. Vịnh Hạ Long giáp đảo Cát Bà với đường bờ biển dài 120 km cùng gần 2000 hòn đảo lớn nhỏ.',
-              style: TextStyle(
-                fontSize: 14,
-              ),
-            ),
-            Text(
-              'Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ Tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo thuộc thành phố Hạ Long, thị xã Cẩm Phả và một phần của huyện đảo Vân Đồn. Vịnh Hạ Long giáp đảo Cát Bà với đường bờ biển dài 120 km cùng gần 2000 hòn đảo lớn nhỏ.',
-              style: TextStyle(
-                fontSize: 14,
-              ),
+              height: 3,
             ),
             Text(
               'Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ Tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo thuộc thành phố Hạ Long, thị xã Cẩm Phả và một phần của huyện đảo Vân Đồn. Vịnh Hạ Long giáp đảo Cát Bà với đường bờ biển dài 120 km cùng gần 2000 hòn đảo lớn nhỏ.',
@@ -203,13 +191,10 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                 Text(
                   'Loại hình du lịch',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                   ),
                 ),
               ],
-            ),
-            SizedBox(
-              height: 5,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -229,13 +214,10 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               Text(
                 'Nhà hàng',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
             ]),
-            SizedBox(
-              height: 10,
-            ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Text(
                 'Nhà hàng Hạ Long',
@@ -244,17 +226,17 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                 ),
               ),
             ]),
+            SizedBox(
+              height: 10,
+            ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Text(
                 'Khách sạn',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
             ]),
-            SizedBox(
-              height: 10,
-            ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Text(
                 'Khách sạn Hạ Long',
