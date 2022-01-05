@@ -37,6 +37,27 @@ class DiaDanhController extends Controller
     public function store(StoreDiaDanhRequest $request)
     {
         //
+        {
+            $data=$request->validate([
+                 'Ten' => 'required',
+                 'MaMien'=> 'required',
+                 'KinhDo'=> 'required',
+                 'Vido'=> 'required',
+                 'MoTa'=> 'required',
+             ]);
+             //
+           $diaDanh =DiaDanh::create([
+               'Ten'=>$data['Ten'],
+               'MaMien'=>$data['MaMien'],
+               'KinhDo'=>$data['KinhDo'],
+               'Vido'=>$data['Vido'],    
+               'ViMoTado'=>$data['MoTa'],                 
+           ]);
+           $response= [
+               'data'=>$diaDanh
+           ];
+           return true;
+         }
     }
 
     /**

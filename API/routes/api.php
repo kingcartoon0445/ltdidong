@@ -65,9 +65,10 @@ Route::post('/sanctum/token', function (Request $request) {
 //     return NguoiDung::all();
 //  });
 
-Route::middleware('auth:sanctum')->apiResource('NguoiDung',NguoiDungController::class);
+Route::apiResource('NguoiDung',NguoiDungController::class);
 Route::apiResource('BaiViet',BaivietController::class);
-Route::middleware('auth:sanctum')->apiResource('Mien',MienController::class);
+Route::apiResource('Mien',MienController::class);
 Route::middleware('auth:sanctum')->apiResource('TienIch',TienIchController::class);
-Route::middleware('auth:sanctum')->apiResource('DiaDanh',DiaDanhController::class);
+Route::apiResource('DiaDanh',DiaDanhController::class);
+//Route::middleware('auth:sanctum')->apiResource('DiaDanh',DiaDanhController::class);
 Route::middleware('auth:sanctum')->apiResource('TheLoai',TheloaiController::class);
