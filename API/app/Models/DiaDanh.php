@@ -15,6 +15,7 @@ class DiaDanh extends Model
     protected $fillable =[
         'id',
        'Ten',
+       'DiaChi',
        'MaMien',
        'KinhDo',
        'ViDo',

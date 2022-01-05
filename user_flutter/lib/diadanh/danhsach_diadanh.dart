@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:user_flutter/Object/diadanhObject.dart';
+import 'package:user_flutter/Provider/DiaDanhProvider.dart';
 import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/recommend_diadanh.dart';
@@ -26,8 +28,8 @@ class _DanhSachDiaDanhState extends State<DanhSachDiaDanh> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-           RecommendDiaDanh(),
-           TatCaDiaDanh(),
+            RecommendDiaDanh(),
+            TatCaDiaDanh(),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -81,13 +83,7 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChiTietDiaDanh()),
-                              );
-                            },
+                            onTap: () {/*1*/  },
                             child: Container(
                               margin: EdgeInsets.only(right: 15),
                               width: double.infinity,
@@ -123,14 +119,7 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                                     height: 40,
                                     width: double.infinity,
                                     child: TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChiTietDiaDanh()),
-                                        );
-                                      },
+                                      onPressed: () {/*2*/},
                                       //  style: TextButton.styleFrom(
                                       //    padding: EdgeInsets.all(4),
                                       //   ),
@@ -205,7 +194,12 @@ class AnhDeCu {}
 class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
+    return FutureBuilder<List<DiaDanhObject>>(
+      future: DiaDanhProvider.fecthNguoidung(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<DiaDanhObject> lsdd = snapshot.data!;
+          return   GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -213,7 +207,7 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       childAspectRatio: 1.2,
-      children: List.generate(4, (index) {
+      children: List.generate(lsdd.length, (index) {
         return GestureDetector(
           onTap: () {},
           child: Container(
@@ -230,7 +224,7 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ChiTietDiaDanh()),
+                            builder: (context) => ChiTietDiaDanh(DD:lsdd[index])),
                       );
                     },
                     child: ClipRRect(
@@ -268,14 +262,14 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ChiTietDiaDanh()),
+                                      builder: (context) => ChiTietDiaDanh(DD:lsdd[index])),
                                 );
                               },
                               //  style: TextButton.styleFrom(
                               //    padding: EdgeInsets.all(4),
                               //   ),
                               child: Text(
-                                "Vũng Tàu",
+                                lsdd[index].Dd_Ten,
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 15,
@@ -294,7 +288,7 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                                     color: Colors.white,
                                   ),
                                   Text(
-                                    "Bà Rịa - Vũng Tàu",
+                                    lsdd[index].Dd_DiaChi,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ],
@@ -327,5 +321,11 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
         );
       }),
     );
-  }
+  
+            }
+        return Text("data");
+      });
+    
+    
+   }
 }

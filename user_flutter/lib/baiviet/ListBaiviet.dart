@@ -25,7 +25,7 @@ class _Lst_baivietState extends State<Lst_baiviet> {
               child: Text('lỗi rồi'),
             );
           }else if(snapshot.hasData){
-            return ListBV(lsBv:snapshot.data!);
+            return Container(color: Color(0xFFe1e1e1),child:ListBV(lsBv:snapshot.data!));
           }
           return Container();
         },

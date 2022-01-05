@@ -94,13 +94,13 @@ class _BackgroundState extends State<Background> {
             height: 30,
           ),
           SvgPicture.asset(
-            'assets/imgs/svg/gps.svg',
+            'assets/imgs/svg/diadanh.svg',
             color: Colors.white,
             width: 30,
             height: 30,
           ),
           SvgPicture.asset(
-            'assets/imgs/svg/gpsplush.svg',
+            'assets/imgs/svg/themgps.svg',
             color: Colors.white,
             width: 30,
             height: 30,

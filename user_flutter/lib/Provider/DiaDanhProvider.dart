@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:user_flutter/Object/diadanhObject.dart';
 class DiaDanhProvider{
  static List<DiaDanhObject> paraseDiaDanh(String reponseBody){
-   final parsed=jsonDecode(reponseBody).cast<Map<String,dynamic>>();
+   final parsed=  jsonDecode(reponseBody).cast<Map<String,dynamic>>();
    return parsed.map<DiaDanhObject>((e)=>DiaDanhObject.fromjson(e)).toList();
  }
 

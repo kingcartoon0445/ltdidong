@@ -22,11 +22,12 @@ class _BaiVietState extends State<BaiViet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFe1e1e1),
       body:  Column(
           children: [
-              bv_decu(),
-             chuoidecu(),
+            Container(margin: EdgeInsets.only(bottom: 10),child:
+             bv_decu()),
+            Container(margin: EdgeInsets.only(bottom: 5),child: chuoidecu()),
              Lst_baiviet(),
           ],
         ),

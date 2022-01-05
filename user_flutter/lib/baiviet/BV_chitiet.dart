@@ -15,16 +15,21 @@ class ChiTiet extends StatefulWidget {
 }
 
 class _ChiTietState extends State<ChiTiet> {
+  bool _thich=true;
+  void _nhanthich(){
+    _thich=!_thich;
+    setState(() {
+      
+    });
+  }
   final BaiVietObject Bai;
   _ChiTietState({required this.Bai});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-      ),
+    return 
+    
+    Scaffold(
       body: Material(
         child: Container(
           child: Stack(children: [
@@ -84,7 +89,7 @@ class _ChiTietState extends State<ChiTiet> {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white, elevation: 0),
                       icon: SvgPicture.asset(
-                        'assets/imgs/svg/gps.svg',
+                        'assets/imgs/svg/gps1.svg',
                         color: Color(0xFF4C56CE),
                         height: size.height * 20 / 640,
                         width: 20,
@@ -96,7 +101,7 @@ class _ChiTietState extends State<ChiTiet> {
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white, elevation: 0),
                       icon: SvgPicture.asset(
-                        'assets/imgs/svg/user.svg',
+                        'assets/imgs/svg/user1.svg',
                         height: size.height * 20 / 640,
                         width: size.width * 20 / 360,
                         color: Color(0xFF4C56CE),
@@ -135,21 +140,21 @@ class _ChiTietState extends State<ChiTiet> {
             FloatingActionButton.extended(
               onPressed: () {
                 // Add your onPressed code here!
+                _nhanthich();
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-              backgroundColor: Colors.white,
-              label: Text(
-                "200",
+              backgroundColor: _thich? Colors.white:Color(0xFF7D82BC),
+              label: Text("200",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
-                  color: Color(0xFF7D82BC),
+                  color: _thich? Color(0xFF7D82BC):Colors.white,
                 ),
               ),
               icon: SvgPicture.asset('assets/imgs/svg/like.svg',
-                  color: Color(0xFF7D82BC)),
+                  color:_thich? Color(0xFF7D82BC):Colors.white,),
               heroTag: "fab1",
             ),
             FloatingActionButton.extended(

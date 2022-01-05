@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_flutter/Object/baivietObject.dart';
+import 'package:user_flutter/colorplush.dart';
 class chuoidecu extends StatefulWidget {
   @override
   _chuoidecuState createState() => _chuoidecuState();
@@ -9,10 +10,11 @@ class _chuoidecuState extends State<chuoidecu> {
   int selectedIndex=0;
   @override
     Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: SizedBox(
-        height: 28,
+        height: 25,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: ds_Decu.length,
@@ -36,11 +38,7 @@ class _chuoidecuState extends State<chuoidecu> {
           children: <Widget>[
             Text(
               ds_Decu[index],
-              style: TextStyle(
-                fontFamily: 'Cabin_B',fontWeight:FontWeight.bold,
-                fontSize: 14,
-                color: selectedIndex == index ? Color(0xFF4C56CE) : Colors.grey,
-              ),
+              style: cabin_B( selectedIndex == index ? Color(0xFF4C56CE) : Colors.grey, 14.0)
             ),
             Container(
               alignment: Alignment.bottomCenter,

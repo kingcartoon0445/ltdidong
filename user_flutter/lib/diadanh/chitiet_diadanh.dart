@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:user_flutter/Object/diadanhObject.dart';
 import 'package:user_flutter/diadanh/chiase_baiviet.dart';
 
 class ChiTietDiaDanh extends StatefulWidget {
-  const ChiTietDiaDanh({Key? key}) : super(key: key);
+  final DiaDanhObject DD;
+  const ChiTietDiaDanh({Key? key,required this.DD}) : super(key: key);
 
   @override
-  _ChiTietDiaDanhState createState() => _ChiTietDiaDanhState();
+  _ChiTietDiaDanhState createState() {
+     return _ChiTietDiaDanhState (DD: DD);
+  }
 }
 
 class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
+   final DiaDanhObject DD;
+   _ChiTietDiaDanhState({required this.DD});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +25,8 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              AnhDiaDanh(),
-              ThongTinChiTietDiaDanh(),
+              AnhDiaDanh(DD:DD),
+              ThongTinChiTietDiaDanh(DD:DD),
             ],
           ),
         ),
@@ -51,7 +57,8 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
 }
 
 class AnhDiaDanh extends StatelessWidget {
-  const AnhDiaDanh({Key? key}) : super(key: key);
+  final DiaDanhObject DD; 
+  const AnhDiaDanh({Key? key,required this.DD}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,13 +97,18 @@ class AnhDiaDanh extends StatelessWidget {
 }
 
 class ThongTinChiTietDiaDanh extends StatefulWidget {
-  const ThongTinChiTietDiaDanh({Key? key}) : super(key: key);
+  final DiaDanhObject DD;
+  const ThongTinChiTietDiaDanh({Key? key,required this.DD}) : super(key: key);
 
   @override
-  _ThongTinChiTietDiaDanhState createState() => _ThongTinChiTietDiaDanhState();
+  _ThongTinChiTietDiaDanhState createState(){
+     return _ThongTinChiTietDiaDanhState (DD: DD);
+  }
 }
 
 class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
+  final DiaDanhObject DD;
+  _ThongTinChiTietDiaDanhState({required this.DD});
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -108,7 +120,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Hạ Long',
+                  DD.Dd_Ten,
                   style: TextStyle(
                     fontSize: 22,
                   ),
@@ -134,7 +146,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                   width: 5,
                 ),
                 Text(
-                  'Hạ Long,Quảng Ninh',
+                  DD.Dd_DiaChi,
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -177,7 +189,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               height: 3,
             ),
             Text(
-              'Vịnh Hạ Long là một vịnh nhỏ thuộc phần bờ Tây vịnh Bắc Bộ tại khu vực biển Đông Bắc Việt Nam, bao gồm vùng biển đảo thuộc thành phố Hạ Long, thị xã Cẩm Phả và một phần của huyện đảo Vân Đồn. Vịnh Hạ Long giáp đảo Cát Bà với đường bờ biển dài 120 km cùng gần 2000 hòn đảo lớn nhỏ.',
+             DD.Dd_KinhDo,
               style: TextStyle(
                 fontSize: 14,
               ),
