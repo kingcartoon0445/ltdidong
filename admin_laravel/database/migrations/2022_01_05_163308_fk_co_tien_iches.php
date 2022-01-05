@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLikesTable extends Migration
+class FkCoTienIches extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateLikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
-            $table->foreignId('MaNguoiDung');
-            $table->foreignId('MaBaiViet');
-            $table->Integer('TrangThai')->default(1);
+        Schema::table('co_tien_iches', function (Blueprint $table) {
+            $table->foreign('MaDiaDanh')->references('id')->on('dia_danhs');
+            $table->foreign('MaTienIch')->references('id')->on('tien_iches');
         });
     }
 
@@ -27,6 +26,8 @@ class CreateLikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::table('co_tien_iches', function (Blueprint $table) {
+            //
+        });
     }
 }

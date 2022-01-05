@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLikesTable extends Migration
+class CreateTheLoaisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateLikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
-            $table->foreignId('MaNguoiDung');
-            $table->foreignId('MaBaiViet');
+        Schema::create('the_loais', function (Blueprint $table) {
+            $table->id();
+            $table->string('Ten');
             $table->Integer('TrangThai')->default(1);
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateLikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('the_loais');
     }
 }
