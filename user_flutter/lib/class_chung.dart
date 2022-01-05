@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
+import 'Object/ViewObject.dart';
 import 'Object/diadanhObject.dart';
 import 'Object/nguoidungObject.dart';
 import 'Provider/DiaDanhProvider.dart';
 import 'Provider/DiaDanhProvider.dart';
+import 'Provider/ViewProvider.dart';
 import 'colorplush.dart';
 import 'package:flutter_svg/svg.dart';
 Widget nut_Icon(var icon,var label,var on)
@@ -120,6 +122,18 @@ Widget CardBv(var size,var img,var tieude,var diadanh,var tacgia){
         if(snapshot.hasData){
           List<NguoiDungObject> lsnd= snapshot.data!;
                return Text(lsnd[0].Nd_TenDaiDien,style: cabin_B(mau, size),);
+        }   return Text("data");
+      }
+    );
+  }
+
+   Widget DemView(int id,Color mau, double size){
+    return FutureBuilder<List<ViewObject>>(
+      future:ViewProvider.oneView(id),
+      builder: (context,snapshot){
+        if(snapshot.hasData){
+          List<ViewObject> lsnd= snapshot.data!;
+               return Text(' '+lsnd.length.toString(),style: cabin_B(mau, size),);
         }   return Text("data");
       }
     );

@@ -73,12 +73,7 @@ class _ChiTietState extends State<ChiTiet> {
                               size: 24,
                               color: Color(0xFF4C56CE),
                             ),
-                            Text(" 200",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'Cabin_B',
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF828282))),
+                            DemView(Bai.Bv_Ma, Color(0xFF828282), 15.0)
                           ],
                         )),
                   ),
@@ -106,7 +101,7 @@ class _ChiTietState extends State<ChiTiet> {
                         width: size.width * 20 / 360,
                         color: Color(0xFF4C56CE),
                       ),
-                      label: tenND(Bai.Bv_MaNguoiDung, Color(0xFF828282) , 15)
+                      label: tenND(Bai.Bv_MaNguoiDung, Color(0xFF828282) , 15.0)
                     ),
                   )),
                   Expanded(

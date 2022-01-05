@@ -16,6 +16,7 @@ class ViewController extends Controller
     public function index()
     {
         //
+        return response()->json(View::all());
     }
 
     /**
@@ -45,9 +46,10 @@ class ViewController extends Controller
      * @param  \App\Models\View  $view
      * @return \Illuminate\Http\Response
      */
-    public function show(View $view)
+    public function show(int $view)
     {
         //
+        return View::where('MaBaiViet',$view)->get();
     }
 
     /**
