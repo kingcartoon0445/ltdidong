@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Models\NguoiDung;
 use App\Http\Requests\StoreNguoiDungRequest;
 use App\Http\Requests\UpdateNguoiDungRequest;
@@ -34,9 +34,29 @@ class NguoiDungController extends Controller
      * @param  \App\Http\Requests\StoreNguoiDungRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNguoiDungRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'HovaTen' => 'required',
+            'Email' => 'required',
+            'SDT' => 'required',
+            'AnhNen' => 'required',
+            'MatKhau' => 'required',
+        ]);
+        //
+      $nguoiDung =NguoiDung::create([
+          'TenDaiDien'=>$data['HovaTen'],
+          'HovaTen'=>$data['HovaTen'],
+          'Email'=>$data['Email'],
+          'SDT'=>$data['SDT'],
+          'AnhNen'=>$data['AnhNen'],
+          'MatKhau'=>$data['MatKhau']
+      ]);
+      $response= [
+          'data'=>$nguoiDung
+      ];
+      return true;
     }
 
     /**

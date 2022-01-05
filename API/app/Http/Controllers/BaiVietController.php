@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Models\BaiViet;
 use App\Http\Requests\StoreBaiVietRequest;
 use App\Http\Requests\UpdateBaiVietRequest;
@@ -26,6 +26,7 @@ class BaiVietController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -37,6 +38,25 @@ class BaiVietController extends Controller
     public function store(StoreBaiVietRequest $request)
     {
         //
+        {
+            $data=$request->validate([
+                 'MaNguoiDung' => 'required',
+                 'MaDiaDanh'=> 'required',
+                 'TieuDe'=> 'required',
+                 'NoiDung'=> 'required',
+             ]);
+             //
+           $baiViet =BaiViet::create([
+               'MaNguoiDung'=>$data['MaNguoiDung'],
+               'MaDiaDanh'=>$data['MaDiaDanh'],
+               'TieuDe'=>$data['TieuDe'],
+               'NoiDung'=>$data['NoiDung'],               
+           ]);
+           $response= [
+               'data'=>$baiViet
+           ];
+           return true;
+         }
     }
 
     /**

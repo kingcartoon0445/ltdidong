@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:user_flutter/Provider/NguoiDungProvider.dart';
+import 'Object/diadanhObject.dart';
+import 'Object/nguoidungObject.dart';
+import 'Provider/DiaDanhProvider.dart';
+import 'Provider/DiaDanhProvider.dart';
 import 'colorplush.dart';
 import 'package:flutter_svg/svg.dart';
 Widget nut_Icon(var icon,var label,var on)
@@ -34,7 +39,12 @@ Widget Listdecu(var size,var flex,Widget wg)
 }
 
 Widget CardBv(var size,var img,var tieude,var diadanh,var tacgia){
-  return Padding(
+ return FutureBuilder<List<DiaDanhObject>>(
+      future:DiaDanhProvider.oneDiaDanh(diadanh),
+      builder: (context,snapshot){
+        if(snapshot.hasData){
+          List<DiaDanhObject> lsdd= snapshot.data!;
+                return  Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: 20, vertical: 20 * 0.75),
         child: Row(
@@ -70,7 +80,7 @@ Widget CardBv(var size,var img,var tieude,var diadanh,var tacgia){
                       width: 15 * size.width / 360,
                     ),
                     label: Text(
-                      diadanh.toString(),
+                      lsdd[0].Dd_Ten.toString(),
                       style: cabin_B(Color(0xFF828282), 15.0)
                     )),
                 TextButton(
@@ -85,4 +95,32 @@ Widget CardBv(var size,var img,var tieude,var diadanh,var tacgia){
           ],
         ),
       );    
-}
+
+        }   return Text("data");
+      }
+    );
+  }
+
+
+  Widget tenDD(int id,Color mau, double size){
+    return FutureBuilder<List<DiaDanhObject>>(
+      future:DiaDanhProvider.oneDiaDanh(id),
+      builder: (context,snapshot){
+        if(snapshot.hasData){
+          List<DiaDanhObject> lsnd= snapshot.data!;
+               return Text(lsnd[0].Dd_Ten,style: cabin_B(mau, size),);
+        }   return Text("data");
+      }
+    );
+  }
+   Widget tenND(int id,Color mau, double size){
+    return FutureBuilder<List<NguoiDungObject>>(
+      future:NguoiDungProvider.oneNguoiDung(id),
+      builder: (context,snapshot){
+        if(snapshot.hasData){
+          List<NguoiDungObject> lsnd= snapshot.data!;
+               return Text(lsnd[0].Nd_TenDaiDien,style: cabin_B(mau, size),);
+        }   return Text("data");
+      }
+    );
+  }
