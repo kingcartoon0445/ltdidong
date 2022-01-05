@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
+import 'package:user_flutter/diadanh/recommend_diadanh.dart';
 
 class DanhSachDiaDanh extends StatefulWidget {
   const DanhSachDiaDanh({Key? key}) : super(key: key);
@@ -25,33 +26,8 @@ class _DanhSachDiaDanhState extends State<DanhSachDiaDanh> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Nổi bật',
-                    style: TextStyle(),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Miền',
-                    style: TextStyle(),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Đã đến',
-                    style: TextStyle(),
-                  ),
-                ),
-              ],
-            ),
-            TatCaDiaDanh(),
+           RecommendDiaDanh(),
+           TatCaDiaDanh(),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
