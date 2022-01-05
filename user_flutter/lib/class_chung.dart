@@ -19,7 +19,7 @@ return ElevatedButton.icon(
             }
 
      
-Widget Listdecu(var size,var flex,Widget wg)
+Widget Listdecu(var size,var flet,Widget wg)
 {
   return SizedBox(
       width: double.infinity,
@@ -31,7 +31,7 @@ Widget Listdecu(var size,var flex,Widget wg)
             child: PageView.builder(
               onPageChanged: (value) {},
               controller: PageController(viewportFraction: 0.8, initialPage: 0),
-              itemCount: 3, //đếm ảnh
+              itemCount: flet, //đếm ảnh
               itemBuilder: (context, index) =>wg
             ),
           ),
@@ -67,10 +67,12 @@ Widget CardBv(var size,var img,var tieude,var diadanh,var tacgia){
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Container(
+                child:
                 Text(
                  tieude,
-                  style: cabin_B(Colors.black, 15.0)
-                ), //#5
+                  style: cabin_B(Colors.black, 15.0),softWrap: true,
+                ), ),//#5
                 ElevatedButton.icon(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(

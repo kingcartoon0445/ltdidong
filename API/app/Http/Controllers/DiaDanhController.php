@@ -51,7 +51,7 @@ class DiaDanhController extends Controller
                'MaMien'=>$data['MaMien'],
                'KinhDo'=>$data['KinhDo'],
                'Vido'=>$data['Vido'],    
-               'ViMoTado'=>$data['MoTa'],                 
+               'MoTa'=>$data['MoTa'],                 
            ]);
            $response= [
                'data'=>$diaDanh
