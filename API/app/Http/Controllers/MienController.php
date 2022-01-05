@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mien;
 use App\Http\Requests\StoreMienRequest;
 use App\Http\Requests\UpdateMienRequest;
+use Illuminate\Http\Request;
 
 class MienController extends Controller
 {
@@ -35,9 +36,19 @@ class MienController extends Controller
      * @param  \App\Http\Requests\StoreMienRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMienRequest $request)
+    public function store(Request $request)
     {
+       $data=$request->validate([
+            'TenMien' => 'required',
+        ]);
         //
+      $mien =Mien::create([
+          'TenMien'=>$data['TenMien']
+      ]);
+      $response= [
+          'data'=>$mien
+      ];
+      return true;
     }
 
     /**
@@ -70,9 +81,8 @@ class MienController extends Controller
      * @param  \App\Models\Mien  $mien
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMienRequest $request, Mien $mien)
+    public function update(Request $request, $id)
     {
-        //
     }
 
     /**

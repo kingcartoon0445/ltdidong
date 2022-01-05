@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TienIch;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreTienIchRequest;
 use App\Http\Requests\UpdateTienIchRequest;
 
@@ -35,9 +36,31 @@ class TienIchController extends Controller
      * @param  \App\Http\Requests\StoreTienIchRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTienIchRequest $request)
+    public function store(Request $request)
     {
         //
+        {
+            $data=$request->validate([
+                 'Ten' => 'required',
+                 'Loai'=> 'required',
+                 'DiaChi'=> 'required',
+                 'MoTa'=> 'required',
+                 'SDT'=> 'required',
+             ]);
+             //
+           $tienIch =TienIch::create([
+               'Ten'=>$data['Ten'],
+               'Loai'=>$data['Loai'],
+               'DiaChi'=>$data['TenMien'],
+               'MoTa'=>$data['MoTa'],
+               'SDT'=>$data['SDT'],
+               
+           ]);
+           $response= [
+               'data'=>$tienIch
+           ];
+           return true;
+         }
     }
 
     /**

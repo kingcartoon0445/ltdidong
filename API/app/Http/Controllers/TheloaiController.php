@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\theloai;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoretheloaiRequest;
 use App\Http\Requests\UpdatetheloaiRequest;
 
@@ -38,6 +39,19 @@ class TheloaiController extends Controller
     public function store(StoretheloaiRequest $request)
     {
         //
+        {
+            $data=$request->validate([
+                 'Ten' => 'required',
+             ]);
+             //
+           $theloai =TheLoai::create([
+               'Ten'=>$data['Ten'],               
+           ]);
+           $response= [
+               'data'=>$theloai
+           ];
+           return true;
+         }
     }
 
     /**
