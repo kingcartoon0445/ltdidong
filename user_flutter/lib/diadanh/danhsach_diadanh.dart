@@ -68,104 +68,124 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 200,
+      height: 180,
       child: Column(
         children: [
           Expanded(
             flex: 3,
             child: PageView.builder(
-              onPageChanged: (value) {},
-              controller: PageController(viewportFraction: 0.8, initialPage: 0),
-              itemCount: 3, //đếm ảnh
-              itemBuilder: (context, index) => Container(
-                margin: EdgeInsets.only(right: 30),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    image: DecorationImage(
-                      image: AssetImage("assets/imgs/diadanh/VungTau.png"),
-                      fit: BoxFit.cover,
-                    )),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 95,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(23),
-                            bottomRight: Radius.circular(23)),
-                        color: kCardInfoBG.withOpacity(0.5),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                            width: double.infinity,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChiTietDiaDanh()),
-                                );
-                              },
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.all(2),
-                              ),
-                              child: Text(
-                                "Vũng Tàu",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700),
-                              ),
+                onPageChanged: (value) {},
+                controller:
+                    PageController(viewportFraction: 0.8, initialPage: 0),
+                itemCount: 3, //đếm ảnh
+                itemBuilder: (context, index) => Stack(
+                      children: [
+                        Container(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChiTietDiaDanh()),
+                              );
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(right: 30),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/imgs/diadanh/VungTau.png"),
+                                    fit: BoxFit.cover,
+                                  )),
                             ),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 95,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(23),
+                                    bottomRight: Radius.circular(23)),
+                                color: kCardInfoBG.withOpacity(0.4),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Icon(
-                                    Icons.place_outlined,
-                                    color: Colors.white,
+                                  SizedBox(
+                                    height: 40,
+                                    width: double.infinity,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChiTietDiaDanh()),
+                                        );
+                                      },
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.all(2),
+                                      ),
+                                      child: Text(
+                                        "Vũng Tàu",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
                                   ),
-                                  Text(
-                                    "Bà Rịa - Vũng Tàu",
-                                    style: TextStyle(color: Colors.white),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.place_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            "Bà Rịa - Vũng Tàu",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          RatingBarIndicator(
+                                            rating: 4.5,
+                                            itemBuilder: (_, __) {
+                                              return Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              );
+                                            },
+                                            itemSize: 20,
+                                          ),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  RatingBarIndicator(
-                                    rating: 4.5,
-                                    itemBuilder: (_, __) {
-                                      return Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      );
-                                    },
-                                    itemSize: 20,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
           ),
         ],
       ),
@@ -204,17 +224,25 @@ class _TopLuotShareDiaDanhState extends State<TopLuotShareDiaDanh> {
             child: Stack(
               children: [
                 Hero(
-                  tag: "btn$index",
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image.asset(
-                      "assets/imgs/diadanh/VungTau.png",
-                      width: double.infinity,
-                      height: 400,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                    tag: "btn$index",
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChiTietDiaDanh()),
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(
+                          "assets/imgs/diadanh/VungTau.png",
+                          width: double.infinity,
+                          height: 400,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

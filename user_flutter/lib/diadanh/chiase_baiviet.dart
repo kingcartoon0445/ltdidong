@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChiaSeBaiViet extends StatefulWidget {
   const ChiaSeBaiViet({Key? key}) : super(key: key);
@@ -63,6 +66,8 @@ class ThongTinDiaDanh extends StatefulWidget {
 }
 
 class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
+  final TextEditingController txtTieuDe = TextEditingController();
+  final TextEditingController txtNoiDung = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -124,7 +129,13 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
               ),
             ],
           ),
-          TextField(
+          TextFormField(
+            controller: txtTieuDe,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Không được bỏ trống';
+              }
+            },
             textAlign: TextAlign.start,
           ),
           SizedBox(
@@ -141,7 +152,13 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
               ),
             ],
           ),
-          TextField(
+          TextFormField(
+            controller: txtNoiDung,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Không được bỏ trống';
+              }
+            },
             textAlign: TextAlign.start,
             maxLines: null,
           ),
@@ -172,9 +189,7 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 FloatingActionButton.extended(
-                  onPressed: () {
-                    // Add your onPressed code here!
-                  },
+                  onPressed: () {},
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
