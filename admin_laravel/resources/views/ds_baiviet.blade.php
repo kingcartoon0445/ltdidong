@@ -1,15 +1,24 @@
 @extends('layouts.app')
 
+@section('content')
 <div class="content-wrapper">
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>DanhSach</h1>
-        </div>
-      </div>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Quản lý bài viết</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Quản lý bài viết</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
-  </section>
+    <!-- /.content-header -->
 
   <!-- Main content -->
   <section class="content">
@@ -20,7 +29,7 @@
             Thêm bài viết
           </button>
 
-          <!-- Danh sách bài viết -->
+          <!-- Danh sách -->
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
@@ -48,10 +57,11 @@
                         <td>User {{ $i+1 }}</td>
                         <td>
                             <!--
-                                <span class="badge bg-danger">Không chấp thuận</span>
-                                <span class="badge bg-warning">Chờ duyệt</span>
+                            <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
+                            <span class="badge bg-warning" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Chờ duyệt</h6></span>
+                            <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Ẩn</h6></span>
                             -->
-                            <span class="badge bg-success">Hoạt động</span>
+                            <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
                         </td>
                         <td>
                             <div class="btn-group">
@@ -75,7 +85,7 @@
   </section>
 </div>
 
-<!-- modal sửa bv -->
+<!-- modal thêm -->
 <div class="modal fade" id="themBV">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -99,38 +109,6 @@
                 <label class="col-form-label" for="txtNoiDung">Nội dung</label>
                 <textarea class="form-control" id="txtNoiDung" name="txtNoiDung" rows="3" placeholder="Nhập nội dung..."></textarea>
               </div>
-              <!-- input states
-              <div class="form-group">
-                <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Input with success</label>
-                <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ...">
-              </div>
-              <div class="form-group">
-                <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Input with error</label>
-                <input type="text" class="form-control is-invalid" id="inputError" placeholder="Enter ...">
-              </div>
-              -->
-
-              <!--
-              <div class="form-group">
-                <label>Select Multiple</label>
-                <select multiple class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Người đăng</label>
-                <select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
-                  <option>Người đăng 1</option>
-                  <option>Người đăng 2</option>
-                  <option>Người đăng 3</option>
-                </select>
-              </div>
-              -->
 
               <div class="form-group">
                 <label>Địa danh</label>
@@ -142,15 +120,25 @@
               </div>
 
               <div class="form-group">
+                <label>Trạng thái</label>
+                <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
+                  <option>Hoạt động</option>  
+                  <option>Chờ duyệt</option>
+                  <option>Ẩn</option>
+                </select>
+              </div>
+
+              <div class="form-group">
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Ảnh</label>
-                  <input onchange="readURL(this);" class="form-control" type="file" id="formFile">
+                  <input onchange="showAnh_ThemBV(this);" class="form-control" type="file" id="formFile">
                 </div>
               </div>
 
-              <div id="anhDiv" class="form-group">
-                <img id="anhImg"/>
+              <div id="themBV_ImgDiv" class="form-group">
+                <img id="themBV_Img"/>
               </div>
+
             </form>
           </div>
         </div>
@@ -163,12 +151,12 @@
   </div>
 </div>
 
-<!-- modal thêm bv -->
+<!-- modal sửa -->
 <div class="modal fade" id="suaBV">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Sửa bài viết</h4>
+        <h4 class="modal-title">Sửa thông tin bài viết</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -187,38 +175,6 @@
                 <label class="col-form-label" for="txtNoiDung">Nội dung</label>
                 <textarea class="form-control" id="txtNoiDung" name="txtNoiDung" rows="3" placeholder="Nhập nội dung..."></textarea>
               </div>
-              <!-- input states
-              <div class="form-group">
-                <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Input with success</label>
-                <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ...">
-              </div>
-              <div class="form-group">
-                <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Input with error</label>
-                <input type="text" class="form-control is-invalid" id="inputError" placeholder="Enter ...">
-              </div>
-              -->
-
-              <!--
-              <div class="form-group">
-                <label>Select Multiple</label>
-                <select multiple class="form-control">
-                  <option>option 1</option>
-                  <option>option 2</option>
-                  <option>option 3</option>
-                  <option>option 4</option>
-                  <option>option 5</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Người đăng</label>
-                <select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
-                  <option>Người đăng 1</option>
-                  <option>Người đăng 2</option>
-                  <option>Người đăng 3</option>
-                </select>
-              </div>
-              -->
 
               <div class="form-group">
                 <label>Địa danh</label>
@@ -230,15 +186,25 @@
               </div>
 
               <div class="form-group">
+                <label>Trạng thái</label>
+                <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
+                  <option>Hoạt động</option>  
+                  <option>Chờ duyệt</option>
+                  <option>Ẩn</option>
+                </select>
+              </div>
+
+              <div class="form-group">
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Ảnh</label>
-                  <input onchange="readURL(this);" class="form-control" type="file" id="formFile">
+                  <input onchange="showAnh_SuaBV(this);" class="form-control" type="file" id="formFile">
                 </div>
               </div>
 
-              <div id="anhDiv" class="form-group">
-                <img id="anhImg"/>
+              <div id="suaBV_ImgDiv" class="form-group">
+                <img id="suaBV_Img"/>
               </div>
+
             </form>
           </div>
         </div>
@@ -250,3 +216,4 @@
     </div>
   </div>
 </div>
+@endsection

@@ -29,9 +29,13 @@ Route::get('/DanhSachMien', function () {
     return view('ds_mien');
 })->name('dsmien');
 
-Route::get('/DanhSachTaiKhoan', function () {
+Route::get('/DanhSachUser', function () {
     return view('ds_taikhoan');
-})->name('dstaikhoan');
+})->name('dsuser');
+
+Route::get('/DanhSachAdmin', function () {
+    return view('ds_taikhoanadmin');
+})->name('dsadmin');
 
 Route::get('/DanhSachTheLoai', function () {
     return view('ds_theloai');
@@ -40,3 +44,7 @@ Route::get('/DanhSachTheLoai', function () {
 Route::get('/DanhSachTienich', function () {
     return view('ds_tienich');
 })->name('dstienich');
+
+Route::get('/Profile', function () {
+    return view('admin_profile');
+})->name('profile');

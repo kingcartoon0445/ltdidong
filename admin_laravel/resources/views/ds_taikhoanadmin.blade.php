@@ -7,12 +7,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Quản lý miền</h1>
+            <h1 class="m-0">Admin</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Quản lý miền</li>
+              <li class="breadcrumb-item active">Quản lý tài khoản</li>
+              <li class="breadcrumb-item active">Admin</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -25,8 +26,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#themDiaDanh">
-            Thêm địa danh
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#themTKUser">
+            Thêm tài khoản
           </button>
 
           <!-- Danh sách -->
@@ -37,11 +38,12 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Tên Địa Dnh</th>
-                    <th>Miền</th>
-                    <th>Kinh Độ</th>
-                    <th>Vĩ Độ</th>
-                    <th>Mô Tả</th>
+                    <th>Ảnh Đại Diện</th>
+                    <th>Tên Đại Diện</th>
+                    <th>Họ Và Tên</th>
+                    <th>Email</th>
+                    <th>Mật Khẩu</th>
+                    <th>SĐT</th>
                     <th>Trạng thái</th>
                     <th></th>
                   </tr>
@@ -50,11 +52,12 @@
                   @for ($i = 0; $i < 20; $i++)
                     <tr>
                         <td>{{ $i+1 }}</td>
-                        <td>Tên {{ $i+1 }}</td>
-                        <td>Mã miền {{ $i+1 }}</td>
-                        <td>Kinh độ {{ $i+1 }}</td>
-                        <td>Vĩ độ {{ $i+1 }}</td>
-                        <td>Mô tả {{ $i+1 }}</td>
+                        <td>Hình {{ $i+1 }}</td>
+                        <td>Tên đại diện {{ $i+1 }}</td>
+                        <td>Họ và tên {{ $i+1 }}</td>
+                        <td>Email {{ $i+1 }}</td>
+                        <td>Mật khẩu {{ $i+1 }}</td>
+                        <td>SĐT {{ $i+1 }}</td>
                         <td>
                             <!--
                             <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
@@ -64,7 +67,7 @@
                             <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>                        </td>
                         <td>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#suaDiaDanh">
+                                <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#suaTKUser">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a type="button" class="btn btn-danger">
@@ -85,11 +88,11 @@
 </div>
 
 <!-- modal thêm -->
-<div class="modal fade" id="themDiaDanh">
+<div class="modal fade" id="themTKUser">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Thêm miền</h4>
+        <h4 class="modal-title">Thêm tài khoản admin</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -100,42 +103,49 @@
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label class="col-form-label" for="txtTenMien">Tên địa danh</label>
-                <input type="text" class="form-control" id="txtTenDiaDanh" name = "txtTenDiaDanh" placeholder="Nhập tên địa danh...">
+                <label class="col-form-label" for="txtTDD">Tên Đại Diện</label>
+                <input type="text" class="form-control" id="txtTenDaiDien" name = "txtTenDaiDien" placeholder="Nhập tên đại diện...">
               </div>
 
               <div class="form-group">
-                <label>Miền</label>
-                <select class="custom-select form-control-border border-width-2" id="txtMaMien" name="txtMaMien">
-                  <option>Bắc</option>
-                  <option>Trung</option>
-                  <option>Nam</option>
-                </select>
+                <label class="col-form-label" for="txtHoTen">Họ Và Tên</label>
+                <input type="text" class="form-control" id="txtHoTen" name = "txtHoTen" placeholder="Nhập họ và tên...">
               </div>
 
               <div class="form-group">
-                <label class="col-form-label" for="txtKinhDo">Kinh độ</label>
-                <input type="text" class="form-control" id="txtKinhDo" name = "txtKinhDo" placeholder="Nhập kinh độ...">
+                <label class="col-form-label" for="txtEmail">Email</label>
+                <input type="text" class="form-control" id="txtEmail" name = "txtEmail" placeholder="Nhập email...">
+              </div>
+              
+              <div class="form-group">
+                <label class="col-form-label" for="txtMatKhau">Mật Khẩu</label>
+                <input type="text" class="form-control" id="txtMatKhau" name = "txtMatKhau" placeholder="Nhập mật khẩu...">
               </div>
 
               <div class="form-group">
-                <label class="col-form-label" for="txtKinhDo">Vĩ độ</label>
-                <input type="text" class="form-control" id="txtViDo" name = "txtViDo" placeholder="Nhập vĩ độ...">
-              </div>
-
-              <div class="form-group">
-                <label class="col-form-label" for="txtMoTa">Mô tả</label>
-                <textarea class="form-control" id="txtMoTa" name="txtMoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
+                <label class="col-form-label" for="txtSDT">Số Điện Thoại</label>
+                <input type="text" class="form-control" id="txtSDT" name = "txtSDT" placeholder="Nhập số điện thoại...">
               </div>
 
               <div class="form-group">
                 <label>Trạng thái</label>
                 <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
                   <option>Hoạt động</option>  
-                  <option>Chờ duyệt</option>
-                  <option>Ẩn</option>
+                  <option>Khóa</option>
                 </select>
               </div>
+
+              <div class="form-group">
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Ảnh</label>
+                  <input onchange="showAnh_ThemTKAdmin(this);" class="form-control" type="file" id="formFile">
+                </div>
+              </div>
+
+              <div id="themTKAdmin_ImgDiv" class="form-group">
+                <img id="themTKAdmin_Img"/>
+              </div>
+
             </form>
           </div>
         </div>
@@ -149,11 +159,11 @@
 </div>
 
 <!-- modal sửa -->
-<div class="modal fade" id="suaDiaDanh">
+<div class="modal fade" id="suaTKUser">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Sửa thông tin địa danh</h4>
+        <h4 class="modal-title">Sửa thông tin tài khoản admin</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -164,42 +174,49 @@
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label class="col-form-label" for="txtTenMien">Tên địa danh</label>
-                <input type="text" class="form-control" id="txtTenMien" name = "txtTenMien" placeholder="Nhập tên miền...">
+                <label class="col-form-label" for="txtTDD">Tên Đại Diện</label>
+                <input type="text" class="form-control" id="txtTenDaiDien" name = "txtTenDaiDien" placeholder="Nhập tên đại diện...">
               </div>
 
               <div class="form-group">
-                <label>Miền</label>
-                <select class="custom-select form-control-border border-width-2" id="txtMaMien" name="txtMaMien">
-                  <option>Bắc</option>
-                  <option>Trung</option>
-                  <option>Nam</option>
-                </select>
+                <label class="col-form-label" for="txtHoTen">Họ Và Tên</label>
+                <input type="text" class="form-control" id="txtHoTen" name = "txtHoTen" placeholder="Nhập họ và tên...">
               </div>
 
               <div class="form-group">
-                <label class="col-form-label" for="txtKinhDo">Kinh độ</label>
-                <input type="text" class="form-control" id="txtKinhDo" name = "txtKinhDo" placeholder="Nhập kinh độ...">
+                <label class="col-form-label" for="txtEmail">Email</label>
+                <input type="text" class="form-control" id="txtEmail" name = "txtEmail" placeholder="Nhập email...">
+              </div>
+              
+              <div class="form-group">
+                <label class="col-form-label" for="txtMatKhau">Mật Khẩu</label>
+                <input type="text" class="form-control" id="txtMatKhau" name = "txtMatKhau" placeholder="Nhập mật khẩu...">
               </div>
 
               <div class="form-group">
-                <label class="col-form-label" for="txtKinhDo">Vĩ độ</label>
-                <input type="text" class="form-control" id="txtViDo" name = "txtViDo" placeholder="Nhập vĩ độ...">
-              </div>
-
-              <div class="form-group">
-                <label class="col-form-label" for="txtMoTa">Mô tả</label>
-                <textarea class="form-control" id="txtMoTa" name="txtMoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
+                <label class="col-form-label" for="txtSDT">Số Điện Thoại</label>
+                <input type="text" class="form-control" id="txtSDT" name = "txtSDT" placeholder="Nhập số điện thoại...">
               </div>
 
               <div class="form-group">
                 <label>Trạng thái</label>
                 <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
                   <option>Hoạt động</option>  
-                  <option>Chờ duyệt</option>
-                  <option>Ẩn</option>
+                  <option>Khóa</option>
                 </select>
               </div>
+
+              <div class="form-group">
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Ảnh</label>
+                  <input onchange="showAnh_SuaTKAdmin(this);" class="form-control" type="file" id="formFile">
+                </div>
+              </div>
+
+              <div id="suaTKAdmin_ImgDiv" class="form-group">
+                <img id="suaTKAdmin_Img"/>
+              </div>
+
             </form>
           </div>
         </div>
@@ -211,4 +228,5 @@
     </div>
   </div>
 </div>
+
 @endsection

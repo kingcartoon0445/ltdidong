@@ -25,11 +25,11 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#themDiaDanh">
-            Thêm địa danh
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#themMien">
+            Thêm miền
           </button>
 
-          <!-- Danh sách -->
+          <!-- Danh sách bài viết -->
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
@@ -37,8 +37,8 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Tên Địa Dnh</th>
-                    <th>Miền</th>
+                    <th>Tên Miền</th>
+                    <th>Mã Miền</th>
                     <th>Kinh Độ</th>
                     <th>Vĩ Độ</th>
                     <th>Mô Tả</th>
@@ -50,7 +50,7 @@
                   @for ($i = 0; $i < 20; $i++)
                     <tr>
                         <td>{{ $i+1 }}</td>
-                        <td>Tên {{ $i+1 }}</td>
+                        <td>Tên miền {{ $i+1 }}</td>
                         <td>Mã miền {{ $i+1 }}</td>
                         <td>Kinh độ {{ $i+1 }}</td>
                         <td>Vĩ độ {{ $i+1 }}</td>
@@ -64,7 +64,7 @@
                             <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>                        </td>
                         <td>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#suaDiaDanh">
+                                <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#suaMien">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a type="button" class="btn btn-danger">
@@ -85,7 +85,7 @@
 </div>
 
 <!-- modal thêm -->
-<div class="modal fade" id="themDiaDanh">
+<div class="modal fade" id="themMien">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -100,17 +100,13 @@
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label class="col-form-label" for="txtTenMien">Tên địa danh</label>
-                <input type="text" class="form-control" id="txtTenDiaDanh" name = "txtTenDiaDanh" placeholder="Nhập tên địa danh...">
+                <label class="col-form-label" for="txtTenMien">Tên miền</label>
+                <input type="text" class="form-control" id="txtTenMien" name = "txtTenMien" placeholder="Nhập tên miền...">
               </div>
 
               <div class="form-group">
-                <label>Miền</label>
-                <select class="custom-select form-control-border border-width-2" id="txtMaMien" name="txtMaMien">
-                  <option>Bắc</option>
-                  <option>Trung</option>
-                  <option>Nam</option>
-                </select>
+                <label class="col-form-label" for="txtNoiDung">Mã miền</label>
+                <input type="text" class="form-control" id="txtMaMien" name = "txtMaMien" placeholder="Nhập mã miền...">
               </div>
 
               <div class="form-group">
@@ -149,11 +145,11 @@
 </div>
 
 <!-- modal sửa -->
-<div class="modal fade" id="suaDiaDanh">
+<div class="modal fade" id="suaMien">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Sửa thông tin địa danh</h4>
+        <h4 class="modal-title">Sửa thông tin miền</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -164,17 +160,13 @@
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label class="col-form-label" for="txtTenMien">Tên địa danh</label>
+                <label class="col-form-label" for="txtTenMien">Tên miền</label>
                 <input type="text" class="form-control" id="txtTenMien" name = "txtTenMien" placeholder="Nhập tên miền...">
               </div>
 
               <div class="form-group">
-                <label>Miền</label>
-                <select class="custom-select form-control-border border-width-2" id="txtMaMien" name="txtMaMien">
-                  <option>Bắc</option>
-                  <option>Trung</option>
-                  <option>Nam</option>
-                </select>
+                <label class="col-form-label" for="txtNoiDung">Mã miền</label>
+                <input type="text" class="form-control" id="txtMaMien" name = "txtMaMien" placeholder="Nhập mã miền...">
               </div>
 
               <div class="form-group">
