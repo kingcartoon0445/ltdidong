@@ -5,30 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Page</title>
 
-  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
+  {{ Html::style('plugins/bootstrap-5/css/bootstrap.min.css') }}
   {{ Html::style('plugins/fontawesome-free/css/all.min.css') }}
-  <!-- overlayScrollbars -->
   {{ Html::style('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}
-  <!-- Theme style -->
   {{ Html::style('dist/css/adminlte.min.css') }}
-
   {{ Html::style('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}
   {{ Html::style('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}
   {{ Html::style('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}
-
-  <!-- summernote -->
-  {{ Html::style('plugins/summernote/summernote-bs4.min.css') }}
-  <!-- CodeMirror -->
   {{ Html::style('plugins/codemirror/codemirror.css') }}
   {{ Html::style('plugins/codemirror/theme/monokai.css') }}
-  <!-- SimpleMDE -->
   {{ Html::style('plugins/simplemde/simplemde.min.css') }}
-  <!-- SweetAlert2 -->
   {{ Html::style('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}
-  <!-- Toastr -->
   {{ Html::style('plugins/toastr/toastr.min.css') }}
+
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -160,14 +153,6 @@
                 </a>
               </li>
             </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.Html" class="nav-link">
-                  <i class="nav-icon fas fa-image"></i>
-                  <p>Ảnh bài viết</p>
-                </a>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item">
@@ -176,44 +161,38 @@
               <p>Quản lý địa danh <i class="fas fa-angle-left right"></i></p>
             </a>
             <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="pages/layout/top-nav.Html" class="nav-link">
+              <li class="nav-item">
+                <a href="{{ route('dsdd') }}" class="nav-link">
                   <i class="nav-icon fas fa-list"></i>
                   <p>Danh sách địa danh</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.Html" class="nav-link">
-                  <i class="nav-icon fas fa-image"></i>
-                  <p>Ảnh địa danh</p>
                 </a>
               </li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.Html" class="nav-link">
+            <a href="{{ route('dstheloai') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>Quản lý thể loại</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.Html" class="nav-link">
+            <a href="{{ route('dsmien') }}" class="nav-link">
               <i class="nav-icon fas fa-map-marked-alt"></i>
               <p>Quản lý miền</p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="pages/widgets.Html" class="nav-link">
+            <a href="{{ route('dstienich') }}" class="nav-link">
               <i class="nav-icon fas fa-hamburger"></i>
               <p>Quản lý tiện ích</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.Html" class="nav-link">
+            <a href="{{ route('dstaikhoan') }}" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>Quản lý tài khoản</p>
             </a>
@@ -231,27 +210,18 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
-<!-- jQuery -->
+{{ Html::script('plugins/bootstrap-5/js/bootstrap.bundle.min.js') }}
 {{ Html::script('plugins/jquery/jquery.min.js') }}
-<!-- Bootstrap -->
 {{ Html::script('plugins/bootstrap/js/bootstrap.bundle.min.js') }}
-<!-- overlayScrollbars -->
 {{ Html::script('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}
-<!-- AdminLTE App -->
 {{ Html::script('dist/js/adminlte.js') }}
-<!-- jQuery Mapael -->
 {{ Html::script('plugins/jquery-mousewheel/jquery.mousewheel.js') }}
 {{ Html::script('plugins/raphael/raphael.min.js') }}
 {{ Html::script('plugins/jquery-mapael/jquery.mapael.min.js') }}
 {{ Html::script('plugins/jquery-mapael/maps/usa_states.min.js') }}
-<!-- ChartJS -->
 {{ Html::script('plugins/chart.js/Chart.min.js') }}
-<!-- AdminLTE for demo purposes -->
 {{ Html::script('dist/js/demo.js') }}
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{ Html::script('dist/js/pages/dashboard2.js') }}
-<!-- DataTables  & Plugins -->
 {{ Html::script('plugins/datatables/jquery.dataTables.min.js') }}
 {{ Html::script('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}
 {{ Html::script('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}
@@ -264,25 +234,14 @@
 {{ Html::script('plugins/datatables-buttons/js/buttons.html5.min.js') }}
 {{ Html::script('plugins/datatables-buttons/js/buttons.print.min.js') }}
 {{ Html::script('plugins/datatables-buttons/js/buttons.colVis.min.js') }}
-<!-- Summernote -->
-{{ Html::script('plugins/summernote/summernote-bs4.min.js') }}
-<!-- CodeMirror -->
-{{ Html::script('plugins/codemirror/codemirror.js') }}
 {{ Html::script('plugins/codemirror/mode/css/css.js') }}
 {{ Html::script('plugins/codemirror/mode/xml/xml.js') }}
 {{ Html::script('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}
-<!-- AdminLTE for demo purposes -->
 {{ Html::script('dist/js/demo.js') }}
 
-<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
-    // Summernote
-    $('#no').summernote()
-
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "excel", "pdf"]
@@ -296,7 +255,7 @@
       "autoWidth": false,
       "responsive": true,
     });
-  })
+  });
 </script>
 <!-- Page specific script -->
 <script>

@@ -20,3 +20,23 @@ Route::get('/', function () {
 Route::get('/DanhSachBaiViet', function () {
     return view('ds_baiviet');
 })->name('dsbv');
+
+Route::get('/DanhSachDiaDanh', function () {
+    return view('ds_diadanh');
+})->name('dsdd');
+
+Route::get('/DanhSachMien', function () {
+    return view('ds_mien');
+})->name('dsmien');
+
+Route::get('/DanhSachTaiKhoan', function () {
+    return view('ds_taikhoan');
+})->name('dstaikhoan');
+
+Route::get('/DanhSachTheLoai', function () {
+    return view('ds_theloai');
+})->name('dstheloai');
+
+Route::get('/DanhSachTienich', function () {
+    return view('ds_tienich');
+})->name('dstienich');
