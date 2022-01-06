@@ -22,7 +22,7 @@
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__wobble" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -107,7 +107,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('index') }}" class="brand-link">
+    <a href="/" class="brand-link">
       <img src="{{ asset('dist/img/mainlogo.png') }}" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Admin Page</span>
     </a>
@@ -130,21 +130,21 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ route('index') }}" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>Dashboard</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('dsbv') }}" class="nav-link">
+            <a href="/baiviet/danhsach" class="nav-link">
             <i class="nav-icon fas fa-clipboard"></i>
             <p>Quản lý bài viết</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('dsdd') }}" class="nav-link">
+            <a href="/diadanh/danhsach" class="nav-link">
             <i class="nav-icon fas fa-mountain"></i>
             <p>Quản lý địa danh</p>
             </a>
@@ -157,14 +157,12 @@
             </a>
           </li>
           
-          <!--
           <li class="nav-item">
-            <a href="{{ route('dsmien') }}" class="nav-link">
+            <a href="/DanhSachMien" class="nav-link">
               <i class="nav-icon fas fa-map-marked-alt"></i>
               <p>Quản lý miền</p>
             </a>
           </li>
-          -->
           
           <li class="nav-item">
             <a href="{{ route('dstienich') }}" class="nav-link">
@@ -225,7 +223,6 @@
 {{ Html::script('plugins/codemirror/mode/css/css.js') }}
 {{ Html::script('plugins/codemirror/mode/xml/xml.js') }}
 {{ Html::script('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}
-{{ Html::script('dist/js_news/script.js') }}
 <!-- Page specific script -->
 <script>
   $(function () {
