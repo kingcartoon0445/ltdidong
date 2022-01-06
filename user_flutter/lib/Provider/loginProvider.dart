@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:user_flutter/background.dart';
 
 class LoginProvider{
-  signIn(BuildContext context,String email,String password) async{
-    String url='http://127.0.0.1:8000/api/sanctum/token';
+ static signIn(BuildContext context,String email,String password) async{
+    String url='http://10.0.2.2:8000/api/sanctum/token';
     SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
     Map body={'email':email,'password':password};
     var   response= await http.post(Uri.parse(url),

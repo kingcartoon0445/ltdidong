@@ -28,7 +28,7 @@ class _bv_decuState extends State<bv_decu> {
               color: Colors.white,child:
             SizedBox(
               width: double.infinity,
-              height: 130 * size.height / 640,
+              height: 180 * size.height / 640,
               child: Column(
                 children: [
                   Expanded(
@@ -63,7 +63,7 @@ class _bv_decuState extends State<bv_decu> {
                             children: [
                               Container(
                                 width: double.infinity,
-                                height: 51 * size.height / 640,
+                                height: 60 * size.height / 640,
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 23, vertical: 5),
                                 decoration: BoxDecoration(

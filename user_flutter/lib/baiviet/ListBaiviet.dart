@@ -16,8 +16,7 @@ class Lst_baiviet extends StatefulWidget {
 class _Lst_baivietState extends State<Lst_baiviet> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: FutureBuilder<List<BaiVietObject>>(
+      return FutureBuilder<List<BaiVietObject>>(
         future: BaiVietProvider.fecthBaiViet(),
         builder: (context,snapshot){
           if(snapshot.hasError){
@@ -25,11 +24,10 @@ class _Lst_baivietState extends State<Lst_baiviet> {
               child: Text('lỗi rồi'),
             );
           }else if(snapshot.hasData){
-            return Container(color: Color(0xFFe1e1e1),child:ListBV(lsBv:snapshot.data!));
+            return ListBV(lsBv:snapshot.data!);
           }
-          return Container();
+          return SliverList(  delegate: SliverChildListDelegate([Text('lỗi rồi')]));
         },
-      ),
     );
   }
 }
@@ -40,12 +38,13 @@ class ListBV extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: lsBv.length,
-        itemBuilder: (context, index) => Column(
+    return  SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {return Column(
           children: [
             card(BV: lsBv[index]),
           ],
+              );}, childCount: lsBv.length,
         ),
       );
   }

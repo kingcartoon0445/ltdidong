@@ -408,7 +408,7 @@ class RegisterPageState extends State<RegisterPage> {
                                       width: double.infinity,
                                       decoration: BoxDecoration(
                                         color: Color.fromRGBO(125, 130, 188, 1),
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(50),
                                       ),
                                       child: MaterialButton(
                                         onPressed: () {

@@ -27,11 +27,11 @@ class _ChiTietState extends State<ChiTiet> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return 
-    
+    return  
     Scaffold(
       body: Material(
         child: Container(
+          padding: EdgeInsets.only(top: 24),
           child: Stack(children: [
             Container(
                 height: size.height * 227 / 640,

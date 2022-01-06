@@ -46,7 +46,9 @@ Widget CardBv(var size, var img, var tieude, var diadanh, var tacgia) {
         if (snapshot.hasData) {
           List<DiaDanhObject> lsdd = snapshot.data!;
           return Container(
-            color: Colors.white,
+             decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),),
             padding: EdgeInsets.all(10),
             margin: EdgeInsets.only(bottom: 5, top: 5),
             child: Container(

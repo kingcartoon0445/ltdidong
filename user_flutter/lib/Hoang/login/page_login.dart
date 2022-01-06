@@ -6,6 +6,7 @@ import '../api.dart';
 import 'page_forgetPassword.dart';
 import 'page_register.dart';
 import 'package:http/http.dart' as http;
+import 'package:user_flutter/Provider/loginProvider.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -21,42 +22,8 @@ class LoginPageState extends State<LoginPage> {
   bool _obsecureText = true;
   bool isLoading = false;
 
-  login() async {
-    var data = {
-      'email': txtEmail.text.trim(),
-      'password': txtPassword.text.trim()
-    };
-
-    var jsonResponser;
-    var response = await CallApi().postData(data, 'login');
-
-    if (response.statusCode == 200) {
-      jsonResponser = json.decode(response.body);
-
-      if (jsonResponser != null) {
-        setState(() {
-          isLoading = false;
-        });
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Background()),
-        );
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-      }
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-
-      const snackBar = SnackBar(
-        content: Text('Đăng nhập thất bại'),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
+  login() {
+    LoginProvider.signIn(context, txtEmail.text, txtPassword.text);
   }
 
   @override
@@ -234,13 +201,13 @@ class LoginPageState extends State<LoginPage> {
                               SizedBox(height: 100),
                               isLoading
                                   ? Container(
-                                      child: CircularProgressIndicator(),
+                                      child: CircularProgressIndicator(strokeWidth:10),
                                     )
                                   : Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(
                                         color: Color.fromRGBO(125, 130, 188, 1),
-                                        borderRadius: BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(50),
                                       ),
                                       child: MaterialButton(
                                         onPressed: () {

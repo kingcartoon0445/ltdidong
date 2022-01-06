@@ -15,18 +15,19 @@ class thongtin extends StatefulWidget {
 }
 
 class _thongtinState extends State<thongtin> {
-  List<int> top = <int>[];
   List<int> bottom = <int>[0,1,2,3,4,5,6,7];
 
   @override
   Widget build(BuildContext context) {
+      Size size = MediaQuery.of(context).size;
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
-    return Scaffold(
+    return 
+    Container(
+      padding: EdgeInsets.only(top: 24),
+      child:
+    Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Color(0xFF7D82BC),
-        elevation: 0.0,
-      ),
+     
       body: CustomScrollView(
         center: centerKey,
         slivers: <Widget>[
@@ -41,7 +42,7 @@ class _thongtinState extends State<thongtin> {
                         bottomRight: Radius.circular(40),
                         bottomLeft: Radius.circular(40)),
                   ),
-                  height: 150,
+                  height:size.height* 150/640,
                   width: 360,
                   child: Padding(
                     padding: EdgeInsets.all(15),
@@ -122,13 +123,13 @@ class _thongtinState extends State<thongtin> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(); //card();
+                return Container(height: 800,color:Colors.red); //card();
               },
               childCount: bottom.length,
             ),
           ),
         ],
-      ),
+      ),),
     );
   }
 }

@@ -41,12 +41,11 @@ Route::post('/sanctum/token', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
-        'device_name' => 'required',
     ]);
 
     $user = NguoiDung::where('email', $request->email)->first();
    // return $user;
-   // return [$request->password, $user->MatKhau];
+  //  return [$request->password, $user->MatKhau];
 
     if (! $user ||( $request->password != $user->MatKhau)) {
         throw ValidationException::withMessages([
@@ -54,7 +53,7 @@ Route::post('/sanctum/token', function (Request $request) {
         ]);
     }
 
-    return ['token'=> $user->createToken($request->device_name)->plainTextToken];
+    return ['token'=> $user->createToken($request->email)->plainTextToken];
 });
 
 
