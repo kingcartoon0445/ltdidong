@@ -5,33 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Page</title>
 
-  <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
+  {{ Html::style('plugins/bootstrap-5/css/bootstrap.min.css') }}
   {{ Html::style('plugins/fontawesome-free/css/all.min.css') }}
-  <!-- overlayScrollbars -->
   {{ Html::style('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}
-  <!-- Theme style -->
   {{ Html::style('dist/css/adminlte.min.css') }}
-
   {{ Html::style('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}
   {{ Html::style('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}
   {{ Html::style('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}
-
-  <!-- summernote -->
-  {{ Html::style('plugins/summernote/summernote-bs4.min.css') }}
-  <!-- CodeMirror -->
-  {{ Html::style('plugins/codemirror/codemirror.css') }}
   {{ Html::style('plugins/codemirror/theme/monokai.css') }}
-  <!-- SimpleMDE -->
   {{ Html::style('plugins/simplemde/simplemde.min.css') }}
-  <!-- SweetAlert2 -->
   {{ Html::style('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}
-  <!-- Toastr -->
   {{ Html::style('plugins/toastr/toastr.min.css') }}
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
+
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-dark">
     <!-- Left navbar links -->
@@ -43,7 +36,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
+      <!--
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
@@ -65,7 +58,6 @@
         </div>
       </li>
 
-      <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
@@ -73,7 +65,6 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
-            <!-- Message Start -->
             <div class="media">
               <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
@@ -82,14 +73,12 @@
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>4 Hours Ago</p>
               </div>
             </div>
-            <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
       </li>
 
-      <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
@@ -106,6 +95,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
+      -->
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -113,12 +103,11 @@
       </li>
     </ul>
   </nav>
-  <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.Html" class="brand-link">
+    <a href="{{ route('index') }}" class="brand-link">
       <img src="{{ asset('dist/img/mainlogo.png') }}" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Admin Page</span>
     </a>
@@ -128,10 +117,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Me</a>
+          <a href="{{ route('profile') }}" class="d-block">Me</a>
         </div>
       </div>
 
@@ -148,75 +137,59 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-clipboard"></i>
-              <p>Quản lý bài viết <i class="fas fa-angle-left right"></i></p>
+            <a href="{{ route('dsbv') }}" class="nav-link">
+            <i class="nav-icon fas fa-clipboard"></i>
+            <p>Quản lý bài viết</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('dsbv') }}" class="nav-link">
-                  <i class="nav-icon fas fa-list"></i>
-                  <p>Danh sách bài viết</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.Html" class="nav-link">
-                  <i class="nav-icon fas fa-image"></i>
-                  <p>Ảnh bài viết</p>
-                </a>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-mountain"></i>
-              <p>Quản lý địa danh <i class="fas fa-angle-left right"></i></p>
+            <a href="{{ route('dsdd') }}" class="nav-link">
+            <i class="nav-icon fas fa-mountain"></i>
+            <p>Quản lý địa danh</p>
             </a>
-            <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="pages/layout/top-nav.Html" class="nav-link">
-                  <i class="nav-icon fas fa-list"></i>
-                  <p>Danh sách địa danh</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.Html" class="nav-link">
-                  <i class="nav-icon fas fa-image"></i>
-                  <p>Ảnh địa danh</p>
-                </a>
-              </li>
-            </ul>
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.Html" class="nav-link">
+            <a href="{{ route('dstheloai') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>Quản lý thể loại</p>
             </a>
           </li>
-
+          
+          <!--
           <li class="nav-item">
-            <a href="pages/widgets.Html" class="nav-link">
+            <a href="{{ route('dsmien') }}" class="nav-link">
               <i class="nav-icon fas fa-map-marked-alt"></i>
               <p>Quản lý miền</p>
             </a>
           </li>
+          -->
           
           <li class="nav-item">
-            <a href="pages/widgets.Html" class="nav-link">
+            <a href="{{ route('dstienich') }}" class="nav-link">
               <i class="nav-icon fas fa-hamburger"></i>
               <p>Quản lý tiện ích</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.Html" class="nav-link">
+            <a class="nav-link">
               <i class="nav-icon fas fa-user"></i>
-              <p>Quản lý tài khoản</p>
+              <p>Quản lý tài khoản<i class="right fas fa-angle-left"></i></p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('dsuser') }}" class="nav-link">
+                  <p>Người dùng</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('dsadmin') }}" class="nav-link">
+                  <p>Admin</p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -224,34 +197,20 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+  @yield('content')
 </div>
 <!-- ./wrapper -->
-
-<!-- jQuery -->
+{{ Html::script('plugins/bootstrap-5/js/bootstrap.bundle.min.js') }}
 {{ Html::script('plugins/jquery/jquery.min.js') }}
-<!-- Bootstrap -->
 {{ Html::script('plugins/bootstrap/js/bootstrap.bundle.min.js') }}
-<!-- overlayScrollbars -->
 {{ Html::script('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}
-<!-- AdminLTE App -->
 {{ Html::script('dist/js/adminlte.js') }}
-<!-- jQuery Mapael -->
 {{ Html::script('plugins/jquery-mousewheel/jquery.mousewheel.js') }}
 {{ Html::script('plugins/raphael/raphael.min.js') }}
 {{ Html::script('plugins/jquery-mapael/jquery.mapael.min.js') }}
 {{ Html::script('plugins/jquery-mapael/maps/usa_states.min.js') }}
-<!-- ChartJS -->
 {{ Html::script('plugins/chart.js/Chart.min.js') }}
-<!-- AdminLTE for demo purposes -->
-{{ Html::script('dist/js/demo.js') }}
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{ Html::script('dist/js/pages/dashboard2.js') }}
-<!-- DataTables  & Plugins -->
 {{ Html::script('plugins/datatables/jquery.dataTables.min.js') }}
 {{ Html::script('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}
 {{ Html::script('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}
@@ -260,29 +219,16 @@
 {{ Html::script('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}
 {{ Html::script('plugins/jszip/jszip.min.js') }}
 {{ Html::script('plugins/pdfmake/pdfmake.min.js') }}
-{{ Html::script('plugins/pdfmake/vfs_fonts.js') }}
 {{ Html::script('plugins/datatables-buttons/js/buttons.html5.min.js') }}
 {{ Html::script('plugins/datatables-buttons/js/buttons.print.min.js') }}
 {{ Html::script('plugins/datatables-buttons/js/buttons.colVis.min.js') }}
-<!-- Summernote -->
-{{ Html::script('plugins/summernote/summernote-bs4.min.js') }}
-<!-- CodeMirror -->
-{{ Html::script('plugins/codemirror/codemirror.js') }}
 {{ Html::script('plugins/codemirror/mode/css/css.js') }}
 {{ Html::script('plugins/codemirror/mode/xml/xml.js') }}
 {{ Html::script('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}
-<!-- AdminLTE for demo purposes -->
-{{ Html::script('dist/js/demo.js') }}
-
-<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+{{ Html::script('dist/js_news/script.js') }}
 <!-- Page specific script -->
 <script>
   $(function () {
-    // Summernote
-    $('#no').summernote()
-
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "excel", "pdf"]
@@ -296,20 +242,7 @@
       "autoWidth": false,
       "responsive": true,
     });
-  })
-</script>
-<!-- Page specific script -->
-<script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#anhImg').attr('src', e.target.result).width(300).height(300);
-        $('#anhDiv').height(300);
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
+  });
 </script>
 </body>
 </Html>

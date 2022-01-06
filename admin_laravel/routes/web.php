@@ -20,3 +20,31 @@ Route::get('/', function () {
 Route::get('/DanhSachBaiViet', function () {
     return view('ds_baiviet');
 })->name('dsbv');
+
+Route::get('/DanhSachDiaDanh', function () {
+    return view('ds_diadanh');
+})->name('dsdd');
+
+Route::get('/DanhSachMien', function () {
+    return view('ds_mien');
+})->name('dsmien');
+
+Route::get('/DanhSachUser', function () {
+    return view('ds_taikhoan');
+})->name('dsuser');
+
+Route::get('/DanhSachAdmin', function () {
+    return view('ds_taikhoanadmin');
+})->name('dsadmin');
+
+Route::get('/DanhSachTheLoai', function () {
+    return view('ds_theloai');
+})->name('dstheloai');
+
+Route::get('/DanhSachTienich', function () {
+    return view('ds_tienich');
+})->name('dstienich');
+
+Route::get('/Profile', function () {
+    return view('admin_profile');
+})->name('profile');

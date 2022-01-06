@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Quản lý bài viết</h1>
+            <h1 class="m-0">Quản lý miền</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Quản lý bài viết</li>
+              <li class="breadcrumb-item active">Quản lý miền</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -25,11 +25,11 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#themBV">
-            Thêm bài viết
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#themMien">
+            Thêm miền
           </button>
 
-          <!-- Danh sách -->
+          <!-- Danh sách bài viết -->
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
@@ -37,11 +37,11 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Ảnh </th>
-                    <th>Tiêu Đề</th>
-                    <th>Nội dung</th>
-                    <th>Địa danh</th>
-                    <th>Người đăng</th>
+                    <th>Tên Miền</th>
+                    <th>Mã Miền</th>
+                    <th>Kinh Độ</th>
+                    <th>Vĩ Độ</th>
+                    <th>Mô Tả</th>
                     <th>Trạng thái</th>
                     <th></th>
                   </tr>
@@ -50,22 +50,21 @@
                   @for ($i = 0; $i < 20; $i++)
                     <tr>
                         <td>{{ $i+1 }}</td>
-                        <td>Hình {{ $i+1 }}</td>
-                        <td>Tiêu đề {{ $i+1 }}</td>
-                        <td>Nội dung {{ $i+1 }}</td>
-                        <td>Địa danh {{ $i+1 }}</td>
-                        <td>User {{ $i+1 }}</td>
+                        <td>Tên miền {{ $i+1 }}</td>
+                        <td>Mã miền {{ $i+1 }}</td>
+                        <td>Kinh độ {{ $i+1 }}</td>
+                        <td>Vĩ độ {{ $i+1 }}</td>
+                        <td>Mô tả {{ $i+1 }}</td>
                         <td>
                             <!--
                             <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
                             <span class="badge bg-warning" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Chờ duyệt</h6></span>
                             <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Ẩn</h6></span>
                             -->
-                            <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
-                        </td>
+                            <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>                        </td>
                         <td>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#suaBV">
+                                <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#suaMien">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a type="button" class="btn btn-danger">
@@ -86,11 +85,11 @@
 </div>
 
 <!-- modal thêm -->
-<div class="modal fade" id="themBV">
+<div class="modal fade" id="themMien">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Thêm bài viết</h4>
+        <h4 class="modal-title">Thêm miền</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -101,22 +100,28 @@
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label class="col-form-label" for="txtTieuDe">Tiêu đề</label>
-                <input type="text" class="form-control" id="txtTieuDe" name = "txtTieuDe" placeholder="Nhập tiêu đề...">
+                <label class="col-form-label" for="txtTenMien">Tên miền</label>
+                <input type="text" class="form-control" id="txtTenMien" name = "txtTenMien" placeholder="Nhập tên miền...">
               </div>
 
               <div class="form-group">
-                <label class="col-form-label" for="txtNoiDung">Nội dung</label>
-                <textarea class="form-control" id="txtNoiDung" name="txtNoiDung" rows="3" placeholder="Nhập nội dung..."></textarea>
+                <label class="col-form-label" for="txtNoiDung">Mã miền</label>
+                <input type="text" class="form-control" id="txtMaMien" name = "txtMaMien" placeholder="Nhập mã miền...">
               </div>
 
               <div class="form-group">
-                <label>Địa danh</label>
-                <select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
-                  <option>Địa danh 1</option>
-                  <option>Địa danh 2</option>
-                  <option>Địa danh 3</option>
-                </select>
+                <label class="col-form-label" for="txtKinhDo">Kinh độ</label>
+                <input type="text" class="form-control" id="txtKinhDo" name = "txtKinhDo" placeholder="Nhập kinh độ...">
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label" for="txtKinhDo">Vĩ độ</label>
+                <input type="text" class="form-control" id="txtViDo" name = "txtViDo" placeholder="Nhập vĩ độ...">
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label" for="txtMoTa">Mô tả</label>
+                <textarea class="form-control" id="txtMoTa" name="txtMoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
               </div>
 
               <div class="form-group">
@@ -127,18 +132,6 @@
                   <option>Ẩn</option>
                 </select>
               </div>
-
-              <div class="form-group">
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">Ảnh</label>
-                  <input onchange="showAnh_ThemBV(this);" class="form-control" type="file" id="formFile">
-                </div>
-              </div>
-
-              <div id="themBV_ImgDiv" class="form-group">
-                <img id="themBV_Img"/>
-              </div>
-
             </form>
           </div>
         </div>
@@ -152,11 +145,11 @@
 </div>
 
 <!-- modal sửa -->
-<div class="modal fade" id="suaBV">
+<div class="modal fade" id="suaMien">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Sửa thông tin bài viết</h4>
+        <h4 class="modal-title">Sửa thông tin miền</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -167,22 +160,28 @@
           <div class="card-body">
             <form>
               <div class="form-group">
-                <label class="col-form-label" for="txtTieuDe">Tiêu đề</label>
-                <input type="text" class="form-control" id="txtTieuDe" name = "txtTieuDe" placeholder="Nhập tiêu đề...">
+                <label class="col-form-label" for="txtTenMien">Tên miền</label>
+                <input type="text" class="form-control" id="txtTenMien" name = "txtTenMien" placeholder="Nhập tên miền...">
               </div>
 
               <div class="form-group">
-                <label class="col-form-label" for="txtNoiDung">Nội dung</label>
-                <textarea class="form-control" id="txtNoiDung" name="txtNoiDung" rows="3" placeholder="Nhập nội dung..."></textarea>
+                <label class="col-form-label" for="txtNoiDung">Mã miền</label>
+                <input type="text" class="form-control" id="txtMaMien" name = "txtMaMien" placeholder="Nhập mã miền...">
               </div>
 
               <div class="form-group">
-                <label>Địa danh</label>
-                <select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
-                  <option>Địa danh 1</option>
-                  <option>Địa danh 2</option>
-                  <option>Địa danh 3</option>
-                </select>
+                <label class="col-form-label" for="txtKinhDo">Kinh độ</label>
+                <input type="text" class="form-control" id="txtKinhDo" name = "txtKinhDo" placeholder="Nhập kinh độ...">
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label" for="txtKinhDo">Vĩ độ</label>
+                <input type="text" class="form-control" id="txtViDo" name = "txtViDo" placeholder="Nhập vĩ độ...">
+              </div>
+
+              <div class="form-group">
+                <label class="col-form-label" for="txtMoTa">Mô tả</label>
+                <textarea class="form-control" id="txtMoTa" name="txtMoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
               </div>
 
               <div class="form-group">
@@ -193,18 +192,6 @@
                   <option>Ẩn</option>
                 </select>
               </div>
-
-              <div class="form-group">
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">Ảnh</label>
-                  <input onchange="showAnh_SuaBV(this);" class="form-control" type="file" id="formFile">
-                </div>
-              </div>
-
-              <div id="suaBV_ImgDiv" class="form-group">
-                <img id="suaBV_Img"/>
-              </div>
-
             </form>
           </div>
         </div>
