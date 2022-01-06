@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\MienController;
+use App\Http\Controllers\NguoiDungController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,25 +42,44 @@ Route::get('/diadanh/sua', function () {
 });
 
 
-Route::get('/DanhSachMien', function () {
-    return view('ds_mien', []);
-})->name('dsmien');
+Route::get('/theloai/danhsach', function () {
+    return view('theloai.danhsach');
+});
+Route::get('/theloai/them', function () {
+    return view('theloai.them');
+});
+Route::get('/theloai/sua', function () {
+    return view('theloai.sua');
+});
 
-Route::get('/DanhSachUser', function () {
-    return view('ds_taikhoan');
-})->name('dsuser');
 
-Route::get('/DanhSachAdmin', function () {
-    return view('ds_taikhoanadmin');
-})->name('dsadmin');
+Route::resource('mien', MienController::class);
 
-Route::get('/DanhSachTheLoai', function () {
-    return view('ds_theloai');
-})->name('dstheloai');
 
-Route::get('/DanhSachTienich', function () {
-    return view('ds_tienich');
-})->name('dstienich');
+Route::get('/tienich/danhsach', function () {
+    return view('tienich.danhsach');
+});
+Route::get('/tienich/them', function () {
+    return view('tienich.them');
+});
+Route::get('/tienich/sua', function () {
+    return view('tienich.sua');
+});
+
+
+Route::resource('nguoidung', NguoiDungController::class);
+
+
+Route::get('/nguoidung/admin/danhsach', function () {
+    return view('nguoidung.admin.danhsach');
+});
+Route::get('/nguoidung/admin/them', function () {
+    return view('nguoidung.admin.them');
+});
+Route::get('/nguoidung/admin/sua', function () {
+    return view('nguoidung.admin.sua');
+});
+
 
 Route::get('/Profile', function () {
     return view('admin_profile');

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NguoiDung;
-use App\Http\Requests\StoreNguoiDungRequest;
-use App\Http\Requests\UpdateNguoiDungRequest;
-use DB;
+use App\Models\LoaiTaiKhoan;
+use App\Http\Requests\StoreLoaiTaiKhoanRequest;
+use App\Http\Requests\UpdateLoaiTaiKhoanRequest;
 
-class NguoiDungController extends Controller
+class LoaiTaiKhoanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,7 @@ class NguoiDungController extends Controller
      */
     public function index()
     {
-        $listnguoiDung = NguoiDung::all();
-
-        return view('nguoidung.danhsach', ['listnguoiDung'=>$listnguoiDung]);
+        //
     }
 
     /**
@@ -28,16 +25,16 @@ class NguoiDungController extends Controller
      */
     public function create()
     {
-        return view('nguoidung.them');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreNguoiDungRequest  $request
+     * @param  \App\Http\Requests\StoreLoaiTaiKhoanRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNguoiDungRequest $request)
+    public function store(StoreLoaiTaiKhoanRequest $request)
     {
         //
     }
@@ -45,32 +42,33 @@ class NguoiDungController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\NguoiDung  $nguoiDung
+     * @param  \App\Models\LoaiTaiKhoan  $loaiTaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function show(NguoiDung $nguoiDung)
+    public function show(LoaiTaiKhoan $loaiTaiKhoan)
     {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NguoiDung  $nguoiDung
+     * @param  \App\Models\LoaiTaiKhoan  $loaiTaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function edit(NguoiDung $nguoiDung)
+    public function edit(LoaiTaiKhoan $loaiTaiKhoan)
     {
-        return view('nguoidung.sua', ['nguoiDung'=>$nguoiDung]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateNguoiDungRequest  $request
-     * @param  \App\Models\NguoiDung  $nguoiDung
+     * @param  \App\Http\Requests\UpdateLoaiTaiKhoanRequest  $request
+     * @param  \App\Models\LoaiTaiKhoan  $loaiTaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNguoiDungRequest $request, NguoiDung $nguoiDung)
+    public function update(UpdateLoaiTaiKhoanRequest $request, LoaiTaiKhoan $loaiTaiKhoan)
     {
         //
     }
@@ -78,10 +76,10 @@ class NguoiDungController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NguoiDung  $nguoiDung
+     * @param  \App\Models\LoaiTaiKhoan  $loaiTaiKhoan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NguoiDung $nguoiDung)
+    public function destroy(LoaiTaiKhoan $loaiTaiKhoan)
     {
         //
     }

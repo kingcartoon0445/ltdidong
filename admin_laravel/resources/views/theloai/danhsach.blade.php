@@ -25,9 +25,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#themBV">
-            Thêm thể loại
-          </button>
+          <a href="/theloai/them" type="button" class="btn btn-success">Thêm thể loại</a>
 
           <!-- Danh sách -->
           <div class="card">
@@ -55,11 +53,8 @@
                             <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>                        </td>
                         <td>
                             <div class="btn-group">
-                                <a type="button" class="btn btn-warning" data-toggle="modal" data-target="#suaBV">
+                                <a href="/theloai/sua" type="button" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
-                                </a>
-                                <a type="button" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i>
                                 </a>
                             </div>
                         </td>

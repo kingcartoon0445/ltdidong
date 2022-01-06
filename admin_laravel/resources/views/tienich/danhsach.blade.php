@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Quản lý địa danh</h1>
+            <h1 class="m-0">Quản lý tiện ích</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Quản lý địa danh</li>
+              <li class="breadcrumb-item active">Quản lý tiện ích</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -25,7 +25,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <a href="/diadanh/them" type="button" class="btn btn-success">Thêm địa danh</a>
+          <a href="/tienich/them" type="button" class="btn btn-success">Thêm tiện ích</a>
 
           <!-- Danh sách -->
           <div class="card">
@@ -35,11 +35,11 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Tên Địa Dnh</th>
-                    <th>Miền</th>
-                    <th>Kinh Độ</th>
-                    <th>Vĩ Độ</th>
+                    <th>Tên</th>
+                    <th>Loại Tiện Ích</th>
+                    <th>Địa Chỉ</th>
                     <th>Mô Tả</th>
+                    <th>Số Điện Thoại</th>
                     <th>Trạng thái</th>
                     <th></th>
                   </tr>
@@ -49,20 +49,15 @@
                     <tr>
                         <td>{{ $i+1 }}</td>
                         <td>Tên {{ $i+1 }}</td>
-                        <td>Mã miền {{ $i+1 }}</td>
-                        <td>Kinh độ {{ $i+1 }}</td>
-                        <td>Vĩ độ {{ $i+1 }}</td>
+                        <td>Loại tiện ích {{ $i+1 }}</td>
+                        <td>Địa chỉ {{ $i+1 }}</td>
                         <td>Mô tả {{ $i+1 }}</td>
+                        <td>SĐT {{ $i+1 }}</td>
                         <td>
-                            <!--
-                            <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
-                            <span class="badge bg-warning" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Chờ duyệt</h6></span>
-                            <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Ẩn</h6></span>
-                            -->
                             <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>                        </td>
                         <td>
                             <div class="btn-group">
-                                <a href="/diadanh/sua" type="button" class="btn btn-warning">
+                                <a href="/tienich/sua" type="button" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </div>
