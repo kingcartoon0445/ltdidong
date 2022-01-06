@@ -25,6 +25,10 @@
   {{ Html::style('plugins/codemirror/theme/monokai.css') }}
   <!-- SimpleMDE -->
   {{ Html::style('plugins/simplemde/simplemde.min.css') }}
+  <!-- SweetAlert2 -->
+  {{ Html::style('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}
+  <!-- Toastr -->
+  {{ Html::style('plugins/toastr/toastr.min.css') }}
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -269,22 +273,16 @@
 {{ Html::script('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}
 <!-- AdminLTE for demo purposes -->
 {{ Html::script('dist/js/demo.js') }}
+
+<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
     // Summernote
-    $('#txtNoiDung').summernote()
+    $('#no').summernote()
 
-    // CodeMirror
-    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-      mode: "htmlmixed",
-      theme: "monokai"
-    });
-  })
-</script>
-<!-- Page specific script -->
-<script>
-  $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "excel", "pdf"]
@@ -298,7 +296,20 @@
       "autoWidth": false,
       "responsive": true,
     });
-  });
+  })
+</script>
+<!-- Page specific script -->
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#anhImg').attr('src', e.target.result).width(300).height(300);
+        $('#anhDiv').height(300);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
 </script>
 </body>
 </Html>
