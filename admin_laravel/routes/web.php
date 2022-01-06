@@ -15,18 +15,33 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-})->name('index');
+});
 
-Route::get('/DanhSachBaiViet', function () {
-    return view('ds_baiviet');
-})->name('dsbv');
 
-Route::get('/DanhSachDiaDanh', function () {
-    return view('ds_diadanh');
-})->name('dsdd');
+Route::get('/baiviet/danhsach', function () {
+    return view('baiviet.danhsach');
+});
+Route::get('/baiviet/them', function () {
+    return view('baiviet.them');
+});
+Route::get('/baiviet/sua', function () {
+    return view('baiviet.sua');
+});
+
+
+Route::get('/diadanh/danhsach', function () {
+    return view('diadanh.danhsach');
+});
+Route::get('/diadanh/them', function () {
+    return view('diadanh.them');
+});
+Route::get('/diadanh/sua', function () {
+    return view('diadanh.sua');
+});
+
 
 Route::get('/DanhSachMien', function () {
-    return view('ds_mien');
+    return view('ds_mien', []);
 })->name('dsmien');
 
 Route::get('/DanhSachUser', function () {
