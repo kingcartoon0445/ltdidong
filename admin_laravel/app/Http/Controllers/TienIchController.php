@@ -17,7 +17,7 @@ class TienIchController extends Controller
             $tienIch->Anh = Storage::url($tienIch->Anh);
         }
         else{
-            $tienIch->Anh = '/images/no_image_holder.png';
+            $tienIch->Anh = 'storage/images/no_image_holder.png';
         }
     }
 
@@ -61,7 +61,7 @@ class TienIchController extends Controller
             'txtDiaChi' => 'required',
             'txtMoTa' => 'required',
             'txtSDT' => 'required',
-            'hinh' => ['required', 'mimetypes:image/*', 'max:5000'],
+            'hinh' => ['mimetypes:image/*', 'max:5000'],
         ]);
 
         if($request->input('txtTrangThai') == 'Hoạt động')
@@ -110,6 +110,8 @@ class TienIchController extends Controller
      */
     public function edit(TienIch $tienIch)
     {
+        $this->fixImage($tienIch);
+
         return view('tienich.sua', ['tienIch'=>$tienIch]);
     }
 
@@ -122,7 +124,36 @@ class TienIchController extends Controller
      */
     public function update(UpdateTienIchRequest $request, TienIch $tienIch)
     {
-        //
+        $request->validate([
+            'txtTenDaiDien' => 'required',
+            'txtLoai' => 'required',
+            'txtDiaChi' => 'required',
+            'txtMoTa' => 'required',
+            'txtSDT' => 'required',
+            'hinh' => ['mimetypes:image/*', 'max:5000'],
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        if($request->hasFile('hinh')){
+            $tienIch->Anh = $request->file('hinh')->store('images/tienich/'.$tienIch->id, 'public');
+        }
+
+        $tienIch->fill([
+            'Ten'=>$request->input('txtTenDaiDien'),
+            'Loai'=>$request->input('txtLoai'),
+            'DiaChi'=>$request->input('txtDiaChi'),
+            'MoTa'=>$request->input('txtMoTa'),
+            'SDT'=>$request->input('txtSDT'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $tienIch->save();
+
+        return Redirect::route('tienIch.index');
     }
 
     /**
@@ -133,6 +164,8 @@ class TienIchController extends Controller
      */
     public function destroy(TienIch $tienIch)
     {
-        //
+        $tienIch->delete();
+
+        return Redirect::route('tienIch.index');
     }
 }

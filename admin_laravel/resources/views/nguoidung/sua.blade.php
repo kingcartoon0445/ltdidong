@@ -82,6 +82,9 @@
                                         <label for="hinh" class="form-label">Ảnh</label>
                                         <input onchange="showAnh(this);" class="form-control" type="file" name="hinh" accept="image/*">
                                     </div>
+                                    @if($errors->has('hinh'))
+                                        <p style="color:red">{{ $errors->first('hinh') }}</p>
+                                    @endif
                                 </div>
 
                                 <div id="ImgDiv" class="form-group">

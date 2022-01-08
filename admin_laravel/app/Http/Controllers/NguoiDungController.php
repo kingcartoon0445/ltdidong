@@ -18,7 +18,7 @@ class NguoiDungController extends Controller
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
         }
         else{
-            $nguoiDung->AnhNen = '/images/no_image_holder.png';
+            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
         }
     }
     /**
@@ -62,7 +62,7 @@ class NguoiDungController extends Controller
             'txtEmail' => 'required',
             'txtSDT' => 'required',
             'txtMatKhau' => 'required',
-            'hinh' => ['required', 'mimetypes:image/*', 'max:5000'],
+            'hinh' => ['mimetypes:image/*', 'max:5000'],
         ]);
 
         if($request->input('txtTrangThai') == 'Hoạt động')

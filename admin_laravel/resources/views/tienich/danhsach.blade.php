@@ -47,7 +47,7 @@
                 <tbody>
                   @foreach($listTienIch as $tienIch)
                     <tr>
-                        <td><img style="width:100px;max-height:100px;object-fit:contain" src="{{ $tienIch->Anh }}" alt=""></td>
+                        <td><img style="width:150px;max-height:150px;object-fit:contain" src="{{ $tienIch->Anh }}" alt=""></td>
                         <td>{{ $tienIch->Ten }}</td>
                         <td>{{ $tienIch->Loai }}</td>
                         <td>{{ $tienIch->DiaChi }}</td>
@@ -55,7 +55,7 @@
                         <td>{{ $tienIch->SDT }}</td>
                         <td>
                             @if($tienIch->TrangThai==0)
-                              <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Khóa</h6></span>
+                              <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Đóng cửa</h6></span>
                             @else
                               <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
                             @endif                     
