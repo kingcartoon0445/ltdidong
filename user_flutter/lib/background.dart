@@ -6,6 +6,7 @@ import 'package:user_flutter/baiviet/BV_chitiet.dart';
 import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
+import 'package:user_flutter/diadanh/chitiet_tienich.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
 import 'package:user_flutter/linhtinh/caidat.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
@@ -33,7 +34,7 @@ class _BackgroundState extends State<Background> {
         return DanhSachDiaDanh();
         break;
       case 3:
-        return LoginPage();
+        return ChiTietTienIch();
         break;
     }
     return Text("null");
