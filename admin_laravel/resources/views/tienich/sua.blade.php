@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label class="col-form-label" for="txtTenTienIch">Tên</label>
-                                <input type="text" class="form-control" id="txtTenTienIch" name="txtTenTienIch" placeholder="Nhập tên...">
+                                <input type="text" class="form-control" id="txtTenTienIch" name="txtTenTienIch">
                             </div>
 
                             <div class="form-group">
@@ -34,17 +34,17 @@
 
                             <div class="form-group">
                                 <label class="col-form-label" for="txtDiaChi">Địa Chỉ</label>
-                                <input type="text" class="form-control" id="txtDiaChi" name="txtDiaChi" placeholder="Nhập địa chỉ...">
+                                <input type="text" class="form-control" id="txtDiaChi" name="txtDiaChi">
                             </div>
 
                             <div class="form-group">
                                 <label class="col-form-label" for="txtSDTTienIch">Số Điện Thoại</label>
-                                <input type="text" class="form-control" id="txtSDTTienIch" name="txtSDTTienIch" placeholder="Nhập số điện thoại...">
+                                <input type="text" class="form-control" id="txtSDTTienIch" name="txtSDTTienIch">
                             </div>
 
                             <div class="form-group">
                                 <label class="col-form-label" for="txtMotaTienich">Mô Tả</label>
-                                <textarea class="form-control" id="txtMotaTienich" name="txtMotaTienich" rows="3" placeholder="Nhập mô tả..."></textarea>
+                                <textarea class="form-control" id="txtMotaTienich" name="txtMotaTienich" rows="3"></textarea>
                             </div>
 
                             <div class="form-group">

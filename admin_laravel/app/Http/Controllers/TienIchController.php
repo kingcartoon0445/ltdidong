@@ -110,7 +110,7 @@ class TienIchController extends Controller
      */
     public function edit(TienIch $tienIch)
     {
-        //
+        return view('tienich.sua', ['tienIch'=>$tienIch]);
     }
 
     /**

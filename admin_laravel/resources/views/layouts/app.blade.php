@@ -18,7 +18,7 @@
   {{ Html::style('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}
   {{ Html::style('plugins/toastr/toastr.min.css') }}
 </head>
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -168,22 +168,10 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('nguoiDung.index') }}" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
-              <p>Quản lý tài khoản <i class="fas fa-angle-left right"></i></p>
+              <p>Quản lý tài khoản</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('nguoiDung.index') }}" class="nav-link">
-                  <p>Tài khoản</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('loaiTaiKhoan.index') }}" class="nav-link">
-                  <p>Loại tài khoản</p>
-                </a>
-              </li>
-            </ul>
           </li>
         </ul>
       </nav>
@@ -222,17 +210,8 @@
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "excel", "pdf"]
+      "buttons": ["excel"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
   });
 </script>
 </body>
