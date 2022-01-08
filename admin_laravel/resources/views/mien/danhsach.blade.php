@@ -23,10 +23,7 @@
       <div class="row">
         <div class="col-12">
           <a href="{{ route('mien.create') }}" type="button" class="btn btn-success">Thêm miền</a>
-
-          <!-- Danh sách bài viết -->
           <div class="card">
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -34,6 +31,7 @@
                     <th>Tên miền</th>
                     <th>Thời gian thêm</th>
                     <th>Thời gian cập nhật</th>
+                    <th>Trạng thái</th>
                     <th></th>
                   </tr>
                 </thead>

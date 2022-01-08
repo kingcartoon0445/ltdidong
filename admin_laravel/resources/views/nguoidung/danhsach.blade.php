@@ -24,10 +24,7 @@
       <div class="row">
         <div class="col-12">
           <a href="{{ route('nguoiDung.create') }}" type="button" class="btn btn-success">Thêm tài khoản</a>
-
-          <!-- Danh sách -->
           <div class="card">
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -38,7 +35,7 @@
                     <th>Email</th>
                     <th>Mật Khẩu</th>
                     <th>SĐT</th>
-                    <th>Loại tài khoản</th>
+                    <th>Admin</th>
                     <th>Trạng thái</th>
                     <th></th>
                   </tr>
@@ -53,11 +50,11 @@
                         <td>{{ $nguoiDung->MatKhau }}</td>
                         <td>{{ $nguoiDung->SDT }}</td>
                         <td>
-                          @foreach($listLoaiTaiKhoan as $loaiTaiKhoan)    
-                            @if($loaiTaiKhoan->id==$nguoiDung->MaLoaiTK)
-                              {{ $loaiTaiKhoan->TenLoaiTK }}
+                            @if($nguoiDung->IsAdmin==1)
+                              true
+                            @else
+                              false
                             @endif  
-                          @endforeach
                         </td>
                         <td>
                             @if($nguoiDung->TrangThai==0)

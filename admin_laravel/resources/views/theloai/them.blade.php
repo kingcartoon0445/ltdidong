@@ -22,7 +22,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtTenTheLoai">Tên thể loại</label>
-                                    <input type="text" class="form-control" id="txtTenTheLoai" name = "txtTenTheLoai" placeholder="Nhập tên thể loại...">
+                                    <input type="text" class="form-control" id="txtTenTheLoai" name = "txtTenTheLoai">
                                     @if($errors->has('txtTenTheLoai'))
                                         <p style="color:red">{{ $errors->first('txtTenTheLoai') }}</p>
                                     @endif

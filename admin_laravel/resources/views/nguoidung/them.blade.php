@@ -23,7 +23,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtTenDaiDien">Tên đại diện</label>
-                                    <input type="text" class="form-control" name="txtTenDaiDien" placeholder="Nhập tên đại diện...">
+                                    <input type="text" class="form-control" name="txtTenDaiDien">
                                     @if($errors->has('txtTenDaiDien'))
                                         <p style="color:red">{{ $errors->first('txtTenDaiDien') }}</p>
                                     @endif
@@ -31,7 +31,7 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtHoTen">Họ và tên</label>
-                                    <input type="text" class="form-control" name="txtHoTen" placeholder="Nhập họ và tên...">
+                                    <input type="text" class="form-control" name="txtHoTen">
                                     @if($errors->has('txtHoTen'))
                                         <p style="color:red">{{ $errors->first('txtHoTen') }}</p>
                                     @endif
@@ -39,7 +39,7 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtEmail">Email</label>
-                                    <input type="text" class="form-control" name="txtEmail" placeholder="Nhập email...">
+                                    <input type="text" class="form-control" name="txtEmail">
                                     @if($errors->has('txtEmail'))
                                         <p style="color:red">{{ $errors->first('txtEmail') }}</p>
                                     @endif
@@ -47,7 +47,7 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtMatKhau">Mật khẩu</label>
-                                    <input type="text" class="form-control" name="txtMatKhau" placeholder="Nhập mật khẩu...">
+                                    <input type="text" class="form-control" name="txtMatKhau">
                                     @if($errors->has('txtMatKhau'))
                                         <p style="color:red">{{ $errors->first('txtMatKhau') }}</p>
                                     @endif
@@ -55,24 +55,17 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtSDT">Số điện thoại</label>
-                                    <input type="text" class="form-control" name="txtSDT" placeholder="Nhập số điện thoại...">
+                                    <input type="text" class="form-control" name="txtSDT">
                                     @if($errors->has('txtSDT'))
                                         <p style="color:red">{{ $errors->first('txtSDT') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Loại tài khoản</label>
-                                    <select class="custom-select form-control-border border-width-2" name="txtLoaiTK">
-                                        @foreach($listLoaiTaiKhoan as $loaiTaiKhoan)
-                                            @if($loaiTaiKhoan->TrangThai == 1)
-                                                <option value="{{ $loaiTaiKhoan->id }}">{{ $loaiTaiKhoan->TenLoaiTK }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('txtLoaiTK'))
-                                        <p style="color:red">{{ $errors->first('txtLoaiTK') }}</p>
-                                    @endif
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="checkIsAdmin" id="customCheckbox5">
+                                        <label for="customCheckbox5" class="custom-control-label">Là Admin</label>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
