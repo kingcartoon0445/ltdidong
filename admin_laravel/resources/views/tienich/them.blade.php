@@ -2,14 +2,15 @@
 
 @section('content')
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Thêm tiện ích</h1>
-          </div>
-        </div>
-      </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
 
     <section class="content">
@@ -18,44 +19,81 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtTenTienIch">Tên</label>
-                                <input type="text" class="form-control" id="txtTenTienIch" name="txtTenTienIch" placeholder="Nhập tên...">
-                            </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <form action="{{ route('tienIch.store') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label class="col-form-label" for="txtTenDaiDien">Tên đại diện</label>
+                                    <input type="text" class="form-control" name="txtTenDaiDien" placeholder="Nhập tên đại diện...">
+                                    @if($errors->has('txtTenDaiDien'))
+                                        <p style="color:red">{{ $errors->first('txtTenDaiDien') }}</p>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label>Loại Tiện Ích</label>
-                                <select class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
-                                <option>Ăn uống</option>
-                                <option>Khu dừng chân</option>
-                                <option>Khách sạn</option>
-                                </select>
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="txtLoai">Loại</label>
+                                    <input type="text" class="form-control" name="txtLoai" placeholder="Nhập tên loại...">
+                                    @if($errors->has('txtLoai'))
+                                        <p style="color:red">{{ $errors->first('txtLoai') }}</p>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtDiaChi">Địa Chỉ</label>
-                                <input type="text" class="form-control" id="txtDiaChi" name="txtDiaChi" placeholder="Nhập địa chỉ...">
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="txtDiaChi">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="txtDiaChi" placeholder="Nhập địa chỉ...">
+                                    @if($errors->has('txtDiaChi'))
+                                        <p style="color:red">{{ $errors->first('txtDiaChi') }}</p>
+                                    @endif
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-form-label" for="txtMoTa">Mô tả</label>
+                                    <textarea class="form-control" name="txtMoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
+                                    @if($errors->has('txtMoTa'))
+                                        <p style="color:red">{{ $errors->first('txtMoTa') }}</p>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtSDTTienIch">Số Điện Thoại</label>
-                                <input type="text" class="form-control" id="txtSDTTienIch" name="txtSDTTienIch" placeholder="Nhập số điện thoại...">
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="txtSDT">Số điện thoại</label>
+                                    <input type="text" class="form-control" name="txtSDT" placeholder="Nhập số điện thoại...">
+                                    @if($errors->has('txtSDT'))
+                                        <p style="color:red">{{ $errors->first('txtSDT') }}</p>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtMotaTienich">Mô Tả</label>
-                                <textarea class="form-control" id="txtMotaTienich" name="txtMotaTienich" rows="3" placeholder="Nhập mô tả..."></textarea>
-                            </div>
+                                <div class="form-group">
+                                    <label>Trạng thái</label>
+                                    <select class="custom-select form-control-border border-width-2" name="txtTrangThai">
+                                        <option>Hoạt động</option>  
+                                        <option>Đóng cửa</option>
+                                    </select>
+                                </div>
 
-                            <div class="form-group">
-                                <label>Trạng thái</label>
-                                <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
-                                <option>Hoạt động</option>
-                                <option>Đóng cửa</option>
-                                </select>
-                            </div>
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label for="hinh" class="form-label">Ảnh</label>
+                                        <input onchange="showAnh(this);" class="form-control" type="file" name="hinh" accept="image/*">
+                                    </div>
+                                    @if($errors->has('hinh'))
+                                        <p style="color:red">{{ $errors->first('hinh') }}</p>
+                                    @endif
+                                </div>
 
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                                <div id="ImgDiv" class="form-group">
+                                    <img id="Img" style="width:725px;max-height:500px"/>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -63,4 +101,17 @@
         </div>
     </section>
 </div>
+
+<script>
+function showAnh(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#Img').attr('src', e.target.result);
+          $('#ImgDiv').height(500);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 @endsection

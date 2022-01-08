@@ -18,6 +18,7 @@ class CreateMiensTable extends Migration
             $table->string('TenMien');
             $table->Integer('TrangThai')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

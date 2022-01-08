@@ -147,7 +147,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/theloai/danhsach" class="nav-link">
+            <a href="{{ route('theLoai.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>Quản lý thể loại</p>
             </a>
@@ -161,27 +161,37 @@
           </li>
           
           <li class="nav-item">
-            <a href="/tienich/danhsach" class="nav-link">
+            <a href="{{ route('tienIch.index') }}" class="nav-link">
               <i class="nav-icon fas fa-hamburger"></i>
               <p>Quản lý tiện ích</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('nguoidung.index') }}" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
-              <p>Quản lý tài khoản</p>
+              <p>Quản lý tài khoản <i class="fas fa-angle-left right"></i></p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('nguoiDung.index') }}" class="nav-link">
+                  <p>Tài khoản</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('loaiTaiKhoan.index') }}" class="nav-link">
+                  <p>Loại tài khoản</p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
   </aside>
   @yield('content')
 </div>
-<!-- ./wrapper -->
+
 {{ Html::script('plugins/bootstrap-5/js/bootstrap.bundle.min.js') }}
 {{ Html::script('plugins/jquery/jquery.min.js') }}
 {{ Html::script('plugins/bootstrap/js/bootstrap.bundle.min.js') }}

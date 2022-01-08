@@ -2,14 +2,15 @@
 
 @section('content')
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Thêm miền</h1>
-          </div>
-        </div>
-      </div>
+            <h1 class="m-0">Thêm loại tài khoản</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
 
     <section class="content">
@@ -18,13 +19,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('mien.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('loaiTaiKhoan.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenMien">Tên miền</label>
-                                    <input type="text" class="form-control" name="txtTenMien" placeholder="Nhập tên miền...">
-                                    @if($errors->has('txtTenMien'))
-                                        <p style="color:red">{{ $errors->first('txtTenMien') }}</p>
+                                    <label class="col-form-label" for="txtTenLoaiTaiKhoan">Tên loại tài khoản</label>
+                                    <input type="text" class="form-control" name="txtTenLoaiTaiKhoan" placeholder="Nhập tên loại tài khoản...">
+                                    @if($errors->has('txtTenLoaiTaiKhoan'))
+                                        <p style="color:red">{{ $errors->first('txtTenLoaiTaiKhoan') }}</p>
                                     @endif
                                 </div>
 
@@ -35,7 +36,7 @@
                                         <option>Khóa</option>
                                     </select>
                                 </div>
-                                
+
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </form>
                         </div>

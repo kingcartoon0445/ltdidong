@@ -25,7 +25,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <a href="/theloai/them" type="button" class="btn btn-success">Thêm thể loại</a>
+          <a href="{{ route('theLoai.create') }}" type="button" class="btn btn-success">Thêm thể loại</a>
 
           <!-- Danh sách -->
           <div class="card">
@@ -34,32 +34,35 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Tên </th>
+                    <th>Tên thể loại</th>
+                    <th>Thời gian thêm</th>
+                    <th>Thời gian cập nhật</th>
                     <th>Trạng thái</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  @for ($i = 0; $i < 20; $i++)
+                  @foreach($listTheLoai as $theLoai)
                     <tr>
-                        <td>{{ $i+1 }}</td>
-                        <td>Tên {{ $i+1 }}</td>
+                        <td>{{ $theLoai->Ten }}</td>
+                        <td>{{ $theLoai->created_at }}</td>
+                        <td>{{ $theLoai->updated_at }}</td>
                         <td>
-                            <!--
-                                <span class="badge bg-danger">Không chấp thuận</span>
-                                <span class="badge bg-warning">Chờ duyệt</span>
-                            -->
-                            <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>                        </td>
+                            @if($theLoai->TrangThai==0)
+                              <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Khóa</h6></span>
+                            @else
+                              <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
+                            @endif                     
+                        </td>
                         <td>
                             <div class="btn-group">
-                                <a href="/theloai/sua" type="button" class="btn btn-warning">
+                                <a href="{{ route('theLoai.edit', ['theLoai'=>$theLoai]) }}" type="button" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                  @endfor
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -68,83 +71,5 @@
       </div>
     </div>
   </section>
-</div>
-
-<!-- modal thêm -->
-<div class="modal fade" id="themBV">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Thêm thể loại</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Form nhập -->
-        <div class="card">
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <label class="col-form-label" for="txtTenTheLoai">Tên</label>
-                <input type="text" class="form-control" id="txtTenTheLoai" name = "txtTenTheLoai" placeholder="Nhập tên thể loại...">
-              </div>
-
-              <div class="form-group">
-                <label>Trạng thái</label>
-                <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
-                  <option>Hoạt động</option>
-                  <option>Xóa</option>
-                </select>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- modal sửa -->
-<div class="modal fade" id="themBV">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Sửa thông tin thể loại</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Form nhập -->
-        <div class="card">
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <label class="col-form-label" for="txtTenTheLoai">Tên</label>
-                <input type="text" class="form-control" id="txtTenTheLoai" name = "txtTenTheLoai" placeholder="Nhập tên thể loại...">
-              </div>
-
-              <div class="form-group">
-                <label>Trạng thái</label>
-                <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
-                  <option>Hoạt động</option>
-                  <option>Xóa</option>
-                </select>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
 @endsection

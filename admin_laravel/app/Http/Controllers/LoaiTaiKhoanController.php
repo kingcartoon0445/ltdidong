@@ -6,6 +6,9 @@ use App\Models\LoaiTaiKhoan;
 use App\Http\Requests\StoreLoaiTaiKhoanRequest;
 use App\Http\Requests\UpdateLoaiTaiKhoanRequest;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+
 class LoaiTaiKhoanController extends Controller
 {
     /**
@@ -16,6 +19,9 @@ class LoaiTaiKhoanController extends Controller
     public function index()
     {
         //
+        $listLoaiTK = LoaiTaiKhoan::all();
+
+        return view('nguoidung.loaitaikhoan.danhsach', ['listLoaiTK'=>$listLoaiTK]);
     }
 
     /**
@@ -25,7 +31,7 @@ class LoaiTaiKhoanController extends Controller
      */
     public function create()
     {
-        //
+        return view('nguoidung.loaitaikhoan.them');
     }
 
     /**
@@ -36,7 +42,24 @@ class LoaiTaiKhoanController extends Controller
      */
     public function store(StoreLoaiTaiKhoanRequest $request)
     {
-        //
+        $request->validate([
+            'txtTenLoaiTaiKhoan' => 'required',
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        $loaiTaiKhoan=new LoaiTaiKhoan;
+        $loaiTaiKhoan->fill([
+            'TenLoaiTK'=>$request->input('txtTenLoaiTaiKhoan'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $loaiTaiKhoan->save();
+
+        return Redirect::route('loaiTaiKhoan.index');
     }
 
     /**
@@ -58,7 +81,7 @@ class LoaiTaiKhoanController extends Controller
      */
     public function edit(LoaiTaiKhoan $loaiTaiKhoan)
     {
-        //
+        return view('nguoidung.loaitaikhoan.sua', ['loaiTaiKhoan'=>$loaiTaiKhoan]);
     }
 
     /**
@@ -70,7 +93,23 @@ class LoaiTaiKhoanController extends Controller
      */
     public function update(UpdateLoaiTaiKhoanRequest $request, LoaiTaiKhoan $loaiTaiKhoan)
     {
-        //
+        $request->validate([
+            'txtTenLoaiTaiKhoan' => 'required',
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        $loaiTaiKhoan->fill([
+            'TenLoaiTK'=>$request->input('txtTenLoaiTaiKhoan'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $loaiTaiKhoan->save();
+
+        return Redirect::route('loaiTaiKhoan.index');
     }
 
     /**
@@ -81,6 +120,8 @@ class LoaiTaiKhoanController extends Controller
      */
     public function destroy(LoaiTaiKhoan $loaiTaiKhoan)
     {
-        //
+        $loaiTaiKhoan->delete();
+
+        return Redirect::route('loaiTaiKhoan.index');
     }
 }

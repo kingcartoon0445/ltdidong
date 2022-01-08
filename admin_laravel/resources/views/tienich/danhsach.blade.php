@@ -25,7 +25,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <a href="/tienich/them" type="button" class="btn btn-success">Thêm tiện ích</a>
+          <a href="{{ route('tienIch.create') }}" type="button" class="btn btn-success">Thêm tiện ích</a>
 
           <!-- Danh sách -->
           <div class="card">
@@ -34,36 +34,41 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>Ảnh</th>
                     <th>Tên</th>
-                    <th>Loại Tiện Ích</th>
+                    <th>Loại</th>
                     <th>Địa Chỉ</th>
                     <th>Mô Tả</th>
-                    <th>Số Điện Thoại</th>
+                    <th>SĐT</th>
                     <th>Trạng thái</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  @for ($i = 0; $i < 20; $i++)
+                  @foreach($listTienIch as $tienIch)
                     <tr>
-                        <td>{{ $i+1 }}</td>
-                        <td>Tên {{ $i+1 }}</td>
-                        <td>Loại tiện ích {{ $i+1 }}</td>
-                        <td>Địa chỉ {{ $i+1 }}</td>
-                        <td>Mô tả {{ $i+1 }}</td>
-                        <td>SĐT {{ $i+1 }}</td>
+                        <td><img style="width:100px;max-height:100px;object-fit:contain" src="{{ $tienIch->Anh }}" alt=""></td>
+                        <td>{{ $tienIch->Ten }}</td>
+                        <td>{{ $tienIch->Loai }}</td>
+                        <td>{{ $tienIch->DiaChi }}</td>
+                        <td>{{ $tienIch->MoTa }}</td>
+                        <td>{{ $tienIch->SDT }}</td>
                         <td>
-                            <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>                        </td>
+                            @if($tienIch->TrangThai==0)
+                              <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Khóa</h6></span>
+                            @else
+                              <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
+                            @endif                     
+                        </td>
                         <td>
                             <div class="btn-group">
-                                <a href="/tienich/sua" type="button" class="btn btn-warning">
-                                    <i class="fas fa-edit"></i>
+                                <a href="{{ route('tienIch.edit', $tienIch) }}" type="button" class="btn btn-warning">
+                                  <i class="fas fa-edit"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                  @endfor
+                  @endforeach
                 </tbody>
               </table>
             </div>

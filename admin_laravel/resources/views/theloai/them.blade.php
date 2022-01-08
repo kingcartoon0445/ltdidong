@@ -18,10 +18,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="{{ route('theLoai.store') }}" method="post" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenTheLoai">Tên</label>
+                                    <label class="col-form-label" for="txtTenTheLoai">Tên thể loại</label>
                                     <input type="text" class="form-control" id="txtTenTheLoai" name = "txtTenTheLoai" placeholder="Nhập tên thể loại...">
+                                    @if($errors->has('txtTenTheLoai'))
+                                        <p style="color:red">{{ $errors->first('txtTenTheLoai') }}</p>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">

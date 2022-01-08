@@ -18,6 +18,7 @@ class CreateLoaiTaiKhoansTable extends Migration
             $table->string('TenLoaiTK');
             $table->Integer('TrangThai')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

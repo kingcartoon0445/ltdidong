@@ -2,14 +2,15 @@
 
 @section('content')
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Sửa thông tin miền</h1>
-          </div>
-        </div>
-      </div>
+            <h1 class="m-0">Sửa thông tin loại tài khoản</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
 
     <section class="content">
@@ -18,25 +19,34 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('mien.update', ['mien'=>$mien]) }}" method="post" enctype="multipart/form-data">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <form action="{{ route('loaiTaiKhoan.update', ['loaiTaiKhoan'=>$loaiTaiKhoan]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenMien">Tên miền</label>
-                                    <input type="text" class="form-control" name="txtTenMien" placeholder="Nhập tên miền..." value="{{ $mien->TenMien }}">
-                                    @if($errors->has('txtTenMien'))
-                                        <p style="color:red">{{ $errors->first('txtTenMien') }}</p>
+                                    <label class="col-form-label" for="txtTenLoaiTaiKhoan">Tên loại tài khoản</label>
+                                    <input type="text" class="form-control" name="txtTenLoaiTaiKhoan" placeholder="Nhập tên loại..." value="{{ $loaiTaiKhoan->TenLoaiTK }}">
+                                    @if($errors->has('txtTenLoaiTaiKhoan'))
+                                        <p style="color:red">{{ $errors->first('txtTenLoaiTaiKhoan') }}</p>
                                     @endif
                                 </div>
-                                    
+
                                 <div class="form-group">
                                     <label>Trạng thái</label>
                                     <select class="custom-select form-control-border border-width-2" name="txtTrangThai">
-                                        <option @if($mien->TrangThai==1) selected @endif>Hoạt động</option>  
-                                        <option @if($mien->TrangThai==0) selected @endif>Khóa</option>
+                                        <option @if($loaiTaiKhoan->TrangThai==1) selected @endif>Hoạt động</option>  
+                                        <option @if($loaiTaiKhoan->TrangThai==0) selected @endif>Khóa</option>
                                     </select>
                                 </div>
-                                
+
                                 <button type="submit" class="btn btn-primary">Save changes</button>
 
                                 <div class="btn-group">
@@ -64,7 +74,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <form action="{{ route('mien.destroy', ['mien'=>$mien]) }}" method="post">
+                <form action="{{ route('loaiTaiKhoan.destroy', ['loaiTaiKhoan'=>$loaiTaiKhoan]) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>

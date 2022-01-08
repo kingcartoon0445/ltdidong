@@ -24,6 +24,7 @@ class CreateNguoiDungsTable extends Migration
             $table->foreignId('MaLoaiTK');
             $table->Integer('TrangThai')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

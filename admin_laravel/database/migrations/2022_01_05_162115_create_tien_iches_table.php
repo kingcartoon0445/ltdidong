@@ -15,6 +15,7 @@ class CreateTienIchesTable extends Migration
     {
         Schema::create('tien_iches', function (Blueprint $table) {
             $table->id();
+            $table->string('Anh');
             $table->string('Ten');
             $table->string('Loai');
             $table->string('DiaChi');
@@ -22,6 +23,7 @@ class CreateTienIchesTable extends Migration
             $table->string('SDT');
             $table->Integer('TrangThai')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

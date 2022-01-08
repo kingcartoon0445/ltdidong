@@ -23,7 +23,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <a href="{{ route('nguoidung.create') }}" type="button" class="btn btn-success">Thêm tài khoản</a>
+          <a href="{{ route('nguoiDung.create') }}" type="button" class="btn btn-success">Thêm tài khoản</a>
 
           <!-- Danh sách -->
           <div class="card">
@@ -32,7 +32,6 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>ID</th>
                     <th>Ảnh Đại Diện</th>
                     <th>Tên Đại Diện</th>
                     <th>Họ Và Tên</th>
@@ -47,18 +46,18 @@
                 <tbody>
                   @foreach($listnguoiDung as $nguoiDung)
                     <tr>
-                        <td>{{ $nguoiDung->id }}</td>
-                        <td>{{ $nguoiDung->AnhNen }}</td>
+                        <td><img style="width:100px;max-height:100px;object-fit:contain" src="{{ $nguoiDung->AnhNen }}" alt=""></td>
                         <td>{{ $nguoiDung->TenDaiDien }}</td>
                         <td>{{ $nguoiDung->HovaTen }}</td>
                         <td>{{ $nguoiDung->Email }}</td>
                         <td>{{ $nguoiDung->MatKhau }}</td>
                         <td>{{ $nguoiDung->SDT }}</td>
-                        <td>@if($nguoiDung->IsAdmin==1) 
-                                Admin 
-                            @else 
-                                User
-                            @endif
+                        <td>
+                          @foreach($listLoaiTaiKhoan as $loaiTaiKhoan)    
+                            @if($loaiTaiKhoan->id==$nguoiDung->MaLoaiTK)
+                              {{ $loaiTaiKhoan->TenLoaiTK }}
+                            @endif  
+                          @endforeach
                         </td>
                         <td>
                             @if($nguoiDung->TrangThai==0)
@@ -69,7 +68,7 @@
                         </td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ route('nguoidung.edit', $nguoiDung) }}" type="button" class="btn btn-warning">
+                                <a href="{{ route('nguoiDung.edit', $nguoiDung) }}" type="button" class="btn btn-warning">
                                   <i class="fas fa-edit"></i>
                                 </a>
                             </div>

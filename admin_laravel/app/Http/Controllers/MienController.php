@@ -41,9 +41,19 @@ class MienController extends Controller
      */
     public function store(StoreMienRequest $request)
     {
+        $request->validate([
+            'txtTenMien' => ['required'],
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
         $mien=new Mien;
         $mien->fill([
             'TenMien'=>$request->input('txtTenMien'),
+            'TrangThai'=>$trangthai,
         ]);
 
         $mien->save();
@@ -82,8 +92,18 @@ class MienController extends Controller
      */
     public function update(UpdateMienRequest $request, Mien $mien)
     {
+        $request->validate([
+            'txtTenMien' => 'required',
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
         $mien->fill([
             'TenMien'=>$request->input('txtTenMien'),
+            'TrangThai'=>$trangthai,
         ]);
 
         $mien->save();
@@ -99,6 +119,8 @@ class MienController extends Controller
      */
     public function destroy(Mien $mien)
     {
-        //
+        $mien->delete();
+
+        return Redirect::route('mien.index');
     }
 }

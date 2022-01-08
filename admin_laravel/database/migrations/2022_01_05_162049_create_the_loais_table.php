@@ -18,6 +18,7 @@ class CreateTheLoaisTable extends Migration
             $table->string('Ten');
             $table->Integer('TrangThai')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
