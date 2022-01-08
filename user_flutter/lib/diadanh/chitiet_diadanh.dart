@@ -5,17 +5,17 @@ import 'package:user_flutter/diadanh/chiase_baiviet.dart';
 
 class ChiTietDiaDanh extends StatefulWidget {
   final DiaDanhObject DD;
-  const ChiTietDiaDanh({Key? key,required this.DD}) : super(key: key);
+  const ChiTietDiaDanh({Key? key, required this.DD}) : super(key: key);
 
   @override
   _ChiTietDiaDanhState createState() {
-     return _ChiTietDiaDanhState (DD: DD);
+    return _ChiTietDiaDanhState(DD: DD);
   }
 }
 
 class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
-   final DiaDanhObject DD;
-   _ChiTietDiaDanhState({required this.DD});
+  final DiaDanhObject DD;
+  _ChiTietDiaDanhState({required this.DD});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +25,8 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              AnhDiaDanh(DD:DD),
-              ThongTinChiTietDiaDanh(DD:DD),
+              AnhDiaDanh(DD: DD),
+              ThongTinChiTietDiaDanh(DD: DD),
             ],
           ),
         ),
@@ -57,8 +57,8 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
 }
 
 class AnhDiaDanh extends StatelessWidget {
-  final DiaDanhObject DD; 
-  const AnhDiaDanh({Key? key,required this.DD}) : super(key: key);
+  final DiaDanhObject DD;
+  const AnhDiaDanh({Key? key, required this.DD}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,11 +98,11 @@ class AnhDiaDanh extends StatelessWidget {
 
 class ThongTinChiTietDiaDanh extends StatefulWidget {
   final DiaDanhObject DD;
-  const ThongTinChiTietDiaDanh({Key? key,required this.DD}) : super(key: key);
+  const ThongTinChiTietDiaDanh({Key? key, required this.DD}) : super(key: key);
 
   @override
-  _ThongTinChiTietDiaDanhState createState(){
-     return _ThongTinChiTietDiaDanhState (DD: DD);
+  _ThongTinChiTietDiaDanhState createState() {
+    return _ThongTinChiTietDiaDanhState(DD: DD);
   }
 }
 
@@ -125,15 +125,6 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                     fontSize: 22,
                   ),
                 ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.remove_red_eye_outlined,
-                      color: Color(0xFF7D82BC),
-                    ),
-                    Text('200'),
-                  ],
-                ),
               ],
             ),
             SizedBox(
@@ -145,12 +136,15 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                 SizedBox(
                   width: 5,
                 ),
-                Text(
-                  DD.Dd_DiaChi,
-                  style: TextStyle(
-                    fontSize: 16,
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    DD.Dd_DiaChi,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(
@@ -189,7 +183,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               height: 3,
             ),
             Text(
-             DD.Dd_KinhDo,
+              DD.Dd_KinhDo,
               style: TextStyle(
                 fontSize: 14,
               ),
@@ -284,25 +278,6 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                     color: Color(0xFF7D82BC),
                   ),
                   heroTag: "fab1",
-                ),
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    // Add your onPressed code here!
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-                  backgroundColor: Colors.white,
-                  label: Text(
-                    "Địa chỉ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Color(0xFF7D82BC),
-                    ),
-                  ),
-                  icon: Icon(Icons.location_on, color: Color(0xFF7D82BC)),
-                  heroTag: "fab2",
                 ),
                 FloatingActionButton.extended(
                   onPressed: () {

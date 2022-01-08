@@ -9,9 +9,9 @@ class RecommendDiaDanh extends StatefulWidget {
 
 class _RecommendDiaDanhState extends State<RecommendDiaDanh> {
   List<String> ds_Decu = [
-    "Nổi bật",
-    "Miền",
-    "Đã đến",
+    "Bắc",
+    "Trung",
+    "Nam",
   ];
   int selectedIndex = 0;
   @override
