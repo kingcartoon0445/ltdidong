@@ -21,6 +21,7 @@ class CreateBaiVietsTable extends Migration
             $table->string('NoiDung');
             $table->Integer('TrangThai')->default(1);;
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

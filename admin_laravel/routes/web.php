@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\MienController;
+use App\Http\Controllers\NguoiDungController;
+use App\Http\Controllers\LoaiTaiKhoanController;
+use App\Http\Controllers\TheLoaiController;
+use App\Http\Controllers\TienIchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,26 +44,11 @@ Route::get('/diadanh/sua', function () {
     return view('diadanh.sua');
 });
 
-
-Route::get('/DanhSachMien', function () {
-    return view('ds_mien', []);
-})->name('dsmien');
-
-Route::get('/DanhSachUser', function () {
-    return view('ds_taikhoan');
-})->name('dsuser');
-
-Route::get('/DanhSachAdmin', function () {
-    return view('ds_taikhoanadmin');
-})->name('dsadmin');
-
-Route::get('/DanhSachTheLoai', function () {
-    return view('ds_theloai');
-})->name('dstheloai');
-
-Route::get('/DanhSachTienich', function () {
-    return view('ds_tienich');
-})->name('dstienich');
+Route::resource('mien', MienController::class);
+Route::resource('loaiTaiKhoan', LoaiTaiKhoanController::class);
+Route::resource('nguoiDung', NguoiDungController::class);
+Route::resource('theLoai', TheLoaiController::class);
+Route::resource('tienIch', TienIchController::class);
 
 Route::get('/Profile', function () {
     return view('admin_profile');

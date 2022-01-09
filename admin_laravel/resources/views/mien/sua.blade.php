@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Sửa thông tin thể loại</h1>
+            <h1 class="m-0">Sửa thông tin miền</h1>
           </div>
         </div>
       </div>
@@ -18,22 +18,22 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('theLoai.update', ['theLoai'=>$theLoai]) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('mien.update', ['mien'=>$mien]) }}" method="post" enctype="multipart/form-data">
                                 @csrf
-                                @method('PATCH')    
+                                @method('PATCH')
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenTheLoai">Tên</label>
-                                    <input type="text" class="form-control" name = "txtTenTheLoai" placeholder="Nhập tên thể loại..." value="{{ $theLoai->Ten }}">
-                                    @if($errors->has('txtTenTheLoai'))
-                                        <p style="color:red">{{ $errors->first('txtTenTheLoai') }}</p>
+                                    <label class="col-form-label" for="txtTenMien">Tên miền</label>
+                                    <input type="text" class="form-control" name="txtTenMien" placeholder="Nhập tên miền..." value="{{ $mien->TenMien }}">
+                                    @if($errors->has('txtTenMien'))
+                                        <p style="color:red">{{ $errors->first('txtTenMien') }}</p>
                                     @endif
                                 </div>
-
+                                    
                                 <div class="form-group">
                                     <label>Trạng thái</label>
                                     <select class="custom-select form-control-border border-width-2" name="txtTrangThai">
-                                        <option @if($theLoai->TrangThai==1) selected @endif>Hoạt động</option>  
-                                        <option @if($theLoai->TrangThai==0) selected @endif>Khóa</option>
+                                        <option @if($mien->TrangThai==1) selected @endif>Hoạt động</option>  
+                                        <option @if($mien->TrangThai==0) selected @endif>Khóa</option>
                                     </select>
                                 </div>
                                 
@@ -64,7 +64,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <form action="{{ route('theLoai.destroy', ['theLoai'=>$theLoai]) }}" method="post">
+                <form action="{{ route('mien.destroy', ['mien'=>$mien]) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>

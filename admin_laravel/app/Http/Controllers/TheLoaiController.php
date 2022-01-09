@@ -6,6 +6,9 @@ use App\Models\TheLoai;
 use App\Http\Requests\StoreTheLoaiRequest;
 use App\Http\Requests\UpdateTheLoaiRequest;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+
 class TheLoaiController extends Controller
 {
     /**
@@ -16,6 +19,9 @@ class TheLoaiController extends Controller
     public function index()
     {
         //
+        $listTheLoai = TheLoai::all();
+
+        return view('theloai.danhsach', ['listTheLoai'=>$listTheLoai]);
     }
 
     /**
@@ -26,6 +32,7 @@ class TheLoaiController extends Controller
     public function create()
     {
         //
+        return view('theLoai.them');
     }
 
     /**
@@ -36,7 +43,25 @@ class TheLoaiController extends Controller
      */
     public function store(StoreTheLoaiRequest $request)
     {
+        $request->validate([
+            'txtTenTheLoai' => 'required',
+        ]);
+        
         //
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        $theLoai=new TheLoai;
+        $theLoai->fill([
+            'Ten'=>$request->input('txtTenTheLoai'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $theLoai->save();
+
+        return Redirect::route('theLoai.index');
     }
 
     /**
@@ -59,6 +84,7 @@ class TheLoaiController extends Controller
     public function edit(TheLoai $theLoai)
     {
         //
+        return view('theloai.sua', ['theLoai'=>$theLoai]);
     }
 
     /**
@@ -70,7 +96,24 @@ class TheLoaiController extends Controller
      */
     public function update(UpdateTheLoaiRequest $request, TheLoai $theLoai)
     {
+        $request->validate([
+            'txtTenTheLoai' => 'required',
+        ]);
+        
         //
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        $theLoai->fill([
+            'Ten'=>$request->input('txtTenTheLoai'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $theLoai->save();
+
+        return Redirect::route('theLoai.index');
     }
 
     /**
@@ -82,5 +125,8 @@ class TheLoaiController extends Controller
     public function destroy(TheLoai $theLoai)
     {
         //
+        $theLoai->delete();
+
+        return Redirect::route('theLoai.index');
     }
 }

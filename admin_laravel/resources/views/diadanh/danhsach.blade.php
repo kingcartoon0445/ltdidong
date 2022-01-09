@@ -65,9 +65,6 @@
                                 <a href="/diadanh/sua" type="button" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a type="button" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i>
-                                </a>
                             </div>
                         </td>
                     </tr>

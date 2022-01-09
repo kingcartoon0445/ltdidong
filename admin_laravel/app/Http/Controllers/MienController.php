@@ -6,6 +6,9 @@ use App\Models\Mien;
 use App\Http\Requests\StoreMienRequest;
 use App\Http\Requests\UpdateMienRequest;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+
 class MienController extends Controller
 {
     /**
@@ -15,7 +18,9 @@ class MienController extends Controller
      */
     public function index()
     {
-        //
+        $listMien = Mien::all();
+
+        return view('mien.danhsach', ['listMien'=>$listMien]);
     }
 
     /**
@@ -25,7 +30,7 @@ class MienController extends Controller
      */
     public function create()
     {
-        //
+        return view('mien.them');
     }
 
     /**
@@ -36,7 +41,24 @@ class MienController extends Controller
      */
     public function store(StoreMienRequest $request)
     {
-        //
+        $request->validate([
+            'txtTenMien' => ['required'],
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        $mien=new Mien;
+        $mien->fill([
+            'TenMien'=>$request->input('txtTenMien'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $mien->save();
+
+        return Redirect::route('mien.index');
     }
 
     /**
@@ -58,7 +80,7 @@ class MienController extends Controller
      */
     public function edit(Mien $mien)
     {
-        //
+        return view('mien.sua', ['mien'=>$mien]);
     }
 
     /**
@@ -70,7 +92,23 @@ class MienController extends Controller
      */
     public function update(UpdateMienRequest $request, Mien $mien)
     {
-        //
+        $request->validate([
+            'txtTenMien' => 'required',
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        $mien->fill([
+            'TenMien'=>$request->input('txtTenMien'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $mien->save();
+
+        return Redirect::route('mien.index');
     }
 
     /**
@@ -81,6 +119,8 @@ class MienController extends Controller
      */
     public function destroy(Mien $mien)
     {
-        //
+        $mien->delete();
+
+        return Redirect::route('mien.index');
     }
 }

@@ -20,10 +20,6 @@
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
-  </div>
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-dark">
@@ -151,53 +147,51 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('dstheloai') }}" class="nav-link">
+            <a href="{{ route('theLoai.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>Quản lý thể loại</p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="/DanhSachMien" class="nav-link">
+            <a href="{{ route('mien.index') }}" class="nav-link">
               <i class="nav-icon fas fa-map-marked-alt"></i>
               <p>Quản lý miền</p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="{{ route('dstienich') }}" class="nav-link">
+            <a href="{{ route('tienIch.index') }}" class="nav-link">
               <i class="nav-icon fas fa-hamburger"></i>
               <p>Quản lý tiện ích</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
-              <p>Quản lý tài khoản<i class="right fas fa-angle-left"></i></p>
+              <p>Quản lý tài khoản <i class="fas fa-angle-left right"></i></p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('dsuser') }}" class="nav-link">
-                  <p>Người dùng</p>
+                <a href="{{ route('nguoiDung.index') }}" class="nav-link">
+                  <p>Tài khoản</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('dsadmin') }}" class="nav-link">
-                  <p>Admin</p>
+                <a href="{{ route('loaiTaiKhoan.index') }}" class="nav-link">
+                  <p>Loại tài khoản</p>
                 </a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
   </aside>
   @yield('content')
 </div>
-<!-- ./wrapper -->
+
 {{ Html::script('plugins/bootstrap-5/js/bootstrap.bundle.min.js') }}
 {{ Html::script('plugins/jquery/jquery.min.js') }}
 {{ Html::script('plugins/bootstrap/js/bootstrap.bundle.min.js') }}

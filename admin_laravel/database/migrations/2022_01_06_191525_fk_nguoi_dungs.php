@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTheLoaisTable extends Migration
+class FkNguoiDungs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateTheLoaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('the_loais', function (Blueprint $table) {
-            $table->id();
-            $table->string('Ten');
-            $table->Integer('TrangThai')->default(1);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('nguoi_dungs', function (Blueprint $table) {
+            $table->foreign('MaLoaiTK')->references('id')->on('loai_tai_khoans');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateTheLoaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('the_loais');
+        Schema::table('nguoi_dungs', function (Blueprint $table) {
+            //
+        });
     }
 }

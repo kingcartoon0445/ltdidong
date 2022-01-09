@@ -6,8 +6,21 @@ use App\Models\TienIch;
 use App\Http\Requests\StoreTienIchRequest;
 use App\Http\Requests\UpdateTienIchRequest;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+
 class TienIchController extends Controller
 {
+    protected function fixImage(TienIch $tienIch)
+    {
+        if(Storage::disk('public')->exists($tienIch->Anh)){
+            $tienIch->Anh = Storage::url($tienIch->Anh);
+        }
+        else{
+            $tienIch->Anh = '/images/no_image_holder.png';
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +28,13 @@ class TienIchController extends Controller
      */
     public function index()
     {
-        //
+        $listTienIch = TienIch::all();
+
+        foreach($listTienIch as $tienIch) {
+            $this->fixImage($tienIch);
+        }
+
+        return view('tienich.danhsach', ['listTienIch'=>$listTienIch]);
     }
 
     /**
@@ -25,7 +44,7 @@ class TienIchController extends Controller
      */
     public function create()
     {
-        //
+        return view('tienich.them');
     }
 
     /**
@@ -36,7 +55,40 @@ class TienIchController extends Controller
      */
     public function store(StoreTienIchRequest $request)
     {
-        //
+        $request->validate([
+            'txtTenDaiDien' => 'required',
+            'txtLoai' => 'required',
+            'txtDiaChi' => 'required',
+            'txtMoTa' => 'required',
+            'txtSDT' => 'required',
+            'hinh' => ['required', 'mimetypes:image/*', 'max:5000'],
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        $tienIch = new TienIch;
+        $tienIch->fill([
+            'Ten'=>$request->input('txtTenDaiDien'),
+            'Loai'=>$request->input('txtLoai'),
+            'DiaChi'=>$request->input('txtDiaChi'),
+            'MoTa'=>$request->input('txtMoTa'),
+            'SDT'=>$request->input('txtSDT'),
+            'Anh'=>'',
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $tienIch->save();
+
+        if($request->hasFile('hinh')){
+            $tienIch->Anh = $request->file('hinh')->store('images/tienich/'.$tienIch->id, 'public');
+        }
+
+        $tienIch->save();
+
+        return Redirect::route('tienIch.index');
     }
 
     /**

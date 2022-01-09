@@ -141,8 +141,44 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'txtTenMien' => [
+            'required' => 'Tên miền không được để trống',
+        ],
+        'txtTenLoaiTaiKhoan' => [
+            'required' => 'Tên loại tài khoản không được để trống',
+        ],
+        'txtTenTheLoai' => [
+            'required' => 'Tên thể loại không được để trống',
+        ],
+        'txtTenDaiDien' => [
+            'required' => 'Tên đại diện không được để trống',
+        ],
+        'txtLoai' => [
+            'required' => 'Loại không được để trống',
+        ],
+        'txtDiaChi' => [
+            'required' => 'Địa chỉ không được để trống',
+        ],
+        'txtMoTa' => [
+            'required' => 'Mô tả không được để trống',
+        ],
+        'txtHoTen' => [
+            'required' => 'Họ tên không được để trống',
+        ],
+        'txtEmail' => [
+            'required' => 'Email không được để trống',
+        ],
+        'txtSDT' => [
+            'required' => 'Số điện thoại không được để trống',
+        ],
+        'txtMatKhau' => [
+            'required' => 'Mật khẩu không được để trống',
+        ],
+        'txtLoaiTK' => [
+            'required' => 'Vui lòng tạo loại tài khoản',
+        ],
+        'hinh' => [
+            'required' => 'Vui lòng chọn hình',
         ],
     ],
 

@@ -16,7 +16,9 @@ class CreateMiensTable extends Migration
         Schema::create('miens', function (Blueprint $table) {
             $table->id();
             $table->string('TenMien');
+            $table->Integer('TrangThai')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

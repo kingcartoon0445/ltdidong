@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import '../../background.dart';
 import '../api.dart';
@@ -201,7 +200,8 @@ class LoginPageState extends State<LoginPage> {
                               SizedBox(height: 100),
                               isLoading
                                   ? Container(
-                                      child: CircularProgressIndicator(strokeWidth:10),
+                                      child: CircularProgressIndicator(
+                                          strokeWidth: 10),
                                     )
                                   : Container(
                                       width: double.infinity,
@@ -213,8 +213,12 @@ class LoginPageState extends State<LoginPage> {
                                         onPressed: () {
                                           if (_formKey.currentState!
                                               .validate()) {
-                                            setState(() {
+                                            setState(() async {
                                               isLoading = true;
+                                              await Future.delayed(
+                                                Duration(seconds: 15),
+                                              );
+                                              isLoading = false;
                                             });
                                             login();
                                           }

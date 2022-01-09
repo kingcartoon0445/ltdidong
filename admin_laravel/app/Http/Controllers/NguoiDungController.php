@@ -3,11 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\NguoiDung;
+use App\Models\LoaiTaiKhoan;
+
 use App\Http\Requests\StoreNguoiDungRequest;
 use App\Http\Requests\UpdateNguoiDungRequest;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+
 class NguoiDungController extends Controller
 {
+    protected function fixImage(NguoiDung $nguoiDung)
+    {
+        if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
+            $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
+        }
+        else{
+            $nguoiDung->AnhNen = '/images/no_image_holder.png';
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +29,14 @@ class NguoiDungController extends Controller
      */
     public function index()
     {
-        //
+        $listnguoiDung = NguoiDung::all();
+        $listLoaiTaiKhoan = LoaiTaiKhoan::all();
+
+        foreach($listnguoiDung as $nguoiDung) {
+            $this->fixImage($nguoiDung);
+        }
+
+        return view('nguoidung.danhsach', ['listnguoiDung'=>$listnguoiDung, 'listLoaiTaiKhoan'=>$listLoaiTaiKhoan]);
     }
 
     /**
@@ -25,7 +46,9 @@ class NguoiDungController extends Controller
      */
     public function create()
     {
-        //
+        $listLoaiTaiKhoan = LoaiTaiKhoan::all();
+
+        return view('nguoidung.them', ['listLoaiTaiKhoan'=>$listLoaiTaiKhoan]);
     }
 
     /**
@@ -36,7 +59,42 @@ class NguoiDungController extends Controller
      */
     public function store(StoreNguoiDungRequest $request)
     {
-        //
+        $request->validate([
+            'txtTenDaiDien' => 'required',
+            'txtHoTen' => 'required',
+            'txtEmail' => 'required',
+            'txtSDT' => 'required',
+            'txtMatKhau' => 'required',
+            'hinh' => ['required', 'mimetypes:image/*', 'max:5000'],
+            'txtLoaiTK'=> 'required',
+        ]);
+
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        $nguoiDung = new NguoiDung;
+        $nguoiDung->fill([
+            'TenDaiDien'=>$request->input('txtTenDaiDien'),
+            'HovaTen'=>$request->input('txtHoTen'),
+            'Email'=>$request->input('txtEmail'),
+            'SDT'=>$request->input('txtSDT'),
+            'AnhNen'=>'',
+            'MatKhau'=>$request->input('txtMatKhau'),
+            'MaLoaiTK'=>$request->input('txtLoaiTK'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $nguoiDung->save();
+
+        if($request->hasFile('hinh')){
+            $nguoiDung->AnhNen = $request->file('hinh')->store('images/nguoidung/'.$nguoiDung->id, 'public');
+        }
+
+        $nguoiDung->save();
+
+        return Redirect::route('nguoiDung.index');
     }
 
     /**
@@ -47,7 +105,6 @@ class NguoiDungController extends Controller
      */
     public function show(NguoiDung $nguoiDung)
     {
-        //
     }
 
     /**
@@ -58,7 +115,11 @@ class NguoiDungController extends Controller
      */
     public function edit(NguoiDung $nguoiDung)
     {
-        //
+        $this->fixImage($nguoiDung);
+        
+        $listLoaiTaiKhoan = LoaiTaiKhoan::all();
+
+        return view('nguoidung.sua', ['nguoiDung'=>$nguoiDung, 'listLoaiTaiKhoan'=>$listLoaiTaiKhoan]);
     }
 
     /**
@@ -70,7 +131,38 @@ class NguoiDungController extends Controller
      */
     public function update(UpdateNguoiDungRequest $request, NguoiDung $nguoiDung)
     {
-        //
+        $request->validate([
+            'txtTenDaiDien' => 'required',
+            'txtHoTen' => 'required',
+            'txtEmail' => 'required',
+            'txtSDT' => 'required',
+            'txtMatKhau' => 'required',
+            'hinh' => ['mimetypes:image/*', 'max:5000'],
+            'txtLoaiTK'=> 'required',
+        ]);
+        
+        if($request->input('txtTrangThai') == 'Hoạt động')
+            $trangthai = 1;
+        else
+            $trangthai = 0;
+
+        if($request->hasFile('hinh')){
+            $nguoiDung->AnhNen = $request->file('hinh')->store('images/nguoidung/'.$nguoiDung->id, 'public');
+        }
+
+        $nguoiDung->fill([
+            'TenDaiDien'=>$request->input('txtTenDaiDien'),
+            'HovaTen'=>$request->input('txtHoTen'),
+            'Email'=>$request->input('txtEmail'),
+            'SDT'=>$request->input('txtSDT'),
+            'MatKhau'=>$request->input('txtMatKhau'),
+            'MaLoaiTK'=>$request->input('txtLoaiTK'),
+            'TrangThai'=>$trangthai,
+        ]);
+
+        $nguoiDung->save();
+
+        return Redirect::route('nguoiDung.index');
     }
 
     /**
@@ -81,6 +173,8 @@ class NguoiDungController extends Controller
      */
     public function destroy(NguoiDung $nguoiDung)
     {
-        //
+        $nguoiDung->delete();
+
+        return Redirect::route('nguoiDung.index');
     }
 }

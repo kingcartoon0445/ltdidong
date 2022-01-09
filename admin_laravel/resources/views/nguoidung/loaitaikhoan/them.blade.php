@@ -2,14 +2,15 @@
 
 @section('content')
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Thêm thể loại</h1>
-          </div>
-        </div>
-      </div>
+            <h1 class="m-0">Thêm loại tài khoản</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
 
     <section class="content">
@@ -18,21 +19,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('theLoai.store') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('loaiTaiKhoan.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenTheLoai">Tên thể loại</label>
-                                    <input type="text" class="form-control" id="txtTenTheLoai" name = "txtTenTheLoai" placeholder="Nhập tên thể loại...">
-                                    @if($errors->has('txtTenTheLoai'))
-                                        <p style="color:red">{{ $errors->first('txtTenTheLoai') }}</p>
+                                    <label class="col-form-label" for="txtTenLoaiTaiKhoan">Tên loại tài khoản</label>
+                                    <input type="text" class="form-control" name="txtTenLoaiTaiKhoan" placeholder="Nhập tên loại tài khoản...">
+                                    @if($errors->has('txtTenLoaiTaiKhoan'))
+                                        <p style="color:red">{{ $errors->first('txtTenLoaiTaiKhoan') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
                                     <label>Trạng thái</label>
-                                    <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
-                                        <option>Hoạt động</option>
-                                        <option>Xóa</option>
+                                    <select class="custom-select form-control-border border-width-2" name="txtTrangThai">
+                                        <option>Hoạt động</option>  
+                                        <option>Khóa</option>
                                     </select>
                                 </div>
 

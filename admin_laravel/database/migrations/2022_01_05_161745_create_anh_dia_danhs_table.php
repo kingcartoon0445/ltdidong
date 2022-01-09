@@ -19,6 +19,7 @@ class CreateAnhDiaDanhsTable extends Migration
             $table->string('Anh');
             $table->Integer('TrangThai')->default(1);;
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
