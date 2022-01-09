@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\TienIch;
+use App\Models\NguoiDung;
+
 use App\Http\Requests\StoreTienIchRequest;
 use App\Http\Requests\UpdateTienIchRequest;
 
@@ -11,6 +13,16 @@ use Illuminate\Support\Facades\Storage;
 
 class TienIchController extends Controller
 {
+    protected function fixImageUser(NguoiDung $nguoiDung)
+    {
+        if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
+            $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
+        }
+        else{
+            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
+        }
+    }
+
     protected function fixImage(TienIch $tienIch)
     {
         if(Storage::disk('public')->exists($tienIch->Anh)){
@@ -30,11 +42,17 @@ class TienIchController extends Controller
     {
         $listTienIch = TienIch::all();
 
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImageUser($data);
+
         foreach($listTienIch as $tienIch) {
             $this->fixImage($tienIch);
         }
 
-        return view('tienich.danhsach', ['listTienIch'=>$listTienIch]);
+        return view('tienich.danhsach', [
+            'listTienIch'=>$listTienIch,
+            'LoggedUserInfo'=>$data
+        ]);
     }
 
     /**
@@ -44,7 +62,10 @@ class TienIchController extends Controller
      */
     public function create()
     {
-        return view('tienich.them');
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImageUser($data);
+
+        return view('tienich.them', ['LoggedUserInfo'=>$data]);
     }
 
     /**
@@ -56,26 +77,26 @@ class TienIchController extends Controller
     public function store(StoreTienIchRequest $request)
     {
         $request->validate([
-            'txtTenDaiDien' => 'required',
-            'txtLoai' => 'required',
-            'txtDiaChi' => 'required',
-            'txtMoTa' => 'required',
-            'txtSDT' => 'required',
+            'TenDaiDien' => 'required',
+            'Loai' => 'required',
+            'DiaChi' => 'required',
+            'MoTa' => 'required',
+            'SDT' => 'required',
             'hinh' => ['mimetypes:image/*', 'max:5000'],
         ]);
 
-        if($request->input('txtTrangThai') == 'Hoạt động')
+        if($request->input('TrangThai') == 'Hoạt động')
             $trangthai = 1;
         else
             $trangthai = 0;
 
         $tienIch = new TienIch;
         $tienIch->fill([
-            'Ten'=>$request->input('txtTenDaiDien'),
-            'Loai'=>$request->input('txtLoai'),
-            'DiaChi'=>$request->input('txtDiaChi'),
-            'MoTa'=>$request->input('txtMoTa'),
-            'SDT'=>$request->input('txtSDT'),
+            'Ten'=>$request->input('TenDaiDien'),
+            'Loai'=>$request->input('Loai'),
+            'DiaChi'=>$request->input('DiaChi'),
+            'MoTa'=>$request->input('MoTa'),
+            'SDT'=>$request->input('SDT'),
             'Anh'=>'',
             'TrangThai'=>$trangthai,
         ]);
@@ -110,9 +131,15 @@ class TienIchController extends Controller
      */
     public function edit(TienIch $tienIch)
     {
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImageUser($data);
+
         $this->fixImage($tienIch);
 
-        return view('tienich.sua', ['tienIch'=>$tienIch]);
+        return view('tienich.sua', [
+            'tienIch'=>$tienIch,
+            'LoggedUserInfo'=>$data
+        ]);
     }
 
     /**
@@ -125,15 +152,15 @@ class TienIchController extends Controller
     public function update(UpdateTienIchRequest $request, TienIch $tienIch)
     {
         $request->validate([
-            'txtTenDaiDien' => 'required',
-            'txtLoai' => 'required',
-            'txtDiaChi' => 'required',
-            'txtMoTa' => 'required',
-            'txtSDT' => 'required',
+            'TenDaiDien' => 'required',
+            'Loai' => 'required',
+            'DiaChi' => 'required',
+            'MoTa' => 'required',
+            'SDT' => 'required',
             'hinh' => ['mimetypes:image/*', 'max:5000'],
         ]);
 
-        if($request->input('txtTrangThai') == 'Hoạt động')
+        if($request->input('TrangThai') == 'Hoạt động')
             $trangthai = 1;
         else
             $trangthai = 0;
@@ -143,11 +170,11 @@ class TienIchController extends Controller
         }
 
         $tienIch->fill([
-            'Ten'=>$request->input('txtTenDaiDien'),
-            'Loai'=>$request->input('txtLoai'),
-            'DiaChi'=>$request->input('txtDiaChi'),
-            'MoTa'=>$request->input('txtMoTa'),
-            'SDT'=>$request->input('txtSDT'),
+            'Ten'=>$request->input('TenDaiDien'),
+            'Loai'=>$request->input('Loai'),
+            'DiaChi'=>$request->input('DiaChi'),
+            'MoTa'=>$request->input('MoTa'),
+            'SDT'=>$request->input('SDT'),
             'TrangThai'=>$trangthai,
         ]);
 

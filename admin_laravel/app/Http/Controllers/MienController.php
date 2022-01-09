@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mien;
+use App\Models\NguoiDung;
+
 use App\Http\Requests\StoreMienRequest;
 use App\Http\Requests\UpdateMienRequest;
 
@@ -11,16 +13,27 @@ use Illuminate\Support\Facades\Storage;
 
 class MienController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected function fixImage(NguoiDung $nguoiDung)
+    {
+        if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
+            $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
+        }
+        else{
+            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
+        }
+    }
+
     public function index()
     {
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
+
         $listMien = Mien::all();
 
-        return view('mien.danhsach', ['listMien'=>$listMien]);
+        return view('mien.danhsach', [
+            'listMien'=>$listMien,
+            'LoggedUserInfo'=>$data
+        ]);
     }
 
     /**
@@ -30,7 +43,10 @@ class MienController extends Controller
      */
     public function create()
     {
-        return view('mien.them');
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
+
+        return view('mien.them', ['LoggedUserInfo'=>$data]);
     }
 
     /**
@@ -42,7 +58,7 @@ class MienController extends Controller
     public function store(StoreMienRequest $request)
     {
         $request->validate([
-            'txtTenMien' => ['required'],
+            'TenMien' => ['required'],
         ]);
 
         if($request->input('txtTrangThai') == 'Hoạt động')
@@ -52,7 +68,7 @@ class MienController extends Controller
 
         $mien=new Mien;
         $mien->fill([
-            'TenMien'=>$request->input('txtTenMien'),
+            'TenMien'=>$request->input('TenMien'),
             'TrangThai'=>$trangthai,
         ]);
 
@@ -80,7 +96,13 @@ class MienController extends Controller
      */
     public function edit(Mien $mien)
     {
-        return view('mien.sua', ['mien'=>$mien]);
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
+        
+        return view('mien.sua', [
+            'mien'=>$mien,
+            'LoggedUserInfo'=>$data
+        ]);
     }
 
     /**
@@ -93,7 +115,7 @@ class MienController extends Controller
     public function update(UpdateMienRequest $request, Mien $mien)
     {
         $request->validate([
-            'txtTenMien' => 'required',
+            'TenMien' => 'required',
         ]);
 
         if($request->input('txtTrangThai') == 'Hoạt động')
@@ -102,7 +124,7 @@ class MienController extends Controller
             $trangthai = 0;
 
         $mien->fill([
-            'TenMien'=>$request->input('txtTenMien'),
+            'TenMien'=>$request->input('TenMien'),
             'TrangThai'=>$trangthai,
         ]);
 

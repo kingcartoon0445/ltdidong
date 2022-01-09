@@ -93,8 +93,8 @@
       </li>
       -->
       <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
+        <a class="nav-link" href="{{ route('logout') }}" role="button">
+          <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
     </ul>
@@ -113,10 +113,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ $LoggedUserInfo->AnhNen }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{ route('profile') }}" class="d-block">Me</a>
+          <a class="d-block">{{ $LoggedUserInfo->TenDaiDien }}</a>
         </div>
       </div>
 
@@ -126,7 +126,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/index" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>Dashboard</p>
             </a>
@@ -213,6 +213,18 @@
       "buttons": ["excel"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
+</script>
+<script>
+function showAnh(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#Img').attr('src', e.target.result);
+          $('#ImgDiv').height(500);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 </body>
 </Html>

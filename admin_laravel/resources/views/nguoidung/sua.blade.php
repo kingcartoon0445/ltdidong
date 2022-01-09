@@ -23,55 +23,57 @@
                                 @csrf
                                 @method('PATCH')
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenDaiDien">Tên đại diện</label>
-                                    <input type="text" class="form-control" id="txtTenDaiDien" name = "txtTenDaiDien" value="{{ $nguoiDung->TenDaiDien }}">
-                                    @if($errors->has('txtTenDaiDien'))
-                                        <p style="color:red">{{ $errors->first('txtTenDaiDien') }}</p>
+                                    <label class="col-form-label" for="TenDaiDien">Tên đại diện</label>
+                                    <input type="text" class="form-control" id="TenDaiDien" name = "TenDaiDien" value="{{ $nguoiDung->TenDaiDien }}">
+                                    @if($errors->has('TenDaiDien'))
+                                        <p style="color:red">{{ $errors->first('TenDaiDien') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtHoTen">Họ và tên</label>
-                                    <input type="text" class="form-control" id="txtHoTen" name = "txtHoTen" value="{{ $nguoiDung->HovaTen }}">
-                                    @if($errors->has('txtHoTen'))
-                                        <p style="color:red">{{ $errors->first('txtHoTen') }}</p>
+                                    <label class="col-form-label" for="HoTen">Họ và tên</label>
+                                    <input type="text" class="form-control" id="HoTen" name = "HoTen" value="{{ $nguoiDung->HovaTen }}">
+                                    @if($errors->has('HoTen'))
+                                        <p style="color:red">{{ $errors->first('HoTen') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtEmail">Email</label>
-                                    <input type="text" class="form-control" id="txtEmail" name = "txtEmail" value="{{ $nguoiDung->Email }}">
-                                    @if($errors->has('txtEmail'))
-                                        <p style="color:red">{{ $errors->first('txtEmail') }}</p>
+                                    <label class="col-form-label" for="Email">Email</label>
+                                    <input type="text" class="form-control" id="Email" name = "Email" value="{{ $nguoiDung->Email }}">
+                                    @if($errors->has('Email'))
+                                        <p style="color:red">{{ $errors->first('Email') }}</p>
                                     @endif
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtMatKhau">Mật khẩu</label>
-                                    <input type="text" class="form-control" id="txtMatKhau" name = "txtMatKhau" value="{{ $nguoiDung->MatKhau }}">
-                                    @if($errors->has('txtMatKhau'))
-                                        <p style="color:red">{{ $errors->first('txtMatKhau') }}</p>
+                                    <label class="col-form-label" for="MatKhau">Mật khẩu @if($nguoiDung->IsAdmin==0) (Hashed) @endif</label>
+                                    <input type="password" class="form-control" id="MatKhau" name = "MatKhau" value="{{ $nguoiDung->MatKhau }}" @if($nguoiDung->IsAdmin==0) readonly @endif>
+                                    @if($errors->has('MatKhau'))
+                                        <p style="color:red">{{ $errors->first('MatKhau') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtSDT">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="txtSDT" name = "txtSDT" value="{{ $nguoiDung->SDT }}">
-                                    @if($errors->has('txtSDT'))
-                                        <p style="color:red">{{ $errors->first('txtSDT') }}</p>
+                                    <label class="col-form-label" for="SDT">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="SDT" name = "SDT" value="{{ $nguoiDung->SDT }}">
+                                    @if($errors->has('SDT'))
+                                        <p style="color:red">{{ $errors->first('SDT') }}</p>
                                     @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="checkIsAdmin" id="customCheckbox5" @if($nguoiDung->IsAdmin)==1 checked @endif>
-                                        <label for="customCheckbox5" class="custom-control-label">Là Admin</label>
+                                @if($nguoiDung->IsAdmin==1)
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="checkIsAdmin" id="customCheckbox5" value="1" @if($nguoiDung->IsAdmin)==1 checked @endif>
+                                            <label for="customCheckbox5" class="custom-control-label">Là Admin</label>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
 
                                 <div class="form-group">
                                     <label>Trạng thái</label>
-                                    <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
+                                    <select class="custom-select form-control-border border-width-2" id="TrangThai" name="TrangThai">
                                         <option @if($nguoiDung->TrangThai==1) selected @endif>Hoạt động</option>  
                                         <option @if($nguoiDung->TrangThai==0) selected @endif>Khóa</option>
                                     </select>
@@ -88,16 +90,18 @@
                                 </div>
 
                                 <div id="ImgDiv" class="form-group">
-                                    <img id="Img" src="{{ $nguoiDung->AnhNen }}" style="width:725px;max-height:500px"/>
+                                    <img id="Img" src="{{ $nguoiDung->AnhNen }}" style="width:300px;max-height:300px">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save changes</button>
-
-                                <div class="btn-group">
-                                    <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>
+                                
+                                @if(!$nguoiDung->Email=='email@gmail.com')
+                                    <div class="btn-group">
+                                        <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                @endif
                             </form>
                         </div>
                     </div>
@@ -127,17 +131,4 @@
         </div>
     </div>
 </div>
-
-<script>
-function showAnh(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $('#Img').attr('src', e.target.result);
-          $('#ImgDiv').height(500);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
 @endsection
