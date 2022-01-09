@@ -62,7 +62,7 @@ class NguoiDungController extends Controller
             'txtEmail' => 'required',
             'txtSDT' => 'required',
             'txtMatKhau' => 'required',
-            'hinh' => ['mimetypes:image/*', 'max:5000'],
+            'hinh' => ['required','mimetypes:image/*','max:5000'],
         ]);
 
         if($request->input('txtTrangThai') == 'Hoạt động')

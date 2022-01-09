@@ -31,7 +31,7 @@
                   <tr>
                     <th>Ảnh Đại Diện</th>
                     <th>Tên Đại Diện</th>
-                    <th>Họ Và Tên</th>
+                    <th>Họ tên</th>
                     <th>Email</th>
                     <th>Mật Khẩu</th>
                     <th>SĐT</th>
@@ -51,9 +51,9 @@
                         <td>{{ $nguoiDung->SDT }}</td>
                         <td>
                             @if($nguoiDung->IsAdmin==1)
-                              true
+                              True
                             @else
-                              false
+                              False
                             @endif  
                         </td>
                         <td>
