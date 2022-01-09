@@ -21,7 +21,7 @@ class CreateNguoiDungsTable extends Migration
             $table->string('SDT');
             $table->string('AnhNen');
             $table->string('MatKhau');
-            $table->boolean('IsAdmin');
+            $table->boolean('IsAdmin')->default(0);
             $table->Integer('TrangThai')->default(1);
             $table->timestamps();
             $table->softDeletes();
