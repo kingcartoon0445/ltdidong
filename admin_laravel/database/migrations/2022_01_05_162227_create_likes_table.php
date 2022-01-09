@@ -16,7 +16,6 @@ class CreateLikesTable extends Migration
         Schema::create('likes', function (Blueprint $table) {
             $table->foreignId('MaNguoiDung');
             $table->foreignId('MaBaiViet');
-            $table->Integer('TrangThai')->default(1);
         });
     }
 

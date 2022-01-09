@@ -49,7 +49,7 @@ class ViewController extends Controller
     public function show(int $view)
     {
         //
-        return View::where('MaBaiViet',$view)->get();
+        return View::where('MaBaiViet',$view)->count();
     }
 
     /**

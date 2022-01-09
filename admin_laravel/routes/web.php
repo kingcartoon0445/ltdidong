@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MienController;
 use App\Http\Controllers\NguoiDungController;
-use App\Http\Controllers\LoaiTaiKhoanController;
 use App\Http\Controllers\TheLoaiController;
 use App\Http\Controllers\TienIchController;
 /*
@@ -45,7 +44,6 @@ Route::get('/diadanh/sua', function () {
 });
 
 Route::resource('mien', MienController::class);
-Route::resource('loaiTaiKhoan', LoaiTaiKhoanController::class);
 Route::resource('nguoiDung', NguoiDungController::class);
 Route::resource('theLoai', TheLoaiController::class);
 Route::resource('tienIch', TienIchController::class);

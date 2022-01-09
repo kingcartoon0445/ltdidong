@@ -24,7 +24,7 @@
                                 @method('PATCH')
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtTenDaiDien">Tên đại diện</label>
-                                    <input type="text" class="form-control" id="txtTenDaiDien" name = "txtTenDaiDien" placeholder="Nhập tên đại diện..." value="{{ $nguoiDung->TenDaiDien }}">
+                                    <input type="text" class="form-control" id="txtTenDaiDien" name = "txtTenDaiDien" value="{{ $nguoiDung->TenDaiDien }}">
                                     @if($errors->has('txtTenDaiDien'))
                                         <p style="color:red">{{ $errors->first('txtTenDaiDien') }}</p>
                                     @endif
@@ -32,7 +32,7 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtHoTen">Họ và tên</label>
-                                    <input type="text" class="form-control" id="txtHoTen" name = "txtHoTen" placeholder="Nhập họ và tên..." value="{{ $nguoiDung->HovaTen }}">
+                                    <input type="text" class="form-control" id="txtHoTen" name = "txtHoTen" value="{{ $nguoiDung->HovaTen }}">
                                     @if($errors->has('txtHoTen'))
                                         <p style="color:red">{{ $errors->first('txtHoTen') }}</p>
                                     @endif
@@ -40,7 +40,7 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtEmail">Email</label>
-                                    <input type="text" class="form-control" id="txtEmail" name = "txtEmail" placeholder="Nhập email..." value="{{ $nguoiDung->Email }}">
+                                    <input type="text" class="form-control" id="txtEmail" name = "txtEmail" value="{{ $nguoiDung->Email }}">
                                     @if($errors->has('txtEmail'))
                                         <p style="color:red">{{ $errors->first('txtEmail') }}</p>
                                     @endif
@@ -48,7 +48,7 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtMatKhau">Mật khẩu</label>
-                                    <input type="text" class="form-control" id="txtMatKhau" name = "txtMatKhau" placeholder="Nhập mật khẩu..." value="{{ $nguoiDung->MatKhau }}">
+                                    <input type="text" class="form-control" id="txtMatKhau" name = "txtMatKhau" value="{{ $nguoiDung->MatKhau }}">
                                     @if($errors->has('txtMatKhau'))
                                         <p style="color:red">{{ $errors->first('txtMatKhau') }}</p>
                                     @endif
@@ -56,22 +56,17 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtSDT">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="txtSDT" name = "txtSDT" placeholder="Nhập số điện thoại..."  value="{{ $nguoiDung->SDT }}">
+                                    <input type="text" class="form-control" id="txtSDT" name = "txtSDT" value="{{ $nguoiDung->SDT }}">
                                     @if($errors->has('txtSDT'))
                                         <p style="color:red">{{ $errors->first('txtSDT') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Loại tài khoản</label>
-                                    <select class="custom-select form-control-border border-width-2" id="txtLoaiTK" name="txtLoaiTK">
-                                        @foreach($listLoaiTaiKhoan as $loaiTaiKhoan)    
-                                            <option value="{{ $loaiTaiKhoan->id }}" @if($loaiTaiKhoan->id==$nguoiDung->MaLoaiTK) selected @endif> {{ $loaiTaiKhoan->TenLoaiTK }}</option>  
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('txtLoaiTK'))
-                                        <p style="color:red">{{ $errors->first('txtLoaiTK') }}</p>
-                                    @endif
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="checkIsAdmin" id="customCheckbox5" @if($nguoiDung->IsAdmin)==1 checked @endif>
+                                        <label for="customCheckbox5" class="custom-control-label">Là Admin</label>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -87,6 +82,9 @@
                                         <label for="hinh" class="form-label">Ảnh</label>
                                         <input onchange="showAnh(this);" class="form-control" type="file" name="hinh" accept="image/*">
                                     </div>
+                                    @if($errors->has('hinh'))
+                                        <p style="color:red">{{ $errors->first('hinh') }}</p>
+                                    @endif
                                 </div>
 
                                 <div id="ImgDiv" class="form-group">

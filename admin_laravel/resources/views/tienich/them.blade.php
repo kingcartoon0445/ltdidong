@@ -19,20 +19,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             <form action="{{ route('tienIch.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtTenDaiDien">Tên đại diện</label>
-                                    <input type="text" class="form-control" name="txtTenDaiDien" placeholder="Nhập tên đại diện...">
+                                    <input type="text" class="form-control" name="txtTenDaiDien">
                                     @if($errors->has('txtTenDaiDien'))
                                         <p style="color:red">{{ $errors->first('txtTenDaiDien') }}</p>
                                     @endif
@@ -40,7 +31,7 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtLoai">Loại</label>
-                                    <input type="text" class="form-control" name="txtLoai" placeholder="Nhập tên loại...">
+                                    <input type="text" class="form-control" name="txtLoai">
                                     @if($errors->has('txtLoai'))
                                         <p style="color:red">{{ $errors->first('txtLoai') }}</p>
                                     @endif
@@ -48,7 +39,7 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtDiaChi">Địa chỉ</label>
-                                    <input type="text" class="form-control" name="txtDiaChi" placeholder="Nhập địa chỉ...">
+                                    <input type="text" class="form-control" name="txtDiaChi">
                                     @if($errors->has('txtDiaChi'))
                                         <p style="color:red">{{ $errors->first('txtDiaChi') }}</p>
                                     @endif
@@ -56,7 +47,7 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtMoTa">Mô tả</label>
-                                    <textarea class="form-control" name="txtMoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
+                                    <textarea class="form-control" name="txtMoTa" rows="3"></textarea>
                                     @if($errors->has('txtMoTa'))
                                         <p style="color:red">{{ $errors->first('txtMoTa') }}</p>
                                     @endif
@@ -64,7 +55,7 @@
 
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtSDT">Số điện thoại</label>
-                                    <input type="text" class="form-control" name="txtSDT" placeholder="Nhập số điện thoại...">
+                                    <input type="text" class="form-control" name="txtSDT">
                                     @if($errors->has('txtSDT'))
                                         <p style="color:red">{{ $errors->first('txtSDT') }}</p>
                                     @endif

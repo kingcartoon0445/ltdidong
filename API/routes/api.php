@@ -12,6 +12,7 @@ use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\DiaDanhController;
 use App\Http\Controllers\TheloaiController;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\LikeController;
 
 /*Route::post('/sanctum/token', function (Request $request) {
     $request->validate([
@@ -71,5 +72,6 @@ Route::apiResource('Mien',MienController::class);
 Route::middleware('auth:sanctum')->apiResource('TienIch',TienIchController::class);
 Route::apiResource('DiaDanh',DiaDanhController::class);
 Route::apiResource('View',ViewController::class);
+Route::apiResource('Like',LikeController::class);
 //Route::middleware('auth:sanctum')->apiResource('DiaDanh',DiaDanhController::class);
 Route::middleware('auth:sanctum')->apiResource('TheLoai',TheloaiController::class);

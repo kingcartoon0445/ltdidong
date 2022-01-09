@@ -23,7 +23,7 @@
                                 @method('PATCH')
                                 <div class="form-group">
                                     <label class="col-form-label" for="txtTenMien">Tên miền</label>
-                                    <input type="text" class="form-control" name="txtTenMien" placeholder="Nhập tên miền..." value="{{ $mien->TenMien }}">
+                                    <input type="text" class="form-control" name="txtTenMien" value="{{ $mien->TenMien }}">
                                     @if($errors->has('txtTenMien'))
                                         <p style="color:red">{{ $errors->first('txtTenMien') }}</p>
                                     @endif

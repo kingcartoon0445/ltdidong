@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../background.dart';
 import '../api.dart';
@@ -213,14 +214,17 @@ class LoginPageState extends State<LoginPage> {
                                         onPressed: () {
                                           if (_formKey.currentState!
                                               .validate()) {
-                                            setState(() async {
-                                              isLoading = true;
-                                              await Future.delayed(
-                                                Duration(seconds: 15),
-                                              );
-                                              isLoading = false;
-                                            });
                                             login();
+                                            setState(() {
+                                              isLoading = true;
+                                              Future.delayed(
+                                                  Duration(milliseconds: 3000),
+                                                  () {
+                                                setState(() {
+                                                  isLoading = false;
+                                                });
+                                              });
+                                            });
                                           }
                                         },
                                         minWidth: double.infinity,

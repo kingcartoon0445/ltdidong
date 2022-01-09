@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\NguoiDung;
-use App\Models\LoaiTaiKhoan;
 
 use App\Http\Requests\StoreNguoiDungRequest;
 use App\Http\Requests\UpdateNguoiDungRequest;
@@ -19,7 +18,7 @@ class NguoiDungController extends Controller
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
         }
         else{
-            $nguoiDung->AnhNen = '/images/no_image_holder.png';
+            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
         }
     }
     /**
@@ -30,13 +29,12 @@ class NguoiDungController extends Controller
     public function index()
     {
         $listnguoiDung = NguoiDung::all();
-        $listLoaiTaiKhoan = LoaiTaiKhoan::all();
 
         foreach($listnguoiDung as $nguoiDung) {
             $this->fixImage($nguoiDung);
         }
 
-        return view('nguoidung.danhsach', ['listnguoiDung'=>$listnguoiDung, 'listLoaiTaiKhoan'=>$listLoaiTaiKhoan]);
+        return view('nguoidung.danhsach', ['listnguoiDung'=>$listnguoiDung]);
     }
 
     /**
@@ -46,9 +44,8 @@ class NguoiDungController extends Controller
      */
     public function create()
     {
-        $listLoaiTaiKhoan = LoaiTaiKhoan::all();
 
-        return view('nguoidung.them', ['listLoaiTaiKhoan'=>$listLoaiTaiKhoan]);
+        return view('nguoidung.them');
     }
 
     /**
@@ -65,14 +62,18 @@ class NguoiDungController extends Controller
             'txtEmail' => 'required',
             'txtSDT' => 'required',
             'txtMatKhau' => 'required',
-            'hinh' => ['required', 'mimetypes:image/*', 'max:5000'],
-            'txtLoaiTK'=> 'required',
+            'hinh' => ['required','mimetypes:image/*','max:5000'],
         ]);
 
         if($request->input('txtTrangThai') == 'Hoạt động')
             $trangthai = 1;
         else
             $trangthai = 0;
+
+        if($request->input('checkIsAdmin') == 'on')
+            $isAdmin = 1;
+        else
+            $isAdmin = 0;
 
         $nguoiDung = new NguoiDung;
         $nguoiDung->fill([
@@ -82,7 +83,7 @@ class NguoiDungController extends Controller
             'SDT'=>$request->input('txtSDT'),
             'AnhNen'=>'',
             'MatKhau'=>$request->input('txtMatKhau'),
-            'MaLoaiTK'=>$request->input('txtLoaiTK'),
+            'IsAdmin'=>$isAdmin,
             'TrangThai'=>$trangthai,
         ]);
 
@@ -117,9 +118,7 @@ class NguoiDungController extends Controller
     {
         $this->fixImage($nguoiDung);
         
-        $listLoaiTaiKhoan = LoaiTaiKhoan::all();
-
-        return view('nguoidung.sua', ['nguoiDung'=>$nguoiDung, 'listLoaiTaiKhoan'=>$listLoaiTaiKhoan]);
+        return view('nguoidung.sua', ['nguoiDung'=>$nguoiDung]);
     }
 
     /**
@@ -138,13 +137,17 @@ class NguoiDungController extends Controller
             'txtSDT' => 'required',
             'txtMatKhau' => 'required',
             'hinh' => ['mimetypes:image/*', 'max:5000'],
-            'txtLoaiTK'=> 'required',
         ]);
         
         if($request->input('txtTrangThai') == 'Hoạt động')
             $trangthai = 1;
         else
             $trangthai = 0;
+
+        if($request->input('checkIsAdmin') == 'on')
+            $isAdmin = 1;
+        else
+            $isAdmin = 0;
 
         if($request->hasFile('hinh')){
             $nguoiDung->AnhNen = $request->file('hinh')->store('images/nguoidung/'.$nguoiDung->id, 'public');
@@ -156,7 +159,7 @@ class NguoiDungController extends Controller
             'Email'=>$request->input('txtEmail'),
             'SDT'=>$request->input('txtSDT'),
             'MatKhau'=>$request->input('txtMatKhau'),
-            'MaLoaiTK'=>$request->input('txtLoaiTK'),
+            'IsAdmin'=>$isAdmin,
             'TrangThai'=>$trangthai,
         ]);
 

@@ -24,21 +24,18 @@
       <div class="row">
         <div class="col-12">
           <a href="{{ route('nguoiDung.create') }}" type="button" class="btn btn-success">Thêm tài khoản</a>
-
-          <!-- Danh sách -->
           <div class="card">
-            <!-- /.card-header -->
             <div class="card-body">
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
                     <th>Ảnh Đại Diện</th>
                     <th>Tên Đại Diện</th>
-                    <th>Họ Và Tên</th>
+                    <th>Họ tên</th>
                     <th>Email</th>
                     <th>Mật Khẩu</th>
                     <th>SĐT</th>
-                    <th>Loại tài khoản</th>
+                    <th>Admin</th>
                     <th>Trạng thái</th>
                     <th></th>
                   </tr>
@@ -46,18 +43,18 @@
                 <tbody>
                   @foreach($listnguoiDung as $nguoiDung)
                     <tr>
-                        <td><img style="width:100px;max-height:100px;object-fit:contain" src="{{ $nguoiDung->AnhNen }}" alt=""></td>
+                        <td><img style="width:150px;max-height:150px;object-fit:contain" src="{{ $nguoiDung->AnhNen }}" alt=""></td>
                         <td>{{ $nguoiDung->TenDaiDien }}</td>
                         <td>{{ $nguoiDung->HovaTen }}</td>
                         <td>{{ $nguoiDung->Email }}</td>
                         <td>{{ $nguoiDung->MatKhau }}</td>
                         <td>{{ $nguoiDung->SDT }}</td>
                         <td>
-                          @foreach($listLoaiTaiKhoan as $loaiTaiKhoan)    
-                            @if($loaiTaiKhoan->id==$nguoiDung->MaLoaiTK)
-                              {{ $loaiTaiKhoan->TenLoaiTK }}
+                            @if($nguoiDung->IsAdmin==1)
+                              True
+                            @else
+                              False
                             @endif  
-                          @endforeach
                         </td>
                         <td>
                             @if($nguoiDung->TrangThai==0)
