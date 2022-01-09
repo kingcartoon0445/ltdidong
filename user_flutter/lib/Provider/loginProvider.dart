@@ -18,8 +18,6 @@ class LoginProvider{
             jsonResponse=json.decode(response.body);
             print('response status:${response.statusCode}');
             print('response status:${response.body}');
-
-            sharedPreferences.setString('token',jsonResponse['token']);
             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>Background()), (route) => false);
             print('response status:${response.body}');
           }
