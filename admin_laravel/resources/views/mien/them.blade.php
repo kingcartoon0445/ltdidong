@@ -21,10 +21,10 @@
                             <form action="{{ route('mien.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenMien">Tên miền</label>
-                                    <input type="text" class="form-control" name="txtTenMien">
-                                    @if($errors->has('txtTenMien'))
-                                        <p style="color:red">{{ $errors->first('txtTenMien') }}</p>
+                                    <label class="col-form-label" for="TenMien">Tên miền</label>
+                                    <input type="text" class="form-control" name="TenMien">
+                                    @if($errors->has('TenMien'))
+                                        <p style="color:red">{{ $errors->first('TenMien') }}</p>
                                     @endif
                                 </div>
 
