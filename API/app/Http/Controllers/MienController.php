@@ -6,6 +6,7 @@ use App\Models\Mien;
 use App\Http\Requests\StoreMienRequest;
 use App\Http\Requests\UpdateMienRequest;
 use Illuminate\Http\Request;
+use Illuminate\Routing;
 
 class MienController extends Controller
 {
@@ -69,9 +70,10 @@ class MienController extends Controller
      * @param  \App\Models\Mien  $mien
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mien $mien)
+    public function edit()
     {
         //
+        return "dsadsadsadsad";
     }
 
     /**
@@ -81,8 +83,10 @@ class MienController extends Controller
      * @param  \App\Models\Mien  $mien
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
+        
+        return "false";
     }
 
     /**

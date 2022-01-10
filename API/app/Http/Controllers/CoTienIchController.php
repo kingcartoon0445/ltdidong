@@ -16,6 +16,7 @@ class CoTienIchController extends Controller
     public function index()
     {
         //
+        return response()->json(CoTienIch::all());
     }
 
     /**
@@ -45,9 +46,10 @@ class CoTienIchController extends Controller
      * @param  \App\Models\CoTienIch  $coTienIch
      * @return \Illuminate\Http\Response
      */
-    public function show(CoTienIch $coTienIch)
+    public function show(int $MaTienIch)
     {
         //
+        return CoTienIch::where('MaTienIch',$MaTienIch)->get();
     }
 
     /**

@@ -16,6 +16,7 @@ class AnhDiaDanhController extends Controller
     public function index()
     {
         //
+        return response()->json(AnhDiaDanh::all());
     }
 
     /**
@@ -48,6 +49,7 @@ class AnhDiaDanhController extends Controller
     public function show(AnhDiaDanh $anhDiaDanh)
     {
         //
+        return BaiViet::where('MaDiaDanh',$anhDiaDanh)->get();
     }
 
     /**

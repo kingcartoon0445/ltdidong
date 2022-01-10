@@ -36,7 +36,7 @@ class TheloaiController extends Controller
      * @param  \App\Http\Requests\StoretheloaiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoretheloaiRequest $request)
+    public function store(Request $request)
     {
         //
         {

@@ -16,6 +16,7 @@ class AnhBaiVietController extends Controller
     public function index()
     {
         //
+        return response()->json(AnhBaiViet::all());
     }
 
     /**
@@ -45,9 +46,10 @@ class AnhBaiVietController extends Controller
      * @param  \App\Models\AnhBaiViet  $anhBaiViet
      * @return \Illuminate\Http\Response
      */
-    public function show(AnhBaiViet $anhBaiViet)
+    public function show(int $anhBaiViet)
     {
         //
+        return BaiViet::where('MaBaiViet',$anhBaiViet)->get();
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Models\DeXuat;
 use App\Http\Requests\StoreDeXuatRequest;
 use App\Http\Requests\UpdateDeXuatRequest;
@@ -16,6 +16,7 @@ class DeXuatController extends Controller
     public function index()
     {
         //
+        return response()->json(DeXuat::all());
     }
 
     /**
@@ -34,9 +35,22 @@ class DeXuatController extends Controller
      * @param  \App\Http\Requests\StoreDeXuatRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDeXuatRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'MaNguoiDung' => 'required',
+            'MaDiaDanh' => 'required',
+        ]);
+        //
+      $deXuat =DeXuat::create([
+          'MaNguoiDung'=>$data['MaNguoiDung'],
+          'MaDiaDanh'=>$data['MaDiaDanh']
+      ]);
+      $response= [
+          'data'=>$deXuat
+      ];
+      return true;
     }
 
     /**
