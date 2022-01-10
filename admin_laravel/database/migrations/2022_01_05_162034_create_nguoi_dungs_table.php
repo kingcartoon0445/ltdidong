@@ -17,7 +17,7 @@ class CreateNguoiDungsTable extends Migration
             $table->id();
             $table->string('TenDaiDien');
             $table->string('HovaTen');
-            $table->string('Email');
+            $table->string('Email')->unique();
             $table->string('SDT');
             $table->string('AnhNen');
             $table->string('MatKhau');

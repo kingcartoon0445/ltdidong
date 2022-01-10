@@ -21,20 +21,22 @@ class NguoiDungController extends Controller
             $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
         }
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $listnguoiDung = NguoiDung::all();
+        
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
 
         foreach($listnguoiDung as $nguoiDung) {
             $this->fixImage($nguoiDung);
         }
 
-        return view('nguoidung.danhsach', ['listnguoiDung'=>$listnguoiDung]);
+        return view('nguoidung.danhsach', [
+            'listnguoiDung'=>$listnguoiDung,
+            'LoggedUserInfo'=>$data,
+        ]);
     }
 
     /**
@@ -44,8 +46,10 @@ class NguoiDungController extends Controller
      */
     public function create()
     {
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
 
-        return view('nguoidung.them');
+        return view('nguoidung.them', ['LoggedUserInfo'=>$data]);
     }
 
     /**
@@ -57,32 +61,32 @@ class NguoiDungController extends Controller
     public function store(StoreNguoiDungRequest $request)
     {
         $request->validate([
-            'txtTenDaiDien' => 'required',
-            'txtHoTen' => 'required',
-            'txtEmail' => 'required',
-            'txtSDT' => 'required',
-            'txtMatKhau' => 'required',
-            'hinh' => ['required','mimetypes:image/*','max:5000'],
+            'TenDaiDien' => 'required',
+            'HoTen' => 'required',
+            'Email' => ['required','email','unique:nguoi_dungs'],
+            'SDT' => ['required','min:10','max:12'],
+            'MatKhau' => 'required',
+            'hinh' => ['mimetypes:image/*','max:5000'],
         ]);
 
-        if($request->input('txtTrangThai') == 'Hoạt động')
+        if($request->input('TrangThai') == 'Hoạt động')
             $trangthai = 1;
         else
             $trangthai = 0;
 
-        if($request->input('checkIsAdmin') == 'on')
+        if($request->has('checkIsAdmin'))
             $isAdmin = 1;
         else
             $isAdmin = 0;
 
         $nguoiDung = new NguoiDung;
         $nguoiDung->fill([
-            'TenDaiDien'=>$request->input('txtTenDaiDien'),
-            'HovaTen'=>$request->input('txtHoTen'),
-            'Email'=>$request->input('txtEmail'),
-            'SDT'=>$request->input('txtSDT'),
+            'TenDaiDien'=>$request->input('TenDaiDien'),
+            'HovaTen'=>$request->input('HoTen'),
+            'Email'=>$request->input('Email'),
+            'SDT'=>$request->input('SDT'),
             'AnhNen'=>'',
-            'MatKhau'=>$request->input('txtMatKhau'),
+            'MatKhau'=>$request->input('MatKhau'),
             'IsAdmin'=>$isAdmin,
             'TrangThai'=>$trangthai,
         ]);
@@ -116,9 +120,15 @@ class NguoiDungController extends Controller
      */
     public function edit(NguoiDung $nguoiDung)
     {
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
+        
         $this->fixImage($nguoiDung);
         
-        return view('nguoidung.sua', ['nguoiDung'=>$nguoiDung]);
+        return view('nguoidung.sua', [
+            'nguoiDung'=>$nguoiDung,
+            'LoggedUserInfo'=>$data
+        ]);
     }
 
     /**
@@ -131,41 +141,47 @@ class NguoiDungController extends Controller
     public function update(UpdateNguoiDungRequest $request, NguoiDung $nguoiDung)
     {
         $request->validate([
-            'txtTenDaiDien' => 'required',
-            'txtHoTen' => 'required',
-            'txtEmail' => 'required',
-            'txtSDT' => 'required',
-            'txtMatKhau' => 'required',
+            'TenDaiDien' => 'required',
+            'HoTen' => 'required',
+            'Email' => ['required','email','unique:nguoi_dungs'],
+            'SDT' => ['required','min:10','max:12'],
+            'MatKhau' => 'required',
             'hinh' => ['mimetypes:image/*', 'max:5000'],
         ]);
         
-        if($request->input('txtTrangThai') == 'Hoạt động')
+        if($request->input('TrangThai') == 'Hoạt động')
             $trangthai = 1;
         else
             $trangthai = 0;
 
-        if($request->input('checkIsAdmin') == 'on')
+        if($request->has('checkIsAdmin'))
             $isAdmin = 1;
         else
             $isAdmin = 0;
 
-        if($request->hasFile('hinh')){
-            $nguoiDung->AnhNen = $request->file('hinh')->store('images/nguoidung/'.$nguoiDung->id, 'public');
+        try{
+            if($request->hasFile('hinh')){
+                $nguoiDung->AnhNen = $request->file('hinh')->store('images/nguoidung/'.$nguoiDung->id, 'public');
+            }
+
+            $nguoiDung->fill([
+                'TenDaiDien'=>$request->input('TenDaiDien'),
+                'HovaTen'=>$request->input('HoTen'),
+                'Email'=>$request->input('Email'),
+                'SDT'=>$request->input('SDT'),
+                'MatKhau'=>$request->input('MatKhau'),
+                'IsAdmin'=>$isAdmin,
+                'TrangThai'=>$trangthai,
+            ]);
+
+            $nguoiDung->save();
+
+            return Redirect::route('nguoiDung.index');
+        }catch (\Exception $e) {
+            if ($e->getCode() == 23000) {
+                // Deal with duplicate key error
+            }
         }
-
-        $nguoiDung->fill([
-            'TenDaiDien'=>$request->input('txtTenDaiDien'),
-            'HovaTen'=>$request->input('txtHoTen'),
-            'Email'=>$request->input('txtEmail'),
-            'SDT'=>$request->input('txtSDT'),
-            'MatKhau'=>$request->input('txtMatKhau'),
-            'IsAdmin'=>$isAdmin,
-            'TrangThai'=>$trangthai,
-        ]);
-
-        $nguoiDung->save();
-
-        return Redirect::route('nguoiDung.index');
     }
 
     /**

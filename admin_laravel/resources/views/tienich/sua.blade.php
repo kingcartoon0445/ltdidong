@@ -23,48 +23,48 @@
                                 @csrf
                                 @method('PATCH')
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenDaiDien">Tên đại diện</label>
-                                    <input type="text" class="form-control" name="txtTenDaiDien" value="{{ $tienIch->Ten }}">
-                                    @if($errors->has('txtTenDaiDien'))
-                                        <p style="color:red">{{ $errors->first('txtTenDaiDien') }}</p>
+                                    <label class="col-form-label" for="TenDaiDien">Tên đại diện</label>
+                                    <input type="text" class="form-control" name="TenDaiDien" value="{{ $tienIch->Ten }}">
+                                    @if($errors->has('TenDaiDien'))
+                                        <p style="color:red">{{ $errors->first('TenDaiDien') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtLoai">Loại</label>
-                                    <input type="text" class="form-control" name="txtLoai" value="{{ $tienIch->Loai }}">
-                                    @if($errors->has('txtLoai'))
-                                        <p style="color:red">{{ $errors->first('txtLoai') }}</p>
+                                    <label class="col-form-label" for="Loai">Loại</label>
+                                    <input type="text" class="form-control" name="Loai" value="{{ $tienIch->Loai }}">
+                                    @if($errors->has('Loai'))
+                                        <p style="color:red">{{ $errors->first('Loai') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtDiaChi">Địa chỉ</label>
-                                    <input type="text" class="form-control" name="txtDiaChi" value="{{ $tienIch->DiaChi }}">
-                                    @if($errors->has('txtDiaChi'))
-                                        <p style="color:red">{{ $errors->first('txtDiaChi') }}</p>
+                                    <label class="col-form-label" for="DiaChi">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="DiaChi" value="{{ $tienIch->DiaChi }}">
+                                    @if($errors->has('DiaChi'))
+                                        <p style="color:red">{{ $errors->first('DiaChi') }}</p>
                                     @endif
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtMoTa">Mô tả</label>
-                                    <textarea class="form-control" name="txtMoTa" rows="3">{{ $tienIch->MoTa }}</textarea>
-                                    @if($errors->has('txtMoTa'))
-                                        <p style="color:red">{{ $errors->first('txtMoTa') }}</p>
+                                    <label class="col-form-label" for="MoTa">Mô tả</label>
+                                    <textarea class="form-control" name="MoTa" rows="3">{{ $tienIch->MoTa }}</textarea>
+                                    @if($errors->has('MoTa'))
+                                        <p style="color:red">{{ $errors->first('MoTa') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtSDT">Số điện thoại</label>
-                                    <input type="text" class="form-control" name="txtSDT" value="{{ $tienIch->SDT }}">
-                                    @if($errors->has('txtSDT'))
-                                        <p style="color:red">{{ $errors->first('txtSDT') }}</p>
+                                    <label class="col-form-label" for="SDT">Số điện thoại</label>
+                                    <input type="text" class="form-control" name="SDT" value="{{ $tienIch->SDT }}">
+                                    @if($errors->has('SDT'))
+                                        <p style="color:red">{{ $errors->first('SDT') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
                                     <label>Trạng thái</label>
-                                    <select class="custom-select form-control-border border-width-2" name="txtTrangThai">
+                                    <select class="custom-select form-control-border border-width-2" name="TrangThai">
                                         <option @if($tienIch->TrangThai==1) selected @endif>Hoạt động</option>  
                                         <option @if($tienIch->TrangThai==0) selected @endif>Đóng cửa</option>
                                     </select>
@@ -120,17 +120,4 @@
         </div>
     </div>
 </div>
-
-<script>
-function showAnh(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $('#Img').attr('src', e.target.result);
-          $('#ImgDiv').height(500);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
 @endsection

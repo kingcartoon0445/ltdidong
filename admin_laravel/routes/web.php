@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\MainController;
+
 use App\Http\Controllers\MienController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\TheLoaiController;
@@ -17,10 +19,7 @@ use App\Http\Controllers\TienIchController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
+Route::get('/', [MainController::class, 'login']);
 
 Route::get('/baiviet/danhsach', function () {
     return view('baiviet.danhsach');
@@ -43,11 +42,18 @@ Route::get('/diadanh/sua', function () {
     return view('diadanh.sua');
 });
 
-Route::resource('mien', MienController::class);
-Route::resource('nguoiDung', NguoiDungController::class);
-Route::resource('theLoai', TheLoaiController::class);
-Route::resource('tienIch', TienIchController::class);
+Route::post('/register', [MainController::class, 'save'])->name('save');
+Route::post('/login', [MainController::class, 'check'])->name('check');
+Route::get('/logout', [MainController::class, 'logout'])->name('logout');
 
-Route::get('/Profile', function () {
-    return view('admin_profile');
-})->name('profile');
+
+Route::group(['middleware'=>['AuthCheck']], function(){
+    Route::get('/login', [MainController::class, 'login'])->name('login');
+    Route::get('/register', [MainController::class, 'register'])->name('register');
+
+    Route::get('/index', [MainController::class, 'index']);
+    Route::resource('mien', MienController::class);
+    Route::resource('nguoiDung', NguoiDungController::class);
+    Route::resource('theLoai', TheLoaiController::class);
+    Route::resource('tienIch', TienIchController::class);
+});

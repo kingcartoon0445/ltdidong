@@ -21,16 +21,16 @@
                             <form action="{{ route('theLoai.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenTheLoai">Tên thể loại</label>
-                                    <input type="text" class="form-control" id="txtTenTheLoai" name = "txtTenTheLoai">
-                                    @if($errors->has('txtTenTheLoai'))
-                                        <p style="color:red">{{ $errors->first('txtTenTheLoai') }}</p>
+                                    <label class="col-form-label" for="TenTheLoai">Tên thể loại</label>
+                                    <input type="text" class="form-control" id="TenTheLoai" name = "TenTheLoai">
+                                    @if($errors->has('TenTheLoai'))
+                                        <p style="color:red">{{ $errors->first('TenTheLoai') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
                                     <label>Trạng thái</label>
-                                    <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
+                                    <select class="custom-select form-control-border border-width-2" name="TrangThai">
                                         <option>Hoạt động</option>
                                         <option>Xóa</option>
                                     </select>
