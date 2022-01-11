@@ -36,7 +36,7 @@ class TheloaiController extends Controller
      * @param  \App\Http\Requests\StoretheloaiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoretheloaiRequest $request)
+    public function store(Request $request)
     {
         //
         {
@@ -63,6 +63,7 @@ class TheloaiController extends Controller
     public function show(int $id)
     {
         //
+        return Theloai::join('thuoc_the_loais','the_loais.id','=','MaTheLoai')->where('the_loais.id',$id)->get();
         return Theloai::where('id',$id)->get();
     }
 

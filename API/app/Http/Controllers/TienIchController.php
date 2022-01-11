@@ -39,7 +39,6 @@ class TienIchController extends Controller
     public function store(Request $request)
     {
         //
-        {
             $data=$request->validate([
                  'Ten' => 'required',
                  'Loai'=> 'required',
@@ -51,7 +50,7 @@ class TienIchController extends Controller
            $tienIch =TienIch::create([
                'Ten'=>$data['Ten'],
                'Loai'=>$data['Loai'],
-               'DiaChi'=>$data['TenMien'],
+               'DiaChi'=>$data['DiaChi'],
                'MoTa'=>$data['MoTa'],
                'SDT'=>$data['SDT'],
                
@@ -60,7 +59,6 @@ class TienIchController extends Controller
                'data'=>$tienIch
            ];
            return true;
-         }
     }
 
     /**

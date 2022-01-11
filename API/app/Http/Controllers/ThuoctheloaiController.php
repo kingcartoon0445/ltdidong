@@ -16,6 +16,7 @@ class ThuoctheloaiController extends Controller
     public function index()
     {
         //
+        return response()->json(Thuoctheloai::all());
     }
 
     /**
@@ -34,9 +35,23 @@ class ThuoctheloaiController extends Controller
      * @param  \App\Http\Requests\StorethuoctheloaiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorethuoctheloaiRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'MaTheLoai' => 'required',
+            'MaDiaDanh'=> 'required',
+        ]);
+        //
+      $thuoctheloai =thuoctheloai::create([
+          'MaTheLoai'=>$data['MaTheLoai'],
+          'MaDiaDanh'=>$data['MaDiaDanh'],
+          
+      ]);
+      $response= [
+          'data'=>$thuoctheloai
+      ];
+      return true;
     }
 
     /**
@@ -45,9 +60,10 @@ class ThuoctheloaiController extends Controller
      * @param  \App\Models\thuoctheloai  $thuoctheloai
      * @return \Illuminate\Http\Response
      */
-    public function show(thuoctheloai $thuoctheloai)
+    public function show(int $id)
     {
         //
+        return ThuocTheloai::where('MaTheLoai',$id)->get();
     }
 
     /**

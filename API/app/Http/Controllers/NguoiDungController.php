@@ -89,9 +89,31 @@ class NguoiDungController extends Controller
      * @param  \App\Models\NguoiDung  $nguoiDung
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNguoiDungRequest $request, NguoiDung $nguoiDung)
+    public function update(Request $request, int $nguoiDung)
     {
         //
+        $data=$request->validate([
+            'HovaTen' => 'required',
+            'TenDaiDien'=> 'required',
+            'Email'=> 'required',
+            'SDT'=> 'required',
+            'AnhNen'=> 'required',
+        ]);try{
+        $NguoiDung=NguoiDung::where('id', $nguoiDung)->
+            update([
+                'HovaTen' => $data['HovaTen'],  
+                'TenDaiDien' => $data['TenDaiDien'], 
+                'Email' => $data['Email'], 
+                'SDT' => $data['SDT'], 
+                'AnhNen' => $data['AnhNen'], 
+            ]);
+            $response= [
+                'data'=>$NguoiDung
+            ];
+            return true;
+    }catch(e){
+        return false;
+    }
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\View;
 use App\Http\Requests\StoreViewRequest;
 use App\Http\Requests\UpdateViewRequest;
+use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
@@ -35,9 +36,22 @@ class ViewController extends Controller
      * @param  \App\Http\Requests\StoreViewRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreViewRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'MaNguoiDung' => 'required',
+            'MaBaiViet' => 'required',
+        ]);
+        //
+      $view =View::create([
+          'MaNguoiDung'=>$data['MaNguoiDung'],
+          'MaBaiViet'=>$data['MaBaiViet']
+      ]);
+      $response= [
+          'data'=>$view
+      ];
+      return true;
     }
 
     /**

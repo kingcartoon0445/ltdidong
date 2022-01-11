@@ -19,7 +19,7 @@ class CreateTienIchesTable extends Migration
             $table->string('Ten');
             $table->string('Loai');
             $table->string('DiaChi');
-            $table->string('MoTa');
+            $table->longText('MoTa');
             $table->string('SDT');
             $table->Integer('TrangThai')->default(1);
             $table->timestamps();

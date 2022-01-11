@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class AnhBaiViet extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table ="bai_viets";
+    protected $table ="anh_bai_viets";
     protected $fillable =[
         'id',
         'MaBaiViet',

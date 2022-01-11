@@ -31,14 +31,17 @@ class NguoiDungSeeder extends Seeder
             'MatKhau' =>'daylamatkhaucuaDui',
             'SDT' =>'0987654321'
     ]);
+    
     DB::table('nguoi_dungs')->insert([
-      'TenDaiDien' =>'Hoàng',
-      'HovaTen' =>'Hoàng sugardaddy',
-      'Email' =>'12345@gmai.com',
+      'TenDaiDien' =>'Admin',
+      'HovaTen' =>'Admin',
+      'Email' =>'admin@gmail.com',
       'AnhNen' =>'3.jpg',
-      'MatKhau' =>'daylamatkhaucuaHoang',
+      'MatKhau' =>'admin',
       'SDT' =>'012345678',
-      'IsAdmin'=>'1' ]);
+      'IsAdmin'=>'1' 
+    ]);
+
       DB::table('nguoi_dungs')->insert([
         'TenDaiDien' =>'Hoàng',
         'HovaTen' =>'Hoàng Huy',
