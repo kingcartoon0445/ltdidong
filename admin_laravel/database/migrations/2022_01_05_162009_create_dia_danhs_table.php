@@ -19,7 +19,7 @@ class CreateDiaDanhsTable extends Migration
             $table->foreignId('MaMien');
             $table->string('KinhDo');
             $table->string('ViDo');
-            $table->string('MoTa');
+            $table->longText('MoTa');
             $table->Integer('TrangThai')->default(1);;
             $table->timestamps();
             $table->softDeletes();
