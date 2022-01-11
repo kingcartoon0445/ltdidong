@@ -64,7 +64,7 @@ class DanhGiaController extends Controller
     public function show(int $danhGia)
     {
         //
-        return DanhGia::where('id',$danhGia)->get();
+        return DanhGia::where('MaDiaDanh',$danhGia)->avg('SoDanhGia');
     }
 
     /**
@@ -82,12 +82,29 @@ class DanhGiaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateDanhGiaRequest  $request
-     * @param  \App\Models\DanhGia  $danhGia
+     * @param  \App\Models\DanhGia  $danhGia    
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDanhGiaRequest $request, DanhGia $danhGia)
+    public function update(Request $request, int $danhGia)
     {
         //
+        
+            $data=$request->validate([
+                'MaNguoiDung' => 'required',
+                'MaDiaDanh'=> 'required',
+                'SoDanhGia'=> 'required',
+            ]);try{
+            $anhBaiViet=DanhGia::where('MaNguoiDung',$data['MaNguoiDung'])->where('MaDiaDanh',$data['MaDiaDanh'])->
+                update([
+                    'SoDanhGia' => $data['SoDanhGia'],  
+                ]);
+                $response= [
+                    'data'=>$anhBaiViet
+                ];
+                return true;
+        }catch(e){
+            return false;
+        }
     }
 
     /**

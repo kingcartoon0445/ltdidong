@@ -38,6 +38,7 @@ class CoTienIchController extends Controller
     public function store(Request $request)
     {
         //
+        try{
         $data=$request->validate([
             'MaDiaDanh' => 'required',
             'MaTienIch'=> 'required',
@@ -50,7 +51,10 @@ class CoTienIchController extends Controller
       $response= [
           'data'=>$coTienIch
       ];
-      return true;
+      return true;}
+      catch(e){
+          return false;
+      }
     }
 
     /**

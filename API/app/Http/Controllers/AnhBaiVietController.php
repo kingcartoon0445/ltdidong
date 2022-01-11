@@ -63,7 +63,7 @@ class AnhBaiVietController extends Controller
     public function show(int $anhBaiViet)
     {
         //
-        return BaiViet::where('MaBaiViet',$anhBaiViet)->get();
+        return AnhBaiViet::where('MaBaiViet',$anhBaiViet)->get();
     }
 
     /**
@@ -88,16 +88,20 @@ class AnhBaiVietController extends Controller
     public function update(int $id,Request $request)
     {
         //
-        $data=$request->validate([
-            'Anh'=> 'required',
-            'MaBaiViet'=>'required',
-        ]);
-        $anhBaiViet=AnhBaiViet::where(['id', $id],['MaBaiViet',$data['MaBaiViet']])->
-            update(['Anh' => $data['Anh']]);
-            $response= [
-                'data'=>$anhBaiViet
-            ];
-            return true;
+        try{
+            $data=$request->validate([
+                'Anh'=> 'required', 
+            ]);
+            $anhBaiViet=AnhBaiViet::where('id', $id)->
+                update(['Anh' => $data['Anh']]);
+                $response= [
+                    'data'=>$anhBaiViet
+                ];
+                return true;
+        }catch(e){
+            return false;
+        }
+        
     }
 
     /**

@@ -38,23 +38,18 @@ class AnhDiaDanhController extends Controller
     public function store(Request $request)
     {
         //
-        {
-            //
+        try{
             $data=$request->validate([
-                'MaBaiViet' => 'required',
-                'Anh'=> 'required',
-                'TrangThai'=> 'required',
+                'Anh'=> 'required', 
             ]);
-            //
-          $anhDiaDanh =AnhDiaDanh::create([
-              'MaBaiViet'=>$data['MaBaiViet'],
-              'Anh'=>$data['Anh'],
-              'TrangThai'=>$data['TrangThai'],                 
-          ]);
-          $response= [
-              'data'=>$anhDiaDanh
-          ];
-          return true;
+            $anhBaiViet=AnhDiaDanh::where('id', $id)->
+                update(['Anh' => $data['Anh']]);
+                $response= [
+                    'data'=>$anhBaiViet
+                ];
+                return true;
+        }catch(e){  
+            return false;
         }
     }
 
@@ -64,7 +59,7 @@ class AnhDiaDanhController extends Controller
      * @param  \App\Models\AnhDiaDanh  $anhDiaDanh
      * @return \Illuminate\Http\Response
      */
-    public function show(AnhDiaDanh $anhDiaDanh)
+    public function show(int $anhDiaDanh)
     {
         //
         return BaiViet::where('MaDiaDanh',$anhDiaDanh)->get();
