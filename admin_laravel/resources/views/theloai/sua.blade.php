@@ -22,16 +22,16 @@
                                 @csrf
                                 @method('PATCH')    
                                 <div class="form-group">
-                                    <label class="col-form-label" for="txtTenTheLoai">Tên</label>
-                                    <input type="text" class="form-control" name = "txtTenTheLoai" value="{{ $theLoai->Ten }}">
-                                    @if($errors->has('txtTenTheLoai'))
-                                        <p style="color:red">{{ $errors->first('txtTenTheLoai') }}</p>
+                                    <label class="col-form-label" for="TenTheLoai">Tên</label>
+                                    <input type="text" class="form-control" name = "TenTheLoai" value="{{ $theLoai->Ten }}">
+                                    @if($errors->has('TenTheLoai'))
+                                        <p style="color:red">{{ $errors->first('TenTheLoai') }}</p>
                                     @endif
                                 </div>
 
                                 <div class="form-group">
                                     <label>Trạng thái</label>
-                                    <select class="custom-select form-control-border border-width-2" name="txtTrangThai">
+                                    <select class="custom-select form-control-border border-width-2" name="TrangThai">
                                         <option @if($theLoai->TrangThai==1) selected @endif>Hoạt động</option>  
                                         <option @if($theLoai->TrangThai==0) selected @endif>Khóa</option>
                                     </select>

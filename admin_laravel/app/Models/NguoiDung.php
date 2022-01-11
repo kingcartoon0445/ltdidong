@@ -12,8 +12,4 @@ class NguoiDung extends Model
     use SoftDeletes;
 
     protected $guarded = [];
-
-    public function loaiTaiKhoan(){
-        return $this->belongsTo(LoaiTaiKhoan::class);
-    }
 }

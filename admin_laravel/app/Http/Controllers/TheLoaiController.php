@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\TheLoai;
+use App\Models\NguoiDung;
+
 use App\Http\Requests\StoreTheLoaiRequest;
 use App\Http\Requests\UpdateTheLoaiRequest;
 
@@ -11,17 +13,27 @@ use Illuminate\Support\Facades\Storage;
 
 class TheLoaiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected function fixImage(NguoiDung $nguoiDung)
+    {
+        if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
+            $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
+        }
+        else{
+            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
+        }
+    }
+
     public function index()
     {
-        //
         $listTheLoai = TheLoai::all();
 
-        return view('theloai.danhsach', ['listTheLoai'=>$listTheLoai]);
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
+
+        return view('theloai.danhsach', [
+            'listTheLoai'=>$listTheLoai,
+            'LoggedUserInfo'=>$data,
+        ]);
     }
 
     /**
@@ -31,8 +43,10 @@ class TheLoaiController extends Controller
      */
     public function create()
     {
-        //
-        return view('theLoai.them');
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
+
+        return view('theLoai.them', ['LoggedUserInfo'=>$data]);
     }
 
     /**
@@ -44,18 +58,18 @@ class TheLoaiController extends Controller
     public function store(StoreTheLoaiRequest $request)
     {
         $request->validate([
-            'txtTenTheLoai' => 'required',
+            'TenTheLoai' => 'required',
         ]);
         
         //
-        if($request->input('txtTrangThai') == 'Hoạt động')
+        if($request->input('TrangThai') == 'Hoạt động')
             $trangthai = 1;
         else
             $trangthai = 0;
 
         $theLoai=new TheLoai;
         $theLoai->fill([
-            'Ten'=>$request->input('txtTenTheLoai'),
+            'Ten'=>$request->input('TenTheLoai'),
             'TrangThai'=>$trangthai,
         ]);
 
@@ -83,8 +97,13 @@ class TheLoaiController extends Controller
      */
     public function edit(TheLoai $theLoai)
     {
-        //
-        return view('theloai.sua', ['theLoai'=>$theLoai]);
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage($data);
+
+        return view('theloai.sua', [
+            'theLoai'=>$theLoai,
+            'LoggedUserInfo'=>$data
+        ]);
     }
 
     /**
@@ -97,17 +116,17 @@ class TheLoaiController extends Controller
     public function update(UpdateTheLoaiRequest $request, TheLoai $theLoai)
     {
         $request->validate([
-            'txtTenTheLoai' => 'required',
+            'TenTheLoai' => 'required',
         ]);
         
         //
-        if($request->input('txtTrangThai') == 'Hoạt động')
+        if($request->input('TrangThai') == 'Hoạt động')
             $trangthai = 1;
         else
             $trangthai = 0;
 
         $theLoai->fill([
-            'Ten'=>$request->input('txtTenTheLoai'),
+            'Ten'=>$request->input('TenTheLoai'),
             'TrangThai'=>$trangthai,
         ]);
 
