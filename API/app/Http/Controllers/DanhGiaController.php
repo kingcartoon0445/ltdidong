@@ -44,13 +44,13 @@ class DanhGiaController extends Controller
             'SoDanhGia'=> 'required',
         ]);
         //
-      $diaDanh =DiaDanh::create([
+      $danhGia =DanhGia::create([
           'MaNguoiDung'=>$data['MaNguoiDung'],
           'MaDiaDanh'=>$data['MaDiaDanh'],
           'SoDanhGia'=>$data['SoDanhGia'],                
       ]);
       $response= [
-          'data'=>$diaDanh
+          'data'=>$danhGia
       ];
       return true;
     }

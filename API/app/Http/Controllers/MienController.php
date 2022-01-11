@@ -6,7 +6,6 @@ use App\Models\Mien;
 use App\Http\Requests\StoreMienRequest;
 use App\Http\Requests\UpdateMienRequest;
 use Illuminate\Http\Request;
-use Illuminate\Routing;
 
 class MienController extends Controller
 {
@@ -70,10 +69,9 @@ class MienController extends Controller
      * @param  \App\Models\Mien  $mien
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Mien $mien)
     {
         //
-        return "dsadsadsadsad";
     }
 
     /**
@@ -83,10 +81,17 @@ class MienController extends Controller
      * @param  \App\Models\Mien  $mien
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(int $id,Request $request)
     {
-        
-        return "false";
+        $data=$request->validate([
+            'TenMien'=> 'required',
+        ]);
+        $mien=Mien::where('id', $id)->
+            update(['TenMien' => $data['TenMien']]);
+            $response= [
+                'data'=>$mien
+            ];
+            return true;
     }
 
     /**

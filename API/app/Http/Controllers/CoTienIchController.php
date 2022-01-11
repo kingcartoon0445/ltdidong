@@ -35,9 +35,22 @@ class CoTienIchController extends Controller
      * @param  \App\Http\Requests\StoreCoTienIchRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCoTienIchRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'MaDiaDanh' => 'required',
+            'MaTienIch'=> 'required',
+        ]);
+        //
+      $coTienIch =CoTienIch::create([
+          'MaTienIch'=>$data['MaTienIch'],
+          'MaDiaDanh'=>$data['MaDiaDanh'],              
+      ]);
+      $response= [
+          'data'=>$coTienIch
+      ];
+      return true;
     }
 
     /**

@@ -44,12 +44,12 @@ class LikeController extends Controller
             'MaBaiViet' => 'required',
         ]);
         //
-      $view =View::create([
+      $like =Like::create([
           'MaNguoiDung'=>$data['MaNguoiDung'],
           'MaBaiViet'=>$data['MaBaiViet']
       ]);
       $response= [
-          'data'=>$view
+          'data'=>$like
       ];
       return true;
     }
