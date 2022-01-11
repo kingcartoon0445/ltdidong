@@ -67,7 +67,7 @@ class BaiVietController extends Controller
      */
     public function show(int $id)
     {
-        //
+        //return BaiViet::join('anh_bai_viets','bai_viets.id','=','MaBaiViet')->where('bai_viets.id',$id)->get()
         return BaiViet::where('id',$id)->get();
     }
 
@@ -89,9 +89,30 @@ class BaiVietController extends Controller
      * @param  \App\Models\BaiViet  $baiViet
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBaiVietRequest $request, BaiViet $baiViet)
+    public function update(Request $request, int $id)
     {
         //
+        
+            $data=$request->validate([
+                'MaNguoiDung' => 'required',
+                'MaDiaDanh'=> 'required',
+                'TieuDe'=> 'required',
+                'NoiDung'=> 'required',
+            ]);try{
+            $anhBaiViet=BaiViet::where('id', $id)->where('MaNguoiDung',$data['MaNguoiDung'])->
+                update([
+                    'MaDiaDanh' => $data['MaDiaDanh'],
+                    'TieuDe' => $data['TieuDe'],
+                    'NoiDung' => $data['NoiDung'],
+                ]);
+                $response= [
+                    'data'=>$anhBaiViet
+                ];
+                return true;
+        }catch(e){
+            return false;
+        }
+        
     }
 
     /**

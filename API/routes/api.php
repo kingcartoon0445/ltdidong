@@ -76,7 +76,7 @@ Route::apiResource('AnhBaiViet',AnhBaiVietController::class);
 Route::apiResource('AnhDiaDanh',AnhDiaDanhController::class);
 Route::apiResource('BaiViet',BaivietController::class);
 Route::apiResource('CoTienIch',CoTienIchController::class);
-Route::apiResource('DanhGia',CoTienIchController::class);
+Route::apiResource('DanhGia',DanhGiaController::class);
 Route::apiResource('DeXuat',DeXuatController::class);
 Route::apiResource('DiaDanh',DiaDanhController::class);
 Route::apiResource('Like',LikeController::class);

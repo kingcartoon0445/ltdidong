@@ -63,6 +63,7 @@ class TheloaiController extends Controller
     public function show(int $id)
     {
         //
+        return Theloai::join('thuoc_the_loais','the_loais.id','=','MaTheLoai')->where('the_loais.id',$id)->get();
         return Theloai::where('id',$id)->get();
     }
 
