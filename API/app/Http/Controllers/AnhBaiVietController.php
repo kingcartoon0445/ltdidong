@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\AnhBaiViet;
 use App\Http\Requests\StoreAnhBaiVietRequest;
 use App\Http\Requests\UpdateAnhBaiVietRequest;
@@ -16,6 +17,7 @@ class AnhBaiVietController extends Controller
     public function index()
     {
         //
+        return response()->json(AnhBaiViet::all());
     }
 
     /**
@@ -34,9 +36,22 @@ class AnhBaiVietController extends Controller
      * @param  \App\Http\Requests\StoreAnhBaiVietRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAnhBaiVietRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'MaBaiViet' => 'required',
+            'Anh'=> 'required',
+        ]);
+        //
+      $anhBaiViet =AnhBaiViet::create([
+          'MaBaiViet'=>$data['MaBaiViet'],
+          'Anh'=>$data['Anh'],                
+      ]);
+      $response= [
+          'data'=>$anhBaiViet
+      ];
+      return true;
     }
 
     /**
@@ -45,9 +60,10 @@ class AnhBaiVietController extends Controller
      * @param  \App\Models\AnhBaiViet  $anhBaiViet
      * @return \Illuminate\Http\Response
      */
-    public function show(AnhBaiViet $anhBaiViet)
+    public function show(int $anhBaiViet)
     {
         //
+        return BaiViet::where('MaBaiViet',$anhBaiViet)->get();
     }
 
     /**
@@ -59,6 +75,7 @@ class AnhBaiVietController extends Controller
     public function edit(AnhBaiViet $anhBaiViet)
     {
         //
+        
     }
 
     /**
@@ -68,9 +85,19 @@ class AnhBaiVietController extends Controller
      * @param  \App\Models\AnhBaiViet  $anhBaiViet
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAnhBaiVietRequest $request, AnhBaiViet $anhBaiViet)
+    public function update(int $id,Request $request)
     {
         //
+        $data=$request->validate([
+            'Anh'=> 'required',
+            'MaBaiViet'=>'required',
+        ]);
+        $anhBaiViet=AnhBaiViet::where(['id', $id],['MaBaiViet',$data['MaBaiViet']])->
+            update(['Anh' => $data['Anh']]);
+            $response= [
+                'data'=>$anhBaiViet
+            ];
+            return true;
     }
 
     /**

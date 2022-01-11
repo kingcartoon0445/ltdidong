@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 class AnhDiaDanh extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table ="bai_viets";
+    protected $table ="anh_dia_danhs";
     protected $fillable =[
         'id',
         'MaDiaDanh',
