@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Like;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreLikeRequest;
 use App\Http\Requests\UpdateLikeRequest;
 
@@ -16,6 +17,7 @@ class LikeController extends Controller
     public function index()
     {
         //
+        return response()->json(Like::all());
     }
 
     /**
@@ -34,9 +36,22 @@ class LikeController extends Controller
      * @param  \App\Http\Requests\StoreLikeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreLikeRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'MaNguoiDung' => 'required',
+            'MaBaiViet' => 'required',
+        ]);
+        //
+      $like =Like::create([
+          'MaNguoiDung'=>$data['MaNguoiDung'],
+          'MaBaiViet'=>$data['MaBaiViet']
+      ]);
+      $response= [
+          'data'=>$like
+      ];
+      return true;
     }
 
     /**

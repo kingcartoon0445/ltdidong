@@ -16,6 +16,7 @@ class AnhDiaDanhController extends Controller
     public function index()
     {
         //
+        return response()->json(AnhDiaDanh::all());
     }
 
     /**
@@ -34,9 +35,27 @@ class AnhDiaDanhController extends Controller
      * @param  \App\Http\Requests\StoreAnhDiaDanhRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAnhDiaDanhRequest $request)
+    public function store(Request $request)
     {
         //
+        {
+            //
+            $data=$request->validate([
+                'MaBaiViet' => 'required',
+                'Anh'=> 'required',
+                'TrangThai'=> 'required',
+            ]);
+            //
+          $anhDiaDanh =AnhDiaDanh::create([
+              'MaBaiViet'=>$data['MaBaiViet'],
+              'Anh'=>$data['Anh'],
+              'TrangThai'=>$data['TrangThai'],                 
+          ]);
+          $response= [
+              'data'=>$anhDiaDanh
+          ];
+          return true;
+        }
     }
 
     /**
@@ -48,6 +67,7 @@ class AnhDiaDanhController extends Controller
     public function show(AnhDiaDanh $anhDiaDanh)
     {
         //
+        return BaiViet::where('MaDiaDanh',$anhDiaDanh)->get();
     }
 
     /**

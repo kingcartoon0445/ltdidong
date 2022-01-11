@@ -81,8 +81,17 @@ class MienController extends Controller
      * @param  \App\Models\Mien  $mien
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(int $id,Request $request)
     {
+        $data=$request->validate([
+            'TenMien'=> 'required',
+        ]);
+        $mien=Mien::where('id', $id)->
+            update(['TenMien' => $data['TenMien']]);
+            $response= [
+                'data'=>$mien
+            ];
+            return true;
     }
 
     /**

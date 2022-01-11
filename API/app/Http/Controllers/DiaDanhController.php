@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DiaDanh;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreDiaDanhRequest;
 use App\Http\Requests\UpdateDiaDanhRequest;
 
@@ -37,7 +38,7 @@ class DiaDanhController extends Controller
     public function store(StoreDiaDanhRequest $request)
     {
         //
-        {
+        
             $data=$request->validate([
                  'Ten' => 'required',
                  'MaMien'=> 'required',
@@ -57,7 +58,7 @@ class DiaDanhController extends Controller
                'data'=>$diaDanh
            ];
            return true;
-         }
+         
     }
 
     /**

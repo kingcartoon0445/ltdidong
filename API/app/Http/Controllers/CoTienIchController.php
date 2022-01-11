@@ -16,6 +16,7 @@ class CoTienIchController extends Controller
     public function index()
     {
         //
+        return response()->json(CoTienIch::all());
     }
 
     /**
@@ -34,9 +35,22 @@ class CoTienIchController extends Controller
      * @param  \App\Http\Requests\StoreCoTienIchRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCoTienIchRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'MaDiaDanh' => 'required',
+            'MaTienIch'=> 'required',
+        ]);
+        //
+      $coTienIch =CoTienIch::create([
+          'MaTienIch'=>$data['MaTienIch'],
+          'MaDiaDanh'=>$data['MaDiaDanh'],              
+      ]);
+      $response= [
+          'data'=>$coTienIch
+      ];
+      return true;
     }
 
     /**
@@ -45,9 +59,10 @@ class CoTienIchController extends Controller
      * @param  \App\Models\CoTienIch  $coTienIch
      * @return \Illuminate\Http\Response
      */
-    public function show(CoTienIch $coTienIch)
+    public function show(int $MaTienIch)
     {
         //
+        return CoTienIch::where('MaTienIch',$MaTienIch)->get();
     }
 
     /**
