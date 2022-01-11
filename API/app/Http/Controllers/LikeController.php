@@ -45,9 +45,10 @@ class LikeController extends Controller
      * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function show(Like $like)
+    public function show(int $like)
     {
         //
+        return Like::where('MaBaiViet',$like)->count();
     }
 
     /**
