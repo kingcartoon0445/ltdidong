@@ -81,7 +81,7 @@ Route::apiResource('DeXuat',DeXuatController::class);
 Route::apiResource('DiaDanh',DiaDanhController::class);
 Route::apiResource('Like',LikeController::class);
 Route::apiResource('Mien',MienController::class);
-Route::apiResource('NguoiDung',DanhGiaController::class);
+Route::apiResource('NguoiDung',NguoiDungController::class);
 Route::apiResource('TheLoai',TheloaiController::class);
 Route::apiResource('ThuocTheLoai',ThuoctheloaiController::class);
 Route::apiResource('TienIch',TienIchController::class);

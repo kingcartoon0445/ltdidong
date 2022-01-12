@@ -38,7 +38,12 @@ class BaiVietController extends Controller
     public function store(StoreBaiVietRequest $request)
     {
         //
-        {
+        $file = $request->file('AnhNen');  //ten input : image
+        $name = $file->getClientOriginalName();  // get name image
+        $max=  (string)(AnhBaiViet::max('id')+1);
+        $nameKhongTrung=date('Y_m_d_H_i_s_').$max.substr($name,-4);
+       // $nameKhongTrung =  date('Y_m_d_H_i_s_').$name;  // đặt tên không trùng Y_m_d_H_i_s_ + name.png
+        $file->move('upload/anhBaiViet', $nameKhongTrung);
             $data=$request->validate([
                  'MaNguoiDung' => 'required',
                  'MaDiaDanh'=> 'required',
@@ -56,7 +61,7 @@ class BaiVietController extends Controller
                'data'=>$baiViet
            ];
            return true;
-         }
+         
     }
 
     /**

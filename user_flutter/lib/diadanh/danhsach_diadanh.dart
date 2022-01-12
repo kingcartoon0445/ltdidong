@@ -195,7 +195,7 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<DiaDanhObject>>(
-      future: DiaDanhProvider.fecthNguoidung(),
+      future: DiaDanhProvider.fectDiaDanh(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<DiaDanhObject> lsdd = snapshot.data!;

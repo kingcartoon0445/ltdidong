@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\NguoiDung;
 use App\Http\Requests\StoreNguoiDungRequest;
 use App\Http\Requests\UpdateNguoiDungRequest;
+use Illuminate\Support\Facades\File;
 
 class NguoiDungController extends Controller
 {
@@ -45,12 +46,19 @@ class NguoiDungController extends Controller
             'MatKhau' => 'required',
         ]);
         //
+        $file = $request->file('AnhNen');  //ten input : image
+        $name = $file->getClientOriginalName();  // get name image
+        $max=  (string)(NguoiDung::max('id')+1);
+        $nameKhongTrung=date('Y_m_d_H_i_s_').$max.substr($name,-4);
+       // $nameKhongTrung =  date('Y_m_d_H_i_s_').$name;  // đặt tên không trùng Y_m_d_H_i_s_ + name.png
+        $file->move('upload/anhNen', $nameKhongTrung);
+
       $nguoiDung =NguoiDung::create([
           'TenDaiDien'=>$data['HovaTen'],
           'HovaTen'=>$data['HovaTen'],
           'Email'=>$data['Email'],
           'SDT'=>$data['SDT'],
-          'AnhNen'=>$data['AnhNen'],
+          'AnhNen'=>$nameKhongTrung,
           'MatKhau'=>$data['MatKhau']
       ]);
       $response= [
@@ -99,13 +107,23 @@ class NguoiDungController extends Controller
             'SDT'=> 'required',
             'AnhNen'=> 'required',
         ]);try{
+
+            $user=NguoiDung::where('id', $nguoiDung)->first();
+            if($user != null){
+                File::delete(public_path("upload/anhNen/".$user['AnhNen']));
+                $file = $request->file('AnhNen');  //ten input : image
+                $name = $file->getClientOriginalName();  // get name image
+                $nameKhongTrung= date('Y_m_d_H_i_s_').$nguoiDung.substr($name,-4);
+                // $nameKhongTrung =  date('Y_m_d_H_i_s_').$name;  // đặt tên không trùng Y_m_d_H_i_s_ + name.png
+                $file->move('upload/anhNen', $nameKhongTrung);
+            }
         $NguoiDung=NguoiDung::where('id', $nguoiDung)->
             update([
                 'HovaTen' => $data['HovaTen'],  
                 'TenDaiDien' => $data['TenDaiDien'], 
                 'Email' => $data['Email'], 
                 'SDT' => $data['SDT'], 
-                'AnhNen' => $data['AnhNen'], 
+                'AnhNen' => $nameKhongTrung, 
             ]);
             $response= [
                 'data'=>$NguoiDung
