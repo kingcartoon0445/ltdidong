@@ -18,17 +18,16 @@ class NguoiDungController extends Controller
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
         }
         else{
-            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
+            $nguoiDung->AnhNen = Storage::url('images/no_image_holder.png');
         }
     }
 
     public function index()
-    {
-        $listnguoiDung = NguoiDung::all();
-        
+    {        
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage($data);
 
+        $listnguoiDung = NguoiDung::all();
         foreach($listnguoiDung as $nguoiDung) {
             $this->fixImage($nguoiDung);
         }
@@ -63,7 +62,7 @@ class NguoiDungController extends Controller
         $request->validate([
             'TenDaiDien' => 'required',
             'HoTen' => 'required',
-            'Email' => ['required','email','unique:nguoi_dungs'],
+            'Email' => ['required', 'email', 'unique:nguoi_dungs,Email'],
             'SDT' => ['required','min:10','max:12'],
             'MatKhau' => 'required',
             'hinh' => ['mimetypes:image/*','max:5000'],
@@ -143,7 +142,7 @@ class NguoiDungController extends Controller
         $request->validate([
             'TenDaiDien' => 'required',
             'HoTen' => 'required',
-            'Email' => ['required','email','unique:nguoi_dungs'],
+            'Email' => ['required', 'email', 'unique:nguoi_dungs,Email,'.$nguoiDung->id],
             'SDT' => ['required','min:10','max:12'],
             'MatKhau' => 'required',
             'hinh' => ['mimetypes:image/*', 'max:5000'],

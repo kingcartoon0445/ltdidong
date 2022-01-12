@@ -68,7 +68,7 @@ class MainController extends Controller
                     if($userInfo->IsAdmin == 1){
                         $request->session()->put('LoggedUser', $userInfo->id);
 
-                        return redirect('index');
+                        return redirect('/');
                     }else{
                         return back()->with('fail', 'Tài khoản của bạn không đủ quyền hạn để đăng nhập');
                     }

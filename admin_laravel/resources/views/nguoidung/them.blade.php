@@ -19,12 +19,6 @@
                     <div class="card">
                         <div class="card-body">
                             <form action="{{ route('nguoiDung.store') }}" method="post" enctype="multipart/form-data">
-                                @if(Session::get('fail'))
-                                    <div class="alert alert-success">
-                                    {{ Session::get('fail') }}
-                                    </div>
-                                @endif
-
                                 @csrf
                                 <div class="form-group">
                                     <label class="col-form-label" for="TenDaiDien">Tên đại diện</label>

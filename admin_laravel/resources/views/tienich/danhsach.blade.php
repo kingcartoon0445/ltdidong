@@ -34,11 +34,9 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Ảnh</th>
                     <th>Tên</th>
                     <th>Loại</th>
                     <th>Địa Chỉ</th>
-                    <th>Mô Tả</th>
                     <th>SĐT</th>
                     <th>Trạng thái</th>
                     <th></th>
@@ -47,18 +45,16 @@
                 <tbody>
                   @foreach($listTienIch as $tienIch)
                     <tr>
-                        <td><img style="width:150px;max-height:150px;object-fit:contain" src="{{ $tienIch->Anh }}" alt=""></td>
-                        <td>{{ $tienIch->Ten }}</td>
+                        <td><a href="{{ route('tienIch.show', $tienIch) }}">{{ $tienIch->Ten }}</a></td>
                         <td>{{ $tienIch->Loai }}</td>
                         <td>{{ $tienIch->DiaChi }}</td>
-                        <td>{{ $tienIch->MoTa }}</td>
                         <td>{{ $tienIch->SDT }}</td>
                         <td>
                             @if($tienIch->TrangThai==0)
                               <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Đóng cửa</h6></span>
                             @else
                               <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
-                            @endif                     
+                            @endif                   
                         </td>
                         <td>
                             <div class="btn-group">

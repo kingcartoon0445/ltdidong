@@ -48,7 +48,7 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="MatKhau">Mật khẩu @if($nguoiDung->IsAdmin==0) (Hashed) @endif</label>
-                                    <input type="password" class="form-control" id="MatKhau" name = "MatKhau" value="{{ $nguoiDung->MatKhau }}" @if($nguoiDung->IsAdmin==0) readonly @endif>
+                                    <input type="text" class="form-control" id="MatKhau" name = "MatKhau" value="{{ $nguoiDung->MatKhau }}" @if($nguoiDung->IsAdmin==0) readonly @endif>
                                     @if($errors->has('MatKhau'))
                                         <p style="color:red">{{ $errors->first('MatKhau') }}</p>
                                     @endif
@@ -95,7 +95,7 @@
 
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                                 
-                                @if(!$nguoiDung->Email=='email@gmail.com')
+                                @if($nguoiDung->Email!='admin@gmail.com')
                                     <div class="btn-group">
                                         <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
                                             <i class="fas fa-trash"></i>

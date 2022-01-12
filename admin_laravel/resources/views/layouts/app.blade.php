@@ -17,10 +17,10 @@
   {{ Html::style('plugins/simplemde/simplemde.min.css') }}
   {{ Html::style('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}
   {{ Html::style('plugins/toastr/toastr.min.css') }}
+  {{ Html::style('dist/css/detail.css') }}
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
-
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-dark">
     <!-- Left navbar links -->
@@ -123,8 +123,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
           <li class="nav-item">
             <a href="/index" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
@@ -140,7 +139,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/diadanh/danhsach" class="nav-link">
+            <a href="{{ route('diaDanh.index') }}" class="nav-link">
             <i class="nav-icon fas fa-mountain"></i>
             <p>Quản lý địa danh</p>
             </a>
@@ -177,6 +176,7 @@
       </nav>
     </div>
   </aside>
+
   @yield('content')
 </div>
 
@@ -213,9 +213,8 @@
       "buttons": ["excel"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
-</script>
-<script>
-function showAnh(input) {
+
+  function showAnh(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -224,7 +223,7 @@ function showAnh(input) {
         };
         reader.readAsDataURL(input.files[0]);
     }
-}
+  }
 </script>
 </body>
 </Html>
