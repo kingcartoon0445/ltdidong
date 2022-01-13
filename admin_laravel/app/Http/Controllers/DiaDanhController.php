@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DiaDanh;
 use App\Models\NguoiDung;
 use App\Models\Mien;
+use App\Models\AnhDiaDanh;
 
 use App\Http\Requests\StoreDiaDanhRequest;
 use App\Http\Requests\UpdateDiaDanhRequest;
@@ -24,13 +25,36 @@ class DiaDanhController extends Controller
         }
     }
 
+    protected function fixImage(DiaDanh $diaDanh)
+    {
+        if(Storage::disk('public')->exists($diaDanh->AnhBia)){
+            $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
+        }
+        else{
+            $diaDanh->AnhBia = Storage::url('images/no_image_holder.png');
+        }
+    }
+
+    protected function fixImageChild(AnhDiaDanh $anhDiaDanh)
+    {
+        if(Storage::disk('public')->exists($anhDiaDanh->Anh)){
+            $anhDiaDanh->Anh = Storage::url($anhDiaDanh->Anh);
+        }
+        else{
+            $anhDiaDanh->Anh = Storage::url('images/no_image_holder.png');
+        }
+    }
+
     public function index()
     {
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImageUser($data);
 
         $listdiaDanh = DiaDanh::all();
-        
+        foreach ($listdiaDanh as $diaDanh) {
+            $this->fixImage($diaDanh);
+        }
+
         return view('diadanh.danhsach', [
             'listdiaDanh'=>$listdiaDanh,
             'LoggedUserInfo'=>$data
@@ -83,8 +107,28 @@ class DiaDanhController extends Controller
             'KinhDo'=>$request->input('KinhDo'),
             'ViDo'=>$request->input('ViDo'),
             'MoTa'=>$request->input('MoTa'),
+            'AnhBia'=>'',
             'TrangThai'=>$trangthai,
         ]);
+
+        $diaDanh->save();
+
+        if($request->hasFile('hinh')){
+            $diaDanh->AnhBia = $request->file('hinh')->store('images/diadanh/'.$diaDanh->id.'/cover', 'public');
+
+            if($request->hasFile('images')){
+                $files = $request->file('images');
+
+                foreach($files as $file){
+                    $anhDiaDanh = new AnhDiaDanh;
+                    $anhDiaDanh->fill([
+                        'MaDiaDanh'=>$diaDanh->id,
+                        'Anh'=>$file->store('images/diadanh/'.$diaDanh->id.'/images', 'public'),
+                    ]);
+                    $anhDiaDanh->save();
+                }
+            }
+        }
 
         $diaDanh->save();
 
@@ -102,7 +146,19 @@ class DiaDanhController extends Controller
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImageUser($data);
 
-        return view('diadanh.show', ['diaDanh'=>$diaDanh, 'LoggedUserInfo'=>$data]);
+        $this->fixImage($diaDanh);
+
+        $listAnh = $diaDanh->anhDiaDanhs;
+        
+        foreach ($listAnh as $anh) {
+            $this->fixImageChild($anh);
+        }
+        
+        return view('diadanh.show', [
+            'diaDanh'=>$diaDanh, 
+            'LoggedUserInfo'=>$data,
+            'listAnh'=>$listAnh
+        ]);
     }
 
     /**
@@ -115,6 +171,8 @@ class DiaDanhController extends Controller
     {
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImageUser($data);
+
+        $this->fixImage($diaDanh);
 
         $listMien = Mien::all();
 

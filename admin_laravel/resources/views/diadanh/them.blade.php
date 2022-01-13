@@ -59,7 +59,7 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="MoTa">Mô tả</label>
-                                    <textarea class="form-control" name="MoTa" rows="3"></textarea>
+                                    <textarea class="form-control" name="MoTa" rows="10"></textarea>
                                     @if($errors->has('MoTa'))
                                         <p style="color:red">{{ $errors->first('MoTa') }}</p>
                                     @endif
@@ -71,6 +71,24 @@
                                         <option>Hoạt động</option>  
                                         <option>Đóng cửa</option>
                                     </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label for="hinh" class="form-label">Ảnh bìa</label>
+                                        <input onchange="showAnh(this);" class="form-control" type="file" name="hinh" accept="image/*">
+                                    </div>
+                                </div>
+
+                                <div id="ImgDiv" class="form-group">
+                                    <img id="Img" style="width:725px;max-height:500px"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label for="hinh" class="form-label">Các ảnh con</label>
+                                        <input class="form-control" type="file" name="images[]" accept="image/*" multiple>
+                                    </div>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save changes</button>

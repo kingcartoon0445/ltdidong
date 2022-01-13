@@ -47,7 +47,7 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="MoTa">Mô tả</label>
-                                    <textarea class="form-control" name="MoTa" rows="3"></textarea>
+                                    <textarea class="form-control" name="MoTa" rows="10"></textarea>
                                     @if($errors->has('MoTa'))
                                         <p style="color:red">{{ $errors->first('MoTa') }}</p>
                                     @endif
