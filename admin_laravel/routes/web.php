@@ -44,4 +44,5 @@ Route::group(['middleware'=>'AuthCheck'], function(){
     Route::resource('theLoai', TheLoaiController::class);
     Route::resource('tienIch', TienIchController::class);
     Route::resource('diaDanh', DiaDanhController::class);
+    Route::delete('/diaDanh/{idAnh}/xoaAnh', [DiaDanhController::class, 'xoaAnh']);
 });

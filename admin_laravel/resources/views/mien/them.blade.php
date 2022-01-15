@@ -27,14 +27,6 @@
                                         <p style="color:red">{{ $errors->first('TenMien') }}</p>
                                     @endif
                                 </div>
-
-                                <div class="form-group">
-                                    <label>Trạng thái</label>
-                                    <select class="custom-select form-control-border border-width-2" name="txtTrangThai">
-                                        <option>Hoạt động</option>  
-                                        <option>Khóa</option>
-                                    </select>
-                                </div>
                                 
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </form>

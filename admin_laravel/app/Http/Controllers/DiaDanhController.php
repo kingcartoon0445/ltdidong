@@ -115,21 +115,21 @@ class DiaDanhController extends Controller
 
         if($request->hasFile('hinh')){
             $diaDanh->AnhBia = $request->file('hinh')->store('images/diadanh/'.$diaDanh->id.'/cover', 'public');
-
-            if($request->hasFile('images')){
-                $files = $request->file('images');
-
-                foreach($files as $file){
-                    $anhDiaDanh = new AnhDiaDanh;
-                    $anhDiaDanh->fill([
-                        'MaDiaDanh'=>$diaDanh->id,
-                        'Anh'=>$file->store('images/diadanh/'.$diaDanh->id.'/images', 'public'),
-                    ]);
-                    $anhDiaDanh->save();
-                }
-            }
         }
 
+        if($request->hasFile('images')){
+            $files = $request->file('images');
+
+            foreach($files as $file){
+                $anhDiaDanh = new AnhDiaDanh;
+                $anhDiaDanh->fill([
+                    'MaDiaDanh'=>$diaDanh->id,
+                    'Anh'=>$file->store('images/diadanh/'.$diaDanh->id.'/images', 'public'),
+                ]);
+                $anhDiaDanh->save();
+            }
+        }
+        
         $diaDanh->save();
 
         return Redirect::route('diaDanh.index');
@@ -149,7 +149,6 @@ class DiaDanhController extends Controller
         $this->fixImage($diaDanh);
 
         $listAnh = $diaDanh->anhDiaDanhs;
-        
         foreach ($listAnh as $anh) {
             $this->fixImageChild($anh);
         }
@@ -176,10 +175,16 @@ class DiaDanhController extends Controller
 
         $listMien = Mien::all();
 
+        $listAnh = $diaDanh->anhDiaDanhs;
+        foreach ($listAnh as $anh) {
+            $this->fixImageChild($anh);
+        }
+        
         return view('diadanh.sua', [
             'diaDanh'=>$diaDanh, 
             'listMien'=>$listMien,
-            'LoggedUserInfo'=>$data
+            'LoggedUserInfo'=>$data,
+            'listAnh'=>$listAnh,
         ]);
     }
 
@@ -204,6 +209,23 @@ class DiaDanhController extends Controller
             $trangthai = 1;
         else
             $trangthai = 0;
+
+        if($request->hasFile('hinh')){
+            $diaDanh->AnhBia = $request->file('hinh')->store('images/diadanh/'.$diaDanh->id.'/cover', 'public');
+        }
+
+        if($request->hasFile('images')){
+            $files = $request->file('images');
+
+            foreach($files as $file){
+                $anhDiaDanh = new AnhDiaDanh;
+                $anhDiaDanh->fill([
+                    'MaDiaDanh'=>$diaDanh->id,
+                    'Anh'=>$file->store('images/diadanh/'.$diaDanh->id.'/images', 'public'),
+                ]);
+                $anhDiaDanh->save();
+            }
+        }
 
         $diaDanh->fill([
             'Ten'=>$request->input('Ten'),
@@ -230,5 +252,17 @@ class DiaDanhController extends Controller
         $diaDanh->delete();
 
         return Redirect::route('diaDanh.index');
+    }
+
+    public function xoaAnh($idAnh)
+    {
+        $image=AnhDiaDanh::where('id','=',$idAnh)->first();
+
+        if(Storage::disk('public')->exists($image->Anh)){
+            Storage::disk('public')->delete($image->Anh);
+            AnhDiaDanh::find($idAnh)->delete();
+        }
+
+        return back();
     }
 }

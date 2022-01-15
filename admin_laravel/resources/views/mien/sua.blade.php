@@ -29,14 +29,6 @@
                                     @endif
                                 </div>
                                     
-                                <div class="form-group">
-                                    <label>Trạng thái</label>
-                                    <select class="custom-select form-control-border border-width-2" name="txtTrangThai">
-                                        <option @if($mien->TrangThai==1) selected @endif>Hoạt động</option>  
-                                        <option @if($mien->TrangThai==0) selected @endif>Khóa</option>
-                                    </select>
-                                </div>
-                                
                                 <button type="submit" class="btn btn-primary">Save changes</button>
 
                                 <div class="btn-group">

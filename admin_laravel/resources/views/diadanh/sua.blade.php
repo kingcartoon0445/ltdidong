@@ -70,8 +70,8 @@
                                 <div class="form-group">
                                     <label>Trạng thái</label>
                                     <select class="custom-select form-control-border border-width-2" name="TrangThai">
-                                        <option>Hoạt động</option>  
-                                        <option>Đóng cửa</option>
+                                        <option @if($diaDanh->TrangThai==1) selected @endif>Hoạt động</option>  
+                                        <option @if($diaDanh->TrangThai==0) selected @endif>Đóng cửa</option>
                                     </select>
                                 </div>
 
@@ -89,6 +89,19 @@
                                     <img id="Img" src="{{ $diaDanh->AnhBia }}" style="width:725px;max-height:500px"/>
                                 </div>
 
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label for="hinh" class="form-label">Các ảnh con</label>
+                                        <input class="form-control" type="file" name="images[]" accept="image/*" multiple>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-delete-anh">
+                                        <span>Hiển thị danh sách ảnh con <i class="fas fa-images"></i></span>
+                                    </a>
+                                </div>
+
                                 <button type="submit" class="btn btn-primary">Save changes</button>
 
                                 <div class="btn-group">
@@ -103,6 +116,33 @@
             </div>
         </div>
     </section>
+</div>
+
+<div class="modal fade" id="modal-delete-anh">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Danh sách ảnh</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+                @foreach($listAnh as $anh)
+                    <div class="form-group">
+                        <div style="position: relative;width: 100%;max-width: 400px;">
+                            <form action="/diaDanh/{{ $anh->id }}/xoaAnh" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <img id="Img" src="{{ $anh->Anh }}" style="width:250px;height:200px"/>
+                                <button type="submit" class="btn text-danger" style="position: absolute;top: 8%;left: 95%;transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);font-size: 20px;">X</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="modal-delete">
