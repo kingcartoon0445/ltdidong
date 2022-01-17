@@ -47,8 +47,8 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="MatKhau">Mật khẩu @if($nguoiDung->IsAdmin==0) (Hashed) @endif</label>
-                                    <input type="password" class="form-control" id="MatKhau" name = "MatKhau" value="{{ $nguoiDung->MatKhau }}" @if($nguoiDung->IsAdmin==0) readonly @endif>
+                                    <label class="col-form-label" for="MatKhau">Mật khẩu (Hashed)</label>
+                                    <input type="password" class="form-control" id="MatKhau" name = "MatKhau" value="{{ $nguoiDung->MatKhau }}">
                                     @if($errors->has('MatKhau'))
                                         <p style="color:red">{{ $errors->first('MatKhau') }}</p>
                                     @endif
@@ -90,12 +90,12 @@
                                 </div>
 
                                 <div id="ImgDiv" class="form-group">
-                                    <img id="Img" src="{{ $nguoiDung->AnhNen }}" style="width:300px;max-height:300px">
+                                    <img id="Img" src="{{ $nguoiDung->AnhNen }}" style="width:400px;height:250px">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                                 
-                                @if(!$nguoiDung->Email=='email@gmail.com')
+                                @if($nguoiDung->Email!='admin@gmail.com')
                                     <div class="btn-group">
                                         <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
                                             <i class="fas fa-trash"></i>

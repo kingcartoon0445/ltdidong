@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateNguoiDungRequest;
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class NguoiDungController extends Controller
 {
@@ -18,17 +19,16 @@ class NguoiDungController extends Controller
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
         }
         else{
-            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
+            $nguoiDung->AnhNen = Storage::url('images/no_image_holder.png');
         }
     }
 
     public function index()
-    {
-        $listnguoiDung = NguoiDung::all();
-        
+    {        
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage($data);
 
+        $listnguoiDung = NguoiDung::all();
         foreach($listnguoiDung as $nguoiDung) {
             $this->fixImage($nguoiDung);
         }
@@ -63,7 +63,7 @@ class NguoiDungController extends Controller
         $request->validate([
             'TenDaiDien' => 'required',
             'HoTen' => 'required',
-            'Email' => ['required','email','unique:nguoi_dungs'],
+            'Email' => ['required', 'email', 'unique:nguoi_dungs,Email'],
             'SDT' => ['required','min:10','max:12'],
             'MatKhau' => 'required',
             'hinh' => ['mimetypes:image/*','max:5000'],
@@ -86,7 +86,7 @@ class NguoiDungController extends Controller
             'Email'=>$request->input('Email'),
             'SDT'=>$request->input('SDT'),
             'AnhNen'=>'',
-            'MatKhau'=>$request->input('MatKhau'),
+            'MatKhau'=>Hash::make($request->input('MatKhau')),
             'IsAdmin'=>$isAdmin,
             'TrangThai'=>$trangthai,
         ]);
@@ -143,7 +143,7 @@ class NguoiDungController extends Controller
         $request->validate([
             'TenDaiDien' => 'required',
             'HoTen' => 'required',
-            'Email' => ['required','email','unique:nguoi_dungs'],
+            'Email' => ['required', 'email', 'unique:nguoi_dungs,Email,'.$nguoiDung->id],
             'SDT' => ['required','min:10','max:12'],
             'MatKhau' => 'required',
             'hinh' => ['mimetypes:image/*', 'max:5000'],
@@ -169,7 +169,7 @@ class NguoiDungController extends Controller
                 'HovaTen'=>$request->input('HoTen'),
                 'Email'=>$request->input('Email'),
                 'SDT'=>$request->input('SDT'),
-                'MatKhau'=>$request->input('MatKhau'),
+                'MatKhau'=>Hash::make($request->input('MatKhau')),
                 'IsAdmin'=>$isAdmin,
                 'TrangThai'=>$trangthai,
             ]);

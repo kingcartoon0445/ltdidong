@@ -19,7 +19,7 @@ class TienIchController extends Controller
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
         }
         else{
-            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
+            $nguoiDung->AnhNen = Storage::url('images/no_image_holder.png');
         }
     }
 
@@ -29,7 +29,7 @@ class TienIchController extends Controller
             $tienIch->Anh = Storage::url($tienIch->Anh);
         }
         else{
-            $tienIch->Anh = 'storage/images/no_image_holder.png';
+            $tienIch->Anh = Storage::url('images/no_image_holder.png');
         }
     }
 
@@ -120,7 +120,12 @@ class TienIchController extends Controller
      */
     public function show(TienIch $tienIch)
     {
-        //
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImageUser($data);
+
+        $this->fixImage($tienIch);
+
+        return view('tienich.show', ['tienIch'=>$tienIch, 'LoggedUserInfo'=>$data]);
     }
 
     /**

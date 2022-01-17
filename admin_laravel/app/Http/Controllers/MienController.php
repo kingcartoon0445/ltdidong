@@ -19,7 +19,7 @@ class MienController extends Controller
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
         }
         else{
-            $nguoiDung->AnhNen = 'storage/images/no_image_holder.png';
+            $nguoiDung->AnhNen = Storage::url('images/no_image_holder.png');
         }
     }
 

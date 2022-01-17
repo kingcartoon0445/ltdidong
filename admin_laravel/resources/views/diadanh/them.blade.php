@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -18,47 +19,80 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                          <form action="" method="post">
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtTenMien">Tên địa danh</label>
-                                <input type="text" class="form-control" id="txtTenDiaDanh" name = "txtTenDiaDanh" placeholder="Nhập tên địa danh...">
-                            </div>
+                            <form action="{{ route('diaDanh.store') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label class="col-form-label" for="Ten">Tên</label>
+                                    <input type="text" class="form-control" name="Ten">
+                                    @if($errors->has('Ten'))
+                                        <p style="color:red">{{ $errors->first('Ten') }}</p>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label>Miền</label>
-                                <select class="custom-select form-control-border border-width-2" id="txtMaMien" name="txtMaMien">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                </select>
-                            </div>
+                                <div class="form-group">
+                                    <label>Miền</label>
+                                    <select class="custom-select form-control-border border-width-2" name="MaMien">
+                                        @foreach($listMien as $mien)
+                                            <option value="{{ $mien->id }}">{{ $mien->TenMien }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('MaMien'))
+                                        <p style="color:red">{{ $errors->first('MaMien') }}</p>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtKinhDo">Kinh độ</label>
-                                <input type="text" class="form-control" id="txtKinhDo" name = "txtKinhDo" placeholder="Nhập kinh độ...">
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="KinhDo">Kinh độ</label>
+                                    <input type="text" class="form-control" name="KinhDo">
+                                    @if($errors->has('KinhDo'))
+                                        <p style="color:red">{{ $errors->first('KinhDo') }}</p>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtKinhDo">Vĩ độ</label>
-                                <input type="text" class="form-control" id="txtViDo" name = "txtViDo" placeholder="Nhập vĩ độ...">
-                            </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="ViDo">Vĩ độ</label>
+                                    <input type="text" class="form-control" name="ViDo">
+                                    @if($errors->has('ViDo'))
+                                        <p style="color:red">{{ $errors->first('ViDo') }}</p>
+                                    @endif
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-form-label" for="MoTa">Mô tả</label>
+                                    <textarea class="form-control" name="MoTa" rows="10"></textarea>
+                                    @if($errors->has('MoTa'))
+                                        <p style="color:red">{{ $errors->first('MoTa') }}</p>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label class="col-form-label" for="txtMoTa">Mô tả</label>
-                                <textarea class="form-control" id="txtMoTa" name="txtMoTa" rows="3" placeholder="Nhập mô tả..."></textarea>
-                            </div>
+                                <div class="form-group">
+                                    <label>Trạng thái</label>
+                                    <select class="custom-select form-control-border border-width-2" name="TrangThai">
+                                        <option>Hoạt động</option>  
+                                        <option>Đóng cửa</option>
+                                    </select>
+                                </div>
 
-                            <div class="form-group">
-                                <label>Trạng thái</label>
-                                <select class="custom-select form-control-border border-width-2" id="txtTrangThai" name="txtTrangThai">
-                                    <option>Hoạt động</option>  
-                                    <option>Chờ duyệt</option>
-                                    <option>Ẩn</option>
-                                </select>
-                            </div>
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label for="hinh" class="form-label">Ảnh bìa</label>
+                                        <input onchange="showAnh(this);" class="form-control" type="file" name="hinh" accept="image/*">
+                                    </div>
+                                </div>
 
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                          </form>
+                                <div id="ImgDiv" class="form-group">
+                                    <img id="Img" style="width:725px;max-height:500px"/>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="mb-3">
+                                        <label for="hinh" class="form-label">Các ảnh con</label>
+                                        <input class="form-control" type="file" name="images[]" accept="image/*" multiple>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnhDiaDanh;
+
 use App\Http\Requests\StoreAnhDiaDanhRequest;
 use App\Http\Requests\UpdateAnhDiaDanhRequest;
+
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class AnhDiaDanhController extends Controller
 {
@@ -81,6 +85,11 @@ class AnhDiaDanhController extends Controller
      */
     public function destroy(AnhDiaDanh $anhDiaDanh)
     {
-        //
+        if(Storage::disk('public')->exists($anhDiaDanh->Anh)){
+            //Storage::disk('public')->delete($anhDiaDanh->Anh);
+            $anhDiaDanh->delete();
+        }
+
+        return back();
     }
 }

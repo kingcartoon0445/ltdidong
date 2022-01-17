@@ -17,10 +17,11 @@
   {{ Html::style('plugins/simplemde/simplemde.min.css') }}
   {{ Html::style('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}
   {{ Html::style('plugins/toastr/toastr.min.css') }}
+  {{ Html::style('dist/css/detail.css') }}
+  {{ Html::style('dist/css/multi-slide.css') }}
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
-
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-dark">
     <!-- Left navbar links -->
@@ -123,10 +124,9 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
           <li class="nav-item">
-            <a href="/index" class="nav-link">
+            <a href="/" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>Dashboard</p>
             </a>
@@ -134,37 +134,47 @@
 
           <li class="nav-item">
             <a href="/baiviet/danhsach" class="nav-link">
-            <i class="nav-icon fas fa-clipboard"></i>
-            <p>Quản lý bài viết</p>
+              <i class="nav-icon fas fa-clipboard"></i>
+              <p>Quản lý bài viết</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/diadanh/danhsach" class="nav-link">
-            <i class="nav-icon fas fa-mountain"></i>
-            <p>Quản lý địa danh</p>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-mountain"></i>
+              <p>Quản lý địa danh <i class="fas fa-angle-left right"></i></p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('diaDanh.index') }}" class="nav-link">
+                  <p>Danh sách địa danh</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('mien.index') }}" class="nav-link">
+                  <p>Quản lý miền</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('theLoai.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>Quản lý thể loại</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="{{ route('mien.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-map-marked-alt"></i>
-              <p>Quản lý miền</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="{{ route('tienIch.index') }}" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-hamburger"></i>
-              <p>Quản lý tiện ích</p>
+              <p>Quản lý tiện ích <i class="fas fa-angle-left right"></i></p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('tienIch.index') }}" class="nav-link">
+                  <p>Danh sách tiện ích</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('theLoai.index') }}" class="nav-link">
+                  <p>Quản lý loại tiện ích</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">
@@ -177,6 +187,7 @@
       </nav>
     </div>
   </aside>
+
   @yield('content')
 </div>
 
@@ -205,6 +216,7 @@
 {{ Html::script('plugins/codemirror/mode/css/css.js') }}
 {{ Html::script('plugins/codemirror/mode/xml/xml.js') }}
 {{ Html::script('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}
+{{ Html::script('dist/js/multi-slide.js') }}
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -213,18 +225,17 @@
       "buttons": ["excel"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
-</script>
-<script>
-function showAnh(input) {
+
+  function showAnh(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
           $('#Img').attr('src', e.target.result);
-          $('#ImgDiv').height(500);
+          $('#ImgDiv').height(250);
         };
         reader.readAsDataURL(input.files[0]);
     }
-}
+  }
 </script>
 </body>
 </Html>

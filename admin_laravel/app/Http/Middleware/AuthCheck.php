@@ -17,10 +17,8 @@ class AuthCheck
     public function handle(Request $request, Closure $next)
     {
         if(!session()->has('LoggedUser') && $request->path() != 'login'){
-            return redirect('login')->with('fail', 'Vui lòng đăng nhập');
-        }
-
-        if(session()->has('LoggedUser') && $request->path() == 'login'){
+            return redirect('login');
+        }elseif(session()->has('LoggedUser') && $request->path() == 'login'){
             return back();
         }
 

@@ -30,8 +30,6 @@
                   <tr>
                     <th>Tên miền</th>
                     <th>Thời gian thêm</th>
-                    <th>Thời gian cập nhật</th>
-                    <th>Trạng thái</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -40,14 +38,6 @@
                     <tr>
                         <td>{{ $mien->TenMien }}</td>
                         <td>{{ $mien->created_at }}</td>
-                        <td>{{ $mien->updated_at }}</td>
-                        <td>
-                            @if($mien->TrangThai==0)
-                              <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Khóa</h6></span>
-                            @else
-                              <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
-                            @endif                     
-                        </td>
                         <td>
                             <div class="btn-group">
                                 <a href="{{ route('mien.edit', ['mien'=>$mien]) }}" type="button" class="btn btn-warning">
