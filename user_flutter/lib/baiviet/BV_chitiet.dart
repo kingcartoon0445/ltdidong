@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:user_flutter/Object/baivietObject.dart';
-import 'package:user_flutter/baiviet/ListBaiviet.dart';
+import 'package:user_flutter/Provider/ViewProvider.dart';
 import 'package:user_flutter/class_chung.dart';
 
 class ChiTiet extends StatefulWidget {
@@ -37,17 +37,8 @@ class _ChiTietState extends State<ChiTiet> {
                 height: size.height * 227 / 640,
                 width: double.maxFinite,
                 decoration: BoxDecoration(),
-                child: PageView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) => Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                      image: AssetImage("assets/imgs/baiviets/test.jpg"),
-                      fit: BoxFit.cover,
-                    )),
-                  ),
-                )),
+                child: LayAnh(id:Bai.Bv_Ma),
+                ),
             Container(
               margin: EdgeInsets.only(top: size.height * 0.27),
               padding: EdgeInsets.only(top: 10),
@@ -140,64 +131,27 @@ class _ChiTietState extends State<ChiTiet> {
             FloatingActionButton.extended(
               onPressed: () {
                 // Add your onPressed code here!
-                _nhanthich();
+                _nhanthich(); 
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
               backgroundColor: _thich? Colors.white:Color(0xFF7D82BC),
-              label: Text("200",
-                style: TextStyle(
+              label:FutureBuilder(
+                future: ViewProvider.Like(Bai.Bv_Ma),
+                 builder: (context, snapshot){
+                if(snapshot.hasData){
+                  return Text(snapshot.data.toString(),style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: _thich? Color(0xFF7D82BC):Colors.white,
-                ),
-              ),
+                ),);
+                }
+                return Text("data");
+              }),
               icon: SvgPicture.asset('assets/imgs/svg/like.svg',
                   color:_thich? Color(0xFF7D82BC):Colors.white,),
               heroTag: "fab1",
-            ),
-            FloatingActionButton.extended(
-              onPressed: () {
-                setState(() {});
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-              backgroundColor: Colors.white,
-              label: Text(
-                "200",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color(0xFF7D82BC),
-                ),
-              ),
-              icon: SvgPicture.asset('assets/imgs/svg/unlike.svg',
-                  color: Color(0xFF7D82BC)),
-              heroTag: "fab2",
-            ),
-            FloatingActionButton.extended(
-              onPressed: () {
-                // Add your onPressed code here!
-              },
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-              backgroundColor: Color(0xFF7D82BC),
-              label: Text(
-                "200",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Colors.white,
-                ),
-              ),
-              icon: SvgPicture.asset(
-                'assets/imgs/svg/share.svg',
-                color: Colors.white,
-              ),
-              heroTag: "fab3",
             ),
           ]),
     );

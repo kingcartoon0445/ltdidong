@@ -14,26 +14,29 @@ import 'Hoang/login/page_login.dart';
 import 'colorplush.dart';
 
 class Background extends StatefulWidget {
+  final int id;
+   const Background({Key? key, required this.id}) : super(key: key);
   @override
-  _BackgroundState createState() => _BackgroundState();
+  _BackgroundState createState() {
+    return _BackgroundState(id: id);
+  }
 }
 
 class _BackgroundState extends State<Background> {
-  int _page = 1;
+  final int id;
+  _BackgroundState({required this.id});
+  int _page = 0;
   String txt = "Danh sách bài viết";
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   Widget Page(int p) {
     switch (p) {
       case 0:
-        return SearchPage();
-        break;
-      case 1:
         return BaiViet();
         break;
-      case 2:
+      case 1:
         return DanhSachDiaDanh();
         break;
-      case 3:
+      case 2:
         return ChiTietTienIch();
         break;
     }
@@ -69,7 +72,7 @@ class _BackgroundState extends State<Background> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => thongtin()),
+                MaterialPageRoute(builder: (context) => LayTT(1)),
               );
             },
             icon: CircleAvatar(
@@ -83,11 +86,6 @@ class _BackgroundState extends State<Background> {
         index: 0,
         height: 60.0,
         items: <Widget>[
-          Icon(
-            Icons.search_outlined,
-            color: Colors.white,
-            size: 30,
-          ),
           SvgPicture.asset(
             'assets/imgs/svg/home.svg',
             color: Colors.white,

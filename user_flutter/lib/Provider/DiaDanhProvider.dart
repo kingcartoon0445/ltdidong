@@ -8,7 +8,7 @@ class DiaDanhProvider{
    return parsed.map<DiaDanhObject>((e)=>DiaDanhObject.fromjson(e)).toList();
  }
 
- static Future<List<DiaDanhObject>> fecthNguoidung()async{
+ static Future<List<DiaDanhObject>> fectDiaDanh()async{
    final response= await http
    .get(Uri.parse('http://10.0.2.2:8000/api/DiaDanh'));
    return paraseDiaDanh(response.body);

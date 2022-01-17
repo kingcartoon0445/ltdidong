@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:user_flutter/Object/anhbaivietObject.dart';
+import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
+import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Object/ViewObject.dart';
 import 'Object/diadanhObject.dart';
 import 'Object/nguoidungObject.dart';
@@ -101,7 +104,7 @@ Widget CardBv(var size, var img, var tieude, var diadanh, var tacgia) {
             ),
           );
         }
-        return Text("data");
+        return CircularProgressIndicator();
       });
 }
 
@@ -136,16 +139,68 @@ Widget tenND(int id, Color mau, double size) {
 }
 
 Widget DemView(int id, Color mau, double size) {
-  return FutureBuilder<List<ViewObject>>(
+  return FutureBuilder<String>(
       future: ViewProvider.oneView(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<ViewObject> lsnd = snapshot.data!;
+          String lsnd = snapshot.data!;
           return Text(
             ' ' + lsnd.length.toString(),
             style: cabin_B(mau, size),
           );
         }
         return Text("data");
+      });
+}
+
+class LayAnh extends StatefulWidget {
+  final int id;
+  const LayAnh({ Key? key, required this.id }) : super(key: key);
+
+  @override
+  _LayAnhState createState() {
+    return _LayAnhState(id:id);
+  }
+}
+
+class _LayAnhState extends State<LayAnh> {
+  final int id;
+  _LayAnhState({required this.id});
+  @override
+  Widget build(BuildContext context) {
+      List<Image> luuanh=[];
+    return FutureBuilder<List<AnhBaiVietObject>>(
+      future: BaiVietProvider.layAnhBV(id),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<AnhBaiVietObject> lsAnhBV = snapshot.data!;
+                luuanh.add(Image.network('https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=BWzFqMmUWVFC1OfpPSUqMA'));
+          return PageView.builder(
+                  itemCount: lsAnhBV.length,
+                  itemBuilder: (context, index) => 
+                  Container(
+                    width: double.maxFinite,
+                    decoration:  BoxDecoration(
+                        image: DecorationImage(
+                      image:luuanh[0].image,
+                      fit: BoxFit.cover,
+                    )),
+                  ),
+                );
+        }
+        return Text("data");
+      });
+  }
+}
+
+Widget LayTT(int id){
+   return FutureBuilder<List<NguoiDungObject>>(
+      future: NguoiDungProvider.oneNguoiDung(id),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<NguoiDungObject> lsnd = snapshot.data!;
+          return thongtin(ND: lsnd[0],);
+        }
+        return CircularProgressIndicator();;
       });
 }
