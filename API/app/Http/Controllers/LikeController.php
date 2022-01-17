@@ -63,7 +63,7 @@ class LikeController extends Controller
     public function show(int $like)
     {
         //
-        return Like::where('MaBaiViet',$like)->count();
+        return ['like'=> Like::where('MaBaiViet',$like)->count()];
     }
 
     /**

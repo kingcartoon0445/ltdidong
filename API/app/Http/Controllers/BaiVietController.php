@@ -17,6 +17,11 @@ class BaiVietController extends Controller
     {
         return response()->json(BaiViet::all());
     }
+    public function BaiVietUS(int $id)
+    {
+        return BaiViet::where('MaNguoiDung',$id)->get();
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -131,3 +136,7 @@ class BaiVietController extends Controller
         //
     }
 }
+
+
+
+

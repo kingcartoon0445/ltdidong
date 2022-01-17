@@ -5,12 +5,23 @@ import 'package:user_flutter/Provider/NguoiDungProvider.dart';
 import 'package:user_flutter/class_chung.dart';
 
 import 'BV_chitiet.dart';
-class card extends StatelessWidget {
+
+class card extends StatefulWidget {
   final BaiVietObject BV;
   const card({Key? key,required this.BV}) : super(key: key);
 
+
   @override
-  Widget build(BuildContext context) {
+  _cardState createState() {
+     return _cardState(BV: BV);
+  }
+}
+
+class _cardState extends State<card> {
+   final BaiVietObject BV;
+  _cardState({required this.BV});
+  @override
+ Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return FutureBuilder<List<NguoiDungObject>>(
       future:NguoiDungProvider.oneNguoiDung(BV.Bv_MaNguoiDung),
@@ -19,12 +30,14 @@ class card extends StatelessWidget {
           List<NguoiDungObject> lsnd= snapshot.data!;
                 return InkWell(
             onTap: () {
-              Navigator.push(
+              setState(() {
+                Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (_) => ChiTiet(Bai: BV,),
                 ),
               );
+              });
             },
             child: CardBv(size, "assets/imgs/baiviets/test.jpg", BV.Bv_TieuDe, BV.Bv_MaDiaDanh, lsnd[0].Nd_HovaTen),
           );

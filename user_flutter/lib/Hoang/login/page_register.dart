@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:user_flutter/Hoang/api.dart';
 import 'package:user_flutter/Hoang/login/page_login.dart';
+import 'package:user_flutter/Provider/loginProvider.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -42,44 +43,9 @@ class RegisterPageState extends State<RegisterPage> {
     Navigator.pop(context);
   }
 
-  register() async {
-    var data = {
-      'email': txtEmail.text.trim(),
-      'password': txtPassword.text.trim()
-    };
-
-    var jsonResponser;
-    var response = await CallApi().postData(data, 'register');
-
-    if (response.statusCode == 200) {
-      jsonResponser = json.decode(response.body);
-
-      if (jsonResponser != null) {
-        setState(() {
-          isLoading = false;
-        });
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );
-      } else {
-        setState(() {
-          isLoading = false;
-        });
-      }
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-
-      const snackBar = SnackBar(
-        content: Text('Đăng ký thất bại'),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-  }
-
+register(){
+  
+}
   @override
   Widget build(BuildContext context) {
     return Stack(

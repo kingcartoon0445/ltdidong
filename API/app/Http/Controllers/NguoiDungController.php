@@ -42,7 +42,7 @@ class NguoiDungController extends Controller
             'HovaTen' => 'required',
             'Email' => 'required',
             'SDT' => 'required',
-            'AnhNen' => 'required',
+            'AnhNen' => 'file',
             'MatKhau' => 'required',
         ]);
         //

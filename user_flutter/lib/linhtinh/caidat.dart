@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:user_flutter/Hoang/login/page_login.dart';
 import 'package:user_flutter/colorplush.dart';
 
 class CaiDat extends StatefulWidget {
@@ -151,7 +152,9 @@ class _CaiDatState extends State<CaiDat> {
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>LoginPage()), (route) => false);
+                },
                 child: Text("Đăng xuất", style: cabin_B(Colors.white, 25.0)),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>( Color(0xFF7D82BC)),

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\NguoiDung;
+use App\Models\BaiViet;
 use App\Http\Controllers\AnhBaiVietController;
 use App\Http\Controllers\AnhDiaDanhController;
 use App\Http\Controllers\BaivietController;
@@ -61,7 +62,8 @@ Route::post('/sanctum/token', function (Request $request) {
         ]);
     }
 
-    return ['token'=> $user->createToken($request->email)->plainTextToken];
+    return ['token'=> $user->createToken($request->email)->plainTextToken,
+            'id'=>$user->id];
 });
 
 
@@ -74,7 +76,18 @@ Route::post('/sanctum/token', function (Request $request) {
 //  });
 Route::apiResource('AnhBaiViet',AnhBaiVietController::class);
 Route::apiResource('AnhDiaDanh',AnhDiaDanhController::class);
-Route::apiResource('BaiViet',BaivietController::class);
+Route::middleware('auth:sanctum')->apiResource('BaiViet',BaivietController::class);
+Route::post('/BaiVietUS', function (Request $request) {
+    $request->validate([
+        'id' => 'required',
+    ]);
+
+    $baiviet = BaiViet::where('MaNguoiDung', $request->id)->get();
+   // return $user;
+  //  return [$request->password, $user->MatKhau];
+
+    return $baiviet;
+});
 Route::apiResource('CoTienIch',CoTienIchController::class);
 Route::apiResource('DanhGia',DanhGiaController::class);
 Route::apiResource('DeXuat',DeXuatController::class);

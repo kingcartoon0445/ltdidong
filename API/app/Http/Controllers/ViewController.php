@@ -63,7 +63,7 @@ class ViewController extends Controller
     public function show(int $view)
     {
         //
-        return View::where('MaBaiViet',$view)->count();
+        return['view'=> View::where('MaBaiViet',$view)->count()];
     }
 
     /**

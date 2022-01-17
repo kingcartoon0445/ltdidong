@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:user_flutter/Hoang/login/page_login.dart';
 import 'package:user_flutter/background.dart';
 
 class LoginProvider{
@@ -16,9 +18,11 @@ class LoginProvider{
     var jsonResponse;
           if(response.statusCode==200){
             jsonResponse=json.decode(response.body);
+          sharedPreferences.setString("token",jsonResponse['token']);
+          sharedPreferences.setInt("id",jsonResponse['id']);
             print('response status:${response.statusCode}');
             print('response status:${response.body}');
-            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>Background()), (route) => false);
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>Background(id: 1,)), (route) => false);
             print('response status:${response.body}');
           }
   }

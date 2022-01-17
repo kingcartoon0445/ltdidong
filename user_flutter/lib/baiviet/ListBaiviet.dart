@@ -7,17 +7,22 @@ import 'BaiViet.dart';
 import 'BV_chitiet.dart';
 
 class Lst_baiviet extends StatefulWidget {
-  const Lst_baiviet({Key? key}) : super(key: key);
+  int a;
+  Lst_baiviet({Key? key,required this.a}) : super(key: key);
 
   @override
-  _Lst_baivietState createState() => _Lst_baivietState();
+  _Lst_baivietState createState() {
+   return _Lst_baivietState(a:a);
+  }
 }
 
 class _Lst_baivietState extends State<Lst_baiviet> {
+  int a;
+  _Lst_baivietState({required this.a});
   @override
   Widget build(BuildContext context) {
       return FutureBuilder<List<BaiVietObject>>(
-        future: BaiVietProvider.fecthBaiViet(),
+        future:a==0? BaiVietProvider.fecthBaiViet():BaiVietProvider.BaiVietUS(context, a.toString()),
         builder: (context,snapshot){
           if(snapshot.hasError){
             return Center(
@@ -26,7 +31,7 @@ class _Lst_baivietState extends State<Lst_baiviet> {
           }else if(snapshot.hasData){
             return ListBV(lsBv:snapshot.data!);
           }
-          return SliverList(  delegate: SliverChildListDelegate([Text('lỗi rồi')]));
+          return SliverList(  delegate: SliverChildListDelegate([CircularProgressIndicator()]));
         },
     );
   }
@@ -38,14 +43,27 @@ class ListBV extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SliverList(
+   try {
+      return  SliverList(
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {return Column(
+              (BuildContext context, int index) {
+                return Container(color: Color(0xFFe1e1e1),child: Column(
           children: [
             card(BV: lsBv[index]),
           ],
-              );}, childCount: lsBv.length,
+            ) );}, childCount: lsBv.length,
         ),
       );
+    } catch (e) {
+      return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {return Column(
+          children: [
+            Center(child: Text('Lỗi load dữ liệu'),)
+          ],
+              );}, childCount:lsBv.length,
+        ),
+      );
+    } 
   }
 }

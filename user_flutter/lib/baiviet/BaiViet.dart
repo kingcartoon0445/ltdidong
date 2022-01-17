@@ -25,7 +25,7 @@ class _BaiVietState extends State<BaiViet> {
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
       backgroundColor: Color(0xFFe1e1e1),
-      body:  CustomScrollView(
+      body:  CustomScrollView(  
          center: centerKey,
         slivers: <Widget>[
            SliverList(
@@ -35,7 +35,7 @@ class _BaiVietState extends State<BaiViet> {
              bv_decu()),
             Container(margin: EdgeInsets.only(bottom: 5),child: chuoidecu()),
            ])),
-           Lst_baiviet()
+           Lst_baiviet(a:0)
           ],
         ),
     );
