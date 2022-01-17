@@ -7,7 +7,7 @@ use App\Models\NguoiDung;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class MainController extends Controller
+class LoginController extends Controller
 {
     public function index(){
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();

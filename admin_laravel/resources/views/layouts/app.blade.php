@@ -231,7 +231,7 @@
         var reader = new FileReader();
         reader.onload = function (e) {
           $('#Img').attr('src', e.target.result);
-          $('#ImgDiv').height(500);
+          $('#ImgDiv').height(250);
         };
         reader.readAsDataURL(input.files[0]);
     }

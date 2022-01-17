@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\MainController;
+use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\MienController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\TheLoaiController;
 use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\DiaDanhController;
+use App\Http\Controllers\AnhDiaDanhController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,19 +31,19 @@ Route::get('/baiviet/sua', function () {
     return view('baiviet.sua');
 });
 
-Route::post('/register', [MainController::class, 'save'])->name('save');
-Route::post('/login', [MainController::class, 'check'])->name('check');
-Route::get('/logout', [MainController::class, 'logout'])->name('logout');
+Route::post('/register', [LoginController::class, 'save'])->name('save');
+Route::post('/login', [LoginController::class, 'check'])->name('check');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware'=>'AuthCheck'], function(){
-    Route::get('/login', [MainController::class, 'login'])->name('login');
-    Route::get('/register', [MainController::class, 'register'])->name('register');
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/register', [LoginController::class, 'register'])->name('register');
 
-    Route::get('/', [MainController::class, 'index']);
+    Route::get('/', [LoginController::class, 'index']);
     Route::resource('mien', MienController::class);
     Route::resource('nguoiDung', NguoiDungController::class);
     Route::resource('theLoai', TheLoaiController::class);
     Route::resource('tienIch', TienIchController::class);
     Route::resource('diaDanh', DiaDanhController::class);
-    Route::delete('/diaDanh/{idAnh}/xoaAnh', [DiaDanhController::class, 'xoaAnh']);
+    Route::resource('anhDiaDanh', AnhDiaDanhController::class);
 });

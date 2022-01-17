@@ -128,13 +128,13 @@
                 </button>
             </div>
             <div class="modal-footer justify-content-between">
-                @foreach($listAnh as $anh)
+                @foreach($listAnh as $anhDiaDanh)
                     <div class="form-group">
                         <div style="position: relative;width: 100%;max-width: 400px;">
-                            <form action="/diaDanh/{{ $anh->id }}/xoaAnh" method="post">
+                            <form action="{{ route('anhDiaDanh.destroy', ['anhDiaDanh'=>$anhDiaDanh]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <img id="Img" src="{{ $anh->Anh }}" style="width:250px;height:200px"/>
+                                <img id="Img" src="{{ $anhDiaDanh->Anh }}" style="width:250px;height:200px"/>
                                 <button type="submit" class="btn text-danger" style="position: absolute;top: 8%;left: 95%;transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);font-size: 20px;">X</button>
                             </form>
                         </div>

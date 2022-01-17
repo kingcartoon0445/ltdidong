@@ -47,8 +47,8 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-form-label" for="MatKhau">Mật khẩu @if($nguoiDung->IsAdmin==0) (Hashed) @endif</label>
-                                    <input type="text" class="form-control" id="MatKhau" name = "MatKhau" value="{{ $nguoiDung->MatKhau }}" @if($nguoiDung->IsAdmin==0) readonly @endif>
+                                    <label class="col-form-label" for="MatKhau">Mật khẩu (Hashed)</label>
+                                    <input type="password" class="form-control" id="MatKhau" name = "MatKhau" value="{{ $nguoiDung->MatKhau }}">
                                     @if($errors->has('MatKhau'))
                                         <p style="color:red">{{ $errors->first('MatKhau') }}</p>
                                     @endif
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <div id="ImgDiv" class="form-group">
-                                    <img id="Img" src="{{ $nguoiDung->AnhNen }}" style="width:300px;max-height:300px">
+                                    <img id="Img" src="{{ $nguoiDung->AnhNen }}" style="width:400px;height:250px">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save changes</button>

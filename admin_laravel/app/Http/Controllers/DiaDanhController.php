@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DiaDanhController extends Controller
 {
-    protected function fixImageUser(NguoiDung $nguoiDung)
+    protected function fixImage_DiaDanh_NguoiDung(NguoiDung $nguoiDung)
     {
         if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
@@ -25,7 +25,7 @@ class DiaDanhController extends Controller
         }
     }
 
-    protected function fixImage(DiaDanh $diaDanh)
+    protected function fixImage_DiaDanh(DiaDanh $diaDanh)
     {
         if(Storage::disk('public')->exists($diaDanh->AnhBia)){
             $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
@@ -35,7 +35,7 @@ class DiaDanhController extends Controller
         }
     }
 
-    protected function fixImageChild(AnhDiaDanh $anhDiaDanh)
+    protected function fixImage_AnhDiaDanh(AnhDiaDanh $anhDiaDanh)
     {
         if(Storage::disk('public')->exists($anhDiaDanh->Anh)){
             $anhDiaDanh->Anh = Storage::url($anhDiaDanh->Anh);
@@ -48,11 +48,11 @@ class DiaDanhController extends Controller
     public function index()
     {
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImageUser($data);
+        $this->fixImage_DiaDanh_NguoiDung($data);
 
         $listdiaDanh = DiaDanh::all();
         foreach ($listdiaDanh as $diaDanh) {
-            $this->fixImage($diaDanh);
+            $this->fixImage_DiaDanh($diaDanh);
         }
 
         return view('diadanh.danhsach', [
@@ -69,7 +69,7 @@ class DiaDanhController extends Controller
     public function create()
     {
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImageUser($data);
+        $this->fixImage_DiaDanh_NguoiDung($data);
 
         $listMien = Mien::all();
 
@@ -143,14 +143,14 @@ class DiaDanhController extends Controller
      */
     public function show(DiaDanh $diaDanh)
     {
-        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImageUser($data);
+        $this->fixImage_DiaDanh($diaDanh);
 
-        $this->fixImage($diaDanh);
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage_DiaDanh_NguoiDung($data);
 
         $listAnh = $diaDanh->anhDiaDanhs;
         foreach ($listAnh as $anh) {
-            $this->fixImageChild($anh);
+            $this->fixImage_AnhDiaDanh($anh);
         }
         
         return view('diadanh.show', [
@@ -168,16 +168,16 @@ class DiaDanhController extends Controller
      */
     public function edit(DiaDanh $diaDanh)
     {
-        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImageUser($data);
+        $this->fixImage_DiaDanh($diaDanh);
 
-        $this->fixImage($diaDanh);
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage_DiaDanh_NguoiDung($data);
 
         $listMien = Mien::all();
 
         $listAnh = $diaDanh->anhDiaDanhs;
         foreach ($listAnh as $anh) {
-            $this->fixImageChild($anh);
+            $this->fixImage_AnhDiaDanh($anh);
         }
         
         return view('diadanh.sua', [
@@ -252,17 +252,5 @@ class DiaDanhController extends Controller
         $diaDanh->delete();
 
         return Redirect::route('diaDanh.index');
-    }
-
-    public function xoaAnh($idAnh)
-    {
-        $image=AnhDiaDanh::where('id','=',$idAnh)->first();
-
-        if(Storage::disk('public')->exists($image->Anh)){
-            Storage::disk('public')->delete($image->Anh);
-            AnhDiaDanh::find($idAnh)->delete();
-        }
-
-        return back();
     }
 }

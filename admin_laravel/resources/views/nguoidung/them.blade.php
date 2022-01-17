@@ -86,7 +86,7 @@
                                 </div>
 
                                 <div id="ImgDiv" class="form-group">
-                                    <img id="Img" style="width:725px;max-height:500px"/>
+                                    <img id="Img" style="width:400px;height:250px"/>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Save changes</button>

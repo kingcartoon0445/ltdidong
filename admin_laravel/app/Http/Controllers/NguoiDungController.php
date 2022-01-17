@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateNguoiDungRequest;
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class NguoiDungController extends Controller
 {
@@ -85,7 +86,7 @@ class NguoiDungController extends Controller
             'Email'=>$request->input('Email'),
             'SDT'=>$request->input('SDT'),
             'AnhNen'=>'',
-            'MatKhau'=>$request->input('MatKhau'),
+            'MatKhau'=>Hash::make($request->input('MatKhau')),
             'IsAdmin'=>$isAdmin,
             'TrangThai'=>$trangthai,
         ]);
@@ -168,7 +169,7 @@ class NguoiDungController extends Controller
                 'HovaTen'=>$request->input('HoTen'),
                 'Email'=>$request->input('Email'),
                 'SDT'=>$request->input('SDT'),
-                'MatKhau'=>$request->input('MatKhau'),
+                'MatKhau'=>Hash::make($request->input('MatKhau')),
                 'IsAdmin'=>$isAdmin,
                 'TrangThai'=>$trangthai,
             ]);
