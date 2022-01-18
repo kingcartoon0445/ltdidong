@@ -19,7 +19,7 @@ class LoginProvider{
           if(response.statusCode==200){
             jsonResponse=json.decode(response.body);
           sharedPreferences.setString("token",jsonResponse['token']);
-          sharedPreferences.setInt("id",jsonResponse['id']);
+          sharedPreferences.setInt  ("id",jsonResponse['id']);
             print('response status:${response.statusCode}');
             print('response status:${response.body}');
             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>Background(id: 1,)), (route) => false);

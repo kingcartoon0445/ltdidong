@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_flutter/Object/anhbaivietObject.dart';
+import 'package:user_flutter/Object/baivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
@@ -42,13 +43,8 @@ Widget Listdecu(var size, var flet, Widget wg) {
   );
 }
 
-Widget CardBv(var size, var img, var tieude, var diadanh, var tacgia) {
-  return FutureBuilder<List<DiaDanhObject>>(
-      future: DiaDanhProvider.oneDiaDanh(diadanh),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<DiaDanhObject> lsdd = snapshot.data!;
-          return Container(
+Widget CardBv(Size size,BaiVietObject bv) {
+  return  Container(
              decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(30)),),
@@ -65,7 +61,7 @@ Widget CardBv(var size, var img, var tieude, var diadanh, var tacgia) {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(23),
                       image: DecorationImage(
-                        image: AssetImage(img),
+                        image: NetworkImage('https://media-cdn.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -75,7 +71,7 @@ Widget CardBv(var size, var img, var tieude, var diadanh, var tacgia) {
                     children: [
                       Container(
                         child: Text(
-                          tieude,
+                          bv.Bv_TieuDe,
                           style: cabin_B(Colors.black, 18.0),
                           softWrap: true,
                         ),
@@ -90,11 +86,11 @@ Widget CardBv(var size, var img, var tieude, var diadanh, var tacgia) {
                             height: 15 * size.height / 640,
                             width: 15 * size.width / 360,
                           ),
-                          label: Text(lsdd[0].Dd_Ten.toString(),
+                          label: Text(bv.Bv_TenDD.toString(),
                               style: cabin_B(Color(0xFF828282), 15.0))),
                       TextButton(
                         onPressed: () {},
-                        child: Text(tacgia.toString(),
+                        child: Text(bv.Bv_TenND.toString(),
                             style: cabin_B(Color(0xFF828282), 15.0)),
                       ),
                     ],
@@ -102,10 +98,7 @@ Widget CardBv(var size, var img, var tieude, var diadanh, var tacgia) {
                 ],
               ),
             ),
-          );
-        }
-        return CircularProgressIndicator();
-      });
+          );     
 }
 
 Widget tenDD(int id, Color mau, double size) {
@@ -153,36 +146,24 @@ Widget DemView(int id, Color mau, double size) {
       });
 }
 
-class LayAnh extends StatefulWidget {
+class LayAnh extends StatelessWidget {
   final int id;
   const LayAnh({ Key? key, required this.id }) : super(key: key);
-
-  @override
-  _LayAnhState createState() {
-    return _LayAnhState(id:id);
-  }
-}
-
-class _LayAnhState extends State<LayAnh> {
-  final int id;
-  _LayAnhState({required this.id});
   @override
   Widget build(BuildContext context) {
-      List<Image> luuanh=[];
     return FutureBuilder<List<AnhBaiVietObject>>(
       future: BaiVietProvider.layAnhBV(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<AnhBaiVietObject> lsAnhBV = snapshot.data!;
-                luuanh.add(Image.network('https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=BWzFqMmUWVFC1OfpPSUqMA'));
           return PageView.builder(
-                  itemCount: lsAnhBV.length,
+                  itemCount: 2,
                   itemBuilder: (context, index) => 
                   Container(
                     width: double.maxFinite,
                     decoration:  BoxDecoration(
                         image: DecorationImage(
-                      image:luuanh[0].image,
+                      image:NetworkImage('https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=BWzFqMmUWVFC1OfpPSUqMA'),
                       fit: BoxFit.cover,
                     )),
                   ),

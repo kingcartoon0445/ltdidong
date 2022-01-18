@@ -17,6 +17,7 @@ class DiaDanhSeeder extends Seeder
         //
         DB::table('dia_danhs')->insert([
             'Ten' =>'Vịnh Hạ Long',
+            'AnhBia'=>'1.png',
             'MaMien'=>'1',
             'KinhDo'=>'12345',
             'ViDo'=>'54321',
@@ -24,6 +25,7 @@ class DiaDanhSeeder extends Seeder
       ]);
       DB::table('dia_danhs')->insert([
           'Ten' =>'Huế',
+          'AnhBia'=>'1.png',
           'MaMien'=>'2',
           'KinhDo'=>'12345',
           'ViDo'=>'231231',
@@ -31,6 +33,7 @@ class DiaDanhSeeder extends Seeder
     ]);
     DB::table('dia_danhs')->insert([
       'Ten' =>'Cà Mau',
+      'AnhBia'=>'1.png',
       'MaMien'=>'3',
       'KinhDo'=>'132131',
       'ViDo'=>'12313121',
@@ -38,3 +41,4 @@ class DiaDanhSeeder extends Seeder
     ]);
     }
 }
+

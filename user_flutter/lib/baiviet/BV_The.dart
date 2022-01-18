@@ -39,7 +39,7 @@ class _cardState extends State<card> {
               );
               });
             },
-            child: CardBv(size, "assets/imgs/baiviets/test.jpg", BV.Bv_TieuDe, BV.Bv_MaDiaDanh, lsnd[0].Nd_HovaTen),
+            child: CardBv(size,BV),
           );
         }   return Text("data");
       }
