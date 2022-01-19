@@ -6,12 +6,15 @@ use App\Models\DiaDanh;
 use App\Models\NguoiDung;
 use App\Models\Mien;
 use App\Models\AnhDiaDanh;
+use App\Models\TheLoai;
+use App\Models\ThuocTheLoai;
 
 use App\Http\Requests\StoreDiaDanhRequest;
 use App\Http\Requests\UpdateDiaDanhRequest;
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use DB;
 
 class DiaDanhController extends Controller
 {
@@ -55,9 +58,14 @@ class DiaDanhController extends Controller
             $this->fixImage_DiaDanh($diaDanh);
         }
 
+        $listMien = Mien::all();
+        $listTheLoai = TheLoai::all();
+
         return view('diadanh.danhsach', [
             'listdiaDanh'=>$listdiaDanh,
-            'LoggedUserInfo'=>$data
+            'LoggedUserInfo'=>$data,
+            'listMien'=>$listMien,
+            'listTheLoai'=>$listTheLoai,
         ]);
     }
 
@@ -68,15 +76,7 @@ class DiaDanhController extends Controller
      */
     public function create()
     {
-        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImage_DiaDanh_NguoiDung($data);
 
-        $listMien = Mien::all();
-
-        return view('diaDanh.them', [
-            'LoggedUserInfo'=>$data,
-            'listMien'=>$listMien
-        ]);
     }
 
     /**
@@ -86,7 +86,7 @@ class DiaDanhController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreDiaDanhRequest $request)
-    {
+    {        
         $request->validate([
             'Ten' => 'required',
             'MaMien' => 'required',
@@ -132,6 +132,18 @@ class DiaDanhController extends Controller
         
         $diaDanh->save();
 
+        if($request->has('theloais')){
+            foreach($request->input('theloais') as $theLoai){
+                $thuocTheLoai = new ThuocTheLoai;
+                $thuocTheLoai->fill([
+                    'MaTheLoai'=>$theLoai,
+                    'MaDiaDanh'=>$diaDanh->id,
+                ]);
+                
+                $thuocTheLoai->save();
+            }
+        }
+
         return Redirect::route('diaDanh.index');
     }
 
@@ -153,10 +165,18 @@ class DiaDanhController extends Controller
             $this->fixImage_AnhDiaDanh($anh);
         }
         
+
+        $listTheLoai = DB::table('the_loais')
+                            ->join('thuoc_the_loais', 'thuoc_the_loais.MaTheLoai', '=', 'the_loais.id')
+                            ->where('thuoc_the_loais.MaDiaDanh', '=', $diaDanh->id)
+                            ->select('the_loais.*')
+                            ->get();
+
         return view('diadanh.show', [
             'diaDanh'=>$diaDanh, 
             'LoggedUserInfo'=>$data,
-            'listAnh'=>$listAnh
+            'listAnh'=>$listAnh,
+            'listTheLoai'=>$listTheLoai
         ]);
     }
 
@@ -180,11 +200,14 @@ class DiaDanhController extends Controller
             $this->fixImage_AnhDiaDanh($anh);
         }
         
+        $listTheLoai = TheLoai::all();
+
         return view('diadanh.sua', [
             'diaDanh'=>$diaDanh, 
             'listMien'=>$listMien,
             'LoggedUserInfo'=>$data,
             'listAnh'=>$listAnh,
+            'listTheLoai'=>$listTheLoai
         ]);
     }
 
@@ -238,6 +261,20 @@ class DiaDanhController extends Controller
 
         $diaDanh->save();
 
+        if($request->has('theloais')){
+            ThuocTheLoai::where('MaDiaDanh', '=', $diaDanh->id)->delete();
+
+            foreach($request->input('theloais') as $theLoai){
+                $thuocTheLoai = new ThuocTheLoai;
+                $thuocTheLoai->fill([
+                    'MaTheLoai'=>$theLoai,
+                    'MaDiaDanh'=>$diaDanh->id,
+                ]);
+                
+                $thuocTheLoai->save();
+            }
+        }
+        
         return Redirect::route('diaDanh.index');
     }
 

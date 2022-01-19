@@ -15,15 +15,6 @@ class MienSeeder extends Seeder
     public function run()
     {
         //
-       DB::table('miens')->insert([
-              'TenMien' =>'Bắc'
-        ]);
-        DB::table('miens')->insert([
-            'TenMien' =>'Trung'
-      ]);
-      DB::table('miens')->insert([
-        'TenMien' =>'Nam'
-  ]);
         
     }
 }

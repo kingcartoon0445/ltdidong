@@ -15,13 +15,5 @@ class TheLoaiSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('the_loais')->insert([
-            'Ten' =>'Du lịch văn hóa'
-      ]);
-      DB::table('the_loais')->insert([
-          'Ten' =>'Du lịch sinh thái'
-    ]);
-    DB::table('the_loais')->insert([
-      'Ten' =>'Du lịch thể thao' ]);
     }
 }

@@ -19,6 +19,11 @@
                     <div class="project-info-box">
                         <p><b>Tên:</b> {{ $diaDanh->Ten }}</p>
                         <p><b>Miền:</b> {{ $diaDanh->mien->TenMien }}</p>
+                        <p><b>Loại du lịch:</b>
+                            @foreach($listTheLoai as $theLoai)
+                                <br> {{ $theLoai->Ten }}
+                            @endforeach
+                        </p>
                         <p><b>Kinh độ:</b> {{ $diaDanh->KinhDo }}</p>
                         <p><b>Vĩ độ:</b> {{ $diaDanh->ViDo }}</p>
                         <p><b>Trạng thái:</b> @if($diaDanh->TrangThai==1) Hoạt động @else Đóng cửa @endif</p>

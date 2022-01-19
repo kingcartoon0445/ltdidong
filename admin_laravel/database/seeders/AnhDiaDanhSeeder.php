@@ -14,21 +14,6 @@ class AnhDiaDanhSeeder extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('anh_dia_danhs')->insert([
-            'MaDiaDanh' =>'2',
-            'Anh' =>'anhcuatoi.jpg'
-           
-      ]);
-      DB::table('anh_dia_danhs')->insert([
-          'Anh' =>'anhdayne.jpg',
-          'MaDiaDanh' =>'3'
-    ]);
-    DB::table('anh_dia_danhs')->insert([
-      'Anh' =>'anh3.jpg',
-      'MaDiaDanh' =>'1' ]);
-      DB::table('anh_dia_danhs')->insert([
-        'Anh' =>'anh2.jpg',
-        'MaDiaDanh' =>'1' ]);
+
     }
 }

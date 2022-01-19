@@ -25,7 +25,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <a href="{{ route('theLoai.create') }}" type="button" class="btn btn-success">Thêm thể loại</a>
+          <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm thể loại</a>
 
           <!-- Danh sách -->
           <div class="card">
@@ -37,7 +37,6 @@
                     <th>Tên thể loại</th>
                     <th>Thời gian thêm</th>
                     <th>Thời gian cập nhật</th>
-                    <th>Trạng thái</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -48,20 +47,69 @@
                         <td>{{ $theLoai->created_at }}</td>
                         <td>{{ $theLoai->updated_at }}</td>
                         <td>
-                            @if($theLoai->TrangThai==0)
-                              <span class="badge bg-danger" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Khóa</h6></span>
-                            @else
-                              <span class="badge bg-success" style="width: 85px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
-                            @endif                     
-                        </td>
-                        <td>
                             <div class="btn-group">
-                                <a href="{{ route('theLoai.edit', ['theLoai'=>$theLoai]) }}" type="button" class="btn btn-warning">
-                                    <i class="fas fa-edit"></i>
+                                <a href="#" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit{{ $theLoai->id }}">
+                                  <i class="fas fa-edit"></i>
                                 </a>
+                            </div>
+                            <div class="btn-group">
+                              <a href="#" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{ $theLoai->id }}">
+                                <i class="fas fa-trash"></i>
+                              </a>
                             </div>
                         </td>
                     </tr>
+
+                    <div class="modal fade" id="modal-edit{{ $theLoai->id }}">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title">Cập nhật thông tin</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body justify-content-between">
+                                    <form action="{{ route('theLoai.update', ['theLoai'=>$theLoai]) }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PATCH')    
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="TenTheLoai">Tên</label>
+                                            <input type="text" class="form-control" name = "TenTheLoai" value="{{ $theLoai->Ten }}">
+                                            @if($errors->has('TenTheLoai'))
+                                                <p style="color:red">{{ $errors->first('TenTheLoai') }}</p>
+                                            @endif
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="modal fade" id="modal-delete{{ $theLoai->id }}">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title">Xác nhận xóa dữ liệu này?</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                      <form action="{{ route('theLoai.destroy', ['theLoai'=>$theLoai]) }}" method="post">
+                                          @csrf
+                                          @method('DELETE')
+                                          <div class="btn-group">
+                                            <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                   @endforeach
                 </tbody>
               </table>
@@ -71,5 +119,33 @@
       </div>
     </div>
   </section>
+</div>
+
+<div class="modal fade" id="modal-add">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm thể loại du lịch</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <form action="{{ route('theLoai.store') }}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group">
+                    <label class="col-form-label" for="TenTheLoai">Tên thể loại</label>
+                    <input type="text" class="form-control" id="TenTheLoai" name = "TenTheLoai">
+                    @if($errors->has('TenTheLoai'))
+                      <p style="color:red">{{ $errors->first('TenTheLoai') }}</p>
+                    @endif
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
