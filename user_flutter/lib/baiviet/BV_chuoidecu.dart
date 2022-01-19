@@ -6,7 +6,7 @@ class chuoidecu extends StatefulWidget {
   _chuoidecuState createState() => _chuoidecuState();
 }
 class _chuoidecuState extends State<chuoidecu> {
-  List<String> ds_Decu=["Tất cả","Nhiều người thích","Nhiều lượt xem","của tôi"];
+  List<String> ds_Decu=["Tất cả","Nhiều người thích","Nhiều lượt xem"];
   int selectedIndex=0;
   @override
     Widget build(BuildContext context) {

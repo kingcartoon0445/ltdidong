@@ -245,8 +245,9 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Text(
-                'Khách sạn Hạ Long',
+                'Khách sạn Hạ Long ',
                 style: TextStyle(
+                  overflow: TextOverflow.clip,
                   fontSize: 14,
                 ),
               ),

@@ -229,12 +229,7 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        "assets/imgs/diadanh/VungTau.png",
-                        width: double.infinity,
-                        height: 400,
-                        fit: BoxFit.cover,
-                      ),
+                      child: lsdd[index].Dd_AnhBia,
                     ),
                   ),
                 ),

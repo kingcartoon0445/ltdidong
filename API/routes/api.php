@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\NguoiDung;
 use App\Models\BaiViet;
+use App\Models\Like;
 use App\Http\Controllers\AnhBaiVietController;
 use App\Http\Controllers\AnhDiaDanhController;
 use App\Http\Controllers\BaivietController;
@@ -82,22 +83,31 @@ Route::post('/BaiVietUS', function (Request $request) {
         'id' => 'required',
     ]);
 
-    $baiviet = BaiViet::where('MaNguoiDung', $request->id)->get();
+    $baiviet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')->where('bai_viets.TrangThai','1')->where('MaNguoiDung',$request->id)->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')->get();
    // return $user;
   //  return [$request->password, $user->MatKhau];
 
     return $baiviet;
 });
+
+
 Route::apiResource('CoTienIch',CoTienIchController::class);
 Route::apiResource('DanhGia',DanhGiaController::class);
 Route::apiResource('DeXuat',DeXuatController::class);
 Route::apiResource('DiaDanh',DiaDanhController::class);
+//route like
 Route::apiResource('Like',LikeController::class);
+Route::post('/XoaLike', [LikeController::class, 'XoaLike']);
+Route::post('/KtraLike', [LikeController::class, 'KtraLike']);
+
 Route::apiResource('Mien',MienController::class);
 Route::apiResource('NguoiDung',NguoiDungController::class);
 Route::apiResource('TheLoai',TheloaiController::class);
 Route::apiResource('ThuocTheLoai',ThuoctheloaiController::class);
 Route::apiResource('TienIch',TienIchController::class);
+
 Route::apiResource('View',ViewController::class);
+Route::post('/XoaView', [LikeController::class, 'XoaView']);
+Route::post('/KtraView', [ViewController::class, 'KtraView']);
 
 //Route::middleware('auth:sanctum')->apiResource('DiaDanh',DiaDanhController::class);

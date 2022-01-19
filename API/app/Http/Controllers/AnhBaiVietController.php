@@ -88,20 +88,20 @@ class AnhBaiVietController extends Controller
     public function update(int $id,Request $request)
     {
         //
-        try{
-            $data=$request->validate([
-                'Anh'=> 'required', 
-            ]);
-            $anhBaiViet=AnhBaiViet::where('id', $id)->
-                update(['Anh' => $data['Anh']]);
-                $response= [
-                    'data'=>$anhBaiViet
-                ];
-                return true;
-        }catch(e){
-            return false;
-        }
-        
+            try{
+                $data=$request->validate([
+                    'Anh'=> 'required', 
+                ]);
+                $anhBaiViet=AnhBaiViet::where('id', $id)->
+                    update(['Anh' => $data['Anh']]);
+                    $response= [
+                        'data'=>$anhBaiViet
+                    ];
+                    return true;
+            }catch(e){
+                return false;
+            }
+            
     }
 
     /**

@@ -16,6 +16,8 @@ class CreateViewsTable extends Migration
         Schema::create('views', function (Blueprint $table) {
             $table->foreignId('MaNguoiDung');
             $table->foreignId('MaBaiViet');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

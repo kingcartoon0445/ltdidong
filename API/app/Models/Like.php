@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Like extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table ="Likes";
+    protected $table ="likes";
     protected $fillable =[
         'MaNguoiDung',
         'MaBaiViet', 

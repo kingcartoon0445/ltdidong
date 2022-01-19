@@ -16,7 +16,7 @@ class DiaDanhController extends Controller
      */
     public function index()
     {
-        return response()->json(DiaDanh::all());
+        return DiaDanh::join('Miens','dia_danhs.MaMien','=','Miens.id')->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->get();
     }
 
     /**
@@ -70,7 +70,7 @@ class DiaDanhController extends Controller
     public function show(int $id)
     {
         //
-        return DiaDanh::where('id',$id)->get();
+        return DiaDanh::join('Miens','dia_danhs.MaMien','=','Miens.id')->where('dia_danhs.id',$id)->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->get();
     }
 
     /**

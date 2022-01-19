@@ -28,10 +28,11 @@ class _thongtinState extends State<thongtin> {
     return DefaultTabController(
       length: 2,
       child: Container(
-        padding: EdgeInsets.only(top: 24),
+
         child: Scaffold(
           backgroundColor: Colors.white,
-          body: CustomScrollView(
+         
+          body:Container(child:CustomScrollView(
             center: centerKey,
             slivers: <Widget>[
               SliverList(
@@ -44,8 +45,7 @@ class _thongtinState extends State<thongtin> {
                           bottomRight: Radius.circular(40),
                           bottomLeft: Radius.circular(40)),
                     ),
-                    height: size.height * 150 / 640,
-                    width: 360,
+                    height: size.height * 180 / 640,
                     child: Padding(
                       padding: EdgeInsets.all(15),
                       child: Row(
@@ -135,7 +135,7 @@ class _thongtinState extends State<thongtin> {
             ],
           ),
         ),
-      ),
+      ),),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_flutter/Object/baivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
+import 'package:user_flutter/Provider/ViewProvider.dart';
 import 'package:user_flutter/baiviet/BV_chitiet.dart';
 import 'package:user_flutter/class_chung.dart';
 
@@ -15,6 +17,17 @@ class bv_decu extends StatefulWidget {
 }
 
 class _bv_decuState extends State<bv_decu> {
+   void chonthe(BaiVietObject BV) async{
+     String a;
+   SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
+   int id=(sharedPreferences.getInt('id')??0);
+   ViewProvider.KtraView(context, BV.Bv_Ma.toString(), id.toString()).then((result){
+     a=result;
+     if(a=='0'){
+        ViewProvider.ThemView(context,BV.Bv_Ma.toString(),id.toString());
+     }
+   });
+   }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -39,6 +52,8 @@ class _bv_decuState extends State<bv_decu> {
                       itemCount: lsbv.length, //đếm ảnh
                       itemBuilder: (context, index) => InkWell(
                         onTap: () {
+                          setState(() {
+                            chonthe(lsbv[index]);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -47,6 +62,8 @@ class _bv_decuState extends State<bv_decu> {
                               ),
                             ),
                           );
+                          });
+                           
                         },
                         child: Container(
                           margin: EdgeInsets.only(right: 14),
@@ -104,7 +121,6 @@ class _bv_decuState extends State<bv_decu> {
                                         ),
                                         Spacer(),
                                           tenND(lsbv[index].Bv_MaNguoiDung, Colors.white, 15.0),
-                                          
                                       ],
                                     )
                                   ],

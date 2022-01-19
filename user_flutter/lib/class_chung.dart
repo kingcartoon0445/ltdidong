@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:user_flutter/Object/anhbaivietObject.dart';
-import 'package:user_flutter/Object/baivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
-import 'Object/ViewObject.dart';
 import 'Object/diadanhObject.dart';
 import 'Object/nguoidungObject.dart';
 import 'Provider/DiaDanhProvider.dart';
-import 'Provider/DiaDanhProvider.dart';
 import 'Provider/ViewProvider.dart';
 import 'colorplush.dart';
-import 'package:flutter_svg/svg.dart';
-
+//Bài viết
 Widget nut_Icon(var icon, var label, var on) {
   return ElevatedButton.icon(
     onPressed: () {
@@ -41,64 +37,6 @@ Widget Listdecu(var size, var flet, Widget wg) {
       ],
     ),
   );
-}
-
-Widget CardBv(Size size,BaiVietObject bv) {
-  return  Container(
-             decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),),
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.only(bottom: 5, top: 5),
-            child: Container(
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.all(20),
-                    width: 144 * size.width / 360,
-                    height: 100 * size.height / 640,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(23),
-                      image: DecorationImage(
-                        image: NetworkImage('https://media-cdn.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Text(
-                          bv.Bv_TieuDe,
-                          style: cabin_B(Colors.black, 18.0),
-                          softWrap: true,
-                        ),
-                      ), //#5
-                      ElevatedButton.icon(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.white, elevation: 0),
-                          icon: SvgPicture.asset(
-                            'assets/imgs/svg/gps1.svg',
-                            color: Color(0xFF4C56CE),
-                            height: 15 * size.height / 640,
-                            width: 15 * size.width / 360,
-                          ),
-                          label: Text(bv.Bv_TenDD.toString(),
-                              style: cabin_B(Color(0xFF828282), 15.0))),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(bv.Bv_TenND.toString(),
-                            style: cabin_B(Color(0xFF828282), 15.0)),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          );     
 }
 
 Widget tenDD(int id, Color mau, double size) {
@@ -131,14 +69,14 @@ Widget tenND(int id, Color mau, double size) {
       });
 }
 
-Widget DemView(int id, Color mau, double size) {
+  Widget DemView(int id, Color mau, double size) {
   return FutureBuilder<String>(
       future: ViewProvider.oneView(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           String lsnd = snapshot.data!;
           return Text(
-            ' ' + lsnd.length.toString(),
+            ' ' + lsnd.toString(),
             style: cabin_B(mau, size),
           );
         }
@@ -185,3 +123,4 @@ Widget LayTT(int id){
         return CircularProgressIndicator();;
       });
 }
+//Địa danh

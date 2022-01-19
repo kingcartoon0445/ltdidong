@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_flutter/Object/baivietObject.dart';
+import 'package:user_flutter/Provider/LikeProvider.dart';
 import 'package:user_flutter/Provider/ViewProvider.dart';
 import 'package:user_flutter/class_chung.dart';
+import 'package:user_flutter/colorplush.dart';
 
 class ChiTiet extends StatefulWidget {
   final BaiVietObject Bai;
@@ -15,17 +18,45 @@ class ChiTiet extends StatefulWidget {
 }
 
 class _ChiTietState extends State<ChiTiet> {
-  bool _thich=true;
-  void _nhanthich(){
-    _thich=!_thich;
+  bool _thich=false;
+  
+ void Ktra() async{ 
+   String a='0';
+   SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
+   int id=(sharedPreferences.getInt('id')??0);
+  LikeProvider.KtraLike(context, Bai.Bv_Ma.toString(),id.toString()).then((result){
+      a=result;
+       if(a=='1'){
+     setState(() {
+       _thich=true;
+     });
+   }else{
     setState(() {
-      
-    });
+       _thich=false;
+     });
+   }
+  });
+ }
+  void _nhanthich() async{
+     SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
+   int id=(sharedPreferences.getInt('id')??0);
+    if(_thich==false){
+    LikeProvider.ThemLike(context,Bai.Bv_Ma.toString(),id.toString());
+    setState(() {_thich=!_thich;});}
+    else if(_thich==true){
+      LikeProvider.XoaLike(context, Bai.Bv_Ma.toString(),id.toString());
+      setState(() {_thich=!_thich;});
+    }
   }
   final BaiVietObject Bai;
   _ChiTietState({required this.Bai});
   @override
-  Widget build(BuildContext context) {
+  initState(){
+        super.initState();
+         Ktra();    
+    }
+  @override
+  Widget build(BuildContext context) {  
     Size size = MediaQuery.of(context).size;
     return  
     Scaffold(
@@ -76,7 +107,9 @@ class _ChiTietState extends State<ChiTiet> {
                   Container(
                       child: ListTile(
                     leading: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white, elevation: 0),
                       icon: SvgPicture.asset(
@@ -85,10 +118,16 @@ class _ChiTietState extends State<ChiTiet> {
                         height: size.height * 20 / 640,
                         width: 20,
                       ),
-                      label: tenDD(Bai.Bv_MaDiaDanh,Color(0xFF828282),15.0),
+                      label:Text(Bai.Bv_TenDD,style: cabin_B(Color(0xFF828282), 15.0),),
                     ),
                     trailing: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                       Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LayTT(Bai.Bv_MaNguoiDung)),
+              );
+                        
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white, elevation: 0),
                       icon: SvgPicture.asset(
@@ -97,7 +136,7 @@ class _ChiTietState extends State<ChiTiet> {
                         width: size.width * 20 / 360,
                         color: Color(0xFF4C56CE),
                       ),
-                      label: tenND(Bai.Bv_MaNguoiDung, Color(0xFF828282) , 15.0)
+                      label:Text(Bai.Bv_TenND,style: cabin_B(Color(0xFF828282), 15.0))
                     ),
                   )),
                   Expanded(
@@ -136,21 +175,21 @@ class _ChiTietState extends State<ChiTiet> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-              backgroundColor: _thich? Colors.white:Color(0xFF7D82BC),
+              backgroundColor: _thich==false? Colors.white:Color(0xFF7D82BC),
               label:FutureBuilder(
-                future: ViewProvider.Like(Bai.Bv_Ma),
+                future:LikeProvider.Like(Bai.Bv_Ma),
                  builder: (context, snapshot){
                 if(snapshot.hasData){
                   return Text(snapshot.data.toString(),style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
-                  color: _thich? Color(0xFF7D82BC):Colors.white,
+                  color: _thich==false? Color(0xFF7D82BC):Colors.white,
                 ),);
                 }
                 return Text("data");
               }),
               icon: SvgPicture.asset('assets/imgs/svg/like.svg',
-                  color:_thich? Color(0xFF7D82BC):Colors.white,),
+                  color:_thich==false? Color(0xFF7D82BC):Colors.white,),
               heroTag: "fab1",
             ),
           ]),

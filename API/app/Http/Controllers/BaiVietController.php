@@ -15,11 +15,11 @@ class BaiVietController extends Controller
      */
     public function index()
     {
-        return response()->json(BaiViet::all());
+        return BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')->where('bai_viets.TrangThai','1')->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')->get();
     }
     public function BaiVietUS(int $id)
     {
-        return BaiViet::where('MaNguoiDung',$id)->get();
+        return BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')->where('bai_viets.TrangThai','1')->where('MaNguoiDung',$id)->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')->get();
     }
 
 

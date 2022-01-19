@@ -95,8 +95,36 @@ class LikeController extends Controller
      * @param  \App\Models\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function destroy(Request $requestn,int $a)
     {
+        $data=$request->validate([
+            'MaNguoiDung' => 'required',
+            'MaBaiViet' => 'required',
+        ]);
         //
+        Like::where('MaNguoiDung',$data->MaNguoiDung)->where('MaBaiViet',$data->MaBaiViet)->delete();
+        return true;
+    }
+
+    public function KtraLike(Request $request)
+    {
+        $request->validate([
+            'MaBV' => 'required',
+            'MaND'=>'required'
+        ]);
+        $like=Like::where('MaNguoiDung',$request->MaND)->where('MaBaiViet',$request->MaBV)->get();
+        $like2=Like::where('MaNguoiDung','0')->where('MaBaiViet','0')->get();
+        if($like!=$like2)
+        return ['colike'=>'1'];else return ['colike'=>'0'];
+    }
+    
+    public function XoaLike(Request $request)
+    {
+        $request->validate([
+            'MaBV' => 'required',
+            'MaND'=>'required'
+        ]);
+        $like=Like::where('MaNguoiDung',$request->MaND)->where('MaBaiViet',$request->MaBV)->delete();
+        return true;
     }
 }

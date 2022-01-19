@@ -99,4 +99,16 @@ class ViewController extends Controller
     {
         //
     }
+
+    public function KtraView(Request $request)
+    {
+        $request->validate([
+            'MaBV' => 'required',
+            'MaND'=>'required'
+        ]);
+        $view=View::where('MaNguoiDung',$request->MaND)->where('MaBaiViet',$request->MaBV)->get();
+        $view2=View::where('MaNguoiDung','0')->where('MaBaiViet','0')->get();
+        if($view!=$view2)
+        return ['coview'=>'1'];else return ['coview'=>'0'];
+    }  
 }
