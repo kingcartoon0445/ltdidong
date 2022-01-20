@@ -84,33 +84,73 @@ Widget tenND(int id, Color mau, double size) {
       });
 }
 
-class LayAnh extends StatelessWidget {
+class LayAnh extends StatefulWidget {
   final int id;
-  const LayAnh({ Key? key, required this.id }) : super(key: key);
+  const LayAnh({ Key? key,required this.id }) : super(key: key);
+
+  @override
+   _LayAnhState createState() {
+   return  _LayAnhState(id:id);
+  }
+}
+class _LayAnhState extends State<LayAnh> {
+  final int id;
+  List<NetworkImage> ls=[];
+  void layDS(int id) async{
+    List<AnhBaiVietObject> lstkhac= await BaiVietProvider.layAnhBV(id);
+    for (var item in lstkhac) {
+      ls.add(new NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+item.ABV_Anh));
+    }
+  }
+  @override
+  void initState(){
+   super.initState();
+   layDS(id);
+  }
+  _LayAnhState({required this.id});
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<AnhBaiVietObject>>(
+    return PageView.builder(
+                  itemCount: ls.length,
+                  itemBuilder: (context, index) =>
+                  Container(
+                    width: double.maxFinite,
+                    decoration:  BoxDecoration(
+                        image: DecorationImage(
+                      image:ls[index],
+                      fit: BoxFit.cover,
+                    )),
+                  ),
+                );
+    
+    /* FutureBuilder<List<AnhBaiVietObject>>(
       future: BaiVietProvider.layAnhBV(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<AnhBaiVietObject> lsAnhBV = snapshot.data!;
           return PageView.builder(
-                  itemCount: 2,
-                  itemBuilder: (context, index) => 
+            onPageChanged: (int index) {
+              setState(() {
+                NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh);
+              });
+            },
+                  itemCount: lsAnhBV.length,
+                  itemBuilder: (context, index) =>
                   Container(
                     width: double.maxFinite,
                     decoration:  BoxDecoration(
                         image: DecorationImage(
-                      image:NetworkImage('https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=BWzFqMmUWVFC1OfpPSUqMA'),
+                      image:NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh),
                       fit: BoxFit.cover,
                     )),
                   ),
                 );
         }
         return Text("data");
-      });
+      });*/
   }
 }
+
 
 Widget LayTT(int id){
    return FutureBuilder<List<NguoiDungObject>>(

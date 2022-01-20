@@ -30,7 +30,7 @@ class BaiVietProvider{
 
  static Future<List<AnhBaiVietObject>> layAnhBV(int id)async{
    final response= await http
-   .get(Uri.parse('http://10.0.2.2:8000/api/AnhBaiViet/$id'));
+   .get(Uri.parse('http://10.0.2.2:8000/api/AnhBaiViet/$id'),);
    return paraseAnhBV(response.body);
  }
   static Future<List<BaiVietObject>> BaiVietUS(BuildContext context,String a) async{
