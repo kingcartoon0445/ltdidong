@@ -15,20 +15,6 @@ class CoTienIchSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('co_tien_iches')->insert([
-            'MaTienIch' =>'1',
-            'MaDiaDanh' =>'2'
-      ]);
-      DB::table('co_tien_iches')->insert([
-          'MaTienIch' =>'2',
-          'MaDiaDanh' =>'3'
-    ]);
-    DB::table('co_tien_iches')->insert([
-      'MaTienIch' =>'3',
-      'MaDiaDanh' =>'1' ]);
-      DB::table('co_tien_iches')->insert([
-        'MaTienIch' =>'2',
-        'MaDiaDanh' =>'1' ]);
       }
     }
     

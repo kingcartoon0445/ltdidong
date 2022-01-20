@@ -44,6 +44,15 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>Loại du lịch</label>
+                                    <select class="form-control" name="theloais[]" multiple>
+                                        @foreach($listTheLoai as $theLoai)
+                                            <option value="{{ $theLoai->id }}">{{ $theLoai->Ten }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-form-label" for="KinhDo">Kinh độ</label>
                                     <input type="text" class="form-control" name="KinhDo" value="{{ $diaDanh->KinhDo }}">
                                     @if($errors->has('KinhDo'))
@@ -61,7 +70,7 @@
                                 
                                 <div class="form-group">
                                     <label class="col-form-label" for="MoTa">Mô tả</label>
-                                    <textarea class="form-control" name="MoTa" rows="10">{{ $diaDanh->MoTa }}"</textarea>
+                                    <textarea class="form-control" name="MoTa" rows="5">{{ $diaDanh->MoTa }}</textarea>
                                     @if($errors->has('MoTa'))
                                         <p style="color:red">{{ $errors->first('MoTa') }}</p>
                                     @endif
@@ -78,15 +87,15 @@
                                 <div class="form-group">
                                     <div class="mb-3">
                                         <label for="hinh" class="form-label">Ảnh bìa</label>
-                                        <input onchange="showAnh(this);" class="form-control" type="file" name="hinh" accept="image/*">
+                                        <input onchange="showAnhEdit(this);" class="form-control" type="file" name="hinh" accept="image/*">
                                     </div>
                                     @if($errors->has('hinh'))
                                         <p style="color:red">{{ $errors->first('hinh') }}</p>
                                     @endif
                                 </div>
 
-                                <div id="ImgDiv" class="form-group">
-                                    <img id="Img" src="{{ $diaDanh->AnhBia }}" style="width:725px;max-height:500px"/>
+                                <div id="ImgDivEdit" class="form-group">
+                                    <img id="ImgEdit" src="{{ $diaDanh->AnhBia }}" style="width:725px;max-height:500px"/>
                                 </div>
 
                                 <div class="form-group">
@@ -140,27 +149,6 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modal-delete">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Xác nhận xóa dữ liệu này?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <form action="{{ route('diaDanh.destroy', ['diaDanh'=>$diaDanh]) }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>
-                </form>
             </div>
         </div>
     </div>

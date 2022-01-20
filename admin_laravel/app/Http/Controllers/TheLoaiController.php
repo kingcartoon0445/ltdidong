@@ -43,10 +43,7 @@ class TheLoaiController extends Controller
      */
     public function create()
     {
-        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImage($data);
 
-        return view('theLoai.them', ['LoggedUserInfo'=>$data]);
     }
 
     /**

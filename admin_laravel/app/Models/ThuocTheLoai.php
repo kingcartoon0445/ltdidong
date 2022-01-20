@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ThuocTheLoai extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }

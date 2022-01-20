@@ -14,8 +14,10 @@ class CreateThuocTheLoaisTable extends Migration
     public function up()
     {
         Schema::create('thuoc_the_loais', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('MaTheLoai');
             $table->foreignId('MaDiaDanh');
+            $table->timestamps();
         });
     }
 

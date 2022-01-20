@@ -14,8 +14,10 @@ class CreateCoTienIchesTable extends Migration
     public function up()
     {
         Schema::create('co_tien_iches', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('MaDiaDanh');
             $table->foreignId('MaTienIch');
+            $table->timestamps();
         });
     }
 

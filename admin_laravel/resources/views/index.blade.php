@@ -90,6 +90,7 @@
                     </p>
 
                     <div class="progress-group">
+                      Test
                       <span class="float-right"><b>160</b>/200</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-primary" style="width: 80%"></div>
@@ -105,7 +106,7 @@
                     </div>
 
                     <div class="progress-group">
-                      <span class="progress-text">Visit Premium Page</span>
+                      Visit Premium Page
                       <span class="float-right"><b>480</b>/800</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-success" style="width: 60%"></div>

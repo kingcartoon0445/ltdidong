@@ -15,21 +15,5 @@ class DeXuatSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('de_xuats')->insert([
-            'MaDiaDanh' =>'2',
-            'MaNguoiDung' =>'1'
-           
-      ]);
-      DB::table('de_xuats')->insert([
-          'MaNguoiDung' =>'2',
-          'MaDiaDanh' =>'3'
-    ]);
-    DB::table('de_xuats')->insert([
-      'MaNguoiDung' =>'2',
-      'MaDiaDanh' =>'1' ]);
-      DB::table('de_xuats')->insert([
-        'MaNguoiDung' =>'3',
-        'MaDiaDanh' =>'1'
-         ]);
     }
 }
