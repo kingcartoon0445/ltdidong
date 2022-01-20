@@ -26,6 +26,7 @@
                         </p>
                         <p><b>Kinh độ:</b> {{ $diaDanh->KinhDo }}</p>
                         <p><b>Vĩ độ:</b> {{ $diaDanh->ViDo }}</p>
+                        <p><b>Địa chỉ:</b> {{ $diaDanh->DiaChi }}</p>
                         <p><b>Trạng thái:</b> @if($diaDanh->TrangThai==1) Hoạt động @else Đóng cửa @endif</p>
                         <h5><b>Mô tả</b></h5><p>{{ $diaDanh->MoTa }}</p>
                     </div>
@@ -38,12 +39,6 @@
                     <div class="pro-img-list">
                         <div id="carouselExampleControls" class="carousel" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="card">
-                                        <img src="{{ $diaDanh->AnhBia }}" class="d-block w-100" style="width:100px;height:100px">
-                                    </div>
-                                </div>
-
                                 @foreach($listAnh as $anh)
                                     <div class="carousel-item">
                                         <div class="card">

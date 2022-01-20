@@ -144,7 +144,9 @@
                                 @csrf
                                 @method('DELETE')
                                 <img id="Img" src="{{ $anhDiaDanh->Anh }}" style="width:250px;height:200px"/>
-                                <button type="submit" class="btn text-danger" style="position: absolute;top: 8%;left: 95%;transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);font-size: 20px;">X</button>
+                                <button type="submit" class="btn btn-danger" style="position: absolute;top: 8%;left: 93%;transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);font-size: 10px;">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </form>
                         </div>
                     </div>

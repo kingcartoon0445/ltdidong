@@ -8,12 +8,6 @@
         <div class="col-sm-6">
           <h1 class="m-0">Quản lý địa danh</h1>
         </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Quản lý địa danh</li>
-          </ol>
-        </div>
       </div>
     </div>
   </div>
@@ -38,7 +32,7 @@
                 <tbody>
                   @foreach($listdiaDanh as $diaDanh)
                     <tr>
-                        <td><a href="{{ route('diaDanh.show', $diaDanh) }}">{{ $diaDanh->Ten }}</a></td>
+                        <td>{{ $diaDanh->Ten }}</td>
                         <td>{{ $diaDanh->mien->TenMien }}</td>
                         <td>
                             @if($diaDanh->TrangThai==0)
@@ -49,14 +43,19 @@
                         </td>
                         <td>
                             <div class="btn-group">
+                              <a href="{{ route('diaDanh.show', $diaDanh) }}" type="button" class="btn btn-primary">
+                                <i class="fas fa-eye"></i>
+                              </a>
+                            </div>
+                            <div class="btn-group">
                                 <a href="{{ route('diaDanh.edit', $diaDanh) }}" type="button" class="btn btn-warning">
                                   <i class="fas fa-edit"></i>
                                 </a>
                             </div>
                             <div class="btn-group">
-                              <a href="#" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{ $diaDanh->id }}">
-                                <i class="fas fa-trash"></i>
-                              </a>
+                                <a href="#" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{ $diaDanh->id }}">
+                                  <i class="fas fa-trash"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -101,12 +100,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-body justify-content-between">
               <form action="{{ route('diaDanh.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="col-form-label" for="Ten">Tên</label>
-                    <input type="text" class="form-control" name="Ten">
+                    <input type="text" class="form-control" style="width:100%;" name="Ten">
                     @if($errors->has('Ten'))
                         <p style="color:red">{{ $errors->first('Ten') }}</p>
                     @endif
@@ -152,6 +151,14 @@
                     @endif
                 </div>
                 
+                <div class="form-group">
+                    <label class="col-form-label" for="DiaChi">Địa chỉ</label>
+                    <input type="text" class="form-control" name="DiaChi">
+                    @if($errors->has('DiaChi'))
+                        <p style="color:red">{{ $errors->first('DiaChi') }}</p>
+                    @endif
+                </div>
+
                 <div class="form-group">
                     <label class="col-form-label" for="MoTa">Mô tả</label>
                     <textarea class="form-control" name="MoTa" rows="5"></textarea>

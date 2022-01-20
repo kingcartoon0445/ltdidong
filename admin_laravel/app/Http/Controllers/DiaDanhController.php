@@ -18,7 +18,7 @@ use DB;
 
 class DiaDanhController extends Controller
 {
-    protected function fixImage_DiaDanh_NguoiDung(NguoiDung $nguoiDung)
+    protected function fixImage_NguoiDung(NguoiDung $nguoiDung)
     {
         if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
@@ -51,7 +51,7 @@ class DiaDanhController extends Controller
     public function index()
     {
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImage_DiaDanh_NguoiDung($data);
+        $this->fixImage_NguoiDung($data);
 
         $listdiaDanh = DiaDanh::all();
         foreach ($listdiaDanh as $diaDanh) {
@@ -92,6 +92,7 @@ class DiaDanhController extends Controller
             'MaMien' => 'required',
             'KinhDo' => 'required',
             'ViDo' => 'required',
+            'DiaChi' => 'required',
             'MoTa' => 'required',
         ]);
 
@@ -107,6 +108,7 @@ class DiaDanhController extends Controller
             'KinhDo'=>$request->input('KinhDo'),
             'ViDo'=>$request->input('ViDo'),
             'MoTa'=>$request->input('MoTa'),
+            'DiaChi'=>$request->input('DiaChi'),
             'AnhBia'=>'',
             'TrangThai'=>$trangthai,
         ]);
@@ -158,7 +160,7 @@ class DiaDanhController extends Controller
         $this->fixImage_DiaDanh($diaDanh);
 
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImage_DiaDanh_NguoiDung($data);
+        $this->fixImage_NguoiDung($data);
 
         $listAnh = $diaDanh->anhDiaDanhs;
         foreach ($listAnh as $anh) {
@@ -191,7 +193,7 @@ class DiaDanhController extends Controller
         $this->fixImage_DiaDanh($diaDanh);
 
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
-        $this->fixImage_DiaDanh_NguoiDung($data);
+        $this->fixImage_NguoiDung($data);
 
         $listMien = Mien::all();
 
@@ -225,6 +227,7 @@ class DiaDanhController extends Controller
             'MaMien' => 'required',
             'KinhDo' => 'required',
             'ViDo' => 'required',
+            'DiaChi' => 'required',
             'MoTa' => 'required',
         ]);
 
@@ -255,6 +258,7 @@ class DiaDanhController extends Controller
             'MaMien'=>$request->input('MaMien'),
             'KinhDo'=>$request->input('KinhDo'),
             'ViDo'=>$request->input('ViDo'),
+            'DiaChi'=>$request->input('DiaChi'),
             'MoTa'=>$request->input('MoTa'),
             'TrangThai'=>$trangthai,
         ]);

@@ -6,14 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Người dùng</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Quản lý tài khoản</li>
-            <li class="breadcrumb-item active">Người dùng</li>
-          </ol>
+          <h1 class="m-0">Quản lý tài khoản</h1>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -202,7 +195,7 @@
                   <span aria-hidden="true">&times;</span>
               </button>
           </div>
-          <div class="modal-footer justify-content-between">
+          <div class="modal-body justify-content-between">
             <form action="{{ route('nguoiDung.store') }}" method="post" enctype="multipart/form-data">
               @csrf
               <div class="form-group">

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Page</title>
 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   {{ Html::style('plugins/bootstrap-5/css/bootstrap.min.css') }}
   {{ Html::style('plugins/fontawesome-free/css/all.min.css') }}
   {{ Html::style('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}
@@ -103,7 +104,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="/baiviet/danhsach" class="nav-link">
+            <a href="{{ route('baiViet.index') }}" class="nav-link">
               <i class="nav-icon fas fa-clipboard"></i>
               <p>Bài viết</p>
             </a>
@@ -186,6 +187,15 @@
 {{ Html::script('plugins/datatables-buttons/js/buttons.html5.min.js') }}
 {{ Html::script('plugins/datatables-buttons/js/buttons.print.min.js') }}
 {{ Html::script('plugins/datatables-buttons/js/buttons.colVis.min.js') }}
+{{ Html::script('plugins/jszip/jszip.min.js') }}
+{{ Html::script('plugins/pdfmake/pdfmake.min.js') }}
+{{ Html::script('plugins/datatables-buttons/js/buttons.html5.min.js') }}
+{{ Html::script('plugins/datatables-buttons/js/buttons.print.min.js') }}
+{{ Html::script('plugins/datatables-buttons/js/buttons.colVis.min.js') }}
+{{ Html::script('plugins/codemirror/mode/css/css.js') }}
+{{ Html::script('plugins/codemirror/mode/xml/xml.js') }}
+{{ Html::script('plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}
+{{ Html::script('dist/js/multi-slide.js') }}
 <!-- Page specific script -->
 <script>
   $(function () {

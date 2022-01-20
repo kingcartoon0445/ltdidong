@@ -9,12 +9,6 @@
           <div class="col-sm-6">
             <h1 class="m-0">Quản lý thể loại</h1>
           </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Quản lý thể loại</li>
-            </ol>
-          </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -130,7 +124,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-body justify-content-between">
                 <form action="{{ route('theLoai.store') }}" method="post" enctype="multipart/form-data">
                   @csrf
                   <div class="form-group">
