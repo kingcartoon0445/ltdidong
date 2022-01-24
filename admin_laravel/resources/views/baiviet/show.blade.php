@@ -17,52 +17,44 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box mb-3">
-                                <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Likes</span>
-                                    <span class="info-box-number">41,410</span>
-                                </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card card-tale">
+                              <div class="card-body">
+                                <p class="fs-25 mb-2">Total likes</p>
+                                <p>123456789</p>
+                              </div>
                             </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box mb-3">
-                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-star"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Lượt đánh giá</span>
-                                    <span class="info-box-number">2,000</span>
-                                </div>
+                          </div>
+                          <div class="col-md-4 mb-4">
+                            <div class="card card-dark-blue">
+                              <div class="card-body">
+                                <p class="fs-25 mb-2">Total Reviews</p>
+                                <p>1000</p>
+                              </div>
                             </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box mb-3">
-                                <span class="info-box-icon bg-warning elevation-1"><i class="far fa-star"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Stars</span>
-                                    <span class="info-box-number">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half"></i>
-                                    </span>
-                                </div>
+                          </div>
+                          <div class="col-md-4 mb-4">
+                            <div class="card card-light-blue">
+                              <div class="card-body">
+                                <p class="fs-25 mb-2">Rating</p>
+                                <p>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star-half"></i>
+                                </p>
+                              </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="project-info-box">
                         <p><b>Tựa đề:</b> {{ $baiViet->TieuDe }}</p>
-                        <p><b>Nội dung:</b> {{ $baiViet->NoiDung }}</p>
                         <p><b>Địa danh:</b> {{ $baiViet->diadanh->Ten }}</p>
                         <p><b>Người đăng:</b> {{ $baiViet->nguoidung->TenDaiDien }}</p>
                         <p><b>Trạng thái:</b> @if($baiViet->TrangThai==1) Hiển thị @else Ẩn @endif</p>
+                        <p><b>Nội dung:</b> {{ $baiViet->NoiDung }}</p>
 
                         <b>Ảnh:</b>
                         <div class="col-md-12">
@@ -79,11 +71,11 @@
                                     </div>
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
+                                        <span class="sr-only">Previous</span>
                                     </button>
                                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
+                                        <span class="sr-only">Next</span>
                                     </button>
                                 </div>
                             </div>

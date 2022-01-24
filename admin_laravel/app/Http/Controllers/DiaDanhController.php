@@ -262,6 +262,8 @@ class DiaDanhController extends Controller
         }
 
         if($request->has('theloais')){
+            ThuocTheLoai::where('MaDiaDanh','=',$diaDanh->id)->delete();
+            
             foreach($request->input('theloais') as $theLoai){
                 $thuocTheLoai = new ThuocTheLoai;
                 $thuocTheLoai->fill([

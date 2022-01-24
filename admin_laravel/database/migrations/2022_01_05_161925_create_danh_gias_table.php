@@ -14,10 +14,12 @@ class CreateDanhGiasTable extends Migration
     public function up()
     {
         Schema::create('danh_gias', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('MaNguoiDung');
             $table->foreignId('MaDiaDanh');
             $table->double("SoDanhGia");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

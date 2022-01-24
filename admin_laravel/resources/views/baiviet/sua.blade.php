@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Thêm địa danh</h1>
+            <h1 class="m-0">Cập nhật thông tin</h1>
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
                                   @csrf
                                   @method('PATCH')
                                   <div class="form-group">
-                                      <label class="col-form-label" for="TieuDe">Tiêu đề</label>
+                                      <label for="TieuDe">Tiêu đề</label>
                                       <input type="text" class="form-control" name="TieuDe" value="{{ $baiViet->TieuDe }}">
                                       @if($errors->has('TieuDe'))
                                           <p style="color:red">{{ $errors->first('TieuDe') }}</p>
@@ -31,7 +31,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                      <label class="col-form-label" for="NoiDung">Nội dung</label>
+                                      <label for="NoiDung">Nội dung</label>
                                       <textarea class="form-control" name="NoiDung" rows="5">{{ $baiViet->NoiDung }}</textarea>
                                       @if($errors->has('NoiDung'))
                                           <p style="color:red">{{ $errors->first('NoiDung') }}</p>
@@ -40,7 +40,7 @@
 
                                   
                                   <div class="form-group">
-                                      <label>Địa danh</label>
+                                      <label for="MaDiaDanh">Địa danh</label>
                                       <select class="custom-select form-control-border border-width-2" name="MaDiaDanh">
                                           @foreach($listdiaDanh as $diaDanh)
                                               <option value="{{ $diaDanh->id }}" @if($diaDanh->id == $baiViet->MaDiaDanh) selected @endif>{{ $diaDanh->Ten }}</option>
@@ -52,7 +52,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                      <label>Người đăng</label>
+                                      <label for="MaNguoiDung">Người đăng</label>
                                       <select class="custom-select form-control-border border-width-2" name="MaNguoiDung">
                                           @foreach($listnguoiDung as $nguoiDung)
                                               <option value="{{ $nguoiDung->id }}" @if($nguoiDung->id == $baiViet->MaNguoiDung) selected @endif>{{ $nguoiDung->TenDaiDien }}</option>
@@ -64,7 +64,7 @@
                                   </div>
 
                                   <div class="form-group">
-                                    <label>Trạng thái</label>
+                                    <label for="TrangThai">Trạng thái</label>
                                     <select class="custom-select form-control-border border-width-2" name="TrangThai">
                                         <option @if($diaDanh->TrangThai==1) selected @endif>Hiển thị</option>  
                                         <option @if($diaDanh->TrangThai==0) selected @endif>Ẩn</option>
@@ -73,14 +73,14 @@
 
                                   <div class="form-group">
                                       <div class="mb-3">
-                                          <label for="hinh" class="form-label">Ảnh</label>
+                                          <label for="hinh">Ảnh</label>
                                           <input class="form-control" type="file" name="images[]" accept="image/*" multiple>
                                       </div>
                                   </div>
 
                                   <div class="form-group">
                                     <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-delete-anh">
-                                        <span>Hiển thị danh sách ảnh con <i class="fas fa-images"></i></span>
+                                        <span>Hiển thị danh sách ảnh <i class="fas fa-images"></i></span>
                                     </a>
                                   </div>
 
@@ -113,9 +113,9 @@
                                 @csrf
                                 @method('DELETE')
                                 <img id="Img" src="{{ $anhBaiViet->Anh }}" style="width:250px;height:200px"/>
-                                <button type="submit" class="btn btn-danger" style="position: absolute;top: 8%;left: 93%;transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);font-size: 10px;">
-                                    <i class="fas fa-times"></i>
-                                </button>
+                                <a type="submit" style="position: absolute;top: 10%;left: 96%;transform: translate(-50%, -50%);">
+                                    <i class="mdi mdi-delete" style="font-size:24px;color:red;"></i>
+                                </a>
                             </form>
                         </div>
                     </div>

@@ -16,10 +16,10 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm địa danh</a>
-
           <div class="card">
             <div class="card-body">
+              <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm bài viết</a>
+
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
@@ -37,28 +37,18 @@
                         <td>{{ $baiViet->diadanh->Ten }}</td>
                         <td>{{ $baiViet->nguoidung->TenDaiDien }}</td>
                         <td>
-                            @if($baiViet->TrangThai==0)
-                              <span class="badge bg-danger" style="width: 90px; height: 25px"><h6 style="font-weight: bold;">Ẩn</h6></span>
-                            @else
-                              <span class="badge bg-success" style="width: 90px; height: 25px"><h6 style="font-weight: bold;">Hiển thị</h6></span>
-                            @endif                   
+                          @if($baiViet->TrangThai==0)
+                            <label class="badge badge-danger" style="width: 90px; height: 25px; font-weight: bold;">Ẩn</label>
+                          @else
+                            <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hiển thị</label>
+                          @endif                    
                         </td>
                         <td>
-                            <div class="btn-group">
-                              <a href="{{ route('baiViet.show', $baiViet) }}" type="button" class="btn btn-primary">
-                                <i class="fas fa-eye"></i>
-                              </a>
-                            </div>
-                            <div class="btn-group">
-                                <a href="{{ route('baiViet.edit', $baiViet) }}" type="button" class="btn btn-warning">
-                                  <i class="fas fa-edit"></i>
-                                </a>
-                            </div>
-                            <div class="btn-group">
-                              <a href="#" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{ $baiViet->id }}">
-                                <i class="fas fa-trash"></i>
-                              </a>
-                            </div>
+                          <div class="btn-group">
+                            <a href="{{ route('baiViet.show', $baiViet) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-eye"></i></a>
+                            <a href="{{ route('baiViet.edit', $baiViet) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>
+                            <a type="button" style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $baiViet->id }}"><i class="mdi mdi-cup"></i></a>
+                          </div>
                         </td>
                     </tr>
 
@@ -106,7 +96,7 @@
               <form action="{{ route('baiViet.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label class="col-form-label" for="TieuDe">Tiêu đề</label>
+                    <label for="TieuDe">Tiêu đề</label>
                     <input type="text" class="form-control" name="TieuDe">
                     @if($errors->has('TieuDe'))
                         <p style="color:red">{{ $errors->first('TieuDe') }}</p>
@@ -114,7 +104,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-form-label" for="NoiDung">Nội dung</label>
+                    <label for="NoiDung">Nội dung</label>
                     <textarea class="form-control" name="NoiDung" rows="5"></textarea>
                     @if($errors->has('NoiDung'))
                         <p style="color:red">{{ $errors->first('NoiDung') }}</p>
@@ -123,7 +113,7 @@
 
                 
                 <div class="form-group">
-                    <label>Địa danh</label>
+                    <label for="MaDiaDanh">Địa danh</label>
                     <select class="custom-select form-control-border border-width-2" name="MaDiaDanh">
                         @foreach($listdiaDanh as $diaDanh)
                             <option value="{{ $diaDanh->id }}">{{ $diaDanh->Ten }}</option>
@@ -135,7 +125,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Người đăng</label>
+                    <label for="MaNguoiDung">Người đăng</label>
                     <select class="custom-select form-control-border border-width-2" name="MaNguoiDung">
                         @foreach($listnguoiDung as $nguoiDung)
                             <option value="{{ $nguoiDung->id }}">{{ $nguoiDung->TenDaiDien }}</option>
@@ -147,7 +137,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Trạng thái</label>
+                    <label for="TrangThai">Trạng thái</label>
                     <select class="custom-select form-control-border border-width-2" name="TrangThai">
                         <option>Hiện</option>  
                         <option>Ẩn</option>
@@ -156,7 +146,7 @@
 
                 <div class="form-group">
                     <div class="mb-3">
-                        <label for="hinh" class="form-label">Ảnh</label>
+                        <label for="hinh">Ảnh</label>
                         <input class="form-control" type="file" name="images[]" accept="image/*" multiple>
                     </div>
                 </div>
@@ -164,7 +154,7 @@
                 <div class="btn-group">
                   <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
-            </form>
+              </form>
             </div>
         </div>
     </div>
