@@ -5,9 +5,11 @@ import 'package:user_flutter/Hoang/search/SearchPage.dart';
 import 'package:user_flutter/baiviet/BV_chitiet.dart';
 import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
+import 'package:user_flutter/diadanh/baiviet_diadanh.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/chitiet_tienich.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
+import 'package:user_flutter/diadanh/danhsachtienich.dart';
 import 'package:user_flutter/linhtinh/caidat.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Hoang/login/page_login.dart';
@@ -37,7 +39,7 @@ class _BackgroundState extends State<Background> {
         return DanhSachDiaDanh();
         break;
       case 2:
-        return ChiTietTienIch();
+        return BaiVietLienQuanDiaDanh();
         break;
     }
     return Text("null");
@@ -50,9 +52,7 @@ class _BackgroundState extends State<Background> {
         backgroundColor: Colors.white,
         elevation: 0.0,
         leading: IconButton(
-          onPressed: () {
-           
-          },
+          onPressed: () {},
           icon: Image.asset(
             'assets/logo/logo.png',
             width: 50,
@@ -72,16 +72,21 @@ class _BackgroundState extends State<Background> {
                   builder: (BuildContext contex) {
                     return AlertDialog(
                       shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(35.0),bottomLeft: Radius.circular(35.0),bottomRight: Radius.circular(35.0))),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(35.0),
+                              bottomLeft: Radius.circular(35.0),
+                              bottomRight: Radius.circular(35.0))),
                       title: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary: Colors.white,
                               elevation: 0.0,
                               shadowColor: Colors.white),
-                          onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LayTT(1)),
-              );},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LayTT(1)),
+                            );
+                          },
                           child: ListTile(
                             leading: CircleAvatar(
                               maxRadius: 30,
@@ -97,10 +102,12 @@ class _BackgroundState extends State<Background> {
                               primary: Colors.white,
                               elevation: 0.0,
                               shadowColor: Colors.white),
-                          onPressed: () { Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CaiDat()),
-            );},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CaiDat()),
+                            );
+                          },
                           child: ListTile(
                             leading: SvgPicture.asset(
                               'assets/imgs/svg/caidat.svg',
@@ -124,15 +131,20 @@ class _BackgroundState extends State<Background> {
                         SizedBox(
                           width: double.infinity,
                           child: TextButton(
-                            
                             onPressed: () {
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
                                       builder: (context) => LoginPage()),
                                   (route) => false);
                             },
-                            child: ListTile(leading: Icon(Icons.logout_outlined,color: Colors.white,),title: Text("Đăng xuất",
-                                style: cabin_B(Colors.white, 20.0)),),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.logout_outlined,
+                                color: Colors.white,
+                              ),
+                              title: Text("Đăng xuất",
+                                  style: cabin_B(Colors.white, 20.0)),
+                            ),
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Color(0xFF7D82BC)),

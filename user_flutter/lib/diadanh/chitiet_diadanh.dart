@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
+import 'package:user_flutter/diadanh/baiviet_diadanh.dart';
 import 'package:user_flutter/diadanh/chiase_baiviet.dart';
+import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
+import 'package:user_flutter/diadanh/danhsachtienich.dart';
+import 'package:user_flutter/colorplush.dart';
 
 class ChiTietDiaDanh extends StatefulWidget {
   final DiaDanhObject DD;
@@ -25,32 +29,10 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              AnhDiaDanh(DD: DD),
               ThongTinChiTietDiaDanh(DD: DD),
             ],
           ),
         ),
-
-        /*Container(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        child: */
-        /*Stack(
-          children: [*/
-        /*  Positioned(
-              left: 0,
-              right: 0,
-              child: Container(
-                width: double.maxFinite,
-                height: 320,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/imgs/diadanh/VungTau.png"),
-                      fit: BoxFit.cover),
-                ),
-              ),
-            ), 
-            */
       ),
     );
   }
@@ -63,7 +45,7 @@ class AnhDiaDanh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 30),
+      padding: EdgeInsets.only(top: 20),
       child: SizedBox(
         width: double.maxFinite,
         height: 200,
@@ -116,15 +98,18 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: ListView(
           children: [
+            AnhDiaDanh(DD: DD),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  DD.Dd_Ten,
-                  style: TextStyle(
-                    fontSize: 22,
+                Expanded(
+                  child: Text(
+                    'nhahang',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
                   ),
-                ),
+                )
               ],
             ),
             SizedBox(
@@ -137,14 +122,15 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                   width: 5,
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    DD.Dd_DiaChi,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
+                    onPressed: () {},
+                    child: Expanded(
+                      child: Text(
+                        ' DD.Dd_DiaChi',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    )),
               ],
             ),
             SizedBox(
@@ -171,22 +157,31 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  'Mô tả',
-                  style: TextStyle(
-                    fontSize: 18,
+                Icon(Icons.description),
+                Expanded(
+                  child: Text(
+                    'Mô tả',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                ),
+                )
               ],
             ),
             SizedBox(
               height: 3,
             ),
-            Text(
-              DD.Dd_KinhDo,
-              style: TextStyle(
-                fontSize: 14,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Dd_KinhDo',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 10,
@@ -194,63 +189,88 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  'Loại hình du lịch',
-                  style: TextStyle(
-                    fontSize: 18,
+                Icon(Icons.class_),
+                Expanded(
+                  child: Text(
+                    'Loại hình du lịch',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
-                ),
+                )
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  'Tham quan',
-                  style: TextStyle(
-                    fontSize: 14,
+                Expanded(
+                  child: Text(
+                    'Tham quan',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
-                ),
+                )
               ],
             ),
             SizedBox(
               height: 5,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Text(
-                'Nhà hàng',
-                style: TextStyle(
-                  fontSize: 18,
+              Icon(Icons.restaurant_outlined),
+              Expanded(
+                child: Text(
+                  'Nhà hàng',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-              ),
+              )
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Text(
-                'Nhà hàng Hạ Long',
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
+              Expanded(
+                child: DanhSachTienTich(),
+              )
             ]),
             SizedBox(
               height: 10,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Text(
-                'Khách sạn',
-                style: TextStyle(
-                  fontSize: 18,
+              Icon(Icons.hotel_outlined),
+              Expanded(
+                child: Text(
+                  'Khách sạn',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-              ),
+              )
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Text(
-                'Khách sạn Hạ Long ',
-                style: TextStyle(
-                  overflow: TextOverflow.clip,
-                  fontSize: 14,
+              Expanded(
+                child: DanhSachTienTich(),
+              )
+            ]),
+            SizedBox(
+              height: 20,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Expanded(
+                child: Text(
+                  'Bài viết về địa danh',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-              ),
+              )
+            ]),
+            SizedBox(
+              height: 10,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Expanded(
+                child: BaiVietLienQuanDiaDanh(),
+              )
             ]),
             SizedBox(
               height: 20,
