@@ -7,18 +7,19 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Quản lý tài khoản</h1>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div>
+      </div>
+    </div>
   </div>
 
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm tài khoản</a>
           <div class="card">
             <div class="card-body">
+              <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm tài khoản</a>
+
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
@@ -26,7 +27,7 @@
                     <th>Họ tên</th>
                     <th>Email</th>
                     <th>SĐT</th>
-                    <th>Admin</th>
+                    <th>Chức vụ</th>
                     <th>Trạng thái</th>
                     <th></th>
                   </tr>
@@ -40,28 +41,22 @@
                         <td>{{ $nguoiDung->SDT }}</td>
                         <td>
                             @if($nguoiDung->IsAdmin==1)
-                              True
+                              <label class="badge badge-info" style="width: 90px; height: 25px; font-weight: bold;">Admin</label>
                             @else
-                              False
+                              Người dùng
                             @endif  
                         </td>
                         <td>
                             @if($nguoiDung->TrangThai==0)
-                              <span class="badge bg-danger" style="width: 90px; height: 25px"><h6 style="font-weight: bold;">Khóa</h6></span>
+                              <label class="badge badge-danger" style="width: 90px; height: 25px; font-weight: bold;">Khóa</label>
                             @else
-                              <span class="badge bg-success" style="width: 90px; height: 25px"><h6 style="font-weight: bold;">Hoạt động</h6></span>
+                              <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hoạt động</label>
                             @endif                     
                         </td>
                         <td>
                           <div class="btn-group">
-                            <a href="#" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit{{ $nguoiDung->id }}">
-                              <i class="fas fa-edit"></i>
-                            </a>
-                          </div>
-                          <div class="btn-group">
-                            <a href="#" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{ $nguoiDung->id }}">
-                              <i class="fas fa-trash"></i>
-                            </a>
+                            <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw" data-toggle="modal" data-target="#modal-edit{{ $nguoiDung->id }}"><i class="mdi mdi-border-color"></i></button>
+                            <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $nguoiDung->id }}"><i class="mdi mdi-cup"></i></button>
                           </div>
                         </td>
                     </tr>
@@ -80,74 +75,81 @@
                                   @csrf
                                   @method('PATCH')
                                   <div class="form-group">
-                                      <label class="col-form-label" for="TenDaiDien">Tên đại diện</label>
-                                      <input type="text" class="form-control" id="TenDaiDien" name = "TenDaiDien" value="{{ $nguoiDung->TenDaiDien }}">
-                                      @if($errors->has('TenDaiDien'))
-                                          <p style="color:red">{{ $errors->first('TenDaiDien') }}</p>
-                                      @endif
+                                    <label for="TenDaiDien">Tên đại diện</label>
+                                    <input type="text" class="form-control" name="TenDaiDien" value="{{ $nguoiDung->TenDaiDien }}">
+                                    @if($errors->has('TenDaiDien'))
+                                        <p style="color:red">{{ $errors->first('TenDaiDien') }}</p>
+                                    @endif
                                   </div>
-  
+                                  
                                   <div class="form-group">
-                                      <label class="col-form-label" for="HoTen">Họ và tên</label>
-                                      <input type="text" class="form-control" id="HoTen" name = "HoTen" value="{{ $nguoiDung->HovaTen }}">
+                                      <label for="HoTen">Họ và tên</label>
+                                      <input type="text" class="form-control" name="HoTen" value="{{ $nguoiDung->HovaTen }}">
                                       @if($errors->has('HoTen'))
                                           <p style="color:red">{{ $errors->first('HoTen') }}</p>
                                       @endif
                                   </div>
-  
+                                  
                                   <div class="form-group">
-                                      <label class="col-form-label" for="Email">Email</label>
-                                      <input type="text" class="form-control" id="Email" name = "Email" value="{{ $nguoiDung->Email }}">
+                                      <label for="Email">Email</label>
+                                      <input type="text" class="form-control" name="Email" value="{{ $nguoiDung->Email }}">
                                       @if($errors->has('Email'))
                                           <p style="color:red">{{ $errors->first('Email') }}</p>
                                       @endif
                                   </div>
                                   
                                   <div class="form-group">
-                                      <label class="col-form-label" for="MatKhau">Mật khẩu (Hashed)</label>
-                                      <input type="password" class="form-control" id="MatKhau" name = "MatKhau" value="{{ $nguoiDung->MatKhau }}">
+                                      <label for="MatKhau">Mật khẩu (Hashed)</label>
+                                      <input type="password" class="form-control" name="MatKhau" value="{{ $nguoiDung->MatKhau }}">
                                       @if($errors->has('MatKhau'))
                                           <p style="color:red">{{ $errors->first('MatKhau') }}</p>
                                       @endif
                                   </div>
-  
+                                  
                                   <div class="form-group">
-                                      <label class="col-form-label" for="SDT">Số điện thoại</label>
-                                      <input type="text" class="form-control" id="SDT" name = "SDT" value="{{ $nguoiDung->SDT }}">
+                                      <label for="SDT">Số điện thoại</label>
+                                      <input type="text" class="form-control" name="SDT" value="{{ $nguoiDung->SDT }}">
                                       @if($errors->has('SDT'))
                                           <p style="color:red">{{ $errors->first('SDT') }}</p>
                                       @endif
                                   </div>
-  
+                            
                                   <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="checkIsAdmin" id="customCheckbox5" value="1" @if($nguoiDung->IsAdmin==1) checked @endif>
-                                        <label for="customCheckbox5" class="custom-control-label">Là Admin</label>
+                                    <label>Chức vụ</label>
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="checkIsAdmin" value="1" @if($nguoiDung->IsAdmin==1) checked @endif>
+                                        Là Admin
+                                      </label>
                                     </div>
                                   </div>
-  
+                                  
                                   <div class="form-group">
                                       <label>Trạng thái</label>
-                                      <select class="custom-select form-control-border border-width-2" id="TrangThai" name="TrangThai">
+                                      <select class="custom-select form-control-border border-width-2" name="TrangThai">
                                           <option @if($nguoiDung->TrangThai==1) selected @endif>Hoạt động</option>  
                                           <option @if($nguoiDung->TrangThai==0) selected @endif>Khóa</option>
                                       </select>
                                   </div>
-  
+                                  
                                   <div class="form-group">
-                                      <div class="mb-3">
-                                          <label for="hinh" class="form-label">Ảnh</label>
-                                          <input onchange="showAnhEdit(this);" class="form-control" type="file" name="hinh" accept="image/*">
-                                      </div>
-                                      @if($errors->has('hinh'))
-                                          <p style="color:red">{{ $errors->first('hinh') }}</p>
-                                      @endif
+                                    <label>Ảnh đại diện</label>
+                                    <input onchange="showAnhEdit(this);" class="file-upload-default" type="file" name="hinh" accept="image/*">
+                                    <div class="input-group col-xs-12">
+                                      <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                                      <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                                      </span>
+                                    </div>
+                                    @if($errors->has('hinh'))
+                                      <p style="color:red">{{ $errors->first('hinh') }}</p>
+                                    @endif
                                   </div>
-  
+                                  
                                   <div id="ImgDivEdit" class="form-group">
                                       <img id="ImgEdit" src="{{ $nguoiDung->AnhNen }}" style="width:400px;height:250px">
                                   </div>
-  
+                                  
                                   <button type="submit" class="btn btn-primary">Save changes</button>
                                 </form>
                               </div>
@@ -165,8 +167,8 @@
                               </button>
                           </div>
                           <div class="modal-footer justify-content-between">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                              <form action="{{ route('nguoiDung.destroy', ['nguoiDung'=>$nguoiDung]) }}" method="post">
+                            <button class="btn btn-light" data-dismiss="modal">Cancel</button>
+                            <form action="{{ route('nguoiDung.destroy', ['nguoiDung'=>$nguoiDung]) }}" method="post">
                                   @csrf
                                   @method('DELETE')
                                   <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>
@@ -198,8 +200,9 @@
           <div class="modal-body justify-content-between">
             <form action="{{ route('nguoiDung.store') }}" method="post" enctype="multipart/form-data">
               @csrf
+
               <div class="form-group">
-                  <label class="col-form-label" for="TenDaiDien">Tên đại diện</label>
+                  <label for="TenDaiDien">Tên đại diện</label>
                   <input type="text" class="form-control" name="TenDaiDien">
                   @if($errors->has('TenDaiDien'))
                       <p style="color:red">{{ $errors->first('TenDaiDien') }}</p>
@@ -207,7 +210,7 @@
               </div>
 
               <div class="form-group">
-                  <label class="col-form-label" for="HoTen">Họ và tên</label>
+                  <label for="HoTen">Họ và tên</label>
                   <input type="text" class="form-control" name="HoTen">
                   @if($errors->has('HoTen'))
                       <p style="color:red">{{ $errors->first('HoTen') }}</p>
@@ -215,15 +218,15 @@
               </div>
 
               <div class="form-group">
-                  <label class="col-form-label" for="Email">Email</label>
+                  <label for="Email">Email</label>
                   <input type="text" class="form-control" name="Email">
                   @if($errors->has('Email'))
                       <p style="color:red">{{ $errors->first('Email') }}</p>
                   @endif
               </div>
-              
+
               <div class="form-group">
-                  <label class="col-form-label" for="MatKhau">Mật khẩu</label>
+                  <label for="MatKhau">Mật khẩu</label>
                   <input type="password" class="form-control" name="MatKhau">
                   @if($errors->has('MatKhau'))
                       <p style="color:red">{{ $errors->first('MatKhau') }}</p>
@@ -231,7 +234,7 @@
               </div>
 
               <div class="form-group">
-                  <label class="col-form-label" for="SDT">Số điện thoại</label>
+                  <label for="SDT">Số điện thoại</label>
                   <input type="text" class="form-control" name="SDT">
                   @if($errors->has('SDT'))
                       <p style="color:red">{{ $errors->first('SDT') }}</p>
@@ -239,10 +242,13 @@
               </div>
 
               <div class="form-group">
-                  <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input custom-control-input-danger custom-control-input-outline" type="checkbox" name="checkIsAdmin" id="customCheckbox5" value="1">
-                      <label for="customCheckbox5" class="custom-control-label">Là Admin</label>
-                  </div>
+                <label>Chức vụ</label>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="checkIsAdmin" value="1">
+                    Là Admin
+                  </label>
+                </div>
               </div>
 
               <div class="form-group">
@@ -254,13 +260,17 @@
               </div>
 
               <div class="form-group">
-                  <div class="mb-3">
-                      <label for="hinh" class="form-label">Ảnh</label>
-                      <input onchange="showAnhAdd(this);" class="form-control" type="file" name="hinh" accept="image/*">
-                  </div>
-                  @if($errors->has('hinh'))
-                      <p style="color:red">{{ $errors->first('hinh') }}</p>
-                  @endif
+                <label>Ảnh đại diện</label>
+                <input onchange="showAnhAdd(this);" class="file-upload-default" type="file" name="hinh" accept="image/*">
+                <div class="input-group col-xs-12">
+                  <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                  <span class="input-group-append">
+                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                  </span>
+                </div>
+                @if($errors->has('hinh'))
+                  <p style="color:red">{{ $errors->first('hinh') }}</p>
+                @endif
               </div>
 
               <div id="ImgDivAdd" class="form-group">
@@ -268,7 +278,7 @@
               </div>
 
               <button type="submit" class="btn btn-primary">Save changes</button>
-          </form>
+            </form>
           </div>
       </div>
   </div>

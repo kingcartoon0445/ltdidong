@@ -7,18 +7,19 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Quản lý miền</h1>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div>
+      </div>
+    </div>
   </div>
 
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm miền</a>
           <div class="card">
             <div class="card-body">
+              <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm miền</a>
+
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
@@ -35,16 +36,11 @@
                         <td>{{ $mien->created_at }}</td>
                         <td>{{ $mien->updated_at }}</td>
                         <td>
-                            <div class="btn-group">
-                                <a href="#" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-edit{{ $mien->id }}">
-                                  <i class="fas fa-edit"></i>
-                                </a>
-                            </div>
-                            <div class="btn-group">
-                              <a href="#" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete{{ $mien->id }}">
-                                <i class="fas fa-trash"></i>
-                              </a>
-                            </div>
+                          <div class="btn-group">
+                            <!--<button type="button" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#modal-edit{{ $mien->id }}"><i class="mdi mdi-eye"></i></button>-->
+                            <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw" data-toggle="modal" data-target="#modal-edit{{ $mien->id }}"><i class="mdi mdi-border-color"></i></button>
+                            <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $mien->id }}"><i class="mdi mdi-cup"></i></button>
+                          </div>
                         </td>
                     </tr>
 
@@ -62,16 +58,14 @@
                                       @csrf
                                       @method('PATCH')
                                       <div class="form-group">
-                                          <label class="col-form-label" for="TenMien">Tên miền</label>
-                                          <input type="text" class="form-control" name="TenMien" value="{{ $mien->TenMien }}">
-                                          @if($errors->has('TenMien'))
+                                        <label for="TenMien">Tên miền</label>
+                                        <input type="text" class="form-control" name="TenMien" value="{{ $mien->TenMien }}">
+                                        @if($errors->has('TenMien'))
                                             <p style="color:red">{{ $errors->first('TenMien') }}</p>
-                                          @endif
+                                        @endif
                                       </div>
 
-                                      <div class="btn-group">
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                      </div>
+                                      <button type="submit" class="btn btn-primary">Save changes</button>
                                     </form>
                                   </div>
                               </div>
@@ -88,14 +82,14 @@
                                       </button>
                                   </div>
                                   <div class="modal-footer justify-content-between">
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                                      <form action="{{ route('mien.destroy', ['mien'=>$mien]) }}" method="post">
-                                          @csrf
-                                          @method('DELETE')
-                                          <div class="btn-group">
-                                            <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>
-                                          </div>
-                                      </form>
+                                    <button class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                    <form action="{{ route('mien.destroy', ['mien'=>$mien]) }}" method="post">
+                                      @csrf
+                                      @method('DELETE')
+                                      <div class="btn-group">
+                                        <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>
+                                      </div>
+                                    </form>
                                   </div>
                               </div>
                           </div>
@@ -124,16 +118,14 @@
               <form id="addform" action="{{ route('mien.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label class="col-form-label" for="TenMien">Tên miền</label>
-                    <input type="text" class="form-control" name="TenMien">
-                    @if($errors->has('TenMien'))
+                  <label for="TenMien">Tên miền</label>
+                  <input type="text" class="form-control" name="TenMien">
+                  @if($errors->has('TenMien'))
                       <p style="color:red">{{ $errors->first('TenMien') }}</p>
-                    @endif
+                  @endif
                 </div>
-                                
-                <div class="btn-group">
-                  <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
+
+                <button type="submit" class="btn btn-primary">Save changes</button>
               </form>
             </div>
         </div>
