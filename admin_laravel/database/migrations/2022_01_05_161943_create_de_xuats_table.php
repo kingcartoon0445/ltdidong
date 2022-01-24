@@ -14,8 +14,11 @@ class CreateDeXuatsTable extends Migration
     public function up()
     {
         Schema::create('de_xuats', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('MaNguoiDung');
             $table->foreignId('MaDiaDanh');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

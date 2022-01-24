@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoTienIch;
 use App\Models\TienIch;
 use App\Models\NguoiDung;
+use App\Models\DiaDanh;
 
 use App\Http\Requests\StoreTienIchRequest;
 use App\Http\Requests\UpdateTienIchRequest;
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use DB;
 
 class TienIchController extends Controller
 {
@@ -38,9 +41,12 @@ class TienIchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $listTienIch = TienIch::all();
+        $listDiaDanh = DiaDanh::all();
+        $listCoTienIch = CoTienIch::all();
 
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImageUser($data);
@@ -51,6 +57,8 @@ class TienIchController extends Controller
 
         return view('tienich.danhsach', [
             'listTienIch'=>$listTienIch,
+            'listDiaDanh'=>$listDiaDanh,
+            'listCoTienIch'=>$listCoTienIch,
             'LoggedUserInfo'=>$data
         ]);
     }
@@ -82,7 +90,6 @@ class TienIchController extends Controller
             'DiaChi' => 'required',
             'MoTa' => 'required',
             'SDT' => 'required',
-            'hinh' => ['mimetypes:image/*', 'max:5000'],
         ]);
 
         if($request->input('TrangThai') == 'Hoạt động')
@@ -105,9 +112,17 @@ class TienIchController extends Controller
 
         if($request->hasFile('hinh')){
             $tienIch->Anh = $request->file('hinh')->store('images/tienich/'.$tienIch->id, 'public');
+            $tienIch->save();
         }
 
-        $tienIch->save();
+        if($request->has('MaDiaDanh')){
+            $coTienIch = new CoTienIch;
+            $coTienIch->fill([
+                'MaDiaDanh'=>$request->input('MaDiaDanh'),
+                'MaTienIch'=>$tienIch->id,
+            ]);
+            $coTienIch->save();
+        }
 
         return Redirect::route('tienIch.index');
     }
@@ -125,7 +140,18 @@ class TienIchController extends Controller
 
         $this->fixImage($tienIch);
 
-        return view('tienich.show', ['tienIch'=>$tienIch, 'LoggedUserInfo'=>$data]);
+        $diaDanh = DB::table('co_tien_iches')
+                        ->join('tien_iches', 'co_tien_iches.MaTienIch', '=', 'tien_iches.id')
+                        ->join('dia_danhs', 'co_tien_iches.MaDiaDanh', '=', 'dia_danhs.id')
+                        ->where('co_tien_iches.MaTienIch', '=', $tienIch->id)
+                        ->select('dia_danhs.*')
+                        ->first();
+
+        return view('tienich.show', [
+            'tienIch'=>$tienIch,
+            'diaDanh'=>$diaDanh,
+            'LoggedUserInfo'=>$data,
+        ]);
     }
 
     /**
@@ -162,7 +188,6 @@ class TienIchController extends Controller
             'DiaChi' => 'required',
             'MoTa' => 'required',
             'SDT' => 'required',
-            'hinh' => ['mimetypes:image/*', 'max:5000'],
         ]);
 
         if($request->input('TrangThai') == 'Hoạt động')
@@ -180,10 +205,22 @@ class TienIchController extends Controller
             'DiaChi'=>$request->input('DiaChi'),
             'MoTa'=>$request->input('MoTa'),
             'SDT'=>$request->input('SDT'),
+            'Anh'=>'',
             'TrangThai'=>$trangthai,
         ]);
 
         $tienIch->save();
+
+        if($request->has('MaDiaDanh')){
+            CoTienIch::where('MaTienIch','=',$tienIch->id)->delete();
+
+            $coTienIch = new CoTienIch;
+            $coTienIch->fill([
+                'MaDiaDanh'=>$request->input('MaDiaDanh'),
+                'MaTienIch'=>$tienIch->id,
+            ]);
+            $coTienIch->save();
+        }
 
         return Redirect::route('tienIch.index');
     }

@@ -18,6 +18,7 @@ class CreateThuocTheLoaisTable extends Migration
             $table->foreignId('MaTheLoai');
             $table->foreignId('MaDiaDanh');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

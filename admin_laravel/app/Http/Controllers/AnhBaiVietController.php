@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnhBaiViet;
+
 use App\Http\Requests\StoreAnhBaiVietRequest;
 use App\Http\Requests\UpdateAnhBaiVietRequest;
+
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class AnhBaiVietController extends Controller
 {
@@ -81,6 +85,11 @@ class AnhBaiVietController extends Controller
      */
     public function destroy(AnhBaiViet $anhBaiViet)
     {
-        //
+        if(Storage::disk('public')->exists($anhBaiViet->Anh)){
+            //Storage::disk('public')->delete($anhBaiViet->Anh);
+            $anhBaiViet->delete();
+        }
+
+        return back();
     }
 }

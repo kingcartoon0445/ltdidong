@@ -18,6 +18,7 @@ class CreateCoTienIchesTable extends Migration
             $table->foreignId('MaDiaDanh');
             $table->foreignId('MaTienIch');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

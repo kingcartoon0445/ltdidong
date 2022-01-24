@@ -4,68 +4,62 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  {{ Html::style('plugins/fontawesome-free/css/all.min.css') }}
-  {{ Html::style('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}
-  {{ Html::style('dist/css/adminlte.min.css') }}
+
+  <link rel="stylesheet" href="./skydash/vendors/feather/feather.css">
+  <link rel="stylesheet" href="./skydash/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="./skydash/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="./skydash/css/vertical-layout-light/style.css">
+  <link rel="shortcut icon" href="./skydash/images/favicon.png" />
 </head>
 
-<body class="hold-transition login-page">
-  <div class="login-box">
-    <div class="card card-outline card-primary">
-      <div class="card-header text-center">
-        <h1><b>Admin</b></h1>
-      </div>
-      <div class="card-body">
-        <form action="{{ route('check') }}" method="post">
-          @if(Session::get('fail'))
-            <div class="alert alert-danger">
-              {{ Session::get('fail') }}
-            </div>
-          @endif
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-center py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="./skydash/images/logo.png" alt="logo">
+              </div>
+              <h4>Hello! let's get started</h4>
+              <h6 class="font-weight-light">Sign in to continue.</h6>
+              <form class="pt-3" action="{{ route('check') }}" method="post">
+                @if(Session::get('fail'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('fail') }}
+                    </div>
+                @endif
 
-          @csrf
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email" name="Email">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-              </div>
+                @csrf
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-lg" placeholder="Email" name="Email">
+                    @if($errors->has('Email'))
+                        <p style="color:red">{{ $errors->first('Email') }}</p>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control form-control-lg" placeholder="Password" name="MatKhau">
+                    @if($errors->has('MatKhau'))
+                        <p style="color:red">{{ $errors->first('MatKhau') }}</p>
+                    @endif
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN IN</button>
+                </div>
+              </form>
             </div>
           </div>
-            @if($errors->has('Email'))
-              <p style="color:red">{{ $errors->first('Email') }}</p>
-            @endif
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password" name="MatKhau">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
-            @if($errors->has('MatKhau'))
-              <p style="color:red">{{ $errors->first('MatKhau') }}</p>
-            @endif
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">Remember Me</label>
-              </div>
-            </div>
-
-            <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
 
-  {{ Html::script('plugins/jquery/jquery.min.js') }}
-  {{ Html::script('plugins/bootstrap/js/bootstrap.bundle.min.js') }}
-  {{ Html::script('dist/js/adminlte.min.js') }}
+  <script src="./skydash/vendors/js/vendor.bundle.base.js"></script>
+  <script src="./skydash/js/off-canvas.js"></script>
+  <script src="./skydash/js/hoverable-collapse.js"></script>
+  <script src="./skydash/js/template.js"></script>
+  <script src="./skydash/js/settings.js"></script>
+  <script src="./skydash/js/todolist.js"></script>
 </body>
 </html>
