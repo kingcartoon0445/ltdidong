@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:user_flutter/Object/anhbaivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
+import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Object/diadanhObject.dart';
 import 'Object/nguoidungObject.dart';
@@ -163,4 +164,16 @@ Widget LayTT(int id){
         return CircularProgressIndicator();;
       });
 }
+
 //Địa danh
+Widget LayDiaDanh(int id){
+return FutureBuilder<List<DiaDanhObject>>(
+      future: DiaDanhProvider.oneDiaDanh(id),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<DiaDanhObject> lsnd = snapshot.data!;
+          return ChiTietDiaDanh(DD: lsnd[0]);
+        }
+        return Text("data");
+      });
+}

@@ -44,7 +44,10 @@ class RegisterPageState extends State<RegisterPage> {
   }
 
 register(){
-  
+  LoginProvider.register(context, txtHoten.text, txtEmail.text, txtSDT.text, txtPassword.text).then((result){
+      if(result==1){
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>LoginPage()), (route) => false);
+      };});
 }
   @override
   Widget build(BuildContext context) {
@@ -376,13 +379,11 @@ register(){
                                         color: Color.fromRGBO(125, 130, 188, 1),
                                         borderRadius: BorderRadius.circular(50),
                                       ),
-                                      child: MaterialButton(
+                                      child: MaterialButton(  
                                         onPressed: () {
                                           if (_formKey.currentState!
                                               .validate()) {
-                                            setState(() {
-                                              isLoading = true;
-                                            });
+                                            
                                             register();
                                           }
                                         },
