@@ -23,16 +23,16 @@ use App\Http\Controllers\AnhBaiVietController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/register', [LoginController::class, 'register'])->name('register');
+Route::post('/register', [LoginController::class, 'save'])->name('save');
 
-//Route::post('/register', [LoginController::class, 'save'])->name('save');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'check'])->name('check');
+
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware'=>'auth.custom'], function(){
     Route::get('/', [LoginController::class, 'index']);
-    Route::get('/login', [LoginController::class, 'login'])->name('login');
-    Route::get('/register', [LoginController::class, 'register'])->name('register');
-    
     Route::resource('mien', MienController::class);
     Route::resource('nguoiDung', NguoiDungController::class);
     Route::resource('theLoai', TheLoaiController::class);
