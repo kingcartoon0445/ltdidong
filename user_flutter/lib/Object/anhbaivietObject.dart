@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class AnhBaiVietObject{
   final int ABV_Ma;
   final int ABV_MaBaiViet;
@@ -7,6 +9,6 @@ class AnhBaiVietObject{
   AnhBaiVietObject.fromjson(Map<String,dynamic>res):
   ABV_Ma=res["id"],
   ABV_MaBaiViet=res["MaBaiViet"],
-  ABV_Anh=res["Anh"],
+  ABV_Anh=res['Anh'],
   ABV_TrangThai=res["TrangThai"];
 }
