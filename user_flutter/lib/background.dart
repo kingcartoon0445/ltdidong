@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:user_flutter/Hoang/search/SearchPage.dart';
+import 'package:user_flutter/Object/nguoidungObject.dart';
+import 'package:user_flutter/Provider/NguoiDungProvider.dart';
 import 'package:user_flutter/baiviet/BV_chitiet.dart';
 import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
@@ -25,6 +27,7 @@ class Background extends StatefulWidget {
 }
 
 class _BackgroundState extends State<Background> {
+  
   final int id;
   _BackgroundState({required this.id});
   int _page = 0;
@@ -47,6 +50,17 @@ class _BackgroundState extends State<Background> {
 
   @override
   Widget build(BuildContext context) {
+    String avt='Duy.jpg';
+  load_avt()async{
+    List<NguoiDungObject> a =await NguoiDungProvider.oneNguoiDung(id);
+   avt=a[0].Nd_AnhNen;
+  }
+  initState(){
+    super.initState();
+    setState(() {
+      load_avt();
+    });
+  };
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -90,7 +104,7 @@ class _BackgroundState extends State<Background> {
                           child: ListTile(
                             leading: CircleAvatar(
                               maxRadius: 30,
-                              child: Text('D'),
+                             backgroundImage: NetworkImage('http://10.0.2.2:8000/storage/upload/anhNen/'+avt),
                             ),
                             title: Text(
                               'Diu diu dio',
@@ -160,7 +174,7 @@ class _BackgroundState extends State<Background> {
                   });
             },
             icon: CircleAvatar(
-              child: Text("D"),
+               backgroundImage: NetworkImage('http://10.0.2.2:8000/storage/upload/anhNen/'+avt),
             ),
           )
         ],

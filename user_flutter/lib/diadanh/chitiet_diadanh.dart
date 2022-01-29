@@ -121,16 +121,16 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                 SizedBox(
                   width: 5,
                 ),
-                TextButton(
+               Expanded(child: TextButton(
                     onPressed: () {},
                     child: Expanded(
                       child: Text(
-                        DD.Dd_DiaChi,
+                        DD.Dd_DiaChi,overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 16,
                         ),
                       ),
-                    )),
+                    )),)
               ],
             ),
             SizedBox(

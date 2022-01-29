@@ -13,7 +13,7 @@ class DiaDanhObject{
   DiaDanhObject(this.Dd_Ma,this.Dd_AnhBia,this.Dd_Ten,this.Dd_DiaChi,this.Dd_MaMien,this.Dd_TenMien,this.Dd_KinhDo,this.Dd_ViDo,this.Dd_MoTa);
   DiaDanhObject.fromjson(Map<String,dynamic>res):
   Dd_Ma=res["id"],
-  Dd_AnhBia=Image.network(res['AnhBia'],width: double.infinity,
+  Dd_AnhBia=Image.network('http://10.0.2.2:8000/upload/anhDiaDanh/'+res['AnhBia'],width: double.infinity,
                         height: 400,
                         fit: BoxFit.cover,),
   Dd_Ten=res["Ten"],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_flutter/colorplush.dart';
+import 'package:user_flutter/diadanh/chitiet_tienich.dart';
 
 class DanhSachTienTich extends StatefulWidget {
   const DanhSachTienTich({Key? key}) : super(key: key);
@@ -25,7 +26,10 @@ class _DanhSachTienTichState extends State<DanhSachTienTich> {
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {/*1*/},
+                            onTap: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChiTietTienIch()),
+              );},
                             child: Container(
                               margin: EdgeInsets.only(right: 15),
                               width: 150,

@@ -96,59 +96,31 @@ class LayAnh extends StatefulWidget {
 }
 class _LayAnhState extends State<LayAnh> {
   final int id;
-  List<NetworkImage> ls=[];
-  void layDS(int id) async{
-    List<AnhBaiVietObject> lstkhac= await BaiVietProvider.layAnhBV(id);
-    for (var item in lstkhac) {
-      ls.add(new NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+item.ABV_Anh));
-    }
-  }
-  @override
-  void initState(){
-   super.initState();
-   layDS(id);
-  }
   _LayAnhState({required this.id});
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-                  itemCount: ls.length,
-                  itemBuilder: (context, index) =>
-                  Container(
-                    width: double.maxFinite,
-                    decoration:  BoxDecoration(
-                        image: DecorationImage(
-                      image:ls[index],
-                      fit: BoxFit.cover,
-                    )),
-                  ),
-                );
+    return 
     
-    /* FutureBuilder<List<AnhBaiVietObject>>(
+     FutureBuilder<List<AnhBaiVietObject>>(
       future: BaiVietProvider.layAnhBV(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<AnhBaiVietObject> lsAnhBV = snapshot.data!;
           return PageView.builder(
-            onPageChanged: (int index) {
-              setState(() {
-                NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh);
-              });
-            },
                   itemCount: lsAnhBV.length,
                   itemBuilder: (context, index) =>
                   Container(
                     width: double.maxFinite,
                     decoration:  BoxDecoration(
                         image: DecorationImage(
-                      image:NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh),
+                      image:NetworkImage('http://10.0.2.2:8000/storage/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh),
                       fit: BoxFit.cover,
                     )),
                   ),
                 );
         }
         return Text("data");
-      });*/
+      });
   }
 }
 
