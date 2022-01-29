@@ -91,7 +91,7 @@ Route::post('/BaiVietUS', function (Request $request) {
 });
 
 
-Route::apiResource('CoTienIch',CoTienIchController::class);
+
 Route::apiResource('DanhGia',DanhGiaController::class);
 Route::apiResource('DeXuat',DeXuatController::class);
 Route::apiResource('DiaDanh',DiaDanhController::class);
@@ -99,12 +99,16 @@ Route::apiResource('DiaDanh',DiaDanhController::class);
 Route::apiResource('Like',LikeController::class);
 Route::post('/XoaLike', [LikeController::class, 'XoaLike']);
 Route::post('/KtraLike', [LikeController::class, 'KtraLike']);
+//route Tiện ích
+Route::apiResource('TienIch',TienIchController::class);
+Route::apiResource('CoTienIch',CoTienIchController::class);
+Route::get('/danhsachtienich/{MaDiaDanh}', [CoTienIchController::class, 'show2']);
 
 Route::apiResource('Mien',MienController::class);
 Route::apiResource('NguoiDung',NguoiDungController::class);
 Route::apiResource('TheLoai',TheloaiController::class);
 Route::apiResource('ThuocTheLoai',ThuoctheloaiController::class);
-Route::apiResource('TienIch',TienIchController::class);
+
 
 Route::apiResource('View',ViewController::class);
 Route::post('/XoaView', [LikeController::class, 'XoaView']);

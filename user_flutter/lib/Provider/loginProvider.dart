@@ -26,4 +26,10 @@ class LoginProvider{
             print('response status:${response.body}');
           }
   }
+ static Future<int> register(BuildContext context,String HoTen,String Email,String sdt,String Matkhau) async{
+   String url='http://10.0.2.2:8000/api/NguoiDung';
+    Map body={'HovaTen':HoTen,'Email':Email,'SDT':sdt,'MatKhau':Matkhau};
+    var response= await http.post(Uri.parse(url),body:body); 
+      if(response.statusCode==200) return 1;else return 0;
+ }
 }

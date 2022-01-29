@@ -14,6 +14,7 @@ class TienIch extends Model
     protected $fillable =[
         'id',
         'Ten',
+        'Anh',
         'Loai',
         'DiaChi',
         'Mota',

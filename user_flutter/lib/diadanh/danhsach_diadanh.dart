@@ -229,7 +229,9 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: lsdd[index].Dd_AnhBia,
+                      child: Image.network('https://cdn1.dotesports.com/wp-content/uploads/2021/09/09145842/SummonersRift.jpg',width: double.infinity,
+                        height: 400,
+                        fit: BoxFit.cover,),
                     ),
                   ),
                 ),
@@ -282,10 +284,10 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                                     Icons.place_outlined,
                                     color: Colors.white,
                                   ),
-                                  Text(
-                                    lsdd[index].Dd_DiaChi,
+                                  Expanded(child: Text(
+                                    lsdd[index].Dd_DiaChi,overflow: TextOverflow.ellipsis,
                                     style: TextStyle(color: Colors.white),
-                                  ),
+                                  ),),
                                 ],
                               ),
                               Row(

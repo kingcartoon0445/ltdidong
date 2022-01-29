@@ -6,6 +6,7 @@ use App\Models\DiaDanh;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDiaDanhRequest;
 use App\Http\Requests\UpdateDiaDanhRequest;
+use Illuminate\Support\Facades\DB;
 
 class DiaDanhController extends Controller
 {
