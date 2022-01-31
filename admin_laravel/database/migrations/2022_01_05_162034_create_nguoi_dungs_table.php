@@ -19,7 +19,7 @@ class CreateNguoiDungsTable extends Migration
             $table->string('HovaTen');
             $table->string('Email')->unique();
             $table->string('SDT');
-            $table->string('AnhNen');
+            $table->string('AnhNen')->default('');
             $table->string('MatKhau');
             $table->boolean('IsAdmin')->default(0);
             $table->Integer('TrangThai')->default(1);

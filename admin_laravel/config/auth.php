@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'nguoi_dung',
+        'passwords' => 'nguoi_dungs',
     ],
 
     /*
@@ -39,6 +39,11 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        'nguoi_dung' => [
+            'driver' => 'session',
+            'provider' => 'nguoi_dungs',
         ],
     ],
 
@@ -65,6 +70,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'nguoi_dungs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\NguoiDung::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -89,6 +99,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'nguoi_dungs' => [
+            'provider' => 'nguoi_dungs',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
