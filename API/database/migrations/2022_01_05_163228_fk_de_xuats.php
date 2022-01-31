@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FKLike extends Migration
+class FkDeXuats extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class FKLike extends Migration
      */
     public function up()
     {
-        Schema::table('likes', function (Blueprint $table) {
-            //
+        Schema::table('de_xuats', function (Blueprint $table) {
             $table->foreign('MaNguoiDung')->references('id')->on('nguoi_dungs');
-            $table->foreign('MaBaiViet')->references('id')->on('bai_viets');
+            $table->foreign('MaDiaDanh')->references('id')->on('dia_danhs');
         });
     }
 
@@ -27,7 +26,7 @@ class FKLike extends Migration
      */
     public function down()
     {
-        Schema::table('likes', function (Blueprint $table) {
+        Schema::table('de_xuats', function (Blueprint $table) {
             //
         });
     }

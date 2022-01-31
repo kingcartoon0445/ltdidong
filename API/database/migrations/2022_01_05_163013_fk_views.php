@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateViewsTable extends Migration
+class FkViews extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateViewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('views', function (Blueprint $table) {
-            $table->foreignId('MaNguoiDung');
-            $table->foreignId('MaBaiViet');
+        Schema::table('views', function (Blueprint $table) {
+            $table->foreign('MaNguoiDung')->references('id')->on('nguoi_dungs');
+            $table->foreign('MaBaiViet')->references('id')->on('bai_viets');
         });
     }
 
@@ -26,6 +26,8 @@ class CreateViewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('views');
+        Schema::table('views', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnhBaiVietsTable extends Migration
+class FkLikes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateAnhBaiVietsTable extends Migration
      */
     public function up()
     {
-        Schema::create('anh_bai_viets', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('MaBaiViet');
-            $table->string('Anh');
-            $table->Integer('TrangThai')->default(1);
-            $table->timestamps();
+        Schema::table('likes', function (Blueprint $table) {
+            $table->foreign('MaNguoiDung')->references('id')->on('nguoi_dungs');
+            $table->foreign('MaBaiViet')->references('id')->on('bai_viets');
         });
     }
 
@@ -29,6 +26,8 @@ class CreateAnhBaiVietsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anh_bai_viets');
+        Schema::table('likes', function (Blueprint $table) {
+            //
+        });
     }
 }

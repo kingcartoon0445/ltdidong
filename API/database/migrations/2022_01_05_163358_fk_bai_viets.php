@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FkBaiviet extends Migration
+class FkBaiViets extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,6 @@ class FkBaiviet extends Migration
     public function up()
     {
         Schema::table('bai_viets', function (Blueprint $table) {
-            //
             $table->foreign('MaNguoiDung')->references('id')->on('nguoi_dungs');
             $table->foreign('MaDiaDanh')->references('id')->on('dia_danhs');
         });

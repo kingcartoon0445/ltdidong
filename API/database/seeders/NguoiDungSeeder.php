@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class NguoiDungSeeder extends Seeder
 {
@@ -14,5 +15,40 @@ class NguoiDungSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('nguoi_dungs')->insert([
+            'TenDaiDien' =>'Thuận',
+            'HovaTen' =>'Lê Thuận',
+            'Email' =>'123@gmail.com',
+            'AnhNen' =>'avt.jpg',
+            'MatKhau' =>'daylamatkhaucuaThuan',
+            'SDT' =>'0123456789'
+      ]);
+      DB::table('nguoi_dungs')->insert([
+          'TenDaiDien' =>'Dui',
+          'HovaTen' =>'Dui sugarbaby',
+          'Email' =>'1234@gmail.com',
+            'AnhNen' =>'avt.jpg',
+            'MatKhau' =>'daylamatkhaucuaDui',
+            'SDT' =>'0987654321'
+    ]);
+    
+    DB::table('nguoi_dungs')->insert([
+      'TenDaiDien' =>'Admin',
+      'HovaTen' =>'Admin',
+      'Email' =>'admin@gmail.com',
+      'AnhNen' =>'avt.jpg',
+      'MatKhau' =>'admin',
+      'SDT' =>'012345678',
+      'IsAdmin'=>'1' 
+    ]);
+
+      DB::table('nguoi_dungs')->insert([
+        'TenDaiDien' =>'Hoàng',
+        'HovaTen' =>'Hoàng Huy',
+        'Email' =>'123456@gmail.com',
+        'AnhNen' =>'avt.jpg',
+        'MatKhau' =>'daylamatkhaucuaHoang',
+        'SDT' =>'0333444555',
+        ]);
     }
 }
