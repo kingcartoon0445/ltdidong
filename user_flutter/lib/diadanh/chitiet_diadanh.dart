@@ -104,7 +104,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               children: [
                 Expanded(
                   child: Text(
-                    'nhahang',
+                    DD.Dd_Ten,
                     style: TextStyle(
                       fontSize: 22,
                     ),
@@ -121,16 +121,16 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                 SizedBox(
                   width: 5,
                 ),
-                TextButton(
+               Expanded(child: TextButton(
                     onPressed: () {},
                     child: Expanded(
                       child: Text(
-                        ' DD.Dd_DiaChi',
+                        DD.Dd_DiaChi,overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 16,
                         ),
                       ),
-                    )),
+                    )),)
               ],
             ),
             SizedBox(
@@ -175,7 +175,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               children: [
                 Expanded(
                   child: Text(
-                    'Dd_KinhDo',
+                    DD.Dd_MoTa,
                     style: TextStyle(
                       fontSize: 14,
                     ),

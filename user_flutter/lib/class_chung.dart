@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:user_flutter/Object/anhbaivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
+import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Object/diadanhObject.dart';
 import 'Object/nguoidungObject.dart';
@@ -95,59 +96,31 @@ class LayAnh extends StatefulWidget {
 }
 class _LayAnhState extends State<LayAnh> {
   final int id;
-  List<NetworkImage> ls=[];
-  void layDS(int id) async{
-    List<AnhBaiVietObject> lstkhac= await BaiVietProvider.layAnhBV(id);
-    for (var item in lstkhac) {
-      ls.add(new NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+item.ABV_Anh));
-    }
-  }
-  @override
-  void initState(){
-   super.initState();
-   layDS(id);
-  }
   _LayAnhState({required this.id});
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-                  itemCount: ls.length,
-                  itemBuilder: (context, index) =>
-                  Container(
-                    width: double.maxFinite,
-                    decoration:  BoxDecoration(
-                        image: DecorationImage(
-                      image:ls[index],
-                      fit: BoxFit.cover,
-                    )),
-                  ),
-                );
+    return 
     
-    /* FutureBuilder<List<AnhBaiVietObject>>(
+     FutureBuilder<List<AnhBaiVietObject>>(
       future: BaiVietProvider.layAnhBV(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<AnhBaiVietObject> lsAnhBV = snapshot.data!;
           return PageView.builder(
-            onPageChanged: (int index) {
-              setState(() {
-                NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh);
-              });
-            },
                   itemCount: lsAnhBV.length,
                   itemBuilder: (context, index) =>
                   Container(
                     width: double.maxFinite,
                     decoration:  BoxDecoration(
                         image: DecorationImage(
-                      image:NetworkImage('http://10.0.2.2:8000/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh),
+                      image:NetworkImage('http://10.0.2.2:8000/storage/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh),
                       fit: BoxFit.cover,
                     )),
                   ),
                 );
         }
         return Text("data");
-      });*/
+      });
   }
 }
 
@@ -163,4 +136,16 @@ Widget LayTT(int id){
         return CircularProgressIndicator();;
       });
 }
+
 //Địa danh
+Widget LayDiaDanh(int id){
+return FutureBuilder<List<DiaDanhObject>>(
+      future: DiaDanhProvider.oneDiaDanh(id),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<DiaDanhObject> lsnd = snapshot.data!;
+          return ChiTietDiaDanh(DD: lsnd[0]);
+        }
+        return Text("data");
+      });
+}
