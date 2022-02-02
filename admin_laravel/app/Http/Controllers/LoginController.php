@@ -11,6 +11,7 @@ class LoginController extends Controller
 {
     public function index(){
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        
         if(Storage::disk('public')->exists($data->AnhNen)){
             $data->AnhNen = Storage::url($data->AnhNen);
         }

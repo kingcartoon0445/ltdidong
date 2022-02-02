@@ -58,15 +58,9 @@ class MienController extends Controller
             'TenMien' => ['required'],
         ]);
 
-        if($request->input('txtTrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
-
         $mien=new Mien;
         $mien->fill([
             'TenMien'=>$request->input('TenMien'),
-            'TrangThai'=>$trangthai,
         ]);
 
         $mien->save();
@@ -115,14 +109,8 @@ class MienController extends Controller
             'TenMien' => 'required',
         ]);
 
-        if($request->input('txtTrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
-
         $mien->fill([
             'TenMien'=>$request->input('TenMien'),
-            'TrangThai'=>$trangthai,
         ]);
 
         $mien->save();

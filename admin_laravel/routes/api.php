@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\AuthController;
 
+use App\Http\Controllers\API\MienController;
+use App\Http\Controllers\API\TheLoaiController;
+use App\Http\Controllers\API\DiaDanhController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,10 +25,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 */
 
-Route::post('login', [AuthController::class, 'login']);
-Route::post('register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::get('profile', [AuthController::class, 'profile']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/profile', [AuthController::class, 'profile']);
+
+    Route::apiResource('/miens', MienController::class);
 });
+
+Route::apiResource('/theloais', TheLoaiController::class);
+Route::apiResource('/diadanhs', DiaDanhController::class);

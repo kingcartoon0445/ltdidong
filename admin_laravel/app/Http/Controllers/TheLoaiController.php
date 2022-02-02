@@ -57,17 +57,10 @@ class TheLoaiController extends Controller
         $request->validate([
             'TenTheLoai' => 'required',
         ]);
-        
-        //
-        if($request->input('TrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
 
         $theLoai=new TheLoai;
         $theLoai->fill([
             'Ten'=>$request->input('TenTheLoai'),
-            'TrangThai'=>$trangthai,
         ]);
 
         $theLoai->save();
@@ -115,16 +108,9 @@ class TheLoaiController extends Controller
         $request->validate([
             'TenTheLoai' => 'required',
         ]);
-        
-        //
-        if($request->input('TrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
 
         $theLoai->fill([
             'Ten'=>$request->input('TenTheLoai'),
-            'TrangThai'=>$trangthai,
         ]);
 
         $theLoai->save();
