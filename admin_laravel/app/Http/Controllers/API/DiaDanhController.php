@@ -44,31 +44,8 @@ class DiaDanhController extends Controller
      */
     public function index()
     {
-        $listDiaDanh = DiaDanh::all();
-        $listTheLoai = DiaDanh::with('theLoais')->get();
-        $listAnhDiaDanh = DiaDanh::with('anhDiaDanhs')->get();
-        
-        foreach ($listAnhDiaDanh as $diaDanh) {
-            if ($diaDanh->AnhBia){
-                if(Storage::disk('public')->exists($diaDanh->AnhBia)){
-                    $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
-                }
-                else{
-                    $diaDanh->AnhBia = Storage::url('images/no_image_holder.png');
-                }
-            }
-            
-            if($diaDanh->Anh){
-                if(Storage::disk('public')->exists($diaDanh->Anh)){
-                    $diaDanh->Anh = Storage::url($diaDanh->Anh);
-                }
-                else{
-                    $diaDanh->Anh = Storage::url('images/no_image_holder.png');
-                }
-            }
-        }
-
-        return response()->json($listAnhDiaDanh, 200);
+        $listDiaDanh = DiaDanh::with('mien', 'theLoais', 'anhDiaDanhs')->get();
+        return response()->json($listDiaDanh, 200);
     }
 
     /**
@@ -90,7 +67,9 @@ class DiaDanhController extends Controller
      */
     public function show($id)
     {
-        //
+        $diaDanh = DiaDanh::with('mien', 'theLoais', 'anhDiaDanhs')->where('id',$id)->get();
+        
+        return response()->json($diaDanh, 200);
     }
 
     /**
