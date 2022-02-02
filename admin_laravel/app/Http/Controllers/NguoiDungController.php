@@ -67,6 +67,12 @@ class NguoiDungController extends Controller
             'SDT' => ['required','min:10','max:12'],
             'MatKhau' => 'required',
             'hinh' => ['mimetypes:image/*','max:5000'],
+        ],[
+            'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
+            'HoTen.required' => 'Vui lòng nhập họ tên',
+            'Email.required' => 'Vui lòng nhập email',
+            'SDT.required' => 'Vui lòng nhập số điện thoại',
+            'MatKhau.required' => 'Vui lòng nhập mật khẩu',
         ]);
 
         if($request->input('TrangThai') == 'Hoạt động')
@@ -147,6 +153,12 @@ class NguoiDungController extends Controller
             'SDT' => ['required','min:10','max:12'],
             'MatKhau' => 'required',
             'hinh' => ['mimetypes:image/*', 'max:5000'],
+        ],[
+            'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
+            'HoTen.required' => 'Vui lòng nhập họ tên',
+            'Email.required' => 'Vui lòng nhập email',
+            'SDT.required' => 'Vui lòng nhập số điện thoại',
+            'MatKhau.required' => 'Vui lòng nhập mật khẩu',
         ]);
         
         if($request->input('TrangThai') == 'Hoạt động')

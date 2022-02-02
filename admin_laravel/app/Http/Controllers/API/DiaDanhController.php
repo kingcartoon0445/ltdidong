@@ -17,34 +17,34 @@ use DB;
 
 class DiaDanhController extends Controller
 {
-    protected function fixImage_DiaDanh(DiaDanh $diaDanh)
-    {
-        if(Storage::disk('public')->exists($diaDanh->AnhBia)){
-            $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
-        }
-        else{
-            $diaDanh->AnhBia = Storage::url('images/no_image_holder.png');
-        }
-    }
-
-    protected function fixImage_AnhDiaDanh(AnhDiaDanh $anhDiaDanh)
-    {
-        if(Storage::disk('public')->exists($anhDiaDanh->Anh)){
-            $anhDiaDanh->Anh = Storage::url($anhDiaDanh->Anh);
-        }
-        else{
-            $anhDiaDanh->Anh = Storage::url('images/no_image_holder.png');
-        }
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         $listDiaDanh = DiaDanh::with('mien', 'theLoais', 'anhDiaDanhs')->get();
+        
+        foreach($listDiaDanh as $diaDanh){
+            if(Storage::disk('public')->exists($diaDanh->AnhBia)){
+                $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
+            }
+            else{
+                $diaDanh->AnhBia = Storage::url('images/no_image_holder.png');
+            }
+
+            foreach($diaDanh->anhDiaDanhs as $anhDiaDanh){
+                if(Storage::disk('public')->exists($anhDiaDanh->Anh)){
+                    $anhDiaDanh->Anh = Storage::url($anhDiaDanh->Anh);
+                }
+                else{
+                    $anhDiaDanh->Anh = Storage::url('images/no_image_holder.png');
+                }
+            }
+        }
+
         return response()->json($listDiaDanh, 200);
     }
 
@@ -67,7 +67,23 @@ class DiaDanhController extends Controller
      */
     public function show($id)
     {
-        $diaDanh = DiaDanh::with('mien', 'theLoais', 'anhDiaDanhs')->where('id',$id)->get();
+        $diaDanh = DiaDanh::with('mien', 'theLoais', 'anhDiaDanhs')->where('id',$id)->first();
+        
+        if(Storage::disk('public')->exists($diaDanh->AnhBia)){
+            $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
+        }
+        else{
+            $diaDanh->AnhBia = Storage::url('images/no_image_holder.png');
+        }
+
+        foreach($diaDanh->anhDiaDanhs as $anhDiaDanh){
+            if(Storage::disk('public')->exists($anhDiaDanh->Anh)){
+                $anhDiaDanh->Anh = Storage::url($anhDiaDanh->Anh);
+            }
+            else{
+                $anhDiaDanh->Anh = Storage::url('images/no_image_holder.png');
+            }
+        }
         
         return response()->json($diaDanh, 200);
     }

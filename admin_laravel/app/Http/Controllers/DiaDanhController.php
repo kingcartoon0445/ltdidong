@@ -99,6 +99,15 @@ class DiaDanhController extends Controller
             'ViDo' => 'required',
             'DiaChi' => 'required',
             'MoTa' => 'required',
+            'theloais' => 'required',
+        ],[
+            'Ten.required' => 'Vui lòng nhập tên địa danh',
+            'MaMien.required' => 'Vui lòng chọn miền',
+            'KinhDo.required' => 'Vui lòng nhập kinh độ',
+            'ViDo.required' => 'Vui lòng nhập vĩ độ',
+            'DiaChi.required' => 'Vui lòng nhập địa chỉ',
+            'MoTa.required' => 'Vui lòng nhập mô tả',
+            'theloais.required' => 'Vui lòng chọn thể loại',
         ]);
 
         if($request->input('TrangThai') == 'Hoạt động')
@@ -236,6 +245,13 @@ class DiaDanhController extends Controller
             'ViDo' => 'required',
             'DiaChi' => 'required',
             'MoTa' => 'required',
+        ],[
+            'Ten.required' => 'Vui lòng nhập tên địa danh',
+            'MaMien.required' => 'Vui lòng chọn miền',
+            'KinhDo.required' => 'Vui lòng nhập kinh độ',
+            'ViDo.required' => 'Vui lòng nhập vĩ độ',
+            'DiaChi.required' => 'Vui lòng nhập địa chỉ',
+            'MoTa.required' => 'Vui lòng nhập mô tả',
         ]);
 
         if($request->input('TrangThai') == 'Hoạt động')

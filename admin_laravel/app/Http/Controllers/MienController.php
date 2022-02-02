@@ -56,6 +56,8 @@ class MienController extends Controller
     {
         $request->validate([
             'TenMien' => ['required'],
+        ],[
+            'TenMien.required' => 'Vui lòng nhập tên miền',
         ]);
 
         $mien=new Mien;
@@ -107,6 +109,8 @@ class MienController extends Controller
     {
         $request->validate([
             'TenMien' => 'required',
+        ],[
+            'TenMien.required' => 'Vui lòng nhập tên miền',
         ]);
 
         $mien->fill([

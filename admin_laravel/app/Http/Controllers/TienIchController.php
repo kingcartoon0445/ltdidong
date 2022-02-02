@@ -90,6 +90,12 @@ class TienIchController extends Controller
             'DiaChi' => 'required',
             'MoTa' => 'required',
             'SDT' => 'required',
+        ],[
+            'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
+            'Loai.required' => 'Vui lòng nhập loại',
+            'DiaChi.required' => 'Vui lòng nhập địa chỉ',
+            'MoTa.required' => 'Vui lòng nhập mô tả',
+            'SDT.required' => 'Vui lòng nhập số điện thoại',
         ]);
 
         if($request->input('TrangThai') == 'Hoạt động')
@@ -188,6 +194,12 @@ class TienIchController extends Controller
             'DiaChi' => 'required',
             'MoTa' => 'required',
             'SDT' => 'required',
+        ],[
+            'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
+            'Loai.required' => 'Vui lòng nhập loại',
+            'DiaChi.required' => 'Vui lòng nhập địa chỉ',
+            'MoTa.required' => 'Vui lòng nhập mô tả',
+            'SDT.required' => 'Vui lòng nhập số điện thoại',
         ]);
 
         if($request->input('TrangThai') == 'Hoạt động')

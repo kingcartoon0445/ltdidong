@@ -56,6 +56,8 @@ class TheLoaiController extends Controller
     {
         $request->validate([
             'TenTheLoai' => 'required',
+        ],[
+            'TenTheLoai.required' => 'Vui lòng nhập tên thể loại',
         ]);
 
         $theLoai=new TheLoai;
@@ -107,6 +109,8 @@ class TheLoaiController extends Controller
     {
         $request->validate([
             'TenTheLoai' => 'required',
+        ],[
+            'TenTheLoai.required' => 'Vui lòng nhập tên thể loại',
         ]);
 
         $theLoai->fill([

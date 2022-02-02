@@ -78,6 +78,11 @@ class BaiVietController extends Controller
             'NoiDung' => 'required',
             'MaDiaDanh' => 'required',
             'MaNguoiDung' => 'required',
+        ],[
+            'TieuDe.required' => 'Vui lòng nhập tiêu đề',
+            'NoiDung.required' => 'Vui lòng nhập nội dung',
+            'MaDiaDanh.required' => 'Vui lòng chọn địa danh',
+            'MaNguoiDung.required' => 'Vui lòng chọn người đăng'
         ]);
 
         if($request->input('TrangThai') == 'Hiện')
@@ -177,6 +182,11 @@ class BaiVietController extends Controller
             'NoiDung' => 'required',
             'MaDiaDanh' => 'required',
             'MaNguoiDung' => 'required',
+        ],[
+            'TieuDe.required' => 'Vui lòng nhập tiêu đề',
+            'NoiDung.required' => 'Vui lòng nhập nội dung',
+            'MaDiaDanh.required' => 'Vui lòng chọn địa danh',
+            'MaNguoiDung.required' => 'Vui lòng chọn người đăng'
         ]);
 
         if($request->input('TrangThai') == 'Hiện')
