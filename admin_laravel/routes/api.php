@@ -8,6 +8,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\MienController;
 use App\Http\Controllers\API\TheLoaiController;
 use App\Http\Controllers\API\DiaDanhController;
+use App\Http\Controllers\API\TienIchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::apiResource('/theloais', TheLoaiController::class);
 Route::apiResource('/diadanhs', DiaDanhController::class);
+Route::apiResource('/tienichs', TienIchController::class);

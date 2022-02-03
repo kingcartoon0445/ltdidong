@@ -48,7 +48,7 @@
                         </td>
                         <td>{{ $tienIch->SDT }}</td>
                         <td>
-                          @if($diaDanh->TrangThai==0)
+                          @if($tienIch->TrangThai==0)
                             <label class="badge badge-danger" style="width: 90px; height: 25px; font-weight: bold;">Đóng cửa</label>
                           @else
                             <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hoạt động</label>
@@ -140,8 +140,8 @@
                                   <div class="form-group">
                                     <label for="TrangThai">Trạng thái</label>
                                     <select class="custom-select form-control-border border-width-2" name="TrangThai">
-                                        <option @if($diaDanh->TrangThai==1) selected @endif>Hoạt động</option>  
-                                        <option @if($diaDanh->TrangThai==0) selected @endif>Đóng cửa</option>
+                                        <option @if($tienIch->TrangThai==1) selected @endif>Hoạt động</option>  
+                                        <option @if($tienIch->TrangThai==0) selected @endif>Đóng cửa</option>
                                     </select>
                                 </div>
                   

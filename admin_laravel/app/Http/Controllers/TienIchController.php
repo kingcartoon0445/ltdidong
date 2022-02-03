@@ -217,7 +217,6 @@ class TienIchController extends Controller
             'DiaChi'=>$request->input('DiaChi'),
             'MoTa'=>$request->input('MoTa'),
             'SDT'=>$request->input('SDT'),
-            'Anh'=>'',
             'TrangThai'=>$trangthai,
         ]);
 

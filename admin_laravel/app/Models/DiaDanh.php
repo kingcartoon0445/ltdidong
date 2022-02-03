@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Models\AnhDiaDanh;
 use App\Models\Mien;
-use App\Models\ThuocTheLoai;
+use App\Models\TheLoai;
+use App\Models\TienIch;
 
 class DiaDanh extends Model
 {
@@ -27,6 +28,10 @@ class DiaDanh extends Model
     }
 
     public function theLoais(){
-        return $this->hasMany(ThuocTheLoai::class, 'MaDiaDanh');
+        return $this->belongsToMany(TheLoai::class, 'thuoc_the_loais', 'MaDiaDanh', 'MaTheLoai');
+    }
+
+    public function tienIchs(){
+        return $this->belongsToMany(TienIch::class, 'co_tien_iches', 'MaDiaDanh', 'MaTienIch');
     }
 }
