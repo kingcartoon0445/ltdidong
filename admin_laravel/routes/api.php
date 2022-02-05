@@ -33,12 +33,12 @@ Route::post('/forgot-password', [AuthController::class, 'forgot']);
 Route::post('/reset-password', [AuthController::class, 'reset']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'profile']);
-});
 
-Route::apiResource('/miens', MienController::class);
-Route::apiResource('/theloais', TheLoaiController::class);
-Route::apiResource('/diadanhs', DiaDanhController::class);
-Route::apiResource('/tienichs', TienIchController::class);
-Route::apiResource('/baiviets', BaiVietController::class);
+    Route::apiResource('/miens', MienController::class);
+    Route::apiResource('/theloais', TheLoaiController::class);
+    Route::apiResource('/diadanhs', DiaDanhController::class);
+    Route::apiResource('/tienichs', TienIchController::class);
+    Route::apiResource('/baiviets', BaiVietController::class);
+});
