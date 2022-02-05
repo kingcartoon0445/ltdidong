@@ -40,7 +40,6 @@ class AuthController extends Controller
         $token = $nguoiDung->createToken('API Token')->plainTextToken;
 
         return response()->json([
-	'success' => true,
             'nguoi_dung' => $nguoiDung,
             'token' => $token,
         ], 200);
@@ -49,7 +48,7 @@ class AuthController extends Controller
     public function logout(){
         auth()->user()->tokens()->delete();
 
-        return response()->json(['success' => true, 'message' => 'Logged Out Successfully'], 200);
+        return response()->json(['message' => 'Logged Out Successfully'], 200);
     }
 
     public function login(Request $request){
@@ -61,13 +60,12 @@ class AuthController extends Controller
         $nguoiDung = NguoiDung::where('Email', $data['Email'])->first();
 
         if(!$nguoiDung || !Hash::check($data['MatKhau'], $nguoiDung['MatKhau'])){
-            return response()->json(['success' => false, 'message' => 'Đăng nhập thất bại'], 400);
+            return response()->json(['message' => 'Đăng nhập thất bại'], 400);
         }
         else{
             $token = $nguoiDung->createToken('API Token')->plainTextToken;
 
             return response()->json([
-		'success' => true,
                 'nguoi_dung' => $nguoiDung,
                 'token' => $token,
             ], 200);
