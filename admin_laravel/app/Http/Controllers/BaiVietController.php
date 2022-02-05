@@ -78,17 +78,14 @@ class BaiVietController extends Controller
             'NoiDung' => 'required',
             'MaDiaDanh' => 'required',
             'MaNguoiDung' => 'required',
+            'hinh' => 'max:5000',
         ],[
             'TieuDe.required' => 'Vui lòng nhập tiêu đề',
             'NoiDung.required' => 'Vui lòng nhập nội dung',
             'MaDiaDanh.required' => 'Vui lòng chọn địa danh',
-            'MaNguoiDung.required' => 'Vui lòng chọn người đăng'
+            'MaNguoiDung.required' => 'Vui lòng chọn người đăng',
+            'hinh.max' => 'Tối đa 5 MB',
         ]);
-
-        if($request->input('TrangThai') == 'Hiện')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
 
         $baiViet = new BaiViet;
         $baiViet->fill([
@@ -96,7 +93,7 @@ class BaiVietController extends Controller
             'NoiDung'=>$request->input('NoiDung'),
             'MaDiaDanh'=>$request->input('MaDiaDanh'),
             'MaNguoiDung'=>$request->input('MaNguoiDung'),
-            'TrangThai'=>$trangthai,
+            'TrangThai'=>$request->input('TrangThai'),
         ]);
 
         $baiViet->save();
@@ -182,17 +179,14 @@ class BaiVietController extends Controller
             'NoiDung' => 'required',
             'MaDiaDanh' => 'required',
             'MaNguoiDung' => 'required',
+            'images' => 'max:5000',
         ],[
             'TieuDe.required' => 'Vui lòng nhập tiêu đề',
             'NoiDung.required' => 'Vui lòng nhập nội dung',
             'MaDiaDanh.required' => 'Vui lòng chọn địa danh',
-            'MaNguoiDung.required' => 'Vui lòng chọn người đăng'
+            'MaNguoiDung.required' => 'Vui lòng chọn người đăng',
+            'hinh.max' => 'Tối đa 5 MB',
         ]);
-
-        if($request->input('TrangThai') == 'Hiện')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
 
         if($request->hasFile('images')){
             $files = $request->file('images');
@@ -212,7 +206,7 @@ class BaiVietController extends Controller
             'NoiDung'=>$request->input('NoiDung'),
             'MaDiaDanh'=>$request->input('MaDiaDanh'),
             'MaNguoiDung'=>$request->input('MaNguoiDung'),
-            'TrangThai'=>$trangthai,
+            'TrangThai'=>$request->input('TrangThai'),
         ]);
 
         $baiViet->save();

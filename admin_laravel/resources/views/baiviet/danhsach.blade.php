@@ -139,8 +139,8 @@
                 <div class="form-group">
                     <label for="TrangThai">Trạng thái</label>
                     <select class="custom-select form-control-border border-width-2" name="TrangThai">
-                        <option>Hiện</option>  
-                        <option>Ẩn</option>
+                        <option value="1">Hiển thị</option>  
+                        <option value="0">Ẩn</option>
                     </select>
                 </div>
 

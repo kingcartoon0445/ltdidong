@@ -18,8 +18,7 @@ use DB;
 
 class DiaDanhController extends Controller
 {
-    protected function fixImage_NguoiDung(NguoiDung $nguoiDung)
-    {
+    protected function fixImage_NguoiDung(NguoiDung $nguoiDung){
         if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
         }
@@ -28,8 +27,7 @@ class DiaDanhController extends Controller
         }
     }
 
-    protected function fixImage_DiaDanh(DiaDanh $diaDanh)
-    {
+    protected function fixImage_DiaDanh(DiaDanh $diaDanh){
         if(Storage::disk('public')->exists($diaDanh->AnhBia)){
             $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
         }
@@ -38,8 +36,7 @@ class DiaDanhController extends Controller
         }
     }
 
-    protected function fixImage_AnhDiaDanh(AnhDiaDanh $anhDiaDanh)
-    {
+    protected function fixImage_AnhDiaDanh(AnhDiaDanh $anhDiaDanh){
         if(Storage::disk('public')->exists($anhDiaDanh->Anh)){
             $anhDiaDanh->Anh = Storage::url($anhDiaDanh->Anh);
         }
@@ -48,8 +45,7 @@ class DiaDanhController extends Controller
         }
     }
 
-    public function index()
-    {
+    public function index(){
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage_NguoiDung($data);
 
@@ -69,8 +65,7 @@ class DiaDanhController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage_NguoiDung($data);
 
@@ -90,8 +85,7 @@ class DiaDanhController extends Controller
      * @param  \App\Http\Requests\StoreDiaDanhRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDiaDanhRequest $request)
-    {        
+    public function store(StoreDiaDanhRequest $request){        
         $request->validate([
             'Ten' => 'required',
             'MaMien' => 'required',
@@ -100,6 +94,7 @@ class DiaDanhController extends Controller
             'DiaChi' => 'required',
             'MoTa' => 'required',
             'theloais' => 'required',
+            'hinh' => 'max:5000',
         ],[
             'Ten.required' => 'Vui lòng nhập tên địa danh',
             'MaMien.required' => 'Vui lòng chọn miền',
@@ -108,12 +103,8 @@ class DiaDanhController extends Controller
             'DiaChi.required' => 'Vui lòng nhập địa chỉ',
             'MoTa.required' => 'Vui lòng nhập mô tả',
             'theloais.required' => 'Vui lòng chọn thể loại',
+            'hinh.max' => 'Tối đa 5 MB',
         ]);
-
-        if($request->input('TrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
 
         $diaDanh = new DiaDanh;
         $diaDanh->fill([
@@ -124,7 +115,7 @@ class DiaDanhController extends Controller
             'MoTa'=>$request->input('MoTa'),
             'DiaChi'=>$request->input('DiaChi'),
             'AnhBia'=>'',
-            'TrangThai'=>$trangthai,
+            'TrangThai'=>$request->input('TrangThai'),
         ]);
 
         $diaDanh->save();
@@ -169,8 +160,7 @@ class DiaDanhController extends Controller
      * @param  \App\Models\DiaDanh  $diaDanh
      * @return \Illuminate\Http\Response
      */
-    public function show(DiaDanh $diaDanh)
-    {
+    public function show(DiaDanh $diaDanh){
         $this->fixImage_DiaDanh($diaDanh);
 
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
@@ -202,8 +192,7 @@ class DiaDanhController extends Controller
      * @param  \App\Models\DiaDanh  $diaDanh
      * @return \Illuminate\Http\Response
      */
-    public function edit(DiaDanh $diaDanh)
-    {
+    public function edit(DiaDanh $diaDanh){
         $this->fixImage_DiaDanh($diaDanh);
 
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
@@ -236,8 +225,7 @@ class DiaDanhController extends Controller
      * @param  \App\Models\DiaDanh  $diaDanh
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDiaDanhRequest $request, DiaDanh $diaDanh)
-    {
+    public function update(UpdateDiaDanhRequest $request, DiaDanh $diaDanh){
         $request->validate([
             'Ten' => 'required',
             'MaMien' => 'required',
@@ -245,6 +233,7 @@ class DiaDanhController extends Controller
             'ViDo' => 'required',
             'DiaChi' => 'required',
             'MoTa' => 'required',
+            'hinh' => 'max:5000',
         ],[
             'Ten.required' => 'Vui lòng nhập tên địa danh',
             'MaMien.required' => 'Vui lòng chọn miền',
@@ -252,12 +241,8 @@ class DiaDanhController extends Controller
             'ViDo.required' => 'Vui lòng nhập vĩ độ',
             'DiaChi.required' => 'Vui lòng nhập địa chỉ',
             'MoTa.required' => 'Vui lòng nhập mô tả',
+            'hinh.max' => 'Tối đa 5 MB',
         ]);
-
-        if($request->input('TrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
 
         if($request->hasFile('hinh')){
             $diaDanh->AnhBia = $request->file('hinh')->store('images/diadanh/'.$diaDanh->id.'/cover', 'public');
@@ -299,7 +284,7 @@ class DiaDanhController extends Controller
             'MoTa'=>$request->input('MoTa'),
             'DiaChi'=>$request->input('DiaChi'),
             'AnhBia'=>'',
-            'TrangThai'=>$trangthai,
+            'TrangThai'=>$request->input('TrangThai'),
         ]);
         
         $diaDanh->save();

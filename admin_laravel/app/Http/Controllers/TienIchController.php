@@ -90,6 +90,7 @@ class TienIchController extends Controller
             'DiaChi' => 'required',
             'MoTa' => 'required',
             'SDT' => 'required',
+            'hinh' => ['mimetypes:image/*', 'max:5000'],
         ],[
             'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
             'Loai.required' => 'Vui lòng nhập loại',
@@ -194,6 +195,7 @@ class TienIchController extends Controller
             'DiaChi' => 'required',
             'MoTa' => 'required',
             'SDT' => 'required',
+            'hinh' => ['mimetypes:image/*', 'max:5000'],
         ],[
             'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
             'Loai.required' => 'Vui lòng nhập loại',

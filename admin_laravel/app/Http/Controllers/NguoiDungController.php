@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 class NguoiDungController extends Controller
 {
-    protected function fixImage(NguoiDung $nguoiDung)
-    {
+    protected function fixImage(NguoiDung $nguoiDung){
         if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
             $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
         }
@@ -23,8 +22,7 @@ class NguoiDungController extends Controller
         }
     }
 
-    public function index()
-    {        
+    public function index(){        
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage($data);
 
@@ -44,8 +42,7 @@ class NguoiDungController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage($data);
 
@@ -58,32 +55,22 @@ class NguoiDungController extends Controller
      * @param  \App\Http\Requests\StoreNguoiDungRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNguoiDungRequest $request)
-    {
+    public function store(StoreNguoiDungRequest $request){
         $request->validate([
-            'TenDaiDien' => 'required',
-            'HoTen' => 'required',
-            'Email' => ['required', 'email', 'unique:nguoi_dungs,Email'],
-            'SDT' => ['required','min:10','max:12'],
+            'TenDaiDien' => 'required|string',
+            'HoTen' => 'required|string',
+            'Email' => 'required|email|unique:nguoi_dungs,Email',
+            'SDT' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'MatKhau' => 'required',
-            'hinh' => ['mimetypes:image/*','max:5000'],
+            'hinh' => 'max:5000',
         ],[
             'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
             'HoTen.required' => 'Vui lòng nhập họ tên',
             'Email.required' => 'Vui lòng nhập email',
             'SDT.required' => 'Vui lòng nhập số điện thoại',
             'MatKhau.required' => 'Vui lòng nhập mật khẩu',
+            'hinh.max' => 'Tối đa 5 MB',
         ]);
-
-        if($request->input('TrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
-
-        if($request->has('checkIsAdmin'))
-            $isAdmin = 1;
-        else
-            $isAdmin = 0;
 
         $nguoiDung = new NguoiDung;
         $nguoiDung->fill([
@@ -93,8 +80,8 @@ class NguoiDungController extends Controller
             'SDT'=>$request->input('SDT'),
             'AnhNen'=>'',
             'MatKhau'=>Hash::make($request->input('MatKhau')),
-            'IsAdmin'=>$isAdmin,
-            'TrangThai'=>$trangthai,
+            'IsAdmin'=>$request->has('checkIsAdmin'),
+            'TrangThai'=>$request->input('TrangThai'),
         ]);
 
         $nguoiDung->save();
@@ -124,8 +111,7 @@ class NguoiDungController extends Controller
      * @param  \App\Models\NguoiDung  $nguoiDung
      * @return \Illuminate\Http\Response
      */
-    public function edit(NguoiDung $nguoiDung)
-    {
+    public function edit(NguoiDung $nguoiDung){
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage($data);
         
@@ -144,33 +130,23 @@ class NguoiDungController extends Controller
      * @param  \App\Models\NguoiDung  $nguoiDung
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNguoiDungRequest $request, NguoiDung $nguoiDung)
-    {
+    public function update(UpdateNguoiDungRequest $request, NguoiDung $nguoiDung){
         $request->validate([
-            'TenDaiDien' => 'required',
-            'HoTen' => 'required',
-            'Email' => ['required', 'email', 'unique:nguoi_dungs,Email,'.$nguoiDung->id],
-            'SDT' => ['required','min:10','max:12'],
+            'TenDaiDien' => 'required|string',
+            'HoTen' => 'required|string',
+            'Email' => 'required|email|unique:nguoi_dungs,Email,'.$nguoiDung->id,
+            'SDT' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'MatKhau' => 'required',
-            'hinh' => ['mimetypes:image/*', 'max:5000'],
+            'hinh' => 'max:5000',
         ],[
             'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
             'HoTen.required' => 'Vui lòng nhập họ tên',
             'Email.required' => 'Vui lòng nhập email',
             'SDT.required' => 'Vui lòng nhập số điện thoại',
             'MatKhau.required' => 'Vui lòng nhập mật khẩu',
+            'hinh.max' => 'Tối đa 5 MB',
         ]);
         
-        if($request->input('TrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
-
-        if($request->has('checkIsAdmin'))
-            $isAdmin = 1;
-        else
-            $isAdmin = 0;
-
         try{
             if($request->hasFile('hinh')){
                 $nguoiDung->AnhNen = $request->file('hinh')->store('images/nguoidung/'.$nguoiDung->id, 'public');
@@ -182,8 +158,8 @@ class NguoiDungController extends Controller
                 'Email'=>$request->input('Email'),
                 'SDT'=>$request->input('SDT'),
                 'MatKhau'=>Hash::make($request->input('MatKhau')),
-                'IsAdmin'=>$isAdmin,
-                'TrangThai'=>$trangthai,
+                'IsAdmin'=>$request->has('checkIsAdmin'),
+                'TrangThai'=>$request->input('TrangThai'),
             ]);
 
             $nguoiDung->save();

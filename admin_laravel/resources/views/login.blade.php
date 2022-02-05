@@ -33,7 +33,7 @@
 
                 @csrf
                 <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" placeholder="Email" name="Email">
+                    <input type="email" class="form-control form-control-lg" placeholder="Email" name="Email" value="{{ old('Email') }}">
                     @if($errors->has('Email'))
                         <p style="color:red">{{ $errors->first('Email') }}</p>
                     @endif
