@@ -26,10 +26,13 @@ class _DanhSachTienTichState extends State<DanhSachTienTich> {
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ChiTietTienIch()),
-              );},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChiTietTienIch()),
+                              );
+                            },
                             child: Container(
                               margin: EdgeInsets.only(right: 15),
                               width: 150,

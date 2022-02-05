@@ -9,6 +9,7 @@ import 'Object/nguoidungObject.dart';
 import 'Provider/DiaDanhProvider.dart';
 import 'Provider/ViewProvider.dart';
 import 'colorplush.dart';
+
 //Bài viết
 Widget nut_Icon(var icon, var label, var on) {
   return ElevatedButton.icon(
@@ -70,7 +71,7 @@ Widget tenND(int id, Color mau, double size) {
       });
 }
 
-  Widget DemView(int id, Color mau, double size) {
+Widget DemView(int id, Color mau, double size) {
   return FutureBuilder<String>(
       future: ViewProvider.oneView(id),
       builder: (context, snapshot) {
@@ -87,59 +88,61 @@ Widget tenND(int id, Color mau, double size) {
 
 class LayAnh extends StatefulWidget {
   final int id;
-  const LayAnh({ Key? key,required this.id }) : super(key: key);
+  const LayAnh({Key? key, required this.id}) : super(key: key);
 
   @override
-   _LayAnhState createState() {
-   return  _LayAnhState(id:id);
+  _LayAnhState createState() {
+    return _LayAnhState(id: id);
   }
 }
+
 class _LayAnhState extends State<LayAnh> {
   final int id;
   _LayAnhState({required this.id});
   @override
   Widget build(BuildContext context) {
-    return 
-    
-     FutureBuilder<List<AnhBaiVietObject>>(
-      future: BaiVietProvider.layAnhBV(id),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<AnhBaiVietObject> lsAnhBV = snapshot.data!;
-          return PageView.builder(
-                  itemCount: lsAnhBV.length,
-                  itemBuilder: (context, index) =>
-                  Container(
-                    width: double.maxFinite,
-                    decoration:  BoxDecoration(
-                        image: DecorationImage(
-                      image:NetworkImage('http://10.0.2.2:8000/storage/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh),
-                      fit: BoxFit.cover,
-                    )),
-                  ),
-                );
-        }
-        return Text("data");
-      });
+    return FutureBuilder<List<AnhBaiVietObject>>(
+        future: BaiVietProvider.layAnhBV(id),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<AnhBaiVietObject> lsAnhBV = snapshot.data!;
+            return PageView.builder(
+              itemCount: lsAnhBV.length,
+              itemBuilder: (context, index) => Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: NetworkImage(
+                      'http://10.0.2.2:8000/storage/upload/anhBaiViet/' +
+                          lsAnhBV[index].ABV_Anh),
+                  fit: BoxFit.cover,
+                )),
+              ),
+            );
+          }
+          return Text("data");
+        });
   }
 }
 
-
-Widget LayTT(int id){
-   return FutureBuilder<List<NguoiDungObject>>(
+Widget LayTT(int id) {
+  return FutureBuilder<List<NguoiDungObject>>(
       future: NguoiDungProvider.oneNguoiDung(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<NguoiDungObject> lsnd = snapshot.data!;
-          return thongtin(ND: lsnd[0],);
+          return thongtin(
+            ND: lsnd[0],
+          );
         }
-        return CircularProgressIndicator();;
+        return CircularProgressIndicator();
+        ;
       });
 }
 
 //Địa danh
-Widget LayDiaDanh(int id){
-return FutureBuilder<List<DiaDanhObject>>(
+Widget LayDiaDanh(int id) {
+  return FutureBuilder<List<DiaDanhObject>>(
       future: DiaDanhProvider.oneDiaDanh(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {

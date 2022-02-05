@@ -19,7 +19,7 @@ class _CaiDatState extends State<CaiDat> {
       backgroundColor: Colors.white,
       body: Container(
         color: Colors.white,
-        margin: EdgeInsets.only(left: 20, right: 20,top: 10),
+        margin: EdgeInsets.only(left: 20, right: 20, top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -153,11 +153,14 @@ class _CaiDatState extends State<CaiDat> {
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>LoginPage()), (route) => false);
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      (route) => false);
                 },
                 child: Text("Đăng xuất", style: cabin_B(Colors.white, 25.0)),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>( Color(0xFF7D82BC)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xFF7D82BC)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0))),
                 ),
