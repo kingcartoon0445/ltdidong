@@ -206,7 +206,7 @@ class DiaDanhController extends Controller
         }
         
         $listTheLoai = TheLoai::all();
-        $selectedListTheLoai = $diaDanh->theLoais;
+        $selectedListTheLoai = $diaDanh->thuocTheLoais;
 
         return view('diadanh.sua', [
             'diaDanh'=>$diaDanh, 

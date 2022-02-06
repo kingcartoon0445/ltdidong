@@ -51,9 +51,9 @@
                               <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hoạt động</label>
                             @endif                     
                         </td>
-                        <td>
+                        <td class="dt-center">
                           <div class="btn-group">
-                            <a href="{{ route('nguoiDung.edit', $nguoiDung) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>
+                            <button onclick="location.href='{{ route('nguoiDung.edit', $nguoiDung) }}'" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>
                             <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $nguoiDung->id }}"><i class="mdi mdi-cup"></i></button>
                           </div>
                         </td>

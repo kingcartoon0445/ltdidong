@@ -41,11 +41,11 @@
                               <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hoạt động</label>
                             @endif                   
                         </td>
-                        <td>
+                        <td class="dt-center">
                             <div class="btn-group">
-                              <a href="{{ route('diaDanh.show', $diaDanh) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-eye"></i></a>
-                              <a href="{{ route('diaDanh.edit', $diaDanh) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>
-                              <a type="button" style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $diaDanh->id }}"><i class="mdi mdi-cup"></i></a>
+                              <button onclick="location.href='{{ route('diaDanh.show', $diaDanh) }}'" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-eye"></i></button>
+                              <button onclick="location.href='{{ route('diaDanh.edit', $diaDanh) }}'" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></button>
+                              <button style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $diaDanh->id }}"><i class="mdi mdi-cup"></i></button>
                             </div>
                         </td>
                     </tr>

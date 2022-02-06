@@ -55,12 +55,13 @@ class BaiVietController extends Controller
             'NoiDung' => 'required',
             'MaDiaDanh' => 'required',
             'MaNguoiDung' => 'required',
-            'images' => ['mimetypes:image/*', 'max:5000'],
+            'images' => 'max:5000',
         ],[
             'TieuDe.required' => 'Vui lòng nhập tiêu đề',
             'NoiDung.required' => 'Vui lòng nhập nội dung',
             'MaDiaDanh.required' => 'Vui lòng chọn địa danh',
-            'MaNguoiDung.required' => 'Vui lòng chọn người đăng'
+            'MaNguoiDung.required' => 'Vui lòng chọn người đăng',
+            'images.max' => 'Tối đa 5 MB',
         ]);
 
         $baiViet = new BaiViet;

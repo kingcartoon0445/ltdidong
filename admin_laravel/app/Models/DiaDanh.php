@@ -31,6 +31,10 @@ class DiaDanh extends Model
         return $this->belongsToMany(TheLoai::class, 'thuoc_the_loais', 'MaDiaDanh', 'MaTheLoai');
     }
 
+    public function thuocTheLoais(){
+        return $this->hasMany(thuocTheLoai::class, 'MaDiaDanh');
+    }
+
     public function tienIchs(){
         return $this->belongsToMany(TienIch::class, 'co_tien_iches', 'MaDiaDanh', 'MaTienIch');
     }

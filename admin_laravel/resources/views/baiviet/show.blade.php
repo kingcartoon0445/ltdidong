@@ -17,36 +17,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="card card-tale">
-                              <div class="card-body">
-                                <p class="fs-25 mb-2">Total likes</p>
-                                <p>123456789</p>
-                              </div>
-                            </div>
+                      <div class="col-md-4 mb-4">
+                        <div class="card card-tale">
+                          <div class="card-body">
+                            <p class="fs-25 mb-2">Total likes</p>
+                            <p>123456789</p>
                           </div>
-                          <div class="col-md-4 mb-4">
-                            <div class="card card-dark-blue">
-                              <div class="card-body">
-                                <p class="fs-25 mb-2">Total Reviews</p>
-                                <p>1000</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4 mb-4">
-                            <div class="card card-light-blue">
-                              <div class="card-body">
-                                <p class="fs-25 mb-2">Rating</p>
-                                <p>
-                                    <i class="mdi mdi-star"></i>
-                                    <i class="mdi mdi-star"></i>
-                                    <i class="mdi mdi-star"></i>
-                                    <i class="mdi mdi-star"></i>
-                                    <i class="mdi mdi-star-half"></i>
-                                </p>
-                              </div>
-                            </div>
                         </div>
+                      </div>
                     </div>
 
                     <div class="project-info-box">

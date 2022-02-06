@@ -13,9 +13,11 @@
   {{ Html::style("skydash/css/vertical-layout-light/style.css") }}
   {{ Html::style("skydash/vendors/select2/select2.min.css") }}
   
-  {{ Html::style("plugins/datatables-bs4/css/dataTables.bootstrap4.min.css") }}
+  {{ Html::style("plugins/datatables-bs4/css/dataTables.bootstrap4.css") }}
   {{ Html::style("plugins/datatables-responsive/css/responsive.bootstrap4.min.css") }}
   {{ Html::style("plugins/datatables-buttons/css/buttons.bootstrap4.min.css") }}
+  {{ Html::style("plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.min.css") }}
+
   {{ Html::style("dist/css/detail.css") }}
   {{ Html::style("dist/css/multi-slide.css") }}
 </head>
@@ -118,11 +120,13 @@
   {{ Html::script("plugins/datatables-responsive/js/dataTables.responsive.min.js") }}
   {{ Html::script("plugins/datatables-responsive/js/responsive.bootstrap4.min.js") }}
   {{ Html::script("plugins/datatables-buttons/js/dataTables.buttons.min.js") }}
+  {{ Html::script("plugins/datatables-fixedheader/js/dataTables.fixedHeader.min.js") }}
+  
   {{ Html::script("dist/js/multi-slide.js") }}
   <script>
     $(function () {
       $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "responsive": true, "lengthChange": false, "autoWidth": true,
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 

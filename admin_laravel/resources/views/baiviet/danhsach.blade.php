@@ -18,7 +18,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm bài viết</a>
+              <!--<a type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-add">Thêm bài viết</a>-->
 
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -43,11 +43,11 @@
                             <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hiển thị</label>
                           @endif                    
                         </td>
-                        <td>
+                        <td class="dt-center">
                           <div class="btn-group">
-                            <a href="{{ route('baiViet.show', $baiViet) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-eye"></i></a>
-                            <a href="{{ route('baiViet.edit', $baiViet) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>
-                            <a type="button" style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $baiViet->id }}"><i class="mdi mdi-cup"></i></a>
+                            <button onclick="location.href='{{ route('baiViet.show', $baiViet) }}'" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-eye"></i></button>
+                            <!--<a href="{{ route('baiViet.edit', $baiViet) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>-->
+                            <button style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $baiViet->id }}"><i class="mdi mdi-cup"></i></button>
                           </div>
                         </td>
                     </tr>
