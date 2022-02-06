@@ -11,7 +11,7 @@ import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
 import 'Hoang/login/page_register.dart';
 
 void main() async {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:LoginPage(),
+      home: LoginPage(),
     );
   }
 }

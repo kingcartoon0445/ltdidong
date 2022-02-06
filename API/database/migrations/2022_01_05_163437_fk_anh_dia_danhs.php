@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FkDidanh extends Migration
+class FkAnhDiaDanhs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class FkDidanh extends Migration
      */
     public function up()
     {
-        Schema::table('dia_danhs', function (Blueprint $table) {
-            //
-            $table->foreign('MaMien')->references('id')->on('miens');
+        Schema::table('anh_dia_danhs', function (Blueprint $table) {
+            $table->foreign('MaDiaDanh')->references('id')->on('dia_danhs');
         });
     }
 
@@ -26,7 +25,7 @@ class FkDidanh extends Migration
      */
     public function down()
     {
-        Schema::table('dia_danhs', function (Blueprint $table) {
+        Schema::table('anh_dia_danhs', function (Blueprint $table) {
             //
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTheloaisTable extends Migration
+class CreateNguoiDungsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,18 @@ class CreateTheloaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('theloais', function (Blueprint $table) {
+        Schema::create('nguoi_dungs', function (Blueprint $table) {
             $table->id();
-            $table->string('Ten');
+            $table->string('TenDaiDien');
+            $table->string('HovaTen');
+            $table->string('Email')->unique();
+            $table->string('SDT');
+            $table->string('AnhNen');
+            $table->string('MatKhau');
+            $table->boolean('IsAdmin')->default(0);
             $table->Integer('TrangThai')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +35,6 @@ class CreateTheloaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('theloais');
+        Schema::dropIfExists('nguoi_dungs');
     }
 }

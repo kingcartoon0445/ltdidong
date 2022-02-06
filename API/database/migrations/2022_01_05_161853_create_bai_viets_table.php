@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMiensTable extends Migration
+class CreateBaiVietsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateMiensTable extends Migration
      */
     public function up()
     {
-        Schema::create('miens', function (Blueprint $table) {
+        Schema::create('bai_viets', function (Blueprint $table) {
             $table->id();
-            $table->string('TenMien');
+            $table->foreignId('MaNguoiDung');
+            $table->foreignId('MaDiaDanh');
+            $table->string('TieuDe');
+            $table->longText('NoiDung');
+            $table->Integer('TrangThai')->default(1);;
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +32,6 @@ class CreateMiensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('miens');
+        Schema::dropIfExists('bai_viets');
     }
 }

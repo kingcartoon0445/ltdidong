@@ -7,8 +7,8 @@ class NguoiDungObject {
   final String Nd_AnhNen;
   final String Nd_MatKhau;
   final int Nd_TrangThai;
-  NguoiDungObject(this.Nd_Ma, this.Nd_TenDaiDien,this.Nd_HovaTen, this.Nd_emai, this.Nd_SDT,
-      this.Nd_AnhNen, this.Nd_MatKhau, this.Nd_TrangThai);
+  NguoiDungObject(this.Nd_Ma, this.Nd_TenDaiDien, this.Nd_HovaTen, this.Nd_emai,
+      this.Nd_SDT, this.Nd_AnhNen, this.Nd_MatKhau, this.Nd_TrangThai);
   NguoiDungObject.fromjson(Map<String, dynamic> res)
       : Nd_Ma = res["id"],
         Nd_TenDaiDien = res["TenDaiDien"],

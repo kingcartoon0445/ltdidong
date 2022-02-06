@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\CoTienIch;
+use App\Models\DiaDanh;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

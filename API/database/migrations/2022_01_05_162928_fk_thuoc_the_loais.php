@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDanhGiasTable extends Migration
+class FkThuocTheLoais extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateDanhGiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('danh_gias', function (Blueprint $table) {
-            $table->foreignId('MaNguoiDung');
-            $table->foreignId('MaDiaDanh');
-            $table->double("SoDanhGia");
-            $table->timestamps();
+        Schema::table('thuoc_the_loais', function (Blueprint $table) {
+            $table->foreign('MaTheLoai')->references('id')->on('the_loais');
+            $table->foreign('MaDiaDanh')->references('id')->on('dia_danhs');
         });
     }
 
@@ -28,6 +26,8 @@ class CreateDanhGiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('danh_gias');
+        Schema::table('thuoc_the_loais', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -13,6 +13,8 @@ use App\Http\Controllers\AnhDiaDanhController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\AnhBaiVietController;
 
+use App\Http\Controllers\API\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,13 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'check'])->name('check');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/reset-password/{token}', [AuthController::class, 'reset_view'])->name('reset_password_view');
+Route::post('/reset-password/{token}', [AuthController::class, 'reset'])->name('reset-password');
+
+Route::get('/success', function(){
+    return view('mail.success');
+});
 
 Route::group(['middleware'=>'auth.custom'], function(){
     Route::get('/', [LoginController::class, 'index']);

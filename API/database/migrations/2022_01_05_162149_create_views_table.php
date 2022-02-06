@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FKViews extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class FKViews extends Migration
      */
     public function up()
     {
-        Schema::table('views', function (Blueprint $table) {
-            //
-            $table->foreign('MaNguoiDung')->references('id')->on('nguoi_dungs');
-            $table->foreign('MaBaiViet')->references('id')->on('bai_viets');
+        Schema::create('views', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('MaNguoiDung');
+            $table->foreignId('MaBaiViet');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,8 +29,6 @@ class FKViews extends Migration
      */
     public function down()
     {
-        Schema::table('views', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('views');
     }
 }

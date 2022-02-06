@@ -56,17 +56,13 @@ class MienController extends Controller
     {
         $request->validate([
             'TenMien' => ['required'],
+        ],[
+            'TenMien.required' => 'Vui lòng nhập tên miền',
         ]);
-
-        if($request->input('txtTrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
 
         $mien=new Mien;
         $mien->fill([
             'TenMien'=>$request->input('TenMien'),
-            'TrangThai'=>$trangthai,
         ]);
 
         $mien->save();
@@ -113,16 +109,12 @@ class MienController extends Controller
     {
         $request->validate([
             'TenMien' => 'required',
+        ],[
+            'TenMien.required' => 'Vui lòng nhập tên miền',
         ]);
-
-        if($request->input('txtTrangThai') == 'Hoạt động')
-            $trangthai = 1;
-        else
-            $trangthai = 0;
 
         $mien->fill([
             'TenMien'=>$request->input('TenMien'),
-            'TrangThai'=>$trangthai,
         ]);
 
         $mien->save();

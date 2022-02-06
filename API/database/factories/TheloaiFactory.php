@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TheloaiFactory extends Factory
+class TheLoaiFactory extends Factory
 {
     /**
      * Define the model's default state.

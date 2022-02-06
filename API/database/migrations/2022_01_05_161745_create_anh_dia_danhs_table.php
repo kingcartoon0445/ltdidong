@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateThuoctheloaisTable extends Migration
+class CreateAnhDiaDanhsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateThuoctheloaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('thuoctheloais', function (Blueprint $table) {
-            $table->foreignId('MaTheLoai');
+        Schema::create('anh_dia_danhs', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('MaDiaDanh');
+            $table->string('Anh');
+            $table->Integer('TrangThai')->default(1);;
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateThuoctheloaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thuoctheloais');
+        Schema::dropIfExists('anh_dia_danhs');
     }
 }

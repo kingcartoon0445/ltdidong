@@ -87,8 +87,8 @@
                                     <div class="form-group">
                                         <label>Trạng thái</label>
                                         <select class="custom-select form-control-border border-width-2" name="TrangThai">
-                                            <option>Hoạt động</option>  
-                                            <option>Đóng cửa</option>
+                                            <option value="1">Hoạt động</option>  
+                                            <option value="0">Đóng cửa</option>
                                         </select>
                                     </div>
                                     

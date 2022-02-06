@@ -23,18 +23,19 @@ class ViewProvider {
     Map body = {'MaBaiViet': MaBV, 'MaNguoiDung': MaND};
     var response = await http.post(Uri.parse(url), body: body);
   }
-  static Future<String>  KtraView(BuildContext context, String MaBV, String MaND) async
-  {
-    String url='http://10.0.2.2:8000/api/KtraView';
-     SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
-     Map body={'MaBV':MaBV,'MaND':MaND};
-     var   response= await http.post(Uri.parse(url),body:body);
-      var jsonResponse;
-      if(response.statusCode==200){
-            jsonResponse=json.decode(response.body);
-            sharedPreferences.setString("coview",jsonResponse['coview']);
-            }
-    String a  =(sharedPreferences.getString('coview')??"w");
-    return a; 
+
+  static Future<String> KtraView(
+      BuildContext context, String MaBV, String MaND) async {
+    String url = 'http://10.0.2.2:8000/api/KtraView';
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    Map body = {'MaBV': MaBV, 'MaND': MaND};
+    var response = await http.post(Uri.parse(url), body: body);
+    var jsonResponse;
+    if (response.statusCode == 200) {
+      jsonResponse = json.decode(response.body);
+      sharedPreferences.setString("coview", jsonResponse['coview']);
+    }
+    String a = (sharedPreferences.getString('coview') ?? "w");
+    return a;
   }
 }

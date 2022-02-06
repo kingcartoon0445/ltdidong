@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FkAbv extends Migration
+class FkCoTienIches extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class FkAbv extends Migration
      */
     public function up()
     {
-        Schema::table('anh_bai_viets', function (Blueprint $table) {
-            //
-            $table->foreign('MaBaiViet')->references('id')->on('bai_viets');
+        Schema::table('co_tien_iches', function (Blueprint $table) {
+            $table->foreign('MaDiaDanh')->references('id')->on('dia_danhs');
+            $table->foreign('MaTienIch')->references('id')->on('tien_iches');
         });
     }
 
@@ -26,7 +26,7 @@ class FkAbv extends Migration
      */
     public function down()
     {
-        Schema::table('anh_bai_viets', function (Blueprint $table) {
+        Schema::table('co_tien_iches', function (Blueprint $table) {
             //
         });
     }

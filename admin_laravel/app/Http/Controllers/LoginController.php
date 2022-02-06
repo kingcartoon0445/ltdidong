@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\NguoiDung;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class LoginController extends Controller
 {
     public function index(){
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        
         if(Storage::disk('public')->exists($data->AnhNen)){
             $data->AnhNen = Storage::url($data->AnhNen);
         }
@@ -35,6 +38,11 @@ class LoginController extends Controller
             'Email'=> ['required','email','unique:nguoi_dungs'],
             'MatKhau'=> ['required'],
             'SDT'=> ['required','min:10','max:12'],
+        ],[
+            'HoTen.required' => 'Vui lòng nhập họ tên',
+            'Email.required' => 'Vui lòng nhập email',
+            'MatKhau.required' => 'Vui lòng nhập mật khẩu',
+            'SDT.required' => 'Vui lòng nhập số điện thoại',
         ]);
 
         $nguoiDung = new NguoiDung;
@@ -56,6 +64,9 @@ class LoginController extends Controller
         $request->validate([
             'Email'=> ['required','email'],
             'MatKhau'=> ['required'],
+        ],[
+            'Email.required' => 'Vui lòng nhập email',
+            'MatKhau.required' => 'Vui lòng nhập mật khẩu',
         ]);
 
         $userInfo = NguoiDung::where('Email','=',$request->input('Email'))->first();
@@ -66,6 +77,7 @@ class LoginController extends Controller
             if(Hash::check($request->input('MatKhau'), $userInfo->MatKhau) || $request->input('MatKhau')==$userInfo->MatKhau){
                 if($userInfo->TrangThai == 1){
                     if($userInfo->IsAdmin == 1){
+                        $token = $userInfo->createToken('API Token')->plainTextToken;
                         $request->session()->put('LoggedUser', $userInfo->id);
 
                         return redirect('/');
@@ -83,8 +95,10 @@ class LoginController extends Controller
 
     public function logout(){
         if(session()->has('LoggedUser')){
+            DB::table('personal_access_tokens')->where('tokenable_id', session()->get('LoggedUser'))->delete();
+
             session()->pull('LoggedUser');
-            
+
             return redirect('login');
         }
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FKThuoctheloai extends Migration
+class FkAnhBaiViets extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class FKThuoctheloai extends Migration
      */
     public function up()
     {
-        Schema::table('thuoctheloais', function (Blueprint $table) {
-            //
-            $table->foreign('MaTheLoai')->references('id')->on('theloais');
-            $table->foreign('MaDiaDanh')->references('id')->on('dia_danhs');
+        Schema::table('anh_bai_viets', function (Blueprint $table) {
+            $table->foreign('MaBaiViet')->references('id')->on('bai_viets');
         });
     }
 
@@ -27,7 +25,7 @@ class FKThuoctheloai extends Migration
      */
     public function down()
     {
-        Schema::table('thuoctheloais', function (Blueprint $table) {
+        Schema::table('anh_bai_viets', function (Blueprint $table) {
             //
         });
     }

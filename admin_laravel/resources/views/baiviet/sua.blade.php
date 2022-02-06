@@ -66,8 +66,8 @@
                                   <div class="form-group">
                                     <label for="TrangThai">Trạng thái</label>
                                     <select class="custom-select form-control-border border-width-2" name="TrangThai">
-                                        <option @if($diaDanh->TrangThai==1) selected @endif>Hiển thị</option>  
-                                        <option @if($diaDanh->TrangThai==0) selected @endif>Ẩn</option>
+                                        <option value="1" @if($baiViet->TrangThai==1) selected @endif>Hiển thị</option>  
+                                        <option value="0" @if($baiViet->TrangThai==0) selected @endif>Ẩn</option>
                                     </select>
                                   </div>
 
@@ -113,9 +113,9 @@
                                 @csrf
                                 @method('DELETE')
                                 <img id="Img" src="{{ $anhBaiViet->Anh }}" style="width:250px;height:200px"/>
-                                <a type="submit" style="position: absolute;top: 10%;left: 96%;transform: translate(-50%, -50%);">
+                                <button type="submit" style="position: absolute;top: 10%;left: 96%;transform: translate(-50%, -50%);background: none;color: inherit;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;">
                                     <i class="mdi mdi-delete" style="font-size:24px;color:red;"></i>
-                                </a>
+                                </button>
                             </form>
                         </div>
                     </div>

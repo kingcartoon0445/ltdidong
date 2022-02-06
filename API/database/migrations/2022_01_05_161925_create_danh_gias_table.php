@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeXuatsTable extends Migration
+class CreateDanhGiasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateDeXuatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('de_xuats', function (Blueprint $table) {
+        Schema::create('danh_gias', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('MaNguoiDung');
             $table->foreignId('MaDiaDanh');
+            $table->double("SoDanhGia");
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateDeXuatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('de_xuats');
+        Schema::dropIfExists('danh_gias');
     }
 }

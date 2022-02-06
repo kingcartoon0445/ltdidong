@@ -83,7 +83,7 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {/*1*/  },
+                            onTap: () {/*1*/},
                             child: Container(
                               margin: EdgeInsets.only(right: 15),
                               width: double.infinity,
@@ -195,134 +195,144 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<DiaDanhObject>>(
-      future: DiaDanhProvider.fectDiaDanh(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<DiaDanhObject> lsdd = snapshot.data!;
-          return   GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.all(10),
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
-      childAspectRatio: 1.2,
-      children: List.generate(lsdd.length, (index) {
-        return GestureDetector(
-          onTap: () {},
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Stack(
-              children: [
-                Hero(
-                  tag: "btn$index",
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChiTietDiaDanh(DD:lsdd[index])),
-                      );
-                    },
-                    child: ClipRRect(
+        future: DiaDanhProvider.fectDiaDanh(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<DiaDanhObject> lsdd = snapshot.data!;
+            return GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.all(10),
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 1.2,
+              children: List.generate(lsdd.length, (index) {
+                return GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.network('https://cdn1.dotesports.com/wp-content/uploads/2021/09/09145842/SummonersRift.jpg',width: double.infinity,
-                        height: 400,
-                        fit: BoxFit.cover,),
                     ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 90,
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(23),
-                            bottomRight: Radius.circular(23)),
-                        color: kCardInfoBG.withOpacity(0.3),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                            height: 35,
-                            width: double.infinity,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChiTietDiaDanh(DD:lsdd[index])),
-                                );
-                              },
-                              //  style: TextButton.styleFrom(
-                              //    padding: EdgeInsets.all(4),
-                              //   ),
-                              child: Text(
-                                lsdd[index].Dd_Ten,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700),
+                    child: Stack(
+                      children: [
+                        Hero(
+                          tag: "btn$index",
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChiTietDiaDanh(DD: lsdd[index])),
+                              );
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                'https://cdn1.dotesports.com/wp-content/uploads/2021/09/09145842/SummonersRift.jpg',
+                                width: double.infinity,
+                                height: 400,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 90,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(23),
+                                    bottomRight: Radius.circular(23)),
+                                color: kCardInfoBG.withOpacity(0.3),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Icon(
-                                    Icons.place_outlined,
-                                    color: Colors.white,
+                                  SizedBox(
+                                    height: 35,
+                                    width: double.infinity,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChiTietDiaDanh(
+                                                      DD: lsdd[index])),
+                                        );
+                                      },
+                                      //  style: TextButton.styleFrom(
+                                      //    padding: EdgeInsets.all(4),
+                                      //   ),
+                                      child: Text(
+                                        lsdd[index].Dd_Ten,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
                                   ),
-                                  Expanded(child: Text(
-                                    lsdd[index].Dd_DiaChi,overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(color: Colors.white),
-                                  ),),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.place_outlined,
+                                            color: Colors.white,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              lsdd[index].Dd_DiaChi,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          RatingBarIndicator(
+                                            rating: 4.5,
+                                            itemBuilder: (_, __) {
+                                              return Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                              );
+                                            },
+                                            itemSize: 15,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  RatingBarIndicator(
-                                    rating: 4.5,
-                                    itemBuilder: (_, __) {
-                                      return Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      );
-                                    },
-                                    itemSize: 15,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      }),
-    );
-  
-            }
-        return Text("data");
-      });
-    
-    
-   }
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            );
+          }
+          return Text("data");
+        });
+  }
 }

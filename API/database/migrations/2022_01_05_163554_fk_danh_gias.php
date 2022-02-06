@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FkCotienich extends Migration
+class FkDanhGias extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class FkCotienich extends Migration
      */
     public function up()
     {
-        Schema::table('co_tien_iches', function (Blueprint $table) {
-            //
+        Schema::table('danh_gias', function (Blueprint $table) {
+            $table->foreign('MaNguoiDung')->references('id')->on('nguoi_dungs');
             $table->foreign('MaDiaDanh')->references('id')->on('dia_danhs');
-            $table->foreign('MaTienIch')->references('id')->on('tien_iches');
         });
     }
 
@@ -27,7 +26,7 @@ class FkCotienich extends Migration
      */
     public function down()
     {
-        Schema::table('co_tien_ichs', function (Blueprint $table) {
+        Schema::table('danh_gias', function (Blueprint $table) {
             //
         });
     }

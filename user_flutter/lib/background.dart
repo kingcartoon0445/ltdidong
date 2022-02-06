@@ -27,7 +27,6 @@ class Background extends StatefulWidget {
 }
 
 class _BackgroundState extends State<Background> {
-  
   final int id;
   _BackgroundState({required this.id});
   int _page = 0;
@@ -50,17 +49,20 @@ class _BackgroundState extends State<Background> {
 
   @override
   Widget build(BuildContext context) {
-    String avt='Duy.jpg';
-  load_avt()async{
-    List<NguoiDungObject> a =await NguoiDungProvider.oneNguoiDung(id);
-   avt=a[0].Nd_AnhNen;
-  }
-  initState(){
-    super.initState();
-    setState(() {
-      load_avt();
-    });
-  };
+    String avt = 'Duy.jpg';
+    load_avt() async {
+      List<NguoiDungObject> a = await NguoiDungProvider.oneNguoiDung(id);
+      avt = a[0].Nd_AnhNen;
+    }
+
+    initState() {
+      super.initState();
+      setState(() {
+        load_avt();
+      });
+    }
+
+    ;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -104,7 +106,9 @@ class _BackgroundState extends State<Background> {
                           child: ListTile(
                             leading: CircleAvatar(
                               maxRadius: 30,
-                             backgroundImage: NetworkImage('http://10.0.2.2:8000/storage/upload/anhNen/'+avt),
+                              backgroundImage: NetworkImage(
+                                  'http://10.0.2.2:8000/storage/upload/anhNen/' +
+                                      avt),
                             ),
                             title: Text(
                               'Diu diu dio',
@@ -174,7 +178,8 @@ class _BackgroundState extends State<Background> {
                   });
             },
             icon: CircleAvatar(
-               backgroundImage: NetworkImage('http://10.0.2.2:8000/storage/upload/anhNen/'+avt),
+              backgroundImage: NetworkImage(
+                  'http://10.0.2.2:8000/storage/upload/anhNen/' + avt),
             ),
           )
         ],
