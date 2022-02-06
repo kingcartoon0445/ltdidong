@@ -102,7 +102,8 @@ Route::post('/KtraLike', [LikeController::class, 'KtraLike']);
 //route Tiện ích
 Route::apiResource('TienIch',TienIchController::class);
 Route::apiResource('CoTienIch',CoTienIchController::class);
-Route::get('/danhsachtienich/{MaDiaDanh}', [CoTienIchController::class, 'show2']);
+Route::get('/danhsachkhachsan/{MaDiaDanh}', [CoTienIchController::class, 'show2']);
+Route::get('/danhsachnhahang/{MaDiaDanh}', [CoTienIchController::class, 'show1']);
 
 Route::apiResource('Mien',MienController::class);
 Route::apiResource('NguoiDung',NguoiDungController::class);

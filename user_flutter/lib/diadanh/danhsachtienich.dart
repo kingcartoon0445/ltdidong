@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:user_flutter/Object/TienIchObject.dart';
 import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chitiet_tienich.dart';
 
 class DanhSachTienTich extends StatefulWidget {
-  const DanhSachTienTich({Key? key}) : super(key: key);
+  final List<TienIchObject> Ti;
+  const DanhSachTienTich({Key? key, required this.Ti}) : super(key: key);
 
   @override
-  _DanhSachTienTichState createState() => _DanhSachTienTichState();
+  _DanhSachTienTichState createState() {
+    return _DanhSachTienTichState(Ti: Ti);
+  }
 }
 
 class _DanhSachTienTichState extends State<DanhSachTienTich> {
+  final List<TienIchObject> Ti;
+  _DanhSachTienTichState({required this.Ti});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,15 +27,18 @@ class _DanhSachTienTichState extends State<DanhSachTienTich> {
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 5, //đếm ảnh
+                itemCount: Ti.length, //đếm ảnh
                 itemBuilder: (context, index) => Stack(
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ChiTietTienIch()),
-              );},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChiTietTienIch()),
+                              );
+                            },
                             child: Container(
                               margin: EdgeInsets.only(right: 15),
                               width: 150,
@@ -70,7 +79,8 @@ class _DanhSachTienTichState extends State<DanhSachTienTich> {
                                       //    padding: EdgeInsets.all(4),
                                       //   ),
                                       child: Text(
-                                        "Nhà hàng",
+                                        Ti[index].Ti_Ten,
+                                        overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15,
@@ -89,11 +99,13 @@ class _DanhSachTienTichState extends State<DanhSachTienTich> {
                                             Icons.place_outlined,
                                             color: Colors.white,
                                           ),
-                                          Text(
-                                            "Địa chỉ",
+                                          Expanded(
+                                              child: Text(
+                                            Ti[index].Ti_DiaChi,
+                                            overflow: TextOverflow.ellipsis,
                                             style:
                                                 TextStyle(color: Colors.white),
-                                          ),
+                                          )),
                                         ],
                                       ),
                                     ],

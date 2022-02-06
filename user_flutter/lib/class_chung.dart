@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:user_flutter/Object/TienIchObject.dart';
 import 'package:user_flutter/Object/anhbaivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
+import 'package:user_flutter/Provider/TienIchProvider.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
+import 'package:user_flutter/diadanh/danhsachtienich.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Object/diadanhObject.dart';
 import 'Object/nguoidungObject.dart';
@@ -149,3 +153,38 @@ return FutureBuilder<List<DiaDanhObject>>(
         return Text("data");
       });
 }
+
+//Lay DS Tiện ích
+Widget LayDsKhachSan(int idbv){
+  return FutureBuilder<List<TienIchObject>>(
+      future: TienIchProvider.DsKhachSan(idbv),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<TienIchObject> lsti = snapshot.data!;
+          if(lsti.length==0){return Container(child:SvgPicture.asset(
+            'assets/imgs/svg/hotel.svg',
+            color: Colors.black,
+            width: 200,
+            height: 200,
+          ),);}else{
+          return DanhSachTienTich(Ti: lsti);}
+        }
+        return Text("data");
+      });
+}
+Widget LayDsNhaHang(int idbv){
+  return FutureBuilder<List<TienIchObject>>(
+      future: TienIchProvider.DsNhaHang(idbv),
+      builder: (context, snapshot) {
+         if (snapshot.hasData) {
+          List<TienIchObject> lsti = snapshot.data!;
+          if(lsti.length==0){return Container(child:SvgPicture.asset(
+            'assets/imgs/svg/nhahang.svg',
+            width: 200,
+            height: 200,
+          ),);}else{
+          return DanhSachTienTich(Ti: lsti);}
+        }
+        return Text("data");
+      });
+} 

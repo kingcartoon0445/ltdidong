@@ -68,10 +68,15 @@ class CoTienIchController extends Controller
         
         return CoTienIch:: join('tien_iches','MaTienIch','=','tien_iches.id')->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')->where('MaTienIch',$MaTienIch)->select('dia_danhs.id','dia_danhs.Ten','dia_danhs.Kinhdo','dia_danhs.Vido','dia_danhs.DiaChi','dia_danhs.MoTa','dia_danhs.AnhBia')->get();
     }
-    public function show2(int $MaDiaDanh)
+    public function show1(int $MaDiaDanh)
     {
         
-        return CoTienIch:: join('tien_iches','MaTienIch','=','tien_iches.id')->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')->where('MaTienIch',$MaDiaDanh)->select('tien_iches.id','tien_iches.Ten','tien_iches.Anh','tien_iches.Loai','tien_iches.DiaChi','tien_iches.MoTa','tien_iches.SDT')->get();
+        return CoTienIch:: join('tien_iches','MaTienIch','=','tien_iches.id')->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')->where('MaDiaDanh',$MaDiaDanh)->where('tien_iches.Loai','1')->select('tien_iches.id','tien_iches.Ten','tien_iches.Anh','tien_iches.Loai','tien_iches.DiaChi','tien_iches.MoTa','tien_iches.SDT')->get();
+    }
+    public function show2(int $MaDiaDanh )
+    {
+        
+        return CoTienIch:: join('tien_iches','MaTienIch','=','tien_iches.id')->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')->where('MaDiaDanh',$MaDiaDanh)->where('tien_iches.Loai','2')->select('tien_iches.id','tien_iches.Ten','tien_iches.Anh','tien_iches.Loai','tien_iches.DiaChi','tien_iches.MoTa','tien_iches.SDT')->get();
     }
     /**
      * Show the form for editing the specified resource.

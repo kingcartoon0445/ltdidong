@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
+import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/diadanh/baiviet_diadanh.dart';
 import 'package:user_flutter/diadanh/chiase_baiviet.dart';
-import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsachtienich.dart';
-import 'package:user_flutter/colorplush.dart';
 
 class ChiTietDiaDanh extends StatefulWidget {
   final DiaDanhObject DD;
@@ -229,7 +228,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Expanded(
-                child: DanhSachTienTich(),
+                child: LayDsNhaHang(DD.Dd_Ma),
               )
             ]),
             SizedBox(
@@ -248,7 +247,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Expanded(
-                child: DanhSachTienTich(),
+                child:LayDsKhachSan(DD.Dd_Ma)
               )
             ]),
             SizedBox(
