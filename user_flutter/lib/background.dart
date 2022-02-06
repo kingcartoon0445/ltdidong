@@ -89,14 +89,9 @@ class _BackgroundState extends State<Background> {
                     return AlertDialog(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(35.0),
-                              bottomLeft: Radius.circular(35.0),
-                              bottomRight: Radius.circular(35.0))),
+                              topLeft: Radius.circular(35.0), bottomLeft: Radius.circular(35.0), bottomRight: Radius.circular(35.0))),
                       title: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              elevation: 0.0,
-                              shadowColor: Colors.white),
+                          style: ElevatedButton.styleFrom(primary: Colors.white, elevation: 0.0, shadowColor: Colors.white),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -106,9 +101,7 @@ class _BackgroundState extends State<Background> {
                           child: ListTile(
                             leading: CircleAvatar(
                               maxRadius: 30,
-                              backgroundImage: NetworkImage(
-                                  'http://10.0.2.2:8000/storage/upload/anhNen/' +
-                                      avt),
+                              backgroundImage: NetworkImage('http://10.0.2.2:8000/storage/upload/anhNen/' + avt),
                             ),
                             title: Text(
                               'Diu diu dio',
@@ -116,10 +109,7 @@ class _BackgroundState extends State<Background> {
                             ),
                           )),
                       content: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              elevation: 0.0,
-                              shadowColor: Colors.white),
+                          style: ElevatedButton.styleFrom(primary: Colors.white, elevation: 0.0, shadowColor: Colors.white),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -140,8 +130,7 @@ class _BackgroundState extends State<Background> {
                           )),
                       actions: [
                         Container(
-                          margin:
-                              EdgeInsets.only(bottom: 30, left: 15, right: 15),
+                          margin: EdgeInsets.only(bottom: 30, left: 15, right: 15),
                           color: Colors.black,
                           height: 2,
                           width: double.infinity,
@@ -150,26 +139,18 @@ class _BackgroundState extends State<Background> {
                           width: double.infinity,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                  (route) => false);
+                              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
                             },
                             child: ListTile(
                               leading: Icon(
                                 Icons.logout_outlined,
                                 color: Colors.white,
                               ),
-                              title: Text("Đăng xuất",
-                                  style: cabin_B(Colors.white, 20.0)),
+                              title: Text("Đăng xuất", style: cabin_B(Colors.white, 20.0)),
                             ),
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Color(0xFF7D82BC)),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(30.0))),
+                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF7D82BC)),
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
                             ),
                           ),
                         ),
@@ -178,8 +159,7 @@ class _BackgroundState extends State<Background> {
                   });
             },
             icon: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'http://10.0.2.2:8000/storage/upload/anhNen/' + avt),
+              backgroundImage: NetworkImage('http://10.0.2.2:8000/storage/upload/anhNen/' + avt),
             ),
           )
         ],

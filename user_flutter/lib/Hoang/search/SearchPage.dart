@@ -54,8 +54,7 @@ class SearchPageState extends State<SearchPage> {
                     hintText: 'Search...',
                     prefixIcon: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      child:
-                          Icon(Icons.search, size: 25, color: Colors.black54),
+                      child: Icon(Icons.search, size: 25, color: Colors.black54),
                     ),
                     hintStyle: TextStyle(fontSize: 15, color: Colors.black54),
                   ),
@@ -96,9 +95,7 @@ class SearchPageState extends State<SearchPage> {
                                   Text(
                                     books[index].name,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                   ),
                                   SizedBox(height: 7),
                                   Row(
@@ -114,8 +111,7 @@ class SearchPageState extends State<SearchPage> {
                                   ),
                                   SizedBox(height: 7),
                                   RatingBarIndicator(
-                                    rating: double.parse(
-                                        books[index].rating.toString()),
+                                    rating: double.parse(books[index].rating.toString()),
                                     itemBuilder: (_, __) {
                                       return Icon(
                                         Icons.star,

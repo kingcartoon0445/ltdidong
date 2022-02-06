@@ -11,8 +11,7 @@ class ViewProvider {
   }
 
   static Future<String> oneView(int Id) async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/View/$Id'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/View/$Id'));
     var jsons = json.decode(response.body);
     String a = jsons['view'].toString();
     return a;
@@ -24,8 +23,7 @@ class ViewProvider {
     var response = await http.post(Uri.parse(url), body: body);
   }
 
-  static Future<String> KtraView(
-      BuildContext context, String MaBV, String MaND) async {
+  static Future<String> KtraView(BuildContext context, String MaBV, String MaND) async {
     String url = 'http://10.0.2.2:8000/api/KtraView';
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map body = {'MaBV': MaBV, 'MaND': MaND};

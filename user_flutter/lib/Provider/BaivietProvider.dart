@@ -9,9 +9,7 @@ class BaiVietProvider {
   static List<BaiVietObject> paraseBaiViet(String reponseBody) {
     try {
       final parsed = jsonDecode(reponseBody).cast<Map<String, dynamic>>();
-      return parsed
-          .map<BaiVietObject>((e) => BaiVietObject.fromjson(e))
-          .toList();
+      return parsed.map<BaiVietObject>((e) => BaiVietObject.fromjson(e)).toList();
     } catch (e) {
       return [];
     }
@@ -19,16 +17,13 @@ class BaiVietProvider {
 
   static List<AnhBaiVietObject> paraseAnhBV(String reponseBody) {
     final parsed = jsonDecode(reponseBody).cast<Map<String, dynamic>>();
-    return parsed
-        .map<AnhBaiVietObject>((e) => AnhBaiVietObject.fromjson(e))
-        .toList();
+    return parsed.map<AnhBaiVietObject>((e) => AnhBaiVietObject.fromjson(e)).toList();
   }
 
   static Future<List<BaiVietObject>> fecthBaiViet() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String tokens = (sharedPreferences.getString('token') ?? "");
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/BaiViet'), headers: {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/BaiViet'), headers: {
       'Authorization': 'Bearer $tokens',
     });
     return paraseBaiViet(response.body);
@@ -41,8 +36,7 @@ class BaiVietProvider {
     return paraseAnhBV(response.body);
   }
 
-  static Future<List<BaiVietObject>> BaiVietUS(
-      BuildContext context, String a) async {
+  static Future<List<BaiVietObject>> BaiVietUS(BuildContext context, String a) async {
     String url = 'http://10.0.2.2:8000/api/BaiVietUS';
     Map body = {'id': a};
     var response = await http.post(Uri.parse(url), body: body);

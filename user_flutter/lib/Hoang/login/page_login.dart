@@ -80,8 +80,7 @@ class LoginPageState extends State<LoginPage> {
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color:
-                                        Colors.grey.shade600.withOpacity(0.5),
+                                    color: Colors.grey.shade600.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: TextFormField(
@@ -92,13 +91,11 @@ class LoginPageState extends State<LoginPage> {
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(vertical: 20),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 20),
                                       border: InputBorder.none,
                                       hintText: 'Email',
                                       prefixIcon: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
+                                        padding: EdgeInsets.symmetric(horizontal: 20),
                                         child: Icon(
                                           Icons.email_outlined,
                                           color: Colors.white,
@@ -123,8 +120,7 @@ class LoginPageState extends State<LoginPage> {
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color:
-                                        Colors.grey.shade600.withOpacity(0.5),
+                                    color: Colors.grey.shade600.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: TextFormField(
@@ -136,13 +132,11 @@ class LoginPageState extends State<LoginPage> {
                                       return null;
                                     },
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(vertical: 20),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 20),
                                       border: InputBorder.none,
                                       hintText: 'Mật khẩu',
                                       prefixIcon: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
+                                        padding: EdgeInsets.symmetric(horizontal: 20),
                                         child: Icon(
                                           Icons.lock_outline,
                                           color: Colors.white,
@@ -151,11 +145,8 @@ class LoginPageState extends State<LoginPage> {
                                       ),
                                       suffixIcon: IconButton(
                                         icon: Icon(
-                                          _obsecureText
-                                              ? Icons.visibility
-                                              : Icons.visibility_off,
-                                          color: Theme.of(context)
-                                              .primaryColorLight,
+                                          _obsecureText ? Icons.visibility : Icons.visibility_off,
+                                          color: Theme.of(context).primaryColorLight,
                                         ),
                                         onPressed: () {
                                           setState(() {
@@ -201,8 +192,7 @@ class LoginPageState extends State<LoginPage> {
                               SizedBox(height: 100),
                               isLoading
                                   ? Container(
-                                      child: CircularProgressIndicator(
-                                          strokeWidth: 10),
+                                      child: CircularProgressIndicator(strokeWidth: 10),
                                     )
                                   : Container(
                                       width: double.infinity,
@@ -212,14 +202,11 @@ class LoginPageState extends State<LoginPage> {
                                       ),
                                       child: MaterialButton(
                                         onPressed: () {
-                                          if (_formKey.currentState!
-                                              .validate()) {
+                                          if (_formKey.currentState!.validate()) {
                                             login();
                                             setState(() {
                                               isLoading = true;
-                                              Future.delayed(
-                                                  Duration(milliseconds: 3000),
-                                                  () {
+                                              Future.delayed(Duration(milliseconds: 3000), () {
                                                 setState(() {
                                                   isLoading = false;
                                                 });
@@ -232,8 +219,7 @@ class LoginPageState extends State<LoginPage> {
                                         color: Color.fromRGBO(125, 130, 188, 1),
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(color: Colors.black),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(50),
                                         ),
                                         child: Text(
                                           'Đăng nhập',

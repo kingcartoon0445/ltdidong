@@ -33,9 +33,7 @@ class RegisterPageState extends State<RegisterPage> {
       if (pick != null) {
         _image = File(pick.path);
       } else {
-        final snackBar = SnackBar(
-            content: Text("Chưa chọn ảnh"),
-            duration: Duration(microseconds: 400));
+        final snackBar = SnackBar(content: Text("Chưa chọn ảnh"), duration: Duration(microseconds: 400));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     });
@@ -43,12 +41,14 @@ class RegisterPageState extends State<RegisterPage> {
     Navigator.pop(context);
   }
 
-register(){
-  LoginProvider.register(context, txtHoten.text, txtEmail.text, txtSDT.text, txtPassword.text).then((result){
-      if(result==1){
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>LoginPage()), (route) => false);
-      };});
-}
+  register() {
+    LoginProvider.register(context, txtHoten.text, txtEmail.text, txtSDT.text, txtPassword.text).then((result) {
+      if (result == 1) {
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -102,16 +102,13 @@ register(){
                                 alignment: Alignment.center,
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 30, horizontal: 30),
+                                    margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
                                     child: CircleAvatar(
                                       radius: 71,
                                       backgroundColor: Colors.pink,
                                       child: CircleAvatar(
                                         radius: 65,
-                                        backgroundImage: _image == null
-                                            ? null
-                                            : FileImage(_image!),
+                                        backgroundImage: _image == null ? null : FileImage(_image!),
                                       ),
                                     ),
                                   ),
@@ -131,9 +128,7 @@ register(){
                                             return AlertDialog(
                                               title: Text(
                                                 'Lựa chọn',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                                style: TextStyle(fontWeight: FontWeight.w600),
                                               ),
                                               content: SingleChildScrollView(
                                                 child: ListBody(
@@ -146,22 +141,17 @@ register(){
                                                       child: Row(
                                                         children: [
                                                           Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
+                                                            padding: const EdgeInsets.all(8.0),
                                                             child: Icon(
                                                               Icons.image,
-                                                              color: Colors.blue
-                                                                  .shade100,
+                                                              color: Colors.blue.shade100,
                                                             ),
                                                           ),
                                                           Text(
                                                             "Gallery",
                                                             style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
+                                                              fontWeight: FontWeight.w500,
                                                             ),
                                                           )
                                                         ],
@@ -182,8 +172,7 @@ register(){
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color:
-                                        Colors.grey.shade600.withOpacity(0.5),
+                                    color: Colors.grey.shade600.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: TextFormField(
@@ -194,13 +183,11 @@ register(){
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(vertical: 20),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 20),
                                       border: InputBorder.none,
                                       hintText: 'Email',
                                       prefixIcon: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
+                                        padding: EdgeInsets.symmetric(horizontal: 20),
                                         child: Icon(
                                           Icons.email_outlined,
                                           color: Colors.white,
@@ -225,8 +212,7 @@ register(){
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color:
-                                        Colors.grey.shade600.withOpacity(0.5),
+                                    color: Colors.grey.shade600.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: TextFormField(
@@ -237,13 +223,11 @@ register(){
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(vertical: 20),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 20),
                                       border: InputBorder.none,
                                       hintText: 'Mật khẩu',
                                       prefixIcon: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
+                                        padding: EdgeInsets.symmetric(horizontal: 20),
                                         child: Icon(
                                           Icons.lock_outline,
                                           color: Colors.white,
@@ -252,11 +236,8 @@ register(){
                                       ),
                                       suffixIcon: IconButton(
                                         icon: Icon(
-                                          _obsecureText
-                                              ? Icons.visibility
-                                              : Icons.visibility_off,
-                                          color: Theme.of(context)
-                                              .primaryColorLight,
+                                          _obsecureText ? Icons.visibility : Icons.visibility_off,
+                                          color: Theme.of(context).primaryColorLight,
                                         ),
                                         onPressed: () {
                                           setState(() {
@@ -282,8 +263,7 @@ register(){
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color:
-                                        Colors.grey.shade600.withOpacity(0.5),
+                                    color: Colors.grey.shade600.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: TextFormField(
@@ -294,13 +274,11 @@ register(){
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(vertical: 20),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 20),
                                       border: InputBorder.none,
                                       hintText: 'Họ tên',
                                       prefixIcon: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
+                                        padding: EdgeInsets.symmetric(horizontal: 20),
                                         child: Icon(
                                           Icons.info_outline,
                                           color: Colors.white,
@@ -325,8 +303,7 @@ register(){
                                 padding: EdgeInsets.symmetric(vertical: 12),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color:
-                                        Colors.grey.shade600.withOpacity(0.5),
+                                    color: Colors.grey.shade600.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: TextFormField(
@@ -337,13 +314,11 @@ register(){
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(vertical: 20),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 20),
                                       border: InputBorder.none,
                                       hintText: 'Số điện thoại',
                                       prefixIcon: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20),
+                                        padding: EdgeInsets.symmetric(horizontal: 20),
                                         child: Icon(
                                           Icons.phone_android_outlined,
                                           color: Colors.white,
@@ -379,11 +354,9 @@ register(){
                                         color: Color.fromRGBO(125, 130, 188, 1),
                                         borderRadius: BorderRadius.circular(50),
                                       ),
-                                      child: MaterialButton(  
+                                      child: MaterialButton(
                                         onPressed: () {
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            
+                                          if (_formKey.currentState!.validate()) {
                                             register();
                                           }
                                         },
@@ -392,8 +365,7 @@ register(){
                                         color: Color.fromRGBO(125, 130, 188, 1),
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(color: Colors.black),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(50),
                                         ),
                                         child: Text(
                                           'Đăng ký',

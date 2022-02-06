@@ -5,8 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class LikeProvider {
-  static Future<String> KtraLike(
-      BuildContext context, String MaBV, String MaND) async {
+  static Future<String> KtraLike(BuildContext context, String MaBV, String MaND) async {
     String url = 'http://10.0.2.2:8000/api/KtraLike';
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map body = {'MaBV': MaBV, 'MaND': MaND};
@@ -21,8 +20,7 @@ class LikeProvider {
   }
 
   static Future<String> Like(int id) async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/Like/$id'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/Like/$id'));
     var jsons = json.decode(response.body);
     String a = jsons['like'].toString();
     return a;
