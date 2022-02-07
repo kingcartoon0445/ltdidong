@@ -80,7 +80,9 @@
                                     
                                     <div class="form-group">
                                         <label class="col-form-label" for="MoTa">Mô tả</label>
-                                        <textarea class="form-control" name="MoTa" rows="10" style="font-size: 16px">{{ $diaDanh->MoTa }}</textarea>
+                                        <div class="editor-container">
+                                            <textarea class="form-control editor" name="MoTa">{!! $diaDanh->MoTa !!}</textarea>
+                                        </div>
                                         @if($errors->has('MoTa'))
                                             <p style="color:red">{{ $errors->first('MoTa') }}</p>
                                         @endif
@@ -96,7 +98,7 @@
 
                                     <div class="form-group">
                                         <label for="hinh" class="form-label">Ảnh bìa</label>
-                                        <input onchange="showAnhAdd(this);" class="file-upload-default" type="file" name="hinh" accept="image/*">
+                                        <input onchange="showAnhEdit(this);" class="file-upload-default" type="file" name="hinh" accept="image/*">
                                         <div class="input-group col-xs-12">
                                             <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                                             <span class="input-group-append">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DiaDanh;
 use App\Models\NguoiDung;
 use App\Models\AnhBaiViet;
+use App\Models\Like;
+use App\Models\View;
 
 use App\Models\BaiViet;
 use App\Http\Requests\StoreBaiVietRequest;
@@ -125,6 +127,9 @@ class BaiVietController extends Controller
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage_NguoiDung($data);
 
+        $soLuotLike = Like::where('MaBaiViet', $baiViet->id)->count();
+        $soLuotView = View::where('MaBaiViet', $baiViet->id)->count();
+
         $listAnh = $baiViet->anhBaiViets;
         foreach ($listAnh as $anh) {
             $this->fixImage_AnhBaiViet($anh);
@@ -134,6 +139,8 @@ class BaiVietController extends Controller
             'baiViet'=>$baiViet,
             'listAnh'=>$listAnh,
             'LoggedUserInfo'=>$data,
+            'soLuotLike'=>$soLuotLike,
+            'soLuotView'=>$soLuotView,
         ]);
     }
 

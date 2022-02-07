@@ -67,14 +67,14 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <a class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    </a>
+                                    <a class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +83,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="project-info-box">
-                                        <h4><b>Mô tả</b></h4><p>{{ $diaDanh->MoTa }}</p>
+                                        <h4><b>Mô tả:</b></h4>
+                                        {!! $diaDanh->MoTa !!}
                                     </div>
                                 </div>
                             </div>

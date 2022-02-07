@@ -263,8 +263,8 @@ class DiaDanhController extends Controller
         }
 
         if($request->has('theloais')){
-            ThuocTheLoai::where('MaDiaDanh','=',$diaDanh->id)->delete();
-            
+            DB::table('thuoc_the_loais')->where('MaDiaDanh', $diaDanh->id)->delete();
+
             foreach($request->input('theloais') as $theLoai){
                 $thuocTheLoai = new ThuocTheLoai;
                 $thuocTheLoai->fill([
@@ -283,7 +283,6 @@ class DiaDanhController extends Controller
             'ViDo'=>$request->input('ViDo'),
             'MoTa'=>$request->input('MoTa'),
             'DiaChi'=>$request->input('DiaChi'),
-            'AnhBia'=>'',
             'TrangThai'=>$request->input('TrangThai'),
         ]);
         

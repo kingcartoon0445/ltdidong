@@ -70,7 +70,9 @@
                     
                                     <div class="form-group">
                                         <label for="MoTa">Mô tả</label>
-                                        <textarea class="form-control" name="MoTa" rows="10"></textarea>
+                                        <div class="editor-container">
+                                            <textarea class="form-control editor" name="MoTa"></textarea>
+                                        </div>
                                         @if($errors->has('MoTa'))
                                             <p style="color:red">{{ $errors->first('MoTa') }}</p>
                                         @endif
