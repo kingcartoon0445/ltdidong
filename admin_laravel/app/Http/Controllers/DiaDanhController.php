@@ -8,6 +8,7 @@ use App\Models\Mien;
 use App\Models\AnhDiaDanh;
 use App\Models\TheLoai;
 use App\Models\ThuocTheLoai;
+use App\Models\DanhGia;
 
 use App\Http\Requests\StoreDiaDanhRequest;
 use App\Http\Requests\UpdateDiaDanhRequest;
@@ -171,7 +172,6 @@ class DiaDanhController extends Controller
             $this->fixImage_AnhDiaDanh($anh);
         }
         
-
         $listTheLoai = DB::table('the_loais')
                             ->join('thuoc_the_loais', 'thuoc_the_loais.MaTheLoai', '=', 'the_loais.id')
                             ->where('thuoc_the_loais.MaDiaDanh', '=', $diaDanh->id)
