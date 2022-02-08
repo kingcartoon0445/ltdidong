@@ -10,6 +10,7 @@ use App\Models\AnhDiaDanh;
 use App\Models\Mien;
 use App\Models\TheLoai;
 use App\Models\TienIch;
+use App\Models\DanhGia;
 
 class DiaDanh extends Model
 {
@@ -32,10 +33,14 @@ class DiaDanh extends Model
     }
 
     public function thuocTheLoais(){
-        return $this->hasMany(thuocTheLoai::class, 'MaDiaDanh');
+        return $this->hasMany(ThuocTheLoai::class, 'MaDiaDanh');
     }
 
     public function tienIchs(){
         return $this->belongsToMany(TienIch::class, 'co_tien_iches', 'MaDiaDanh', 'MaTienIch');
+    }
+
+    public function danhGias(){
+        return $this->hasMany(DanhGia::class, 'MaDiaDanh');
     }
 }

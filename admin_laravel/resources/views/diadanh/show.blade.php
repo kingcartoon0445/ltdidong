@@ -20,13 +20,11 @@
                           <div class="card-body">
                             <p class="fs-25 mb-2">Rating</p>
                             <p>
-                                <i class="mdi mdi-star"></i>
-                                <i class="mdi mdi-star"></i>
-                                <i class="mdi mdi-star"></i>
-                                <i class="mdi mdi-star"></i>
-                                <i class="mdi mdi-star-half"></i>
+                                @for ($i = 0; $i < $avg_stars; $i++)
+                                    <i class="mdi mdi-star"></i>
+                                @endfor
                             </p>
-                            <p class="fs-25 mb-2">Total Reviews: ....</p>
+                            <p class="fs-25 mb-2">Total Reviews: {{ $totalReview }}</p>
                           </div>
                         </div>
                     </div>

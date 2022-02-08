@@ -178,11 +178,16 @@ class DiaDanhController extends Controller
                             ->select('the_loais.*')
                             ->get();
 
+        $totalReview = $diaDanh->danhGias->count();
+        $avg_stars = $diaDanh->danhGias->avg('SoDanhGia');
+
         return view('diadanh.show', [
             'diaDanh'=>$diaDanh, 
             'LoggedUserInfo'=>$data,
             'listAnh'=>$listAnh,
-            'listTheLoai'=>$listTheLoai
+            'listTheLoai'=>$listTheLoai,
+            'totalReview'=>$totalReview,
+            'avg_stars'=>$avg_stars,
         ]);
     }
 
