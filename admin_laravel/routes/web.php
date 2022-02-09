@@ -12,6 +12,7 @@ use App\Http\Controllers\DiaDanhController;
 use App\Http\Controllers\AnhDiaDanhController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\AnhBaiVietController;
+use App\Http\Controllers\TrashController;
 
 use App\Http\Controllers\API\AuthController;
 
@@ -42,14 +43,31 @@ Route::get('/success', function(){
 
 Route::group(['middleware'=>'auth.custom'], function(){
     Route::get('/', [LoginController::class, 'index']);
+    Route::resource('diaDanh', DiaDanhController::class);
     Route::resource('mien', MienController::class);
-    Route::resource('nguoiDung', NguoiDungController::class);
     Route::resource('theLoai', TheLoaiController::class);
     Route::resource('tienIch', TienIchController::class);
-
-    Route::resource('diaDanh', DiaDanhController::class);
-    Route::resource('anhDiaDanh', AnhDiaDanhController::class);
-
     Route::resource('baiViet', BaiVietController::class);
+    Route::resource('nguoiDung', NguoiDungController::class);
+
+    Route::resource('anhDiaDanh', AnhDiaDanhController::class);
     Route::resource('anhBaiViet', AnhBaiVietController::class);
+
+    Route::get('rac/mien', [TrashController::class, 'mienIndex'])->name('mienIndex');
+    Route::patch('rac/mien/{id}', [TrashController::class, 'mienEdit'])->name('mienEdit');
+
+    Route::get('rac/theLoai', [TrashController::class, 'theLoaiIndex'])->name('theLoaiIndex');
+    Route::patch('rac/theLoai/{id}', [TrashController::class, 'theLoaiEdit'])->name('theLoaiEdit');
+
+    Route::get('rac/nguoiDung', [TrashController::class, 'nguoiDungIndex'])->name('nguoiDungIndex');
+    Route::patch('rac/nguoiDung/{id}', [TrashController::class, 'nguoiDungEdit'])->name('nguoiDungEdit');
+
+    Route::get('rac/tienIch', [TrashController::class, 'tienIchIndex'])->name('tienIchIndex');
+    Route::patch('rac/tienIch/{id}', [TrashController::class, 'tienIchEdit'])->name('tienIchEdit');
+
+    Route::get('rac/diaDanh', [TrashController::class, 'diaDanhIndex'])->name('diaDanhIndex');
+    Route::patch('rac/diaDanh/{id}', [TrashController::class, 'diaDanhEdit'])->name('diaDanhEdit');
+
+    Route::get('rac/baiViet', [TrashController::class, 'baiVietIndex'])->name('baiVietIndex');
+    Route::patch('rac/baiViet/{id}', [TrashController::class, 'baiVietEdit'])->name('baiVietEdit');
 });

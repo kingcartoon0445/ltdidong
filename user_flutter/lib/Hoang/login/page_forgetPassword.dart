@@ -62,8 +62,7 @@ class ForgotPageState extends State<ForgotPage> {
                           steps: _mySteps(),
                           currentStep: _currentStep,
                           onStepContinue: () {
-                            final _isLastStep =
-                                _currentStep == _mySteps().length - 1;
+                            final _isLastStep = _currentStep == _mySteps().length - 1;
 
                             print(_currentStep);
                             if (_isLastStep) {
@@ -88,11 +87,8 @@ class ForgotPageState extends State<ForgotPage> {
                               _currentStep = step;
                             });
                           },
-
-                          controlsBuilder: (context,ControlsDetails controls) {
-
-                            final _isLastStep =
-                                _currentStep == _mySteps().length - 1;
+                          controlsBuilder: (context, ControlsDetails controls) {
+                            final _isLastStep = _currentStep == _mySteps().length - 1;
                             return Container(
                               margin: EdgeInsets.only(top: 15),
                               child: Row(
@@ -120,7 +116,7 @@ class ForgotPageState extends State<ForgotPage> {
                                   SizedBox(width: 12),
                                   Expanded(
                                     child: MaterialButton(
-                                      onPressed:controls.onStepCancel,
+                                      onPressed: controls.onStepCancel,
                                       minWidth: double.infinity,
                                       height: 40,
                                       color: Colors.grey.shade300,

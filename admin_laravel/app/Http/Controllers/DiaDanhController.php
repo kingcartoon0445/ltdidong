@@ -8,6 +8,7 @@ use App\Models\Mien;
 use App\Models\AnhDiaDanh;
 use App\Models\TheLoai;
 use App\Models\ThuocTheLoai;
+use App\Models\DanhGia;
 
 use App\Http\Requests\StoreDiaDanhRequest;
 use App\Http\Requests\UpdateDiaDanhRequest;
@@ -171,18 +172,22 @@ class DiaDanhController extends Controller
             $this->fixImage_AnhDiaDanh($anh);
         }
         
-
         $listTheLoai = DB::table('the_loais')
                             ->join('thuoc_the_loais', 'thuoc_the_loais.MaTheLoai', '=', 'the_loais.id')
                             ->where('thuoc_the_loais.MaDiaDanh', '=', $diaDanh->id)
                             ->select('the_loais.*')
                             ->get();
 
+        $totalReview = $diaDanh->danhGias->count();
+        $avg_stars = $diaDanh->danhGias->avg('SoDanhGia');
+
         return view('diadanh.show', [
             'diaDanh'=>$diaDanh, 
             'LoggedUserInfo'=>$data,
             'listAnh'=>$listAnh,
-            'listTheLoai'=>$listTheLoai
+            'listTheLoai'=>$listTheLoai,
+            'totalReview'=>$totalReview,
+            'avg_stars'=>$avg_stars,
         ]);
     }
 
@@ -206,7 +211,7 @@ class DiaDanhController extends Controller
         }
         
         $listTheLoai = TheLoai::all();
-        $selectedListTheLoai = $diaDanh->theLoais;
+        $selectedListTheLoai = $diaDanh->thuocTheLoais;
 
         return view('diadanh.sua', [
             'diaDanh'=>$diaDanh, 
@@ -263,8 +268,8 @@ class DiaDanhController extends Controller
         }
 
         if($request->has('theloais')){
-            ThuocTheLoai::where('MaDiaDanh','=',$diaDanh->id)->delete();
-            
+            DB::table('thuoc_the_loais')->where('MaDiaDanh', $diaDanh->id)->delete();
+
             foreach($request->input('theloais') as $theLoai){
                 $thuocTheLoai = new ThuocTheLoai;
                 $thuocTheLoai->fill([
@@ -283,7 +288,6 @@ class DiaDanhController extends Controller
             'ViDo'=>$request->input('ViDo'),
             'MoTa'=>$request->input('MoTa'),
             'DiaChi'=>$request->input('DiaChi'),
-            'AnhBia'=>'',
             'TrangThai'=>$request->input('TrangThai'),
         ]);
         

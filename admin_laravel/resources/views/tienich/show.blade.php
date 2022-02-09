@@ -33,7 +33,7 @@
                 <div class="col-md-12 mt-4">
                     <div class="project-info-box mt-0">
                         <h5><b>Mô tả</b></h5>
-                        <p>{{ $tienIch->MoTa }}</p>
+                        <p>{!! $tienIch->MoTa !!}</p>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Quản lý tài khoản</h1>
+          <h1 class="m-0">Các tài khoản đã xóa</h1>
         </div>
       </div>
     </div>
@@ -18,8 +18,6 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <a href="{{ route('nguoiDung.create') }}" type="button" class="btn btn-success">Thêm tài khoản</a>
-
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
@@ -27,7 +25,7 @@
                     <th>Họ tên</th>
                     <th>SĐT</th>
                     <th>Chức vụ</th>
-                    <th>Trạng thái</th>
+                    <th>Thời gian xóa</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -45,16 +43,11 @@
                             @endif  
                         </td>
                         <td>
-                            @if($nguoiDung->TrangThai==0)
-                              <label class="badge badge-danger" style="width: 90px; height: 25px; font-weight: bold;">Khóa</label>
-                            @else
-                              <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hoạt động</label>
-                            @endif                     
+                          {{$nguoiDung->deleted_at}}
                         </td>
                         <td class="dt-center">
                           <div class="btn-group">
-                            <button onclick="location.href='{{ route('nguoiDung.edit', $nguoiDung) }}'" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>
-                            <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $nguoiDung->id }}"><i class="mdi mdi-cup"></i></button>
+                            <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-success btn-fw" data-toggle="modal" data-target="#modal-delete{{ $nguoiDung->id }}"><i class="mdi mdi-cup"></i></button>
                           </div>
                         </td>
                     </tr>
@@ -63,18 +56,18 @@
                     <div class="modal-dialog">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h5 class="modal-title">Xác nhận xóa dữ liệu này?</h5>
+                              <h5 class="modal-title">Xác nhận recover dữ liệu này?</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                               </button>
                           </div>
                           <div class="modal-footer justify-content-between">
                             <button class="btn btn-light" data-dismiss="modal">Cancel</button>
-                            <form action="{{ route('nguoiDung.destroy', ['nguoiDung'=>$nguoiDung]) }}" method="post">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>
-                              </form>
+                            <form action="{{ route('nguoiDungEdit', ['id'=>$nguoiDung->id]) }}" method="post">
+                              @csrf
+                              @method('PATCH')
+                              <button type="submit" class="btn btn-success">Chấp nhận</button>
+                            </form>
                           </div>
                       </div>
                     </div>

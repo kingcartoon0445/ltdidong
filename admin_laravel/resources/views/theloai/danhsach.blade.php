@@ -35,7 +35,7 @@
                         <td>{{ $theLoai->Ten }}</td>
                         <td>{{ $theLoai->created_at }}</td>
                         <td>{{ $theLoai->updated_at }}</td>
-                        <td>
+                        <td class="dt-center">
                             <div class="btn-group">
                               <!--<button type="button" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#modal-edit{{ $theLoai->id }}"><i class="mdi mdi-eye"></i></button>-->
                               <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw" data-toggle="modal" data-target="#modal-edit{{ $theLoai->id }}"><i class="mdi mdi-border-color"></i></button>
@@ -76,6 +76,7 @@
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header">
+                                    <h5 class="modal-title">Chấp nhận xóa dữ liệu này?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>

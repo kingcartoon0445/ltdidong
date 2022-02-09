@@ -9,11 +9,8 @@ class CallApi {
 
     return await http.post(
       Uri.parse(fullUrl),
-      headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: {'Accept': 'application/json'},
       body: jsonEncode(data),
-    );  
+    );
   }
 }

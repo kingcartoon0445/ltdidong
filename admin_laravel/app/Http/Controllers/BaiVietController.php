@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DiaDanh;
 use App\Models\NguoiDung;
 use App\Models\AnhBaiViet;
+use App\Models\Like;
+use App\Models\View;
 
 use App\Models\BaiViet;
 use App\Http\Requests\StoreBaiVietRequest;
@@ -78,13 +80,13 @@ class BaiVietController extends Controller
             'NoiDung' => 'required',
             'MaDiaDanh' => 'required',
             'MaNguoiDung' => 'required',
-            'hinh' => 'max:5000',
+            'images' => 'max:5000',
         ],[
             'TieuDe.required' => 'Vui lòng nhập tiêu đề',
             'NoiDung.required' => 'Vui lòng nhập nội dung',
             'MaDiaDanh.required' => 'Vui lòng chọn địa danh',
             'MaNguoiDung.required' => 'Vui lòng chọn người đăng',
-            'hinh.max' => 'Tối đa 5 MB',
+            'images.max' => 'Tối đa 5 MB',
         ]);
 
         $baiViet = new BaiViet;
@@ -125,6 +127,9 @@ class BaiVietController extends Controller
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage_NguoiDung($data);
 
+        $soLuotLike = Like::where('MaBaiViet', $baiViet->id)->count();
+        $soLuotView = View::where('MaBaiViet', $baiViet->id)->count();
+
         $listAnh = $baiViet->anhBaiViets;
         foreach ($listAnh as $anh) {
             $this->fixImage_AnhBaiViet($anh);
@@ -134,6 +139,8 @@ class BaiVietController extends Controller
             'baiViet'=>$baiViet,
             'listAnh'=>$listAnh,
             'LoggedUserInfo'=>$data,
+            'soLuotLike'=>$soLuotLike,
+            'soLuotView'=>$soLuotView,
         ]);
     }
 

@@ -35,7 +35,7 @@
                         <td>{{ $mien->TenMien }}</td>
                         <td>{{ $mien->created_at }}</td>
                         <td>{{ $mien->updated_at }}</td>
-                        <td>
+                        <td class="dt-center">
                           <div class="btn-group">
                             <!--<button type="button" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw" data-toggle="modal" data-target="#modal-edit{{ $mien->id }}"><i class="mdi mdi-eye"></i></button>-->
                             <button type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw" data-toggle="modal" data-target="#modal-edit{{ $mien->id }}"><i class="mdi mdi-border-color"></i></button>

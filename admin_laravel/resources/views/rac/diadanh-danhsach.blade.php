@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Quản lý địa danh</h1>
+          <h1 class="m-0">Các địa danh đã xóa</h1>
         </div>
       </div>
     </div>
@@ -18,14 +18,12 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <a href="{{ route('diaDanh.create') }}" type="button" class="btn btn-success">Thêm địa danh</a>
-
               <table id="example1" class="table table-bordered">
                 <thead>
                   <tr>
                     <th>Tên địa danh</th>
                     <th>Miền</th>
-                    <th>Trạng thái</th>
+                    <th>Thời gian xóa</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -33,19 +31,11 @@
                   @foreach($listdiaDanh as $diaDanh)
                     <tr>
                         <td>{{ $diaDanh->Ten }}</td>
-                        <td>{{ $diaDanh->mien->TenMien }}</td>
-                        <td>
-                            @if($diaDanh->TrangThai==0)
-                              <label class="badge badge-danger" style="width: 90px; height: 25px; font-weight: bold;">Đóng cửa</label>
-                            @else
-                              <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hoạt động</label>
-                            @endif                   
-                        </td>
+                        <td>{{ $diaDanh->TenMien }}</td>
+                        <td>{{ $diaDanh->deleted_at }}</td>
                         <td class="dt-center">
                             <div class="btn-group">
-                              <button onclick="location.href='{{ route('diaDanh.show', $diaDanh) }}'" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-eye"></i></button>
-                              <button onclick="location.href='{{ route('diaDanh.edit', $diaDanh) }}'" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></button>
-                              <button style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $diaDanh->id }}"><i class="mdi mdi-cup"></i></button>
+                              <button style="width: 50px; height: 30px" class="btn btn-outline-success btn-fw" data-toggle="modal" data-target="#modal-delete{{ $diaDanh->id }}"><i class="mdi mdi-cup"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -54,17 +44,17 @@
                       <div class="modal-dialog">
                           <div class="modal-content">
                               <div class="modal-header">
-                                  <h5 class="modal-title">Xác nhận xóa dữ liệu này?</h5>
+                                  <h5 class="modal-title">Xác nhận recover dữ liệu này?</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                   </button>
                               </div>
                               <div class="modal-footer justify-content-between">
                                 <button class="btn btn-light" data-dismiss="modal">Cancel</button>
-                                <form action="{{ route('diaDanh.destroy', ['diaDanh'=>$diaDanh]) }}" method="post">
+                                <form action="{{ route('diaDanhEdit', ['id'=>$diaDanh->id]) }}" method="post">
                                   @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="btn btn-danger">Chấp nhận xóa</button>
+                                  @method('PATCH')
+                                  <button type="submit" class="btn btn-success">Chấp nhận</button>
                               </form>
                             </div>
                           </div>

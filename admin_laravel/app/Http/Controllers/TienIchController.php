@@ -70,10 +70,17 @@ class TienIchController extends Controller
      */
     public function create()
     {
+        $listDiaDanh = DiaDanh::all();
+        $listCoTienIch = CoTienIch::all();
+
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImageUser($data);
 
-        return view('tienich.them', ['LoggedUserInfo'=>$data]);
+        return view('tienich.them', [
+            'listDiaDanh'=>$listDiaDanh,
+            'listCoTienIch'=>$listCoTienIch,
+            'LoggedUserInfo'=>$data
+        ]);
     }
 
     /**
@@ -169,13 +176,17 @@ class TienIchController extends Controller
      */
     public function edit(TienIch $tienIch)
     {
+        $listDiaDanh = DiaDanh::all();
+        $listCoTienIch = CoTienIch::all();
+
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImageUser($data);
-
         $this->fixImage($tienIch);
 
         return view('tienich.sua', [
             'tienIch'=>$tienIch,
+            'listDiaDanh'=>$listDiaDanh,
+            'listCoTienIch'=>$listCoTienIch,
             'LoggedUserInfo'=>$data
         ]);
     }

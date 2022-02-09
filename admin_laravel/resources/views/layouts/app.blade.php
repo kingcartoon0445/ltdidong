@@ -13,9 +13,11 @@
   {{ Html::style("skydash/css/vertical-layout-light/style.css") }}
   {{ Html::style("skydash/vendors/select2/select2.min.css") }}
   
-  {{ Html::style("plugins/datatables-bs4/css/dataTables.bootstrap4.min.css") }}
+  {{ Html::style("plugins/datatables-bs4/css/dataTables.bootstrap4.css") }}
   {{ Html::style("plugins/datatables-responsive/css/responsive.bootstrap4.min.css") }}
   {{ Html::style("plugins/datatables-buttons/css/buttons.bootstrap4.min.css") }}
+  {{ Html::style("plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.min.css") }}
+
   {{ Html::style("dist/css/detail.css") }}
   {{ Html::style("dist/css/multi-slide.css") }}
 </head>
@@ -90,6 +92,24 @@
               <span class="menu-title">Tài khoản</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic">
+              <i class="mdi mdi-cup menu-icon"></i>
+                <span class="menu-title">Khu vực rác</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic2">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('baiVietIndex') }}">Bài viết</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('diaDanhIndex') }}">Địa danh</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('mienIndex') }}">Miền</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('theLoaiIndex') }}">Loại du lịch</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('tienIchIndex') }}">Tiện ích</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('nguoiDungIndex') }}">Tài khoản</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </nav>
 
@@ -118,11 +138,27 @@
   {{ Html::script("plugins/datatables-responsive/js/dataTables.responsive.min.js") }}
   {{ Html::script("plugins/datatables-responsive/js/responsive.bootstrap4.min.js") }}
   {{ Html::script("plugins/datatables-buttons/js/dataTables.buttons.min.js") }}
+  {{ Html::script("plugins/datatables-fixedheader/js/dataTables.fixedHeader.min.js") }}
+  
   {{ Html::script("dist/js/multi-slide.js") }}
+
+  {{ Html::script("ckeditor/ckeditor.js") }}
+
   <script>
+    	ClassicEditor.create( document.querySelector('.editor'), {licenseKey: '',} )
+			.then( editor => {
+				window.editor = editor;
+			} )
+			.catch( error => {
+				console.error( 'Oops, something went wrong!' );
+				console.error( 'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:' );
+				console.warn( 'Build id: 6psx97ta6i9h-fxxp4hao3qfu' );
+				console.error( error );
+			});
+
     $(function () {
       $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "responsive": true, "lengthChange": false, "autoWidth": true,
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 
