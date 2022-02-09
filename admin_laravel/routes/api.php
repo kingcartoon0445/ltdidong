@@ -10,6 +10,11 @@ use App\Http\Controllers\API\TheLoaiController;
 use App\Http\Controllers\API\DiaDanhController;
 use App\Http\Controllers\API\TienIchController;
 use App\Http\Controllers\API\BaiVietController;
+use App\Http\Controllers\API\ViewController;
+use App\Http\Controllers\API\NguoiDungController;
+use App\Http\Controllers\API\LikeController;
+use App\Http\Controllers\API\CoTienIchController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +37,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/forgot-password', [AuthController::class, 'forgot']);
 Route::post('/reset-password', [AuthController::class, 'reset']);
 
-Route::middleware(['auth:sanctum'])->group(function () {
+
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'profile']);
 
@@ -41,4 +46,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/diadanhs', DiaDanhController::class);
     Route::apiResource('/tienichs', TienIchController::class);
     Route::apiResource('/baiviets', BaiVietController::class);
-});
+    Route::apiResource('NguoiDung',NguoiDungController::class);
+//route bài viết
+Route::post('BaivietUS',[BaiVietController::class,'BaivietUS']);
+Route::get('baiviettop5',[BaiVietController::class,'baiviettop5']);
+    //route like
+Route::apiResource('Like',LikeController::class);
+Route::post('/XoaLike', [LikeController::class, 'XoaLike']);
+Route::post('/KtraLike', [LikeController::class, 'KtraLike']);
+    Route::apiResource('/View',ViewController::class);
+Route::post('/XoaView', [LikeController::class, 'XoaView']);
+Route::post('/KtraView', [ViewController::class, 'KtraView']);
+//route Tiện ích
+Route::apiResource('TienIch',TienIchController::class);
+Route::apiResource('CoTienIch',CoTienIchController::class);
+Route::get('/danhsachkhachsan/{MaDiaDanh}', [CoTienIchController::class, 'show2']);
+Route::get('/danhsachnhahang/{MaDiaDanh}', [CoTienIchController::class, 'show1']);
+

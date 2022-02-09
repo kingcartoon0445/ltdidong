@@ -17,7 +17,7 @@ class DiaDanh extends Model
     use SoftDeletes;
 
     protected $guarded = [];
-
+    
     public function mien()
     {
         return $this->belongsTo(Mien::class, 'MaMien');
@@ -25,13 +25,5 @@ class DiaDanh extends Model
 
     public function anhDiaDanhs(){
         return $this->hasMany(AnhDiaDanh::class, 'MaDiaDanh');
-    }
-
-    public function theLoais(){
-        return $this->belongsToMany(TheLoai::class, 'thuoc_the_loais', 'MaDiaDanh', 'MaTheLoai');
-    }
-
-    public function tienIchs(){
-        return $this->belongsToMany(TienIch::class, 'co_tien_iches', 'MaDiaDanh', 'MaTienIch');
     }
 }

@@ -57,14 +57,14 @@ class AnhDiaDanh extends StatelessWidget {
                 onPageChanged: (value) {},
                 controller:
                     PageController(viewportFraction: 0.8, initialPage: 0),
-                itemCount: 3, //đếm ảnh
+                itemCount: DD.ADD.length, //đếm ảnh
                 itemBuilder: (context, index) => Container(
                   margin: EdgeInsets.only(right: 30),
                   width: double.maxFinite,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       image: DecorationImage(
-                        image: AssetImage("assets/imgs/diadanh/VungTau.png"),
+                        image: AssetImage("assets/imgs/diadanh/VungTau.png"/*'http://10.0.2.2:8000'+DD.ADD[index].ADD_Anh*/),
                         fit: BoxFit.cover,
                       )),
                 ),
@@ -94,7 +94,6 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12),
         child: ListView(
           children: [
             AnhDiaDanh(DD: DD),
@@ -122,16 +121,14 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                 ),
                 Expanded(
                   child: TextButton(
-                      onPressed: () {},
-                      child: Expanded(
-                        child: Text(
+                    onPressed: (){},
+                    child: Text(
                           DD.Dd_DiaChi,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 16,
                           ),
-                        ),
-                      )),
+                        ),)
                 )
               ],
             ),
@@ -142,7 +139,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 RatingBarIndicator(
-                  rating: 4.5,
+                  rating: DD.Dd_DanhGia-0.1,
                   itemBuilder: (_, __) {
                     return Icon(
                       Icons.star,
@@ -308,7 +305,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ChiaSeBaiViet()));
+                            builder: (context) => ChiaSeBaiViet(TTDD: DD,)));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),

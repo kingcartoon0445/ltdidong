@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:user_flutter/Object/TienIchObject.dart';
+import 'package:user_flutter/class_chung.dart';
 
 class TienIchProvider{
   static List<TienIchObject> paraseTienIch(String reponseBody){
@@ -11,12 +12,12 @@ class TienIchProvider{
  }
   static Future<List<TienIchObject>> DsKhachSan(int iddd)async{
    final response= await http
-   .get(Uri.parse('http://10.0.2.2:8000/api/danhsachkhachsan/$iddd'));
+   .get(Uri.parse(https+'/danhsachkhachsan/$iddd'));
    return paraseTienIch(response.body);
  }
  static Future<List<TienIchObject>> DsNhaHang(int iddd)async{
    final response= await http
-   .get(Uri.parse('http://10.0.2.2:8000/api/danhsachnhahang/$iddd'));
+   .get(Uri.parse(https+'/danhsachnhahang/$iddd'));
    return paraseTienIch(response.body);
  }
 }

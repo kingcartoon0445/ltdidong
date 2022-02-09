@@ -13,6 +13,9 @@ import 'Object/nguoidungObject.dart';
 import 'Provider/DiaDanhProvider.dart';
 import 'Provider/ViewProvider.dart';
 import 'colorplush.dart';
+//HTTP
+String https='http://192.168.1.15:80/api';
+String httpsanh='http://192.168.1.15:80';
 //Bài viết
 Widget nut_Icon(var icon, var label, var on) {
   return ElevatedButton.icon(
@@ -163,7 +166,7 @@ Widget LayDsKhachSan(int idbv){
           List<TienIchObject> lsti = snapshot.data!;
           if(lsti.length==0){return Container(child:SvgPicture.asset(
             'assets/imgs/svg/hotel.svg',
-            color: Colors.black,
+            color: Color(0XFF7d82bc),
             width: 200,
             height: 200,
           ),);}else{
@@ -180,6 +183,7 @@ Widget LayDsNhaHang(int idbv){
           List<TienIchObject> lsti = snapshot.data!;
           if(lsti.length==0){return Container(child:SvgPicture.asset(
             'assets/imgs/svg/nhahang.svg',
+            color:  Color(0XFF7d82bc),
             width: 200,
             height: 200,
           ),);}else{

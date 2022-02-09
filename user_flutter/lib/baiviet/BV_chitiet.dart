@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_flutter/Object/baivietObject.dart';
 import 'package:user_flutter/Provider/LikeProvider.dart';
-import 'package:user_flutter/Provider/ViewProvider.dart';
 import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/colorplush.dart';
 
@@ -75,7 +74,19 @@ class _ChiTietState extends State<ChiTiet> {
               height: size.height * 227 / 640,
               width: double.maxFinite,
               decoration: BoxDecoration(),
-              child: LayAnh(id: Bai.Bv_Ma),
+              child: PageView.builder(
+                
+                  itemCount: Bai.ABV.length,
+                  itemBuilder: (context, index) =>
+                  Container(
+                    width: double.maxFinite,
+                    decoration:  BoxDecoration(
+                        image: DecorationImage(
+                      image:NetworkImage('http://192.168.1.15:80'+Bai.ABV[index].ABV_Anh),
+                      fit: BoxFit.cover,
+                    )),
+                  ),
+                ),
             ),
             Container(
               margin: EdgeInsets.only(top: size.height * 0.27),

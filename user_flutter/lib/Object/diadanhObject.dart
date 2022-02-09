@@ -1,38 +1,44 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
+import 'package:user_flutter/Object/anhdiadanhObject.dart';
+import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 
 class DiaDanhObject {
-  final int Dd_Ma;
-  final Image Dd_AnhBia;
-  final String Dd_Ten;
-  final String Dd_DiaChi;
-  final int Dd_MaMien;
-  final String Dd_TenMien;
-  final String Dd_KinhDo;
-  final String Dd_ViDo;
-  final String Dd_MoTa;
-  DiaDanhObject(
-      this.Dd_Ma,
-      this.Dd_AnhBia,
-      this.Dd_Ten,
-      this.Dd_DiaChi,
-      this.Dd_MaMien,
-      this.Dd_TenMien,
-      this.Dd_KinhDo,
-      this.Dd_ViDo,
-      this.Dd_MoTa);
-  DiaDanhObject.fromjson(Map<String, dynamic> res)
-      : Dd_Ma = res["id"],
-        Dd_AnhBia = Image.network(
-          'http://10.0.2.2:8000/upload/anhDiaDanh/' + res['AnhBia'],
-          width: double.infinity,
-          height: 400,
-          fit: BoxFit.cover,
-        ),
-        Dd_Ten = res["Ten"],
-        Dd_DiaChi = res["DiaChi"],
-        Dd_MaMien = res["MaMien"],
-        Dd_TenMien = res['TenMien'],
-        Dd_KinhDo = res["KinhDo"].toString(),
-        Dd_ViDo = res["ViDo"].toString(),
-        Dd_MoTa = res["MoTa"];
+   int Dd_Ma;
+   String Dd_AnhBia;
+   String Dd_Ten;
+   String Dd_DiaChi;
+   int Dd_MaMien;
+   String Dd_KinhDo;
+   String Dd_ViDo;
+   String Dd_MoTa;
+   final Dd_DanhGia;
+   List<AnhDiaDanhObject> ADD;
+  DiaDanhObject({
+      required this.Dd_Ma,
+      required this.Dd_AnhBia,
+      required this.Dd_Ten,
+      required this.Dd_DiaChi,
+      required this.Dd_MaMien,
+      required this.Dd_KinhDo,
+      required this.Dd_ViDo,
+      required this.Dd_MoTa,
+      required this.Dd_DanhGia,
+      required this.ADD});
+  factory DiaDanhObject.fromjson(Map<String, dynamic> res){
+    var list = res['anh_dia_danhs'] as List;
+print(list); //returns List<dynamic>
+List<AnhDiaDanhObject> ADDList = list.map((i) => AnhDiaDanhObject.fromjson(i)).toList();
+    return DiaDanhObject(Dd_Ma: res["id"],
+        Dd_AnhBia: res['AnhBia'],
+        Dd_Ten: res["Ten"],
+        Dd_DiaChi: res["DiaChi"],
+        Dd_MaMien: res["MaMien"],
+        Dd_KinhDo: res["KinhDo"],
+        Dd_ViDo: res["ViDo"],
+        Dd_MoTa: res["MoTa"],
+        Dd_DanhGia:res["danhgia"]+0.1,
+        ADD: ADDList);
+  }
 }

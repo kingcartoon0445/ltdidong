@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_flutter/Object/ViewObject.dart';
+import 'package:user_flutter/class_chung.dart';
 
 class ViewProvider {
   static List<ViewObject> paraseView(String reponseBody) {
@@ -12,21 +13,21 @@ class ViewProvider {
 
   static Future<String> oneView(int Id) async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/View/$Id'));
+        await http.get(Uri.parse(https+'/View/$Id'));
     var jsons = json.decode(response.body);
     String a = jsons['view'].toString();
     return a;
   }
 
   static ThemView(BuildContext context, String MaBV, String MaND) async {
-    String url = 'http://10.0.2.2:8000/api/View';
+    String url = https+'/View';
     Map body = {'MaBaiViet': MaBV, 'MaNguoiDung': MaND};
     var response = await http.post(Uri.parse(url), body: body);
   }
 
   static Future<String> KtraView(
       BuildContext context, String MaBV, String MaND) async {
-    String url = 'http://10.0.2.2:8000/api/KtraView';
+    String url = https+'/KtraView';
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map body = {'MaBV': MaBV, 'MaND': MaND};
     var response = await http.post(Uri.parse(url), body: body);

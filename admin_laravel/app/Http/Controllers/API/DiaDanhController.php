@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\DiaDanh;
+use App\Models\DanhGia;
 use App\Models\NguoiDung;
 use App\Models\Mien;
 use App\Models\AnhDiaDanh;
@@ -25,8 +26,11 @@ class DiaDanhController extends Controller
     
     public function index()
     {
-        $listDiaDanh = DiaDanh::with('mien', 'theLoais', 'anhDiaDanhs', 'tienIchs')->where('TrangThai', 1)->get();
-        
+        $listDiaDanh = DiaDanh::join('Miens','dia_danhs.MaMien','=','Miens.id')
+        ->join('danh_gias','danh_gias.MaDiaDanh','=','dia_danhs.id')
+        ->where('dia_danhs.TrangThai',1)
+        ->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi',DanhGia::raw(" AVG(danh_gias.SoDanhGia) AS danhgia"))->groupBy('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->get();
+       
         foreach($listDiaDanh as $diaDanh){
             if(Storage::disk('public')->exists($diaDanh->AnhBia)){
                 $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
@@ -41,15 +45,6 @@ class DiaDanhController extends Controller
                 }
                 else{
                     $anhDiaDanh->Anh = Storage::url('images/no_image_holder.png');
-                }
-            }
-
-            foreach($diaDanh->tienIchs as $anhTienIch){
-                if(Storage::disk('public')->exists($anhTienIch->Anh)){
-                    $anhTienIch->Anh = Storage::url($anhTienIch->Anh);
-                }
-                else{
-                    $anhTienIch->Anh = Storage::url('images/no_image_holder.png');
                 }
             }
         }
@@ -76,7 +71,9 @@ class DiaDanhController extends Controller
      */
     public function show($id)
     {
-        $diaDanh = DiaDanh::with('mien', 'theLoais', 'anhDiaDanhs', 'tienIchs')->where('id',$id)->first();
+        $diaDanh = DiaDanh::join('Miens','dia_danhs.MaMien','=','Miens.id')
+        ->where('dia_danhs.TrangThai',1)
+        ->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->where('dia_danhs.id',$id)->first();
         
         if(Storage::disk('public')->exists($diaDanh->AnhBia)){
             $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
@@ -91,15 +88,6 @@ class DiaDanhController extends Controller
             }
             else{
                 $anhDiaDanh->Anh = Storage::url('images/no_image_holder.png');
-            }
-        }
-
-        foreach($diaDanh->tienIchs as $anhTienIch){
-            if(Storage::disk('public')->exists($anhTienIch->Anh)){
-                $anhTienIch->Anh = Storage::url($anhTienIch->Anh);
-            }
-            else{
-                $anhTienIch->Anh = Storage::url('images/no_image_holder.png');
             }
         }
         

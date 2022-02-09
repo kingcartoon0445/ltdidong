@@ -1,21 +1,22 @@
 class NguoiDungObject {
-  final int Nd_Ma;
-  final String Nd_TenDaiDien;
-  final String Nd_HovaTen;
-  final String Nd_emai;
-  final String Nd_SDT;
-  final String Nd_AnhNen;
-  final String Nd_MatKhau;
-  final int Nd_TrangThai;
-  NguoiDungObject(this.Nd_Ma, this.Nd_TenDaiDien, this.Nd_HovaTen, this.Nd_emai,
-      this.Nd_SDT, this.Nd_AnhNen, this.Nd_MatKhau, this.Nd_TrangThai);
-  NguoiDungObject.fromjson(Map<String, dynamic> res)
-      : Nd_Ma = res["id"],
-        Nd_TenDaiDien = res["TenDaiDien"],
-        Nd_HovaTen = res["HovaTen"],
-        Nd_emai = res["Email"],
-        Nd_SDT = res["SDT"],
-        Nd_AnhNen = res["AnhNen"],
-        Nd_MatKhau = res["MatKhau"],
-        Nd_TrangThai = res["TrangThai"];
+   int Nd_Ma;
+   String Nd_TenDaiDien;
+   String Nd_HovaTen;
+   String Nd_emai;
+   String Nd_SDT;
+   String Nd_AnhNen;
+   String Nd_MatKhau;
+   int Nd_TrangThai;
+  NguoiDungObject({required this.Nd_Ma,required this.Nd_TenDaiDien,required this.Nd_HovaTen,required this.Nd_emai,
+     required this.Nd_SDT,required this.Nd_AnhNen,required this.Nd_MatKhau,required this.Nd_TrangThai});
+  factory NguoiDungObject.fromjson(Map<String, dynamic> res){
+    return NguoiDungObject( Nd_Ma: res["id"],
+        Nd_TenDaiDien: res["TenDaiDien"],
+        Nd_HovaTen: res["HovaTen"],
+        Nd_emai: res["Email"],
+        Nd_SDT: res["SDT"],
+        Nd_AnhNen: res["AnhNen"],
+        Nd_MatKhau: res["MatKhau"],
+        Nd_TrangThai: res["TrangThai"]);
+  }
 }

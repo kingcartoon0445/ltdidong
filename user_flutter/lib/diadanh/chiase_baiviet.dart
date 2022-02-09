@@ -1,17 +1,31 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_flutter/Object/diadanhObject.dart';
+import 'package:user_flutter/Provider/BaivietProvider.dart';
+import 'package:user_flutter/baiviet/BaiViet.dart';
+import 'package:user_flutter/class_chung.dart';
 
 class ChiaSeBaiViet extends StatefulWidget {
-  const ChiaSeBaiViet({Key? key}) : super(key: key);
+  final DiaDanhObject TTDD;
+  const ChiaSeBaiViet({Key? key, required this.TTDD}) : super(key: key);
 
   @override
-  _ChiaSeBaiVietState createState() => _ChiaSeBaiVietState();
+  _ChiaSeBaiVietState createState(){
+return _ChiaSeBaiVietState(TTDD:TTDD);
+  }
 }
 
 class _ChiaSeBaiVietState extends State<ChiaSeBaiViet> {
+  final DiaDanhObject TTDD;
+  _ChiaSeBaiVietState({required this.TTDD});
+  int id=0;
+  layid() async{
+SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     id = (sharedPreferences.getInt('id') ?? 0);
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +34,7 @@ class _ChiaSeBaiVietState extends State<ChiaSeBaiViet> {
         child: Container(
             padding: const EdgeInsets.only(top: 30),
             child: SingleChildScrollView(
-              child: ThongTinDiaDanh(),
+              child: ThongTinDiaDanh(DD:TTDD),
             )),
       ),
     );
@@ -59,15 +73,64 @@ class _RatingState extends State<Rating> {
 }
 
 class ThongTinDiaDanh extends StatefulWidget {
-  const ThongTinDiaDanh({Key? key}) : super(key: key);
+  final DiaDanhObject DD;
+  const ThongTinDiaDanh({Key? key,required this.DD}) : super(key: key);
 
   @override
-  _ThongTinDiaDanhState createState() => _ThongTinDiaDanhState();
+  _ThongTinDiaDanhState createState() {
+    return _ThongTinDiaDanhState(DD:DD);
+  }
 }
 
 class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
+  int id=1;
+  @override
+    initState() {
+    super.initState();
+    ktra();
+  }
+  ktra()async{  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     setState(() {
+       id = (sharedPreferences.getInt('id') ?? 1);
+     }); }
+     
+  final DiaDanhObject DD;
+  _ThongTinDiaDanhState({required this.DD});
   final TextEditingController txtTieuDe = TextEditingController();
   final TextEditingController txtNoiDung = TextEditingController();
+  var snackBar=SnackBar(content: const Text('data'));
+  dangbai() async{SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final success = await sharedPreferences.remove('thanhcong');
+    String a="";
+    BaiVietProvider.ThemBV(txtTieuDe.text, txtNoiDung.text, DD.Dd_Ma, id).then((value){
+      a=value;
+      if(a=='1'){
+        setState(() {
+          
+        snackBar = SnackBar(
+            content: const Text('Tạo bài viết thành công'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );ScaffoldMessenger.of(context).showSnackBar(snackBar); 
+        Navigator.pop(context);}); 
+      }else{
+        setState(() {        
+         snackBar = SnackBar(
+            content: const Text('Có lỗi xảy ra'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );});ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,13 +140,14 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
         children: [
           Rating(),
           Row(
-            children: [
-              Text(
-                'Hạ Long',
+             children: [
+              Expanded(child:  Text(
+                DD.Dd_Ten,
                 style: TextStyle(
                   fontSize: 30,
+                  overflow: TextOverflow.ellipsis
                 ),
-              ),
+              ),),
             ],
           ),
           SizedBox(
@@ -95,12 +159,13 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
               SizedBox(
                 width: 5,
               ),
-              Text(
-                'Hạ Long,Quảng Ninh',
+              Expanded(child: Text(
+                DD.Dd_DiaChi,
                 style: TextStyle(
                   fontSize: 18,
+                  overflow: TextOverflow.ellipsis
                 ),
-              )
+              )),
             ],
           ),
           SizedBox(
@@ -112,7 +177,7 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
               SizedBox(
                 width: 5,
               ),
-              Text('Lê Thuận')
+              tenND(id, Colors.black, 15)
             ],
           ),
           SizedBox(
@@ -210,7 +275,11 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
                 ),
                 FloatingActionButton.extended(
                   onPressed: () {
+                  
                     // Add your onPressed code here!
+                      dangbai();
+
+                      
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\API;
+use App\Http\Controllers\Controller;
 use App\Models\View;
 use App\Http\Requests\StoreViewRequest;
 use App\Http\Requests\UpdateViewRequest;
+use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
@@ -35,9 +36,22 @@ class ViewController extends Controller
      * @param  \App\Http\Requests\StoreViewRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreViewRequest $request)
+    public function store(Request $request)
     {
         //
+        $data=$request->validate([
+            'MaNguoiDung' => 'required',
+            'MaBaiViet' => 'required',
+        ]);
+        //
+      $view =View::create([
+          'MaNguoiDung'=>$data['MaNguoiDung'],
+          'MaBaiViet'=>$data['MaBaiViet']
+      ]);
+      $response= [
+          'data'=>$view
+      ];
+      return true;
     }
 
     /**
@@ -46,9 +60,10 @@ class ViewController extends Controller
      * @param  \App\Models\View  $view
      * @return \Illuminate\Http\Response
      */
-    public function show(View $view)
+    public function show(int $view)
     {
         //
+        return['view'=> View::where('MaBaiViet',$view)->count()];
     }
 
     /**
@@ -84,4 +99,16 @@ class ViewController extends Controller
     {
         //
     }
+
+    public function KtraView(Request $request)
+    {
+        $request->validate([
+            'MaBV' => 'required',
+            'MaND'=>'required'
+        ]);
+        $view=View::where('MaNguoiDung',$request->MaND)->where('MaBaiViet',$request->MaBV)->get();
+        $view2=View::where('MaNguoiDung','0')->where('MaBaiViet','0')->get();
+        if($view!=$view2)
+        return ['coview'=>'1'];else return ['coview'=>'0'];
+    }  
 }

@@ -59,14 +59,16 @@ class AuthController extends Controller
 
         $nguoiDung = NguoiDung::where('Email', $data['Email'])->first();
 
-        if(!$nguoiDung || !Hash::check($data['MatKhau'], $nguoiDung['MatKhau'])){
+        //if(!$nguoiDung || !Hash::check($data['MatKhau'], $nguoiDung['MatKhau'])){
+          if(!$nguoiDung || ( $request->MatKhau != $nguoiDung->MatKhau)){
             return response()->json(['message' => 'Đăng nhập thất bại'], 400);
         }
         else{
             $token = $nguoiDung->createToken('API Token')->plainTextToken;
 
             return response()->json([
-                'nguoi_dung' => $nguoiDung,
+                //'nguoi_dung' => $nguoiDung,
+                'id'=>$nguoiDung->id,
                 'token' => $token,
             ], 200);
         }

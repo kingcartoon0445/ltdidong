@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:user_flutter/Hoang/search/SearchPage.dart';
 import 'package:user_flutter/Object/nguoidungObject.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
-import 'package:user_flutter/baiviet/BV_chitiet.dart';
 import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/diadanh/baiviet_diadanh.dart';
-import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
-import 'package:user_flutter/diadanh/chitiet_tienich.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
-import 'package:user_flutter/diadanh/danhsachtienich.dart';
 import 'package:user_flutter/linhtinh/caidat.dart';
-import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Hoang/login/page_login.dart';
 import 'colorplush.dart';
 
@@ -106,9 +100,7 @@ class _BackgroundState extends State<Background> {
                           child: ListTile(
                             leading: CircleAvatar(
                               maxRadius: 30,
-                              backgroundImage: NetworkImage(
-                                  'http://10.0.2.2:8000/storage/upload/anhNen/' +
-                                      avt),
+                              backgroundImage: NetworkImage('https://scr.vn/wp-content/uploads/2020/08/%E1%BA%A2nh-avt-%C4%91en-tr%E1%BA%AFng-d%E1%BB%85-th%C6%B0%C6%A1ng-1.jpg'),
                             ),
                             title: Text(
                               'Diu diu dio',
@@ -179,7 +171,7 @@ class _BackgroundState extends State<Background> {
             },
             icon: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'http://10.0.2.2:8000/storage/upload/anhNen/' + avt),
+                  'https://lh3.googleusercontent.com/-QpucJ7ceepw/XjgMmeOvkkI/AAAAAAACdsc/f6rHSExkOMgjFUMPlT7DYLHrocan7QH_ACNcBGAsYHQ/w500/97f28bea5cf33abff9d260848f5af9d7.png'),
             ),
           )
         ],

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_flutter/Object/anhbaivietObject.dart';
 import 'package:user_flutter/Object/baivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/ViewProvider.dart';
 import 'package:user_flutter/baiviet/BV_chitiet.dart';
 import 'package:user_flutter/class_chung.dart';
+
 
 import '../colorplush.dart';
 
@@ -29,15 +31,30 @@ class _bv_decuState extends State<bv_decu> {
       }
     });
   }
-
+  String xetanh(List<AnhBaiVietObject> a){
+    // ignore: unnecessary_null_comparison
+    if(a!=[]){
+      return a[0].ABV_Anh;
+    }else{
+      return'images/no_image_holder.png';
+    }
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return FutureBuilder<List<BaiVietObject>>(
-        future: BaiVietProvider.fecthBaiViet(),
+        future: BaiVietProvider.BaiVietDC(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            List<NetworkImage> lstAnh=[];
             List<BaiVietObject> lsbv = snapshot.data!;
+            for(int i=0;i<lsbv.length;i++){
+              try{
+                lstAnh.add(NetworkImage(httpsanh+lsbv[i].ABV[0].ABV_Anh));
+                }catch(e){
+                  lstAnh.add(NetworkImage('https://vnn-imgs-a1.vgcloud.vn/icdn.dantri.com.vn/2021/05/26/ngo-ngang-voi-ve-dep-cua-hot-girl-anh-the-chua-tron-18-docx-1622043349706.jpeg'));
+                }
+            }
             return Container(
               padding: EdgeInsets.only(bottom: 20, top: 10),
               color: Colors.white,
@@ -51,7 +68,7 @@ class _bv_decuState extends State<bv_decu> {
                       child: PageView.builder(
                         controller: PageController(
                             viewportFraction: 0.8, initialPage: 0),
-                        itemCount: lsbv.length, //đếm ảnh
+                        itemCount: 5, //đếm ảnh
                         itemBuilder: (context, index) => InkWell(
                           onTap: () {
                             setState(() {
@@ -72,8 +89,7 @@ class _bv_decuState extends State<bv_decu> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(23),
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/imgs/baiviets/vhlong.jpg"),
+                                  image: lstAnh[index],
                                   fit: BoxFit.cover,
                                 )),
                             child: Column(
@@ -121,8 +137,8 @@ class _bv_decuState extends State<bv_decu> {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Spacer(),
-                                          tenND(lsbv[index].Bv_MaNguoiDung,
-                                              Colors.white, 15.0),
+                                          Text(lsbv[index].Bv_TenND,style: cabin_B( Colors.white, 15.0),)
+
                                         ],
                                       )
                                     ],

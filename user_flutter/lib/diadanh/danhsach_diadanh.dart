@@ -307,7 +307,7 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                                             MainAxisAlignment.start,
                                         children: [
                                           RatingBarIndicator(
-                                            rating: 4.5,
+                                            rating: lsdd[index].Dd_DanhGia-0.1,
                                             itemBuilder: (_, __) {
                                               return Icon(
                                                 Icons.star,
