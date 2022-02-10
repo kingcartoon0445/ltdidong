@@ -30,7 +30,9 @@ class BaiVietController extends Controller
         $listBaiViet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')
         ->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')
         ->where('bai_viets.TrangThai','1')
-        ->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')->get();
+        ->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung',Like::raw("count('likes.MaNguoiDung') AS thich"))
+        ->groupBy('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')
+        ->get();
         
         foreach($listBaiViet as $baiViet){
             foreach($baiViet->anhBaiViets as $anhBaiViet){
@@ -178,7 +180,11 @@ class BaiVietController extends Controller
             'id' => 'required',
         ]);
     
-        $listBaiViet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')->where('bai_viets.TrangThai','1')->where('MaNguoiDung',$request->id)->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')->get();
+        $listBaiViet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')
+        ->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')
+        ->where('bai_viets.TrangThai','1')
+        ->where('MaNguoiDung',$request->id)
+        ->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')->get();
        // return $user;
       //  return [$request->password, $user->MatKhau];
     
@@ -193,5 +199,29 @@ class BaiVietController extends Controller
         }
     }
     return response()->json($listBaiViet, 200);
+    }
+    public function BaiVietNhieuLike(){
+        $listBaiViet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')
+        ->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')
+        ->join('likes','bai_viets.id','=','likes.MaBaiViet')
+        ->where('bai_viets.TrangThai','1')
+        ->select('bai_viets.id','bai_viets.MaNguoiDung','TenDaiDien','bai_viets.MaDiaDanh','Ten','TieuDe','NoiDung',Like::raw("count('likes.MaNguoiDung') AS thich"))
+        ->where('bai_viets.id','=','likes.MaBaiViet')
+        ->groupBy('bai_viets.id','bai_viets.MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')
+        ->orderBy('thich','desc')
+        ->get();
+        
+        foreach($listBaiViet as $baiViet){
+            foreach($baiViet->anhBaiViets as $anhBaiViet){
+                if(Storage::disk('public')->exists($anhBaiViet->Anh)){
+                    $anhBaiViet->Anh = Storage::url($anhBaiViet->Anh);
+                }
+                else{
+                    $anhBaiViet->Anh = Storage::url('images/no_image_holder.png');
+                }
+            }
+        }
+
+        return response()->json($listBaiViet, 200);
     }
 }

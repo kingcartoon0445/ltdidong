@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
+import 'package:user_flutter/baiviet/ListBaiviet.dart';
 import 'package:user_flutter/class_chung.dart';
-import 'package:user_flutter/diadanh/baiviet_diadanh.dart';
 import 'package:user_flutter/diadanh/chiase_baiviet.dart';
-import 'package:user_flutter/diadanh/danhsachtienich.dart';
 
 class ChiTietDiaDanh extends StatefulWidget {
   final DiaDanhObject DD;
@@ -21,18 +20,81 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
   _ChiTietDiaDanhState({required this.DD});
   @override
   Widget build(BuildContext context) {
+    const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Material(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
+      body:Container(child: CustomScrollView(
+        center: centerKey,
+        slivers: <Widget>[
+          SliverList(
+            key: centerKey,
+            delegate: SliverChildListDelegate(
+            [
               ThongTinChiTietDiaDanh(DD: DD),
-            ],
+               
+             Text(
+                  'Bài viết về địa danh',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+            ]
           ),
-        ),
-      ),
+          ),
+          Lst_baiviet(a: 0),
+        ]
+      ),),
+      floatingActionButton: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FloatingActionButton.extended(
+                  onPressed: () {
+                    // Add your onPressed code here!
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+                  backgroundColor: Colors.white,
+                  label: Text(
+                    "Đã đến",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Color(0xFF7D82BC),
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.check,
+                    color: Color(0xFF7D82BC),
+                  ),
+                  heroTag: "fab1",
+                ),
+                FloatingActionButton.extended(
+                  onPressed: () {
+                    // Add your onPressed code here!
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChiaSeBaiViet(TTDD: DD,)));
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+                  backgroundColor: Colors.white,
+                  label: Text(
+                    "200",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Color(0xFF7D82BC),
+                    ),
+                  ),
+                  icon: Icon(Icons.share, color: Color(0xFF7D82BC)),
+                  heroTag: "fab3",
+                ),
+              ],
+            )
+          ,
     );
   }
 }
@@ -64,7 +126,7 @@ class AnhDiaDanh extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       image: DecorationImage(
-                        image: AssetImage("assets/imgs/diadanh/VungTau.png"/*'http://10.0.2.2:8000'+DD.ADD[index].ADD_Anh*/),
+                        image: NetworkImage(httpsanh+DD.ADD[index].ADD_Anh),
                         fit: BoxFit.cover,
                       )),
                 ),
@@ -94,7 +156,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        child: ListView(
+        child: Column(
           children: [
             AnhDiaDanh(DD: DD),
             Row(
@@ -253,78 +315,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
             SizedBox(
               height: 20,
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Expanded(
-                child: Text(
-                  'Bài viết về địa danh',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              )
-            ]),
-            SizedBox(
-              height: 10,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Expanded(
-                child: BaiVietLienQuanDiaDanh(),
-              )
-            ]),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    // Add your onPressed code here!
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-                  backgroundColor: Colors.white,
-                  label: Text(
-                    "Đã đến",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Color(0xFF7D82BC),
-                    ),
-                  ),
-                  icon: Icon(
-                    Icons.check,
-                    color: Color(0xFF7D82BC),
-                  ),
-                  heroTag: "fab1",
-                ),
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    // Add your onPressed code here!
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChiaSeBaiViet(TTDD: DD,)));
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-                  backgroundColor: Colors.white,
-                  label: Text(
-                    "200",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Color(0xFF7D82BC),
-                    ),
-                  ),
-                  icon: Icon(Icons.share, color: Color(0xFF7D82BC)),
-                  heroTag: "fab3",
-                ),
-              ],
-            )
-          ],
+            ],
         ),
       ),
     );

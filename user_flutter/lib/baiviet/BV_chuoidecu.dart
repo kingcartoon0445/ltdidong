@@ -42,7 +42,7 @@ class _chuoidecuState extends State<chuoidecu> {
             Text(ds_Decu[index],
                 style: cabin_B(
                     selectedIndex == index ? Color(0xFF4C56CE) : Colors.grey,
-                    14.0)),
+                    13.0)),
             Container(
               alignment: Alignment.bottomCenter,
               margin: EdgeInsets.only(top: 5), //top padding 5

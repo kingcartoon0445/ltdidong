@@ -7,6 +7,7 @@ use App\Models\NguoiDung;
 use App\Http\Requests\StoreNguoiDungRequest;
 use App\Http\Requests\UpdateNguoiDungRequest;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class NguoiDungController extends Controller
 {
@@ -77,7 +78,14 @@ class NguoiDungController extends Controller
     public function show(int $id)
     {
         //
-     return NguoiDung::where('id',$id)->get();
+        $nguoidung=NguoiDung::where('id',$id)->first();
+        if(Storage::disk('public')->exists($nguoidung->AnhNen)){
+            $anh = Storage::url($anh);
+        }
+        else{
+            $nguoidung->AnhNen = Storage::url('images/no_image_holder.png');
+        }
+     return response()->json([$nguoidung], 200);;
     }
 
     /**

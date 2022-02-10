@@ -89,7 +89,7 @@ class _bv_decuState extends State<bv_decu> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(23),
                                 image: DecorationImage(
-                                  image: lstAnh[index],
+                                  image: NetworkImage(httpsanh+lsbv[index].ABV[0].ABV_Anh),
                                   fit: BoxFit.cover,
                                 )),
                             child: Column(

@@ -1,8 +1,4 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
 import 'package:user_flutter/Object/anhdiadanhObject.dart';
-import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 
 class DiaDanhObject {
    int Dd_Ma;
@@ -28,7 +24,7 @@ class DiaDanhObject {
       required this.ADD});
   factory DiaDanhObject.fromjson(Map<String, dynamic> res){
     var list = res['anh_dia_danhs'] as List;
-print(list); //returns List<dynamic>
+//returns List<dynamic>
 List<AnhDiaDanhObject> ADDList = list.map((i) => AnhDiaDanhObject.fromjson(i)).toList();
     return DiaDanhObject(Dd_Ma: res["id"],
         Dd_AnhBia: res['AnhBia'],

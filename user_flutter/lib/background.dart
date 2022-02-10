@@ -12,17 +12,17 @@ import 'Hoang/login/page_login.dart';
 import 'colorplush.dart';
 
 class Background extends StatefulWidget {
-  final int id;
-  const Background({Key? key, required this.id}) : super(key: key);
+  final NguoiDungObject ND;
+  const Background({Key? key, required this.ND}) : super(key: key);
   @override
   _BackgroundState createState() {
-    return _BackgroundState(id: id);
+    return _BackgroundState(ND: ND);
   }
 }
 
 class _BackgroundState extends State<Background> {
-  final int id;
-  _BackgroundState({required this.id});
+  final NguoiDungObject ND;
+  _BackgroundState({required this.ND});
   int _page = 0;
   String txt = "Danh sách bài viết";
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
@@ -40,23 +40,9 @@ class _BackgroundState extends State<Background> {
     }
     return Text("null");
   }
-
   @override
   Widget build(BuildContext context) {
-    String avt = 'Duy.jpg';
-    load_avt() async {
-      List<NguoiDungObject> a = await NguoiDungProvider.oneNguoiDung(id);
-      avt = a[0].Nd_AnhNen;
-    }
-
-    initState() {
-      super.initState();
-      setState(() {
-        load_avt();
-      });
-    }
-
-    ;
+    String avt = ND.Nd_AnhNen;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -94,16 +80,16 @@ class _BackgroundState extends State<Background> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LayTT(1)),
+                              MaterialPageRoute(builder: (context) => LayTT(ND.Nd_Ma,1)),
                             );
                           },
                           child: ListTile(
                             leading: CircleAvatar(
                               maxRadius: 30,
-                              backgroundImage: NetworkImage('https://scr.vn/wp-content/uploads/2020/08/%E1%BA%A2nh-avt-%C4%91en-tr%E1%BA%AFng-d%E1%BB%85-th%C6%B0%C6%A1ng-1.jpg'),
+                              backgroundImage: NetworkImage(httpsanh+avt),
                             ),
                             title: Text(
-                              'Diu diu dio',
+                              ND.Nd_HovaTen,
                               style: cabin_B(Colors.black, 20.0),
                             ),
                           )),
@@ -115,7 +101,7 @@ class _BackgroundState extends State<Background> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => CaiDat()),
+                              MaterialPageRoute(builder: (context) => LayTT(ND.Nd_Ma, 3)),
                             );
                           },
                           child: ListTile(
@@ -171,7 +157,7 @@ class _BackgroundState extends State<Background> {
             },
             icon: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'https://lh3.googleusercontent.com/-QpucJ7ceepw/XjgMmeOvkkI/AAAAAAACdsc/f6rHSExkOMgjFUMPlT7DYLHrocan7QH_ACNcBGAsYHQ/w500/97f28bea5cf33abff9d260848f5af9d7.png'),
+                  httpsanh+avt),
             ),
           )
         ],

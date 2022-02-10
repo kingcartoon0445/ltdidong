@@ -19,9 +19,7 @@ class LoginProvider {
       sharedPreferences.setInt("id", jsonResponse['id']);
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-              builder: (context) => Background(
-                    id: jsonResponse['id'],
-                  )),
+              builder: (context) => LayTT(jsonResponse['id'], 2)),
           (route) => false);
     }
   }

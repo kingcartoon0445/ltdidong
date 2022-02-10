@@ -15,7 +15,7 @@ class LikeProvider {
     var jsonResponse;
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-        
+      sharedPreferences.setString("colike", jsonResponse["colike"]);
     }
     String a = (sharedPreferences.getString('colike') ?? "w");
     return a;

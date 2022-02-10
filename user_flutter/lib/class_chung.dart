@@ -5,8 +5,10 @@ import 'package:user_flutter/Object/anhbaivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
 import 'package:user_flutter/Provider/TienIchProvider.dart';
+import 'package:user_flutter/background.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsachtienich.dart';
+import 'package:user_flutter/linhtinh/caidat.dart';
 import 'package:user_flutter/linhtinh/thongthin.dart';
 import 'Object/diadanhObject.dart';
 import 'Object/nguoidungObject.dart';
@@ -14,8 +16,9 @@ import 'Provider/DiaDanhProvider.dart';
 import 'Provider/ViewProvider.dart';
 import 'colorplush.dart';
 //HTTP
-String https='http://192.168.1.15:80/api';
-String httpsanh='http://192.168.1.15:80';
+String https='http://192.168.1.15:8000/api';
+String httpsanh='http://192.168.1.15:8000';
+
 //Bài viết
 Widget nut_Icon(var icon, var label, var on) {
   return ElevatedButton.icon(
@@ -131,19 +134,45 @@ class _LayAnhState extends State<LayAnh> {
   }
 }
 
+Widget LayDD(int id){
+   return FutureBuilder<List<DiaDanhObject>>(
+      future: DiaDanhProvider.oneDiaDanh(id),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<DiaDanhObject> lsdd = snapshot.data!;
+          return ChiTietDiaDanh(DD: lsdd[0]);
+        }
+        return CircularProgressIndicator();
+      });
+}
 
-Widget LayTT(int id){
+Widget LayTT(int id,int dinhdanh){
    return FutureBuilder<List<NguoiDungObject>>(
       future: NguoiDungProvider.oneNguoiDung(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<NguoiDungObject> lsnd = snapshot.data!;
-          return thongtin(ND: lsnd[0],);
+          switch (dinhdanh) {
+            case 2:return Background(ND: lsnd[0]);
+            case 3:return CaiDat(ND: lsnd[0]);  
+              break;
+            default:return thongtin(ND: lsnd[0]);
+          }
         }
-        return CircularProgressIndicator();;
+        return CircularProgressIndicator();
       });
 }
-
+Widget LayAVT(int id){
+   return FutureBuilder<List<NguoiDungObject>>(
+      future: NguoiDungProvider.oneNguoiDung(id),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<NguoiDungObject> lsnd = snapshot.data!;
+          return Container();
+        }
+        return CircularProgressIndicator();
+      });
+}
 //Địa danh
 Widget LayDiaDanh(int id){
 return FutureBuilder<List<DiaDanhObject>>(
@@ -167,8 +196,8 @@ Widget LayDsKhachSan(int idbv){
           if(lsti.length==0){return Container(child:SvgPicture.asset(
             'assets/imgs/svg/hotel.svg',
             color: Color(0XFF7d82bc),
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
           ),);}else{
           return DanhSachTienTich(Ti: lsti);}
         }
@@ -184,8 +213,8 @@ Widget LayDsNhaHang(int idbv){
           if(lsti.length==0){return Container(child:SvgPicture.asset(
             'assets/imgs/svg/nhahang.svg',
             color:  Color(0XFF7d82bc),
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
           ),);}else{
           return DanhSachTienTich(Ti: lsti);}
         }

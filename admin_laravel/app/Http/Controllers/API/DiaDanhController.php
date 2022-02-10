@@ -72,9 +72,10 @@ class DiaDanhController extends Controller
     public function show($id)
     {
         $diaDanh = DiaDanh::join('Miens','dia_danhs.MaMien','=','Miens.id')
+        ->join('danh_gias','danh_gias.MaDiaDanh','=','dia_danhs.id')
         ->where('dia_danhs.TrangThai',1)
-        ->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->where('dia_danhs.id',$id)->first();
-        
+        ->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi',DanhGia::raw(" AVG(danh_gias.SoDanhGia) AS danhgia"))->groupBy('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->where('dia_danhs.id',$id)->first();
+    
         if(Storage::disk('public')->exists($diaDanh->AnhBia)){
             $diaDanh->AnhBia = Storage::url($diaDanh->AnhBia);
         }
@@ -91,7 +92,7 @@ class DiaDanhController extends Controller
             }
         }
         
-        return response()->json($diaDanh, 200);
+        return response()->json([$diaDanh], 200);
     }
 
     /**

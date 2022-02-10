@@ -24,7 +24,7 @@ class _Lst_baivietState extends State<Lst_baiviet> {
     return FutureBuilder<List<BaiVietObject>>(
       future: a == 0
           ? BaiVietProvider.fecthBaiViet()
-          : BaiVietProvider.BaiVietUS(context, a.toString()),
+          : BaiVietProvider.BaiVietUS(a.toString()),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(

@@ -70,7 +70,7 @@ class _cardState extends State<card> {
                   borderRadius: BorderRadius.circular(23),
                   image: DecorationImage(
                     image: NetworkImage(
-                        'https://media-cdn.laodong.vn/Storage/NewsPortal/2021/5/26/913299/Ngan-Ha25.jpg'),
+                        httpsanh+BV.ABV[0].ABV_Anh),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -78,7 +78,7 @@ class _cardState extends State<card> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                                  Container(
                     child: Text(
                       BV.Bv_TieuDe,
                       style: cabin_B(Colors.black, 18.0),
@@ -86,7 +86,13 @@ class _cardState extends State<card> {
                     ),
                   ), //#5
                   ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LayDD(BV.Bv_MaDiaDanh)),
+                      );
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white, elevation: 0),
                       icon: SvgPicture.asset(
@@ -106,7 +112,7 @@ class _cardState extends State<card> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => LayTT(BV.Bv_MaNguoiDung)),
+                            builder: (context) => LayTT(BV.Bv_MaNguoiDung,1 )),
                       );
                     },
                     icon: SvgPicture.asset(

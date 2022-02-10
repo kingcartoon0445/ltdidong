@@ -50,6 +50,7 @@ Route::post('/reset-password', [AuthController::class, 'reset']);
 //route bài viết
 Route::post('BaivietUS',[BaiVietController::class,'BaivietUS']);
 Route::get('baiviettop5',[BaiVietController::class,'baiviettop5']);
+Route::get('BaiVietNhieuLike',[BaiVietController::class,'BaiVietNhieuLike']);
     //route like
 Route::apiResource('Like',LikeController::class);
 Route::post('/XoaLike', [LikeController::class, 'XoaLike']);

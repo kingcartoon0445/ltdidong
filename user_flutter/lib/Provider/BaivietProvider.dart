@@ -55,9 +55,8 @@ class BaiVietProvider {
     return thanhcong;
   } 
 
-  static Future<List<BaiVietObject>> BaiVietUS(
-      BuildContext context, String a) async {
-    String url = https+'/BaiVietUS';
+  static Future<List<BaiVietObject>> BaiVietUS(String a) async {
+    String url = https+'/BaivietUS';
     Map body = {'id': a};
     var response = await http.post(Uri.parse(url), body: body);
     return paraseBaiViet(response.body);

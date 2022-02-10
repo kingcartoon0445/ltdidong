@@ -19,7 +19,7 @@ class BaiVietObject {
 List<AnhBaiVietObject> ABVList = list.map((i) => AnhBaiVietObject.fromjson(i)).toList();
         return BaiVietObject(
         Bv_Ma: res["id"],
-        Bv_MaNguoiDung: 12,
+        Bv_MaNguoiDung: res['MaNguoiDung'],
         Bv_TenND: res['TenDaiDien'],
         Bv_MaDiaDanh: res["MaDiaDanh"],
         Bv_TenDD: res['Ten'],

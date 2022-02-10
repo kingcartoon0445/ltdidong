@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:user_flutter/Object/nguoidungObject.dart';
-import 'package:user_flutter/baiviet/BV_The.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
 import '../class_chung.dart';
 import '../colorplush.dart';
@@ -17,15 +16,21 @@ class thongtin extends StatefulWidget {
 }
 
 class _thongtinState extends State<thongtin> {
+  bool riengtu=true;
   NguoiDungObject ND;
   _thongtinState({required this.ND});
   List<int> bottom = <int>[0, 1, 2, 3, 4, 5, 6, 7];
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+        ND.Nd_TrangThai==3?riengtu==false:riengtu==true;
+    });
+  
     Size size = MediaQuery.of(context).size;
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
-    return DefaultTabController(
+    return Container(
+      child: DefaultTabController(
       length: 2,
       child: Container(
         child: Scaffold(
@@ -34,6 +39,7 @@ class _thongtinState extends State<thongtin> {
             child: CustomScrollView(
               center: centerKey,
               slivers: <Widget>[
+                // ảnh đại diện
                 SliverList(
                   key: centerKey,
                   delegate: SliverChildListDelegate([
@@ -55,9 +61,9 @@ class _thongtinState extends State<thongtin> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   CircleAvatar(
+                                    backgroundColor: Colors.white,
                                     radius: 60,
-                                    backgroundImage: AssetImage(
-                                        "assets/imgs/baiviets/test.jpg"),
+                                    backgroundImage: NetworkImage(httpsanh+ND.Nd_AnhNen)
                                   )
                                 ]),
                             Text(
@@ -68,7 +74,13 @@ class _thongtinState extends State<thongtin> {
                         ),
                       ),
                     ),
-                    Container(
+                   ]),
+                ),
+                
+                //Thông tin người dùng
+                riengtu==true?
+                SliverList(delegate: SliverChildListDelegate([
+                   Container(
                       padding: EdgeInsets.only(left: 20, top: 10),
                       child: Text(
                         "Thông tin",
@@ -121,23 +133,34 @@ class _thongtinState extends State<thongtin> {
                         ],
                       ),
                     ),
-                    Container(
+                   
+                ])):SliverList(delegate: SliverChildListDelegate([
+                  Center(child: Container(
+                    padding: EdgeInsets.all(10),
+                    child:  SvgPicture.asset(
+                        "assets/imgs/svg/khongthay.svg",
+                        color: Color(0xFF7D82BC),height: 150,width: 150,),)),
+                ])),
+                
+                //danh sách bài viết
+                SliverList( delegate: SliverChildListDelegate([
+                   Container(
                       padding: EdgeInsets.only(left: 20, top: 10),
                       child: Text(
                         "Danh sách bài viết",
                         style: cabin_B(Colors.black, 20.0),
                       ),
                     ),
-                  ]),
-                ),
+                  
+                ])),
                 Lst_baiviet(
-                  a: ND.Nd_Ma.toInt(),
+                  a: ND.Nd_Ma,
                 )
               ],
             ),
           ),
         ),
-      ),
+      ),),
     );
   }
 }

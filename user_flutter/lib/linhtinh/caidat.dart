@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:user_flutter/Hoang/login/page_login.dart';
+import 'package:user_flutter/Object/nguoidungObject.dart';
 import 'package:user_flutter/colorplush.dart';
 
 class CaiDat extends StatefulWidget {
-  const CaiDat({Key? key}) : super(key: key);
+  final NguoiDungObject ND;
+  const CaiDat({Key? key, required this.ND}) : super(key: key);
 
   @override
-  _CaiDatState createState() => _CaiDatState();
+  _CaiDatState createState(){
+   return _CaiDatState(ND:ND);
+  }
 }
 
 class _CaiDatState extends State<CaiDat> {
+  final NguoiDungObject ND;
+  _CaiDatState({required this.ND});
   final controller1 = ValueNotifier<bool>(false);
   @override
   Widget build(BuildContext context) {
@@ -38,10 +44,22 @@ class _CaiDatState extends State<CaiDat> {
                 ),
               ],
             ),
-            Text(
+            ListTile(
+              title: Text(
               "Thông tin",
               style: cabin_B(Colors.black, 25.0),
+            ), trailing: ElevatedButton(onPressed: (){},
+            style:ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xFF7D82BC)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0))),
+                ),
+              child:  Text("Sửa", style: cabin_B(Colors.white, 20.0),
             ),
+            ),
+            ),
+           
             Container(
               decoration: BoxDecoration(
                   color: Color(0xFF7D82BC),
@@ -56,7 +74,7 @@ class _CaiDatState extends State<CaiDat> {
                       style: cabin_B(Colors.black, 20.0),
                     ),
                     title: Text(
-                      "Thanh Dui",
+                      ND.Nd_HovaTen,
                       style: cabin_B(Colors.white, 20.0),
                     ),
                   ),
@@ -68,11 +86,11 @@ class _CaiDatState extends State<CaiDat> {
                   ),
                   ListTile(
                     leading: Text(
-                      "Địa chỉ:",
+                      "Địa chỉ Email:",
                       style: cabin_B(Colors.black, 20.0),
                     ),
                     title: Text(
-                      "Nhà Thanh Dui",
+                      ND.Nd_emai,
                       style: cabin_B(Colors.white, 20.0),
                     ),
                   ),
@@ -88,7 +106,7 @@ class _CaiDatState extends State<CaiDat> {
                       style: cabin_B(Colors.black, 20.0),
                     ),
                     title: Text(
-                      "03061323",
+                      ND.Nd_SDT,
                       style: cabin_B(Colors.white, 20.0),
                     ),
                   ),

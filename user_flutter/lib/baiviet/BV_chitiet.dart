@@ -82,7 +82,7 @@ class _ChiTietState extends State<ChiTiet> {
                     width: double.maxFinite,
                     decoration:  BoxDecoration(
                         image: DecorationImage(
-                      image:NetworkImage('http://192.168.1.15:80'+Bai.ABV[index].ABV_Anh),
+                      image:NetworkImage(httpsanh+Bai.ABV[index].ABV_Anh),
                       fit: BoxFit.cover,
                     )),
                   ),
@@ -125,7 +125,14 @@ class _ChiTietState extends State<ChiTiet> {
                   Container(
                       child: ListTile(
                     leading: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LayDD(Bai.Bv_MaDiaDanh)),
+                          );
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white, elevation: 0),
                       icon: SvgPicture.asset(
@@ -145,7 +152,7 @@ class _ChiTietState extends State<ChiTiet> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    LayTT(Bai.Bv_MaNguoiDung)),
+                                    LayTT(Bai.Bv_MaNguoiDung,1)),
                           );
                         },
                         style: ElevatedButton.styleFrom(
