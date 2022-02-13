@@ -7,24 +7,32 @@ import 'BaiViet.dart';
 import 'BV_chitiet.dart';
 
 class Lst_baiviet extends StatefulWidget {
-  int a;
-  Lst_baiviet({Key? key, required this.a}) : super(key: key);
+  int a; int ma;
+  Lst_baiviet({Key? key, required this.a,required this.ma}) : super(key: key);
 
   @override
   _Lst_baivietState createState() {
-    return _Lst_baivietState(a: a);
+    return _Lst_baivietState(a: a,ma:ma);
   }
 }
 
 class _Lst_baivietState extends State<Lst_baiviet> {
   int a;
-  _Lst_baivietState({required this.a});
+  int ma;
+  _Lst_baivietState({required this.a,required,required this.ma});
   @override
   Widget build(BuildContext context) {
+    Future<List<BaiVietObject>>baivietFT;
+    switch (a) {
+      case 0: baivietFT=BaiVietProvider.fecthBaiViet();break;
+      case 1:baivietFT=BaiVietProvider.BVLienQuan(ma);break;
+      default:baivietFT=BaiVietProvider.BaiVietUS(ma.toString());
+    }
+    setState(() {
+      
+    });
     return FutureBuilder<List<BaiVietObject>>(
-      future: a == 0
-          ? BaiVietProvider.fecthBaiViet()
-          : BaiVietProvider.BaiVietUS(a.toString()),
+      future:baivietFT,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Center(
@@ -34,7 +42,11 @@ class _Lst_baivietState extends State<Lst_baiviet> {
           return ListBV(lsBv: snapshot.data!);
         }
         return SliverList(
-            delegate: SliverChildListDelegate([CircularProgressIndicator()]));
+            delegate: SliverChildListDelegate([Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ))]));
       },
     );
   }

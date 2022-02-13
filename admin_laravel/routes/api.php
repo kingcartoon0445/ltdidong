@@ -14,7 +14,7 @@ use App\Http\Controllers\API\ViewController;
 use App\Http\Controllers\API\NguoiDungController;
 use App\Http\Controllers\API\LikeController;
 use App\Http\Controllers\API\CoTienIchController;
-
+use App\Http\Controllers\API\AnhBaiVietController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +51,8 @@ Route::post('/reset-password', [AuthController::class, 'reset']);
 Route::post('BaivietUS',[BaiVietController::class,'BaivietUS']);
 Route::get('baiviettop5',[BaiVietController::class,'baiviettop5']);
 Route::get('BaiVietNhieuLike',[BaiVietController::class,'BaiVietNhieuLike']);
+Route::get('BVLienQuan/{id}',[BaiVietController::class,'BVLienQuan']);
+
     //route like
 Route::apiResource('Like',LikeController::class);
 Route::post('/XoaLike', [LikeController::class, 'XoaLike']);
@@ -63,4 +65,7 @@ Route::apiResource('TienIch',TienIchController::class);
 Route::apiResource('CoTienIch',CoTienIchController::class);
 Route::get('/danhsachkhachsan/{MaDiaDanh}', [CoTienIchController::class, 'show2']);
 Route::get('/danhsachnhahang/{MaDiaDanh}', [CoTienIchController::class, 'show1']);
+
+//Test
+Route::apiResource('AnhBaiViet',AnhBaiVietController::class);
 

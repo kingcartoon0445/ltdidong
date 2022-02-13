@@ -1,12 +1,24 @@
 <?php
 
+
 namespace App\Http\Controllers\API;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\AnhBaiViet;
-use App\Http\Requests\StoreAnhBaiVietRequest;
-use App\Http\Requests\UpdateAnhBaiVietRequest;
 
+use App\Models\BaiViet;
+use App\Models\Like;
+use App\Models\DiaDanh;
+use App\Models\DanhGia;
+use App\Models\NguoiDung;
+use App\Models\Mien;
+use App\Models\AnhDiaDanh;
+use App\Models\AnhBaiViet;
+use App\Models\TheLoai;
+use App\Models\ThuocTheLoai;
+
+use Illuminate\Support\Facades\Storage;
+    use DB;
 class AnhBaiVietController extends Controller
 {
     /**
@@ -38,20 +50,27 @@ class AnhBaiVietController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $data=$request->validate([
+        $anhBaiViet = new AnhBaiViet;
+        $request->validate([
             'MaBaiViet' => 'required',
-            'Anh'=> 'required',
+            'images' => 'max:5000',
+        ],[
+            'MaBaiViet.required' => 'Vui lòng nhập tiêu đề',
+            'images.max' => 'Tối đa 5 MB',
         ]);
-        //
-      $anhBaiViet =AnhBaiViet::create([
-          'MaBaiViet'=>$data['MaBaiViet'],
-          'Anh'=>$data['Anh'],                
-      ]);
-      $response= [
-          'data'=>$anhBaiViet
-      ];
-      return true;
+        if($request->hasFile('images')){
+            $files = $request->file('images');
+
+            foreach($files as $file){   
+                $anhBaiViet->fill([
+                    'MaBaiViet'=>$request->input('MaBaiViet'),
+                    'Anh'=>$file->store('images/baiviet/'.$request->input('MaBaiViet'), 'public'),
+                ]);
+                $anhBaiViet->save();
+            }
+        }
+        
+        return response()->json([$anhBaiViet]);
     }
 
     /**

@@ -35,7 +35,7 @@ class _CaiDatState extends State<CaiDat> {
               children: [
                 Text(
                   "Cài đặt",
-                  style: cabin_B(Color(0xFF7D82BC), 40.0),
+                  style: cabin_B(context, Color(0xFF7D82BC), 40.0),
                 ),
                 Image.asset(
                   "assets/logo/logoxanh.png",
@@ -47,7 +47,7 @@ class _CaiDatState extends State<CaiDat> {
             ListTile(
               title: Text(
               "Thông tin",
-              style: cabin_B(Colors.black, 25.0),
+              style: cabin_B(context, Colors.black, 25.0),
             ), trailing: ElevatedButton(onPressed: (){},
             style:ButtonStyle(
                   backgroundColor:
@@ -55,7 +55,7 @@ class _CaiDatState extends State<CaiDat> {
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0))),
                 ),
-              child:  Text("Sửa", style: cabin_B(Colors.white, 20.0),
+              child:  Text("Sửa", style: cabin_B(context, Colors.white, 20.0),
             ),
             ),
             ),
@@ -71,11 +71,11 @@ class _CaiDatState extends State<CaiDat> {
                   ListTile(
                     leading: Text(
                       "Tên người dùng:",
-                      style: cabin_B(Colors.black, 20.0),
+                      style: cabin_B(context, Colors.black, 20.0),
                     ),
                     title: Text(
                       ND.Nd_HovaTen,
-                      style: cabin_B(Colors.white, 20.0),
+                      style: cabin_B(context, Colors.white, 20.0),
                     ),
                   ),
                   Container(
@@ -87,11 +87,11 @@ class _CaiDatState extends State<CaiDat> {
                   ListTile(
                     leading: Text(
                       "Địa chỉ Email:",
-                      style: cabin_B(Colors.black, 20.0),
+                      style: cabin_B(context, Colors.black, 20.0),
                     ),
                     title: Text(
                       ND.Nd_emai,
-                      style: cabin_B(Colors.white, 20.0),
+                      style: cabin_B(context, Colors.white, 20.0),
                     ),
                   ),
                   Container(
@@ -103,11 +103,11 @@ class _CaiDatState extends State<CaiDat> {
                   ListTile(
                     leading: Text(
                       "SDT:",
-                      style: cabin_B(Colors.black, 20.0),
+                      style: cabin_B(context, Colors.black, 20.0),
                     ),
                     title: Text(
                       ND.Nd_SDT,
-                      style: cabin_B(Colors.white, 20.0),
+                      style: cabin_B(context, Colors.white, 20.0),
                     ),
                   ),
                   Container(
@@ -126,7 +126,7 @@ class _CaiDatState extends State<CaiDat> {
                 children: [
                   Text(
                     "Chế độ riêng tư",
-                    style: cabin_B(Colors.black, 25.0),
+                    style: cabin_B(context, Colors.black, 25.0),
                   ),
                   AdvancedSwitch(
                     activeChild: SvgPicture.asset(
@@ -157,7 +157,7 @@ class _CaiDatState extends State<CaiDat> {
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Đổi mật khẩu", style: cabin_B(Colors.black, 25.0))
+                      Text("Đổi mật khẩu", style: cabin_B(context, Colors.black, 25.0))
                     ]),
               ),
             ),
@@ -175,7 +175,7 @@ class _CaiDatState extends State<CaiDat> {
                       MaterialPageRoute(builder: (context) => LoginPage()),
                       (route) => false);
                 },
-                child: Text("Đăng xuất", style: cabin_B(Colors.white, 25.0)),
+                child: Text("Đăng xuất", style: cabin_B(context, Colors.white, 25.0)),
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Color(0xFF7D82BC)),

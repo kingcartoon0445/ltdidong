@@ -81,7 +81,7 @@ class _cardState extends State<card> {
                                   Container(
                     child: Text(
                       BV.Bv_TieuDe,
-                      style: cabin_B(Colors.black, 18.0),
+                      style: cabin_B(context, Colors.black, 18.0),
                       softWrap: true,
                     ),
                   ), //#5
@@ -102,7 +102,7 @@ class _cardState extends State<card> {
                         width: 15 * size.width / 360,
                       ),
                       label: Text(BV.Bv_TenDD.toString(),
-                          style: cabin_B(Color(0xFF828282), 15.0))),
+                          style: cabin_B(context, Color(0xFF828282), 15.0))),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                         primary: Colors.white,
@@ -122,7 +122,7 @@ class _cardState extends State<card> {
                       width: 15 * size.width / 360,
                     ),
                     label: Text(BV.Bv_TenND.toString(),
-                        style: cabin_B(Color(0xFF828282), 15.0)),
+                        style: cabin_B(context, Color(0xFF828282), 15.0)),
                   ),
                 ],
               )

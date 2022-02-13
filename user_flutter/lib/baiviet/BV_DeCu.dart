@@ -137,7 +137,7 @@ class _bv_decuState extends State<bv_decu> {
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Spacer(),
-                                          Text(lsbv[index].Bv_TenND,style: cabin_B( Colors.white, 15.0),)
+                                          Text(lsbv[index].Bv_TenND,style: cabin_B(context, Colors.white, 15.0),)
 
                                         ],
                                       )
@@ -155,7 +155,11 @@ class _bv_decuState extends State<bv_decu> {
               ),
             );
           }
-          return Text("data");
+          return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
         });
   }
 }

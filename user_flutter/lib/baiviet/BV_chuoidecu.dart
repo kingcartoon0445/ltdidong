@@ -40,7 +40,7 @@ class _chuoidecuState extends State<chuoidecu> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(ds_Decu[index],
-                style: cabin_B(
+                style: cabin_B(context, 
                     selectedIndex == index ? Color(0xFF4C56CE) : Colors.grey,
                     13.0)),
             Container(

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\BaiViet;
 use App\Models\Like;
 use App\Models\DiaDanh;
+use App\Models\DanhGia;
 use App\Models\NguoiDung;
 use App\Models\Mien;
 use App\Models\AnhDiaDanh;
@@ -29,7 +30,7 @@ class BaiVietController extends Controller
     {
         $listBaiViet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')
         ->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')
-        ->where('bai_viets.TrangThai','1')
+        ->where('bai_viets.TrangThai','=','1')
         ->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung',Like::raw("count('likes.MaNguoiDung') AS thich"))
         ->groupBy('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')
         ->get();
@@ -56,28 +57,40 @@ class BaiVietController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'TieuDe' => 'required',
             'NoiDung' => 'required',
             'MaDiaDanh' => 'required',
             'MaNguoiDung' => 'required',
-            'images' => ['max:5000'],
+            'rating'=> 'required',
+            'images' => 'max:5000',
+            'images'=>'required'
         ],[
             'TieuDe.required' => 'Vui lòng nhập tiêu đề',
             'NoiDung.required' => 'Vui lòng nhập nội dung',
             'MaDiaDanh.required' => 'Vui lòng chọn địa danh',
-            'MaNguoiDung.required' => 'Vui lòng chọn người đăng'
+            'MaNguoiDung.required' => 'Vui lòng chọn người đăng',
+            'rating.required' => 'Vui lòng nhập số đánh giá',
+            'images.max' => 'Tối đa 5 MB',
         ]);
-
+        $files = $request->file('images');
         $baiViet = new BaiViet;
         $baiViet->fill([
-            'TieuDe' => $data['TieuDe'],
-            'NoiDung' => $data['NoiDung'],
-            'MaDiaDanh' => $data['MaDiaDanh'],
-            'MaNguoiDung' => $data['MaNguoiDung'],
+            'TieuDe'=>$request->input('TieuDe'),
+            'NoiDung'=>$request->input('NoiDung'),
+            'MaDiaDanh'=>$request->input('MaDiaDanh'),
+            'MaNguoiDung'=>$request->input('MaNguoiDung'),
         ]);
-
+        
         $baiViet->save();
+
+        $danhgia=new DanhGia;
+        $danhgia->fill([
+            'MaDiaDanh'=>$request->input('MaDiaDanh'),
+            'MaNguoiDung'=>$request->input('MaNguoiDung'),
+            'SoDanhGia'=>$request->input('rating'),
+        ]);
+        $danhgia->save();
 
         if($request->hasFile('images')){
             $files = $request->file('images');
@@ -96,7 +109,7 @@ class BaiVietController extends Controller
                                                                         ->where('TrangThai', '=', 1)
                                                                         ->first();
         if($baiViet->id ==$newBaiViet->id)
-        return ['thanhcong'=>'1'];else return ['thanhcong'=>'0'];
+        return [$files];else return ['thanhcong'=>'0'];
     }
 
     /**
@@ -159,7 +172,7 @@ class BaiVietController extends Controller
         $listBaiViet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')
         ->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')
         ->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung',)
-        ->where('bai_viets.TrangThai', '=', 1)
+        ->where('bai_viets.TrangThai', '=', '1')
         ->orderBy('bai_viets.id', 'desc')
         ->take(5)
         ->get();
@@ -184,6 +197,28 @@ class BaiVietController extends Controller
         ->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')
         ->where('bai_viets.TrangThai','1')
         ->where('MaNguoiDung',$request->id)
+        ->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')->get();
+       // return $user;
+      //  return [$request->password, $user->MatKhau];
+    
+      foreach($listBaiViet as $baiViet){
+        foreach($baiViet->anhBaiViets as $anhBaiViet){
+            if(Storage::disk('public')->exists($anhBaiViet->Anh)){
+                $anhBaiViet->Anh = Storage::url($anhBaiViet->Anh);
+            }
+            else{
+                $anhBaiViet->Anh = Storage::url('images/no_image_holder.png');
+            }
+        }
+    }
+    return response()->json($listBaiViet, 200);
+    }
+    public function BVLienQuan(int $id)
+    {
+        $listBaiViet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')
+        ->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')
+        ->where('bai_viets.TrangThai','1')
+        ->where('dia_danhs.id',$id)
         ->select('bai_viets.id','MaNguoiDung','TenDaiDien','MaDiaDanh','Ten','TieuDe','NoiDung')->get();
        // return $user;
       //  return [$request->password, $user->MatKhau];

@@ -15,9 +15,11 @@ import 'Object/nguoidungObject.dart';
 import 'Provider/DiaDanhProvider.dart';
 import 'Provider/ViewProvider.dart';
 import 'colorplush.dart';
+
 //HTTP
-String https='http://192.168.1.15:8000/api';
-String httpsanh='http://192.168.1.15:8000';
+//lệnh chạy php: php artisan serve --host 192.168.1.15 --port 8000
+String https = 'http://10.0.2.2:8000/api';
+String httpsanh = 'http://10.0.2.2:8000';
 
 //Bài viết
 Widget nut_Icon(var icon, var label, var on) {
@@ -58,10 +60,14 @@ Widget tenDD(int id, Color mau, double size) {
           List<DiaDanhObject> lsnd = snapshot.data!;
           return Text(
             lsnd[0].Dd_Ten,
-            style: cabin_B(mau, size),
+            style: cabin_B(context, mau, size),
           );
         }
-        return Text("data");
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
       });
 }
 
@@ -73,14 +79,18 @@ Widget tenND(int id, Color mau, double size) {
           List<NguoiDungObject> lsnd = snapshot.data!;
           return Text(
             lsnd[0].Nd_TenDaiDien,
-            style: cabin_B(mau, size),
+            style: cabin_B(context, mau, size),
           );
         }
-        return Text("data");
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
       });
 }
 
-  Widget DemView(int id, Color mau, double size) {
+Widget DemView(int id, Color mau, double size) {
   return FutureBuilder<String>(
       future: ViewProvider.oneView(id),
       builder: (context, snapshot) {
@@ -88,136 +98,141 @@ Widget tenND(int id, Color mau, double size) {
           String lsnd = snapshot.data!;
           return Text(
             ' ' + lsnd.toString(),
-            style: cabin_B(mau, size),
+            style: cabin_B(context, mau, size),
           );
         }
-        return Text("data");
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
       });
 }
 
-class LayAnh extends StatefulWidget {
-  final int id;
-  const LayAnh({ Key? key,required this.id }) : super(key: key);
-
-  @override
-   _LayAnhState createState() {
-   return  _LayAnhState(id:id);
-  }
-}
-class _LayAnhState extends State<LayAnh> {
-  final int id;
-  _LayAnhState({required this.id});
-  @override
-  Widget build(BuildContext context) {
-    return 
-    
-     FutureBuilder<List<AnhBaiVietObject>>(
-      future: BaiVietProvider.layAnhBV(id),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<AnhBaiVietObject> lsAnhBV = snapshot.data!;
-          return PageView.builder(
-                  itemCount: lsAnhBV.length,
-                  itemBuilder: (context, index) =>
-                  Container(
-                    width: double.maxFinite,
-                    decoration:  BoxDecoration(
-                        image: DecorationImage(
-                      image:NetworkImage('http://10.0.2.2:8000/storage/upload/anhBaiViet/'+lsAnhBV[index].ABV_Anh),
-                      fit: BoxFit.cover,
-                    )),
-                  ),
-                );
-        }
-        return Text("data");
-      });
-  }
-}
-
-Widget LayDD(int id){
-   return FutureBuilder<List<DiaDanhObject>>(
+Widget LayDD(int id) {
+  return FutureBuilder<List<DiaDanhObject>>(
       future: DiaDanhProvider.oneDiaDanh(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<DiaDanhObject> lsdd = snapshot.data!;
           return ChiTietDiaDanh(DD: lsdd[0]);
         }
-        return CircularProgressIndicator();
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
       });
 }
 
-Widget LayTT(int id,int dinhdanh){
-   return FutureBuilder<List<NguoiDungObject>>(
+Widget LayTT(int id, int dinhdanh) {
+  return FutureBuilder<List<NguoiDungObject>>(
       future: NguoiDungProvider.oneNguoiDung(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<NguoiDungObject> lsnd = snapshot.data!;
           switch (dinhdanh) {
-            case 2:return Background(ND: lsnd[0]);
-            case 3:return CaiDat(ND: lsnd[0]);  
+            case 2:
+              return Background(ND: lsnd[0]);
+            case 3:
+              return CaiDat(ND: lsnd[0]);
               break;
-            default:return thongtin(ND: lsnd[0]);
+            default:
+              return thongtin(ND: lsnd[0]);
           }
         }
-        return CircularProgressIndicator();
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
       });
 }
-Widget LayAVT(int id){
-   return FutureBuilder<List<NguoiDungObject>>(
+
+Widget LayAVT(int id) {
+  return FutureBuilder<List<NguoiDungObject>>(
       future: NguoiDungProvider.oneNguoiDung(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<NguoiDungObject> lsnd = snapshot.data!;
           return Container();
         }
-        return CircularProgressIndicator();
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));;
       });
 }
+
 //Địa danh
-Widget LayDiaDanh(int id){
-return FutureBuilder<List<DiaDanhObject>>(
+Widget LayDiaDanh(int id) {
+  return FutureBuilder<List<DiaDanhObject>>(
       future: DiaDanhProvider.oneDiaDanh(id),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<DiaDanhObject> lsnd = snapshot.data!;
           return ChiTietDiaDanh(DD: lsnd[0]);
         }
-        return Text("data");
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
       });
 }
 
 //Lay DS Tiện ích
-Widget LayDsKhachSan(int idbv){
+Widget LayDsKhachSan(int idbv) {
   return FutureBuilder<List<TienIchObject>>(
       future: TienIchProvider.DsKhachSan(idbv),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<TienIchObject> lsti = snapshot.data!;
-          if(lsti.length==0){return Container(child:SvgPicture.asset(
-            'assets/imgs/svg/hotel.svg',
-            color: Color(0XFF7d82bc),
-            width: 150,
-            height: 150,
-          ),);}else{
-          return DanhSachTienTich(Ti: lsti);}
+          if (lsti.length == 0) {
+            return Container(
+              child: SvgPicture.asset(
+                'assets/imgs/svg/hotel.svg',
+                color: Color(0XFF7d82bc),
+                width: 150,
+                height: 150,
+              ),
+            );
+          } else {
+            return DanhSachTienTich(Ti: lsti);
+          }
         }
-        return Text("data");
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
       });
 }
-Widget LayDsNhaHang(int idbv){
+
+Widget LayDsNhaHang(int idbv) {
   return FutureBuilder<List<TienIchObject>>(
       future: TienIchProvider.DsNhaHang(idbv),
       builder: (context, snapshot) {
-         if (snapshot.hasData) {
+        if (snapshot.hasData) {
           List<TienIchObject> lsti = snapshot.data!;
-          if(lsti.length==0){return Container(child:SvgPicture.asset(
-            'assets/imgs/svg/nhahang.svg',
-            color:  Color(0XFF7d82bc),
-            width: 150,
-            height: 150,
-          ),);}else{
-          return DanhSachTienTich(Ti: lsti);}
+          if (lsti.length == 0) {
+            return Container(
+              child: SvgPicture.asset(
+                'assets/imgs/svg/nhahang.svg',
+                color: Color(0XFF7d82bc),
+                width: 150,
+                height: 150,
+              ),
+            );
+          } else {
+            return DanhSachTienTich(Ti: lsti);
+          }
         }
-        return Text("data");
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
       });
-} 
+}

@@ -65,12 +65,14 @@ class _ChiTietState extends State<ChiTiet> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+     const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
-      body: Material(
-        child: Container(
-          padding: EdgeInsets.only(top: 24),
-          child: Stack(children: [
-            Container(
+      backgroundColor: Colors.white,
+      body:CustomScrollView(center: centerKey,
+      slivers: <Widget>[
+        SliverList(key: centerKey,delegate: SliverChildListDelegate([
+          Stack(children: [
+          Container(
               height: size.height * 227 / 640,
               width: double.maxFinite,
               decoration: BoxDecoration(),
@@ -88,19 +90,20 @@ class _ChiTietState extends State<ChiTiet> {
                   ),
                 ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: size.height * 0.27),
+          Container(
+              margin: EdgeInsets.only(top: size.height * 0.3),
               padding: EdgeInsets.only(top: 10),
-              height: size.height * 600 / 640,
+              height: size.height * 36 / 640,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25)),
-              ),
-              child: Column(
-                children: [
-                  Container(
+              ),),
+        ],),])),
+        SliverList(delegate: SliverChildListDelegate([
+          Container(color: Colors.white,child: Column(children: [
+            Container(
                     child: ListTile(
                         leading: Text(
                           Bai.Bv_TieuDe,
@@ -143,7 +146,7 @@ class _ChiTietState extends State<ChiTiet> {
                       ),
                       label: Text(
                         Bai.Bv_TenDD,
-                        style: cabin_B(Color(0xFF828282), 15.0),
+                        style: cabin_B(context,Color(0xFF828282), 15.0),
                       ),
                     ),
                     trailing: ElevatedButton.icon(
@@ -164,13 +167,9 @@ class _ChiTietState extends State<ChiTiet> {
                           color: Color(0xFF4C56CE),
                         ),
                         label: Text(Bai.Bv_TenND,
-                            style: cabin_B(Color(0xFF828282), 15.0))),
+                            style: cabin_B(context,Color(0xFF828282), 15.0))),
                   )),
-                  Expanded(
-                    child: Container(
-                      child: ListView(
-                        children: [
-                          Padding(
+                  Padding(
                             padding: EdgeInsets.only(
                                 right: 30, left: 30, top: 3, bottom: 90),
                             child: Text(
@@ -180,17 +179,12 @@ class _ChiTietState extends State<ChiTiet> {
                                   overflow: TextOverflow.clip),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ]),
-        ),
+                        
+          ],),),
+        ])),
+      ],
       ),
-      floatingActionButton: Row(
+       floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

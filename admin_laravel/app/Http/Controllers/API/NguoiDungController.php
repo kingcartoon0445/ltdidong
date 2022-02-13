@@ -44,7 +44,7 @@ class NguoiDungController extends Controller
             'HovaTen' => 'required',
             'Email' => 'required',
             'SDT' => 'required',
-            //'AnhNen' => 'file',
+            'AnhNen' =>'max:5000',
             'MatKhau' => 'required',
         ]);
         //
@@ -54,8 +54,8 @@ class NguoiDungController extends Controller
         $nameKhongTrung=date('Y_m_d_H_i_s_').$max.substr($name,-4);
        // $nameKhongTrung =  date('Y_m_d_H_i_s_').$name;  // đặt tên không trùng Y_m_d_H_i_s_ + name.png
         $file->move('upload/anhNen', $nameKhongTrung);*/
-
-      $nguoiDung =NguoiDung::create([
+      $nguoiDung=new NguoiDung;
+      $nguoiDung ->fill([
           'TenDaiDien'=>$data['HovaTen'],
           'HovaTen'=>$data['HovaTen'],
           'Email'=>$data['Email'],
@@ -63,9 +63,12 @@ class NguoiDungController extends Controller
           'AnhNen'=>'avt.png',
           'MatKhau'=>$data['MatKhau']
       ]);
-      $response= [
-          'data'=>$nguoiDung
-      ];
+      $nguoiDung->save();
+      if($request->hasFile('AnhNen')){
+        $nguoiDung->AnhNen = $request->file('AnhNen')->store('images/nguoidung/'.$nguoiDung->id, 'public');
+    }
+
+    $nguoiDung->save();
       return true;
     }
 

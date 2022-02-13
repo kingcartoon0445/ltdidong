@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,6 +9,7 @@ import 'package:user_flutter/Object/diadanhObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
+
 
 class ChiaSeBaiViet extends StatefulWidget {
   final DiaDanhObject TTDD;
@@ -16,6 +20,8 @@ class ChiaSeBaiViet extends StatefulWidget {
 return _ChiaSeBaiVietState(TTDD:TTDD);
   }
 }
+
+double rak=5;
 
 class _ChiaSeBaiVietState extends State<ChiaSeBaiViet> {
   final DiaDanhObject TTDD;
@@ -64,7 +70,8 @@ class _RatingState extends State<Rating> {
             color: Colors.amber,
           ),
           onRatingUpdate: (rating) {
-            print(rating);
+            rak=rating;
+            print(rak);
           },
         )
       ],
@@ -84,6 +91,7 @@ class ThongTinDiaDanh extends StatefulWidget {
 
 class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
   int id=1;
+
   @override
     initState() {
     super.initState();
@@ -96,13 +104,28 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
      
   final DiaDanhObject DD;
   _ThongTinDiaDanhState({required this.DD});
+  //đăng bài
+  var snackBar=SnackBar(content: const Text('data'));
   final TextEditingController txtTieuDe = TextEditingController();
   final TextEditingController txtNoiDung = TextEditingController();
-  var snackBar=SnackBar(content: const Text('data'));
+  List<File> files=[];
+
+  chonAnh()async{FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+
+if (result != null) {
+ files = result.paths.map((path) => File(path!)).toList();
+ setState(() {
+   
+ });
+} else {
+  // User canceled the picker
+}}
+  
   dangbai() async{SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final success = await sharedPreferences.remove('thanhcong');
     String a="";
-    BaiVietProvider.ThemBV(txtTieuDe.text, txtNoiDung.text, DD.Dd_Ma, id).then((value){
+    print(files);
+    BaiVietProvider.ThemBV(txtTieuDe.text, txtNoiDung.text, DD.Dd_Ma, id,rak,files).then((value){
       a=value;
       if(a=='1'){
         setState(() {
@@ -116,7 +139,7 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
               },
             ),
           );ScaffoldMessenger.of(context).showSnackBar(snackBar); 
-        Navigator.pop(context);}); 
+        }); 
       }else{
         setState(() {        
          snackBar = SnackBar(
@@ -127,12 +150,16 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
                 // Some code to undo the change.
               },
             ),
-          );});ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          );
+          }
+          );ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     });
   }
   @override
   Widget build(BuildContext context) {
+    try{
+    Size size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
@@ -244,17 +271,33 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
           SizedBox(
             height: 10,
           ),
-          Container(
-            width: 280,
-            height: 280,
-            child: Image.asset('assets/imgs/diadanh/noimage.jpg'),
-          ),
+         files.length==0? Container( height: 300,width: 500, child: Image.asset('assets/imgs/diadanh/noimage.jpg'))
+         :   Container(height: 300,width: 500,child: PageView.builder(
+                        controller: PageController(
+                            viewportFraction: 0.8, initialPage: 0),
+                        itemCount: files.length, //đếm ảnh
+                        itemBuilder: (context, index) =>
+                           InkWell(
+                          onTap: () {},
+                          child: Container(
+                            height: 300,
+                            width: 500,
+                            margin: EdgeInsets.only(right: 14),
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: FileImage(files[index]),fit: BoxFit.scaleDown
+                                )),
+                            ),
+                        ),
+                      ),),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 FloatingActionButton.extended(
-                  onPressed: () {},
+                  onPressed: () {
+                    chonAnh();
+                  },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
@@ -305,5 +348,8 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
         ],
       ),
     );
+  }catch(e){
+    return Text('data');
+  }
   }
 }

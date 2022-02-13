@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
 import 'package:user_flutter/Provider/DiaDanhProvider.dart';
+import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/recommend_diadanh.dart';
@@ -67,7 +68,12 @@ class TatCaDiaDanh extends StatefulWidget {
 class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return FutureBuilder<List<DiaDanhObject>>(
+        future: DiaDanhProvider.fectDiaDanh(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData){
+             List<DiaDanhObject> lsdd = snapshot.data!;
+            return SizedBox(
       width: double.infinity,
       height: 180,
       child: Column(
@@ -83,15 +89,22 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {/*1*/},
+                            onTap: () {/*1*/
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChiTietDiaDanh(DD: lsdd[index])),
+                              );
+                            },
                             child: Container(
                               margin: EdgeInsets.only(right: 15),
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25),
                                   image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/imgs/diadanh/VungTau.png"),
+                                    image: NetworkImage(
+                                       httpsanh+ lsdd[index].Dd_AnhBia),
                                     fit: BoxFit.cover,
                                   )),
                             ),
@@ -119,12 +132,19 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                                     height: 40,
                                     width: double.infinity,
                                     child: TextButton(
-                                      onPressed: () {/*2*/},
+                                      onPressed: () {/*2*/
+                                      Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChiTietDiaDanh(DD: lsdd[index])),
+                              );
+                                      },
                                       //  style: TextButton.styleFrom(
                                       //    padding: EdgeInsets.all(4),
                                       //   ),
                                       child: Text(
-                                        "Vũng Tàu",
+                                        lsdd[index].Dd_Ten,
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15,
@@ -143,11 +163,11 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
                                             Icons.place_outlined,
                                             color: Colors.white,
                                           ),
-                                          Text(
-                                            "Bà Rịa - Vũng Tàu",
+                                          Expanded(child:  Text(
+                                            lsdd[index].Dd_DiaChi,
                                             style:
-                                                TextStyle(color: Colors.white),
-                                          ),
+                                                TextStyle(color: Colors.white),overflow: TextOverflow.ellipsis,
+                                          ),),
                                         ],
                                       ),
                                       Row(
@@ -180,6 +200,9 @@ class _TatCaDiaDanhState extends State<TatCaDiaDanh> {
       ),
     );
   }
+          else{return Container();}});
+    
+     }
 }
 
 class DeCuDiaDanh extends StatefulWidget {
@@ -231,7 +254,7 @@ class _DeCuDiaDanhState extends State<DeCuDiaDanh> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: Image.network(
-                                'https://cdn1.dotesports.com/wp-content/uploads/2021/09/09145842/SummonersRift.jpg',
+                                httpsanh+lsdd[index].Dd_AnhBia,
                                 width: double.infinity,
                                 height: 400,
                                 fit: BoxFit.cover,

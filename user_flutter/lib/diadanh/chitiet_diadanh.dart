@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
@@ -41,7 +42,7 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
             ]
           ),
           ),
-          Lst_baiviet(a: 0),
+          Lst_baiviet(a: 1,ma: DD.Dd_Ma,),
         ]
       ),),
       floatingActionButton: Row(
@@ -154,8 +155,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
   _ThongTinChiTietDiaDanhState({required this.DD});
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
+    return  Container(
         child: Column(
           children: [
             AnhDiaDanh(DD: DD),
@@ -317,7 +317,6 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
             ),
             ],
         ),
-      ),
     );
   }
 }

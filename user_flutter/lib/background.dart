@@ -57,7 +57,7 @@ class _BackgroundState extends State<Background> {
         ),
         title: Text(
           txt,
-          style: cabin_B(Colors.black, 20.0),
+          style: cabin_B(context, Colors.black, 20.0),
         ),
         centerTitle: true,
         actions: [
@@ -90,7 +90,7 @@ class _BackgroundState extends State<Background> {
                             ),
                             title: Text(
                               ND.Nd_HovaTen,
-                              style: cabin_B(Colors.black, 20.0),
+                              style: cabin_B(context, Colors.black, 20.0),
                             ),
                           )),
                       content: ElevatedButton(
@@ -113,7 +113,7 @@ class _BackgroundState extends State<Background> {
                             ),
                             title: Text(
                               'Cài Đặt',
-                              style: cabin_B(Colors.black, 18.0),
+                              style: cabin_B(context, Colors.black, 18.0),
                             ),
                           )),
                       actions: [
@@ -139,7 +139,7 @@ class _BackgroundState extends State<Background> {
                                 color: Colors.white,
                               ),
                               title: Text("Đăng xuất",
-                                  style: cabin_B(Colors.white, 20.0)),
+                                  style: cabin_B(context, Colors.white, 20.0)),
                             ),
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(

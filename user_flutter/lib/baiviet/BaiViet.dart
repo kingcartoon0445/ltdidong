@@ -21,6 +21,7 @@ Widget baiviet() {
 class _BaiVietState extends State<BaiViet> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
       backgroundColor: Color(0xFFe1e1e1),
@@ -28,14 +29,14 @@ class _BaiVietState extends State<BaiViet> {
         center: centerKey,
         slivers: <Widget>[
           SliverList(
-              key: centerKey,
+             key: centerKey,
               delegate: SliverChildListDelegate([
                 Container(
                     margin: EdgeInsets.only(bottom: 10), child: bv_decu()),
                 Container(
                     margin: EdgeInsets.only(bottom: 5), child: chuoidecu()),
               ])),
-          Lst_baiviet(a: 0)
+          Lst_baiviet(a: 0, ma: 0)
         ],
       ),
     );
