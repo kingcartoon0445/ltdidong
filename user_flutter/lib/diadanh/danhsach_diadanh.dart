@@ -40,10 +40,7 @@ class _DanhSachDiaDanhState extends State<DanhSachDiaDanh> {
                       onPressed: () {},
                       child: Text(
                         'Đề cử',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                        ),
+                        style: cabin_B(context, Colors.blue, 25.0)
                       ),
                     ),
                   ],

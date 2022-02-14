@@ -39,7 +39,7 @@ class _thongtinState extends State<thongtin> {
               child: CustomScrollView(
                 center: centerKey,
                 slivers: <Widget>[
-                  // ảnh đại diện
+                  // ảnh đại diện  
                   SliverList(
                     key: centerKey,
                     delegate: SliverChildListDelegate([
