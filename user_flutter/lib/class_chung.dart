@@ -18,8 +18,8 @@ import 'colorplush.dart';
 
 //HTTP
 //lệnh chạy php: php artisan serve --host 192.168.1.15 --port 8000
-String https = 'http://10.0.2.2:8000/api';
-String httpsanh = 'http://10.0.2.2:8000';
+String https = 'http://192.168.243.126:8000/api';
+String httpsanh = 'http://192.168.243.126:8000';
 
 //Bài viết
 Widget nut_Icon(var icon, var label, var on) {
