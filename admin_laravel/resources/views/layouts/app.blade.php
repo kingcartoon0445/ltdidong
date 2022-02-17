@@ -110,6 +110,13 @@
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('deXuat.index') }}">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Đề xuất địa danh</span>
+            </a>
+          </li>
         </ul>
       </nav>
 

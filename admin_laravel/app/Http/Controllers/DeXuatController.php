@@ -3,19 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeXuat;
+use App\Models\NguoiDung;
+
 use App\Http\Requests\StoreDeXuatRequest;
 use App\Http\Requests\UpdateDeXuatRequest;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use DB;
+
 class DeXuatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected function fixImage_NguoiDung(NguoiDung $nguoiDung){
+        if(Storage::disk('public')->exists($nguoiDung->AnhNen)){
+            $nguoiDung->AnhNen = Storage::url($nguoiDung->AnhNen);
+        }
+        else{
+            $nguoiDung->AnhNen = Storage::url('images/no_image_holder.png');
+        }
+    }
+
     public function index()
     {
-        //
+        $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
+        $this->fixImage_NguoiDung($data);
+
+        $listDeXuat = DeXuat::all();
+
+        return view('deXuat.danhsach', [
+            'listDeXuat'=>$listDeXuat,
+            'LoggedUserInfo'=>$data,
+        ]);
     }
 
     /**
@@ -36,7 +54,7 @@ class DeXuatController extends Controller
      */
     public function store(StoreDeXuatRequest $request)
     {
-        //
+        
     }
 
     /**
