@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DeXuat;
 use App\Models\NguoiDung;
+use App\Models\DiaDanh;
 
 use App\Http\Requests\StoreDeXuatRequest;
 use App\Http\Requests\UpdateDeXuatRequest;
@@ -30,7 +31,7 @@ class DeXuatController extends Controller
 
         $listDeXuat = DeXuat::all();
 
-        return view('deXuat.danhsach', [
+        return view('dexuat.danhsach', [
             'listDeXuat'=>$listDeXuat,
             'LoggedUserInfo'=>$data,
         ]);
@@ -54,7 +55,7 @@ class DeXuatController extends Controller
      */
     public function store(StoreDeXuatRequest $request)
     {
-        
+        //
     }
 
     /**
@@ -99,6 +100,14 @@ class DeXuatController extends Controller
      */
     public function destroy(DeXuat $deXuat)
     {
-        //
+        $diaDanh = DiaDanh::where('id','=',$deXuat->MaDiaDanh)->first();
+        $diaDanh->fill([
+            'TrangThai' => 2,
+        ]);
+        $diaDanh->save();
+
+        $deXuat->delete();
+
+        return Redirect::route('deXuat.index');
     }
 }

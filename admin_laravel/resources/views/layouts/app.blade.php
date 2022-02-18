@@ -75,6 +75,7 @@
                 <li class="nav-item"> <a class="nav-link" href="{{ route('diaDanh.index') }}">Địa danh</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('mien.index') }}">Miền</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('theLoai.index') }}">Loại du lịch</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('deXuat.index') }}">Được đề xuất</a></li>
               </ul>
             </div>
           </li>
@@ -109,13 +110,6 @@
                 <li class="nav-item"> <a class="nav-link" href="{{ route('nguoiDungIndex') }}">Tài khoản</a></li>
               </ul>
             </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('deXuat.index') }}">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Đề xuất địa danh</span>
-            </a>
           </li>
         </ul>
       </nav>

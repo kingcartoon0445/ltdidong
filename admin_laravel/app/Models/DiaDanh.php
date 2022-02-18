@@ -31,4 +31,8 @@ class DiaDanh extends Model
     public function danhGias(){
         return $this->hasMany(DanhGia::class, 'MaDiaDanh');
     }
+
+    public function thuocTheLoais(){
+        return $this->hasMany(ThuocTheLoai::class, 'MaDiaDanh');
+    }
 }

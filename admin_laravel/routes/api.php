@@ -15,6 +15,7 @@ use App\Http\Controllers\API\NguoiDungController;
 use App\Http\Controllers\API\LikeController;
 use App\Http\Controllers\API\CoTienIchController;
 use App\Http\Controllers\API\AnhBaiVietController;
+use App\Http\Controllers\API\DeXuatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,16 +38,16 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/forgot-password', [AuthController::class, 'forgot']);
 Route::post('/reset-password', [AuthController::class, 'reset']);
 
+Route::get('/logout', [AuthController::class, 'logout']);
+Route::get('/profile', [AuthController::class, 'profile']);
 
-    Route::get('/logout', [AuthController::class, 'logout']);
-    Route::get('/profile', [AuthController::class, 'profile']);
-
-    Route::apiResource('/miens', MienController::class);
-    Route::apiResource('/theloais', TheLoaiController::class);
-    Route::apiResource('/diadanhs', DiaDanhController::class);
-    Route::apiResource('/tienichs', TienIchController::class);
-    Route::apiResource('/baiviets', BaiVietController::class);
-    Route::apiResource('NguoiDung',NguoiDungController::class);
+Route::apiResource('/dexuats', DeXuatController::class);
+Route::apiResource('/miens', MienController::class);
+Route::apiResource('/theloais', TheLoaiController::class);
+Route::apiResource('/diadanhs', DiaDanhController::class);
+Route::apiResource('/tienichs', TienIchController::class);
+Route::apiResource('/baiviets', BaiVietController::class);
+Route::apiResource('NguoiDung',NguoiDungController::class);
 //route bài viết
 Route::post('BaivietUS',[BaiVietController::class,'BaivietUS']);
 Route::get('baiviettop5',[BaiVietController::class,'baiviettop5']);
@@ -68,4 +69,3 @@ Route::get('/danhsachnhahang/{MaDiaDanh}', [CoTienIchController::class, 'show1']
 
 //Test
 Route::apiResource('AnhBaiViet',AnhBaiVietController::class);
-
