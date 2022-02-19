@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class AnhBaiVietObject {
   final int ABV_Ma;
   final int ABV_MaBaiViet;

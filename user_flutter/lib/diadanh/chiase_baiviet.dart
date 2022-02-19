@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
+import 'package:user_flutter/baiviet/BV_chitiet.dart';
 import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
 
@@ -110,7 +111,8 @@ class _ThongTinDiaDanhState extends State<ThongTinDiaDanh> {
   final TextEditingController txtNoiDung = TextEditingController();
   List<File> files=[];
 
-  chonAnh()async{FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+  chonAnh()async{FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.custom,
+  allowedExtensions: ['jpg', 'png'],allowMultiple: true);
 
 if (result != null) {
  files = result.paths.map((path) => File(path!)).toList();
@@ -125,11 +127,12 @@ if (result != null) {
     final success = await sharedPreferences.remove('thanhcong');
     String a="";
     print(files);
-    BaiVietProvider.ThemBV(txtTieuDe.text, txtNoiDung.text, DD.Dd_Ma, id,rak,files).then((value){
-      a=value;
-      if(a=='1'){
+   final result = await  BaiVietProvider.ThemBV(txtTieuDe.text, txtNoiDung.text, DD.Dd_Ma, id,rak,files);
+    a = (await sharedPreferences.getString('bvmoi'))!;
+      if(result!='1'){
         setState(() {
-          
+          Navigator.pop(context);
+    
         snackBar = SnackBar(
             content: const Text('Tạo bài viết thành công'),
             action: SnackBarAction(
@@ -153,9 +156,7 @@ if (result != null) {
           );
           }
           );ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    });
-  }
+      }}
   @override
   Widget build(BuildContext context) {
     try{

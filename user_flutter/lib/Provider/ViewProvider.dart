@@ -12,25 +12,28 @@ class ViewProvider {
   }
 
   static Future<String> oneView(int Id) async {
-    final response =
-        await http.get(Uri.parse(https+'/View/$Id'));
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
+    final response =await http.get(Uri.parse(https+'/View/$Id'),headers: {'Authorization': 'Bearer $tokens'});
     var jsons = json.decode(response.body);
     String a = jsons['view'].toString();
     return a;
   }
 
   static ThemView(BuildContext context, String MaBV, String MaND) async {
-    String url = https+'/View';
-    Map body = {'MaBaiViet': MaBV, 'MaNguoiDung': MaND};
-    var response = await http.post(Uri.parse(url), body: body);
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
+    String url = https+'/View';Map body = {'MaBaiViet': MaBV, 'MaNguoiDung': MaND,};
+    var response = await http.post(Uri.parse(url), body: body,headers: {'Authorization': 'Bearer $tokens'});
   }
 
   static Future<String> KtraView(
       BuildContext context, String MaBV, String MaND) async {
     String url = https+'/KtraView';
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
     Map body = {'MaBV': MaBV, 'MaND': MaND};
-    var response = await http.post(Uri.parse(url), body: body);
+    var response = await http.post(Uri.parse(url), body: body,headers: {'Authorization': 'Bearer $tokens'});
     var jsonResponse;
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);

@@ -21,7 +21,6 @@ class LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   bool _obsecureText = true;
   bool isLoading = false;
-
   login() {
     LoginProvider.signIn(context, txtEmail.text, txtPassword.text);
   }
@@ -164,7 +163,7 @@ class LoginPageState extends State<LoginPage> {
                                       color: Colors.white,
                                     ),
                                     textInputAction: TextInputAction.done,
-                                    obscureText: true,
+                                    obscureText: _obsecureText?true:false,
                                   ),
                                 ),
                               ),

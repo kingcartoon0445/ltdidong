@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
@@ -24,78 +23,90 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
       backgroundColor: Colors.white,
-      body:Container(child: CustomScrollView(
-        center: centerKey,
-        slivers: <Widget>[
+      body: Container(
+        child:Center(child:  CustomScrollView(center: centerKey, slivers: <Widget>[
           SliverList(
             key: centerKey,
-            delegate: SliverChildListDelegate(
-            [
+            delegate: SliverChildListDelegate([
               ThongTinChiTietDiaDanh(DD: DD),
-               
-             Text(
-                  'Bài viết về địa danh',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+              Text(
+                'Bài viết về địa danh',
+                style: TextStyle(
+                  fontSize: 18,
                 ),
-            ]
+              ),
+            ]),
           ),
+          Lst_baiviet(
+            a: 1,
+            ma: DD.Dd_Ma,
           ),
-          Lst_baiviet(a: 1,ma: DD.Dd_Ma,),
-        ]
-      ),),
+        ],)),
+      ),
       floatingActionButton: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    // Add your onPressed code here!
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-                  backgroundColor: Colors.white,
-                  label: Text(
-                    "Đã đến",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Color(0xFF7D82BC),
-                    ),
-                  ),
-                  icon: Icon(
-                    Icons.check,
-                    color: Color(0xFF7D82BC),
-                  ),
-                  heroTag: "fab1",
-                ),
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    // Add your onPressed code here!
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChiaSeBaiViet(TTDD: DD,)));
-                  },
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-                  backgroundColor: Colors.white,
-                  label: Text(
-                    "200",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                      color: Color(0xFF7D82BC),
-                    ),
-                  ),
-                  icon: Icon(Icons.share, color: Color(0xFF7D82BC)),
-                  heroTag: "fab3",
-                ),
-              ],
-            )
-          ,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+           Container(
+  width: 100.0,
+  height: 50.0,
+  child: new RawMaterialButton(
+     shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+    elevation: 0.0,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+                   Text(
+              '200',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                color: Color(0xFF7D82BC),
+              ),
+            ),
+             Icon(Icons.share, color: Color(0xFF7D82BC)),
+    ],),
+    onPressed: () { Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ChiaSeBaiViet(
+                            TTDD: DD,
+                          )));},
+  ),
+),
+        
+          Container(
+  width: 200.0,
+  height: 50.0,
+  child: new RawMaterialButton(
+     shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+    elevation: 0.0,fillColor: Color(0xFF7D82BC),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+                   Text(
+              '200',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                color: Colors.white,
+              ),
+            ),
+             Icon(Icons.share, color: Colors.white),
+    ],),
+    onPressed: () { Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ChiaSeBaiViet(
+                            TTDD: DD,
+                          )));},
+  ),
+)
+        ],
+      ),
     );
   }
 }
@@ -127,7 +138,7 @@ class AnhDiaDanh extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       image: DecorationImage(
-                        image: NetworkImage(httpsanh+DD.ADD[index].ADD_Anh),
+                        image: NetworkImage(httpsanh + DD.ADD[index].ADD_Anh),
                         fit: BoxFit.cover,
                       )),
                 ),
@@ -155,168 +166,166 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
   _ThongTinChiTietDiaDanhState({required this.DD});
   @override
   Widget build(BuildContext context) {
-    return  Container(
-        child: Column(
-          children: [
-            AnhDiaDanh(DD: DD),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    DD.Dd_Ten,
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Icon(Icons.location_on, color: Color(0xFF7D82BC)),
-                SizedBox(
-                  width: 5,
-                ),
-                Expanded(
-                  child: TextButton(
-                    onPressed: (){},
-                    child: Text(
-                          DD.Dd_DiaChi,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),)
-                )
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                RatingBarIndicator(
-                  rating: DD.Dd_DanhGia-0.1,
-                  itemBuilder: (_, __) {
-                    return Icon(
-                      Icons.star,
-                      color: Colors.amber,
-                    );
-                  },
-                  itemSize: 25,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(Icons.description),
-                Expanded(
-                  child: Text(
-                    'Mô tả',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 3,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    DD.Dd_MoTa,
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(Icons.class_),
-                Expanded(
-                  child: Text(
-                    'Loại hình du lịch',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(
-                    'Tham quan',
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Icon(Icons.restaurant_outlined),
+    return Container(
+      child: Column(
+        children: [
+          AnhDiaDanh(DD: DD),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               Expanded(
                 child: Text(
-                  'Nhà hàng',
+                  DD.Dd_Ten,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 22,
                   ),
                 ),
               )
-            ]),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Expanded(
-                child: LayDsNhaHang(DD.Dd_Ma),
-              )
-            ]),
-            SizedBox(
-              height: 10,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Icon(Icons.hotel_outlined),
-              Expanded(
-                child: Text(
-                  'Khách sạn',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              )
-            ]),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Expanded(
-                child:LayDsKhachSan(DD.Dd_Ma)
-              )
-            ]),
-            SizedBox(
-              height: 20,
-            ),
             ],
-        ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Icon(Icons.location_on, color: Color(0xFF7D82BC)),
+              SizedBox(
+                width: 5,
+              ),
+              Expanded(
+                  child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  DD.Dd_DiaChi,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ))
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              RatingBarIndicator(
+                rating: DD.Dd_DanhGia - 0.1,
+                itemBuilder: (_, __) {
+                  return Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  );
+                },
+                itemSize: 25,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(Icons.description),
+              Expanded(
+                child: Text(
+                  'Mô tả',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 3,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  DD.Dd_MoTa,
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(Icons.class_),
+              Expanded(
+                child: Text(
+                  'Loại hình du lịch',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  'Tham quan',
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Icon(Icons.restaurant_outlined),
+            Expanded(
+              child: Text(
+                'Nhà hàng',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            )
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Expanded(
+              child: LayDsNhaHang(DD.Dd_Ma),
+            )
+          ]),
+          SizedBox(
+            height: 10,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Icon(Icons.hotel_outlined),
+            Expanded(
+              child: Text(
+                'Khách sạn',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            )
+          ]),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [Expanded(child: LayDsKhachSan(DD.Dd_Ma))]),
+          SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -4,14 +4,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:user_flutter/Hoang/login/page_login.dart';
 import 'package:user_flutter/Object/nguoidungObject.dart';
 import 'package:user_flutter/colorplush.dart';
+import 'package:user_flutter/linhtinh/settingTT.dart';
 
 class CaiDat extends StatefulWidget {
   final NguoiDungObject ND;
   const CaiDat({Key? key, required this.ND}) : super(key: key);
 
   @override
-  _CaiDatState createState(){
-   return _CaiDatState(ND:ND);
+  _CaiDatState createState() {
+    return _CaiDatState(ND: ND);
   }
 }
 
@@ -46,20 +47,29 @@ class _CaiDatState extends State<CaiDat> {
             ),
             ListTile(
               title: Text(
-              "Thông tin",
-              style: cabin_B(context, Colors.black, 25.0),
-            ), trailing: ElevatedButton(onPressed: (){},
-            style:ButtonStyle(
+                "Thông tin",
+                style: cabin_B(context, Colors.black, 25.0),
+              ),
+              trailing: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => settingTT(Nd: ND,)),
+                              );
+                },
+                style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Color(0xFF7D82BC)),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0))),
                 ),
-              child:  Text("Sửa", style: cabin_B(context, Colors.white, 20.0),
+                child: Text(
+                  "Sửa",
+                  style: cabin_B(context, Colors.white, 20.0),
+                ),
+              ),
             ),
-            ),
-            ),
-           
             Container(
               decoration: BoxDecoration(
                   color: Color(0xFF7D82BC),
@@ -157,7 +167,8 @@ class _CaiDatState extends State<CaiDat> {
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Đổi mật khẩu", style: cabin_B(context, Colors.black, 25.0))
+                      Text("Đổi mật khẩu",
+                          style: cabin_B(context, Colors.black, 25.0))
                     ]),
               ),
             ),
@@ -175,7 +186,8 @@ class _CaiDatState extends State<CaiDat> {
                       MaterialPageRoute(builder: (context) => LoginPage()),
                       (route) => false);
                 },
-                child: Text("Đăng xuất", style: cabin_B(context, Colors.white, 25.0)),
+                child: Text("Đăng xuất",
+                    style: cabin_B(context, Colors.white, 25.0)),
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Color(0xFF7D82BC)),

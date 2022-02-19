@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:user_flutter/Object/TienIchObject.dart';
 import 'package:user_flutter/Object/anhbaivietObject.dart';
+import 'package:user_flutter/Object/baivietObject.dart';
 import 'package:user_flutter/Provider/BaivietProvider.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
 import 'package:user_flutter/Provider/TienIchProvider.dart';
 import 'package:user_flutter/background.dart';
+import 'package:user_flutter/baiviet/BV_chitiet.dart';
 import 'package:user_flutter/diadanh/chitiet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsachtienich.dart';
 import 'package:user_flutter/linhtinh/caidat.dart';
@@ -17,9 +19,9 @@ import 'Provider/ViewProvider.dart';
 import 'colorplush.dart';
 
 //HTTP
-//lệnh chạy php: php artisan serve --host 192.168.1.15 --port 8000
-String https = 'http://192.168.243.126:8000/api';
-String httpsanh = 'http://192.168.243.126:8000';
+//lệnh chạy php: php artisan serve --host 192.168.1.6 --port 8000
+String https = 'http://192.168.1.6:8000/api';
+String httpsanh = 'http://192.168.1.6:8000';
 
 //Bài viết
 Widget nut_Icon(var icon, var label, var on) {
@@ -228,6 +230,22 @@ Widget LayDsNhaHang(int idbv) {
           } else {
             return DanhSachTienTich(Ti: lsti);
           }
+        }
+        return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(strokeWidth: 10),
+            ));
+      });
+}
+
+Widget layBV(int id){
+   return FutureBuilder<List<BaiVietObject>>(
+      future: BaiVietProvider.oneBaiViet(id),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          List<BaiVietObject> lsnd = snapshot.data!;
+          return ChiTiet(Bai: lsnd[0]);
         }
         return Container(
             color: Colors.white,

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Sanctum\HasApiTokens;
 
 use App\Models\AnhDiaDanh;
 use App\Models\Mien;
@@ -12,9 +13,7 @@ use App\Models\TheLoai;
 use App\Models\TienIch;
 
 class DiaDanh extends Model
-{
-    use HasFactory;
-    use SoftDeletes;
+{  use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [];
     
