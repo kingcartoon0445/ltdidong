@@ -40,7 +40,6 @@ Route::post('/reset-password', [AuthController::class, 'reset']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'profile']);
-    Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/miens', MienController::class);
     Route::apiResource('/theloais', TheLoaiController::class);
     Route::apiResource('/diadanhs', DiaDanhController::class);
@@ -50,7 +49,7 @@ Route::post('/reset-password', [AuthController::class, 'reset']);
 //route bài viết
 
 Route::post('BaivietUS',[BaiVietController::class,'BaivietUS']);
-Route::get('baiviettop5',[BaiVietController::class,'baiviettop5']);
+Route::middleware('auth:sanctum')->get('baiviettop5',[BaiVietController::class,'baiviettop5']);
 Route::get('BaiVietNhieuLike',[BaiVietController::class,'BaiVietNhieuLike']);
 Route::get('BVLienQuan/{id}',[BaiVietController::class,'BVLienQuan']);
     //route like
@@ -67,5 +66,3 @@ Route::get('/danhsachkhachsan/{MaDiaDanh}', [CoTienIchController::class, 'show2'
 Route::get('/danhsachnhahang/{MaDiaDanh}', [CoTienIchController::class, 'show1']);
 
 //Test
-
-});
