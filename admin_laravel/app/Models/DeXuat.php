@@ -7,9 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\NguoiDung;
+
 class DeXuat extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [];
+    
+    public function nguoiDung()
+    {
+        return $this->belongsTo(NguoiDung::class, 'MaNguoiDung');
+    }
+
+    public function diaDanh()
+    {
+        return $this->belongsTo(DiaDanh::class, 'MaDiaDanh');
+    }
 }

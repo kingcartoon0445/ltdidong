@@ -11,6 +11,7 @@ use App\Models\AnhDiaDanh;
 use App\Models\Mien;
 use App\Models\TheLoai;
 use App\Models\TienIch;
+use App\Models\DanhGia;
 
 class DiaDanh extends Model
 {  use HasApiTokens, HasFactory, Notifiable;
@@ -24,5 +25,13 @@ class DiaDanh extends Model
 
     public function anhDiaDanhs(){
         return $this->hasMany(AnhDiaDanh::class, 'MaDiaDanh');
+    }
+
+    public function danhGias(){
+        return $this->hasMany(DanhGia::class, 'MaDiaDanh');
+    }
+
+    public function thuocTheLoais(){
+        return $this->hasMany(ThuocTheLoai::class, 'MaDiaDanh');
     }
 }

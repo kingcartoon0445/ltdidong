@@ -50,7 +50,7 @@ class DiaDanhController extends Controller
         $data = NguoiDung::where('id','=',session('LoggedUser'))->first();
         $this->fixImage_NguoiDung($data);
 
-        $listdiaDanh = DiaDanh::all();
+        $listdiaDanh = DiaDanh::where('TrangThai', 1)->orWhere('TrangThai', 0)->orWhere('TrangThai', 2)->get();
         foreach ($listdiaDanh as $diaDanh) {
             $this->fixImage_DiaDanh($diaDanh);
         }

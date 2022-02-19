@@ -17,6 +17,7 @@ class CreateDeXuatsTable extends Migration
             $table->id();
             $table->foreignId('MaNguoiDung');
             $table->foreignId('MaDiaDanh');
+            $table->Integer('TrangThai')->default(1);;
             $table->timestamps();
             $table->softDeletes();
         });

@@ -13,6 +13,7 @@ use App\Http\Controllers\AnhDiaDanhController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\AnhBaiVietController;
 use App\Http\Controllers\TrashController;
+use App\Http\Controllers\DeXuatController;
 
 use App\Http\Controllers\API\AuthController;
 
@@ -70,4 +71,6 @@ Route::group(['middleware'=>'auth.custom'], function(){
 
     Route::get('rac/baiViet', [TrashController::class, 'baiVietIndex'])->name('baiVietIndex');
     Route::patch('rac/baiViet/{id}', [TrashController::class, 'baiVietEdit'])->name('baiVietEdit');
+
+    Route::resource('deXuat', DeXuatController::class);
 });
