@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:user_flutter/Hoang/login/page_login.dart';
 import 'package:user_flutter/background.dart';
 import 'package:user_flutter/class_chung.dart';
 
@@ -25,16 +26,20 @@ class LoginProvider {
     }
   }
 
-  static Future<bool> logout() async{
+  static Future logout(BuildContext context,) async{
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String tokens = (sharedPreferences.getString('token') ?? "");
     String url=https+'/logout';
-    final respones=await http.post(Uri.parse(url),headers: {
+    final respones=await http.get(Uri.parse(url),headers: {
        'Authorization': 'Bearer $tokens',
     });
-    final jsonRespon=jsonDecode(respones.body);
+    final jsonRespon=jsonDecode(respones.body); 
     if(jsonRespon['status']=='200'){
-      return true;
+      Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()),
+                                    (route) => false);
+        sharedPreferences.remove('token');                            
     }else{return false;}
   }
 
