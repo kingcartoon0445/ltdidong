@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
 import 'package:user_flutter/class_chung.dart';
@@ -24,87 +25,97 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        child:Center(child:  CustomScrollView(center: centerKey, slivers: <Widget>[
-          SliverList(
-            key: centerKey,
-            delegate: SliverChildListDelegate([
-              ThongTinChiTietDiaDanh(DD: DD),
-              Text(
-                'Bài viết về địa danh',
-                style: TextStyle(
-                  fontSize: 18,
+        child: Center(
+            child: CustomScrollView(
+          center: centerKey,
+          slivers: <Widget>[
+            SliverList(
+              key: centerKey,
+              delegate: SliverChildListDelegate([
+                ThongTinChiTietDiaDanh(DD: DD),
+                Text(
+                  'Bài viết về địa danh',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-            ]),
-          ),
-          Lst_baiviet(
-            a: 1,
-            ma: DD.Dd_Ma,
-          ),
-        ],)),
+              ]),
+            ),
+            Lst_baiviet(
+              a: 1,
+              ma: DD.Dd_Ma,
+            ),
+          ],
+        )),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-           Container(
-  width: 100.0,
-  height: 50.0,
-  child: new RawMaterialButton(
-     shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-    elevation: 0.0,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-                   Text(
-              '200',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-                color: Color(0xFF7D82BC),
-              ),
-            ),
-             Icon(Icons.share, color: Color(0xFF7D82BC)),
-    ],),
-    onPressed: () { Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ChiaSeBaiViet(
-                            TTDD: DD,
-                          )));},
-  ),
-),
-        
           Container(
-  width: 200.0,
-  height: 50.0,
-  child: new RawMaterialButton(
-     shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-    elevation: 0.0,fillColor: Color(0xFF7D82BC),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-                   Text(
-              '200',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-                color: Colors.white,
+            width: 100.0,
+            height: 50.0,
+            child: new RawMaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+              elevation: 0.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    '200',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Color(0xFF7D82BC),
+                    ),
+                  ),
+                  Icon(Icons.share, color: Color(0xFF7D82BC)),
+                ],
               ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChiaSeBaiViet(
+                              TTDD: DD,
+                            )));
+              },
             ),
-             Icon(Icons.share, color: Colors.white),
-    ],),
-    onPressed: () { Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ChiaSeBaiViet(
-                            TTDD: DD,
-                          )));},
-  ),
-)
+          ),
+          Container(
+            width: 200.0,
+            height: 50.0,
+            child: new RawMaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+              elevation: 0.0,
+              fillColor: Color(0xFF7D82BC),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    '200',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Icon(Icons.share, color: Colors.white),
+                ],
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChiaSeBaiViet(
+                              TTDD: DD,
+                            )));
+              },
+            ),
+          )
         ],
       ),
     );
@@ -194,7 +205,10 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               ),
               Expanded(
                   child: TextButton(
-                onPressed: () {},
+                onPressed: () => MapsLauncher.launchCoordinates(
+                  double.parse(DD.Dd_KinhDo),
+                  double.parse(DD.Dd_ViDo),
+                ),
                 child: Text(
                   DD.Dd_DiaChi,
                   overflow: TextOverflow.ellipsis,
