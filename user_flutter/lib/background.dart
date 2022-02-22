@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:user_flutter/Object/nguoidungObject.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
+import 'package:user_flutter/Provider/loginProvider.dart';
 import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/diadanh/baiviet_diadanh.dart';
@@ -128,10 +129,23 @@ class _BackgroundState extends State<Background> {
                           width: double.infinity,
                           child: TextButton(
                             onPressed: () {
+                             if(LoginProvider.logout()==true){
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
                                       builder: (context) => LoginPage()),
-                                  (route) => false);
+                                  (route) => false);}
+                                  else{
+                                    final  snackBar = SnackBar(
+            content: const Text('Kết nối bị lỗi'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          ); ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
+                                 
                             },
                             child: ListTile(
                               leading: Icon(

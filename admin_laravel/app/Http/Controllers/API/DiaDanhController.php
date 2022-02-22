@@ -29,6 +29,8 @@ class DiaDanhController extends Controller
         $listDiaDanh = DiaDanh::join('Miens','dia_danhs.MaMien','=','Miens.id')
         ->join('danh_gias','danh_gias.MaDiaDanh','=','dia_danhs.id')
         ->where('dia_danhs.TrangThai',1)
+        ->orWhere('dia_danhs.TrangThai',0)
+        ->orWhere('dia_danhs.TrangThai',2)
         ->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi',DanhGia::raw(" AVG(danh_gias.SoDanhGia) AS danhgia"))->groupBy('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->get();
        
         foreach($listDiaDanh as $diaDanh){
@@ -74,6 +76,8 @@ class DiaDanhController extends Controller
         $diaDanh = DiaDanh::join('Miens','dia_danhs.MaMien','=','Miens.id')
         ->join('danh_gias','danh_gias.MaDiaDanh','=','dia_danhs.id')
         ->where('dia_danhs.TrangThai',1)
+        ->orWhere('dia_danhs.TrangThai',0)
+        ->orWhere('dia_danhs.TrangThai',2)
         ->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi',DanhGia::raw(" AVG(danh_gias.SoDanhGia) AS danhgia"))->groupBy('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->where('dia_danhs.id',$id)->first();
     
         if(Storage::disk('public')->exists($diaDanh->AnhBia)){

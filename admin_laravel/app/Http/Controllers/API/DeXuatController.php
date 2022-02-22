@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DeXuat;
+use App\Models\DiaDanh;
 use App\Http\Requests\StoreDeXuatRequest;
 use App\Http\Requests\UpdateDeXuatRequest;
+use Carbon\Carbon;
 
 class DeXuatController extends Controller
 {
@@ -38,20 +40,40 @@ class DeXuatController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $data=$request->validate([
+        $data = $request->validate([
+            'TenDiaDanh' => 'required',
+            'MaMien' => 'required',
+            'KinhDo' => 'required',
+            'ViDo' => 'required',
+            'DiaChi' => 'required',
             'MaNguoiDung' => 'required',
-            'MaDiaDanh' => 'required',
+        ],[
+            'TenDiaDanh.required' => 'Vui lòng nhập tên địa danh',
+            'MaMien.required' => 'Vui lòng chọn miền',
+            'KinhDo.required' => 'Vui lòng nhập kinh độ',
+            'ViDo.required' => 'Vui lòng nhập vĩ độ',
+            'DiaChi.required' => 'Vui lòng nhập địa chỉ',
+            'MaNguoiDung.required' => 'Vui lòng chọn người đăng',
         ]);
-        //
-      $deXuat =DeXuat::create([
-          'MaNguoiDung'=>$data['MaNguoiDung'],
-          'MaDiaDanh'=>$data['MaDiaDanh']
-      ]);
-      $response= [
-          'data'=>$deXuat
-      ];
-      return true;
+
+        $diaDanh = DiaDanh::create([
+            'Ten' => $data['TenDiaDanh'],
+            'MaMien' => $data['MaMien'],
+            'KinhDo' => $data['KinhDo'],
+            'ViDo' => $data['ViDo'],
+            'MoTa' => '',
+            'DiaChi' => $data['DiaChi'],
+            'AnhBia' => '',
+            'TrangThai' => 3,
+        ]);
+
+        $deXuat = DeXuat::create([
+            'MaNguoiDung' => $data['MaNguoiDung'],
+            'MaDiaDanh' => $diaDanh->id,
+            'TrangThai' => 0,
+        ]);
+
+        return response()->json($deXuat, 200);
     }
 
     /**

@@ -65,10 +65,21 @@ class _bv_decuState extends State<bv_decu> {
                   children: [
                     Expanded(
                       flex: 3,
-                      child: PageView.builder(
+                      child: lsbv.length==0?Container(child: Center(
+                        child:Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                        SvgPicture.asset(
+                              'assets/imgs/svg/khongBV.svg',
+                              height: 100,
+                              width: 100,
+                              color: Color(0xFF7D82BC),
+                            ),
+                            Text('Hiện chưa có bài viết',style: cabin_B(context, Color(0xFF4C56CE), 18.0),)
+                        ],) ),): PageView.builder(
                         controller: PageController(
                             viewportFraction: 0.8, initialPage: 0),
-                        itemCount: 5, //đếm ảnh
+                        itemCount: lsbv.length, //đếm ảnh
                         itemBuilder: (context, index) => InkWell(
                           onTap: () {
                             setState(() {

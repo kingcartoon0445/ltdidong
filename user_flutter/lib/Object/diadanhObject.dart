@@ -10,6 +10,7 @@ class DiaDanhObject {
    String Dd_ViDo;
    String Dd_MoTa;
    final Dd_DanhGia;
+   final Dd_Share;
    List<AnhDiaDanhObject> ADD;
   DiaDanhObject({
       required this.Dd_Ma,
@@ -20,6 +21,7 @@ class DiaDanhObject {
       required this.Dd_KinhDo,
       required this.Dd_ViDo,
       required this.Dd_MoTa,
+      required this.Dd_Share,
       required this.Dd_DanhGia,
       required this.ADD});
   factory DiaDanhObject.fromjson(Map<String, dynamic> res){
@@ -34,6 +36,7 @@ List<AnhDiaDanhObject> ADDList = list.map((i) => AnhDiaDanhObject.fromjson(i)).t
         Dd_KinhDo: res["KinhDo"],
         Dd_ViDo: res["ViDo"],
         Dd_MoTa: res["MoTa"],
+        Dd_Share: res['share'],
         Dd_DanhGia:res["danhgia"]+0.1,
         ADD: ADDList);
   }

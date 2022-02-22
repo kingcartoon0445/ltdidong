@@ -37,9 +37,11 @@
                         <td>
                             @if($diaDanh->TrangThai==0)
                               <label class="badge badge-danger" style="width: 90px; height: 25px; font-weight: bold;">Đóng cửa</label>
-                            @else
-                              <label class="badge badge-success" style="width: 90px; height: 25px; font-weight: bold;">Hoạt động</label>
-                            @endif                   
+                            @elseif($diaDanh->TrangThai==1)
+                              <label class="badge badge-success" style="width: 95px; height: 25px; font-weight: bold;">Hoạt động</label>
+                            @elseif($diaDanh->TrangThai==2)
+                              <label class="badge badge-warning" style="width: 100px; height: 25px; font-weight: bold;">Cần thông tin</label>
+                            @endif
                         </td>
                         <td class="dt-center">
                             <div class="btn-group">

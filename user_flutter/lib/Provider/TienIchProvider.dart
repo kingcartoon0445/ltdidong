@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_flutter/Object/TienIchObject.dart';
 import 'package:user_flutter/class_chung.dart';
 
@@ -11,13 +12,15 @@ class TienIchProvider{
    }catch(e){return [];}
  }
   static Future<List<TienIchObject>> DsKhachSan(int iddd)async{
-   final response= await http
-   .get(Uri.parse(https+'/danhsachkhachsan/$iddd'));
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
+   final response= await http.get(Uri.parse(https+'/danhsachkhachsan/$iddd'),headers: {'Authorization': 'Bearer $tokens'});
    return paraseTienIch(response.body);
  }
  static Future<List<TienIchObject>> DsNhaHang(int iddd)async{
-   final response= await http
-   .get(Uri.parse(https+'/danhsachnhahang/$iddd'));
+   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
+   final response= await http.get(Uri.parse(https+'/danhsachnhahang/$iddd'),headers: {'Authorization': 'Bearer $tokens'});
    return paraseTienIch(response.body);
  }
 }

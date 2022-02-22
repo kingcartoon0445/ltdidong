@@ -17,7 +17,7 @@ class BaiVietObject {
       {
         var list = res['anh_bai_viets'] as List; //returns List<dynamic>
 List<AnhBaiVietObject> ABVList = list.map((i) => AnhBaiVietObject.fromjson(i)).toList();
-        return BaiVietObject(
+          return BaiVietObject(
         Bv_Ma: res["id"],
         Bv_MaNguoiDung: res['MaNguoiDung'],
         Bv_TenND: res['TenDaiDien'],

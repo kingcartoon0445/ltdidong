@@ -112,38 +112,41 @@ class NguoiDungController extends Controller
     public function update(Request $request, int $nguoiDung)
     {
         //
-        $data=$request->validate([
-            'HovaTen' => 'required',
-            'TenDaiDien'=> 'required',
-            'Email'=> 'required',
-            'SDT'=> 'required',
-            'AnhNen'=> 'required',
-        ]);try{
-
-            $user=NguoiDung::where('id', $nguoiDung)->first();
-            if($user != null){
-                File::delete(public_path("upload/anhNen/".$user['AnhNen']));
-                $file = $request->file('AnhNen');  //ten input : image
-                $name = $file->getClientOriginalName();  // get name image
-                $nameKhongTrung= date('Y_m_d_H_i_s_').$nguoiDung.substr($name,-4);
-                // $nameKhongTrung =  date('Y_m_d_H_i_s_').$name;  // đặt tên không trùng Y_m_d_H_i_s_ + name.png
-                $file->move('upload/anhNen', $nameKhongTrung);
+        $request->validate([
+            'TenDaiDien' => 'required|string',
+            'HoTen' => 'required|string',
+            'Email' => 'required|email|unique:nguoi_dungs,Email,'.$nguoiDung->id,
+            'SDT' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'hinh' => 'max:5000',
+        ],[
+            'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
+            'HoTen.required' => 'Vui lòng nhập họ tên',
+            'Email.required' => 'Vui lòng nhập email',
+            'MatKhau.required' => 'Vui lòng nhập mật khẩu',
+            'hinh.max' => 'Tối đa 5 MB',
+        ]);
+        
+        try{
+            if($request->hasFile('hinh')){
+                $nguoiDung->AnhNen = $request->file('hinh')->store('images/nguoidung/'.$nguoiDung->id, 'public');
             }
-        $NguoiDung=NguoiDung::where('id', $nguoiDung)->
-            update([
-                'HovaTen' => $data['HovaTen'],  
-                'TenDaiDien' => $data['TenDaiDien'], 
-                'Email' => $data['Email'], 
-                'SDT' => $data['SDT'], 
-                'AnhNen' => $nameKhongTrung, 
+
+            $nguoiDung->fill([
+                'TenDaiDien'=>$request->input('TenDaiDien'),
+                'HovaTen'=>$request->input('HoTen'),
+                'Email'=>$request->input('Email'),
+                'SDT'=>$request->input('SDT'),
+                'TrangThai'=>$request->input('TrangThai'),
             ]);
-            $response= [
-                'data'=>$NguoiDung
-            ];
-            return true;
-    }catch(e){
-        return false;
-    }
+
+            $nguoiDung->save();
+
+            return Redirect::route('nguoiDung.index');
+        }catch (\Exception $e) {
+            if ($e->getCode() == 23000) {
+                // Deal with duplicate key error
+            }
+        }
     }
 
     /**

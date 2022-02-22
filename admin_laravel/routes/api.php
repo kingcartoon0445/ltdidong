@@ -38,9 +38,8 @@ Route::post('/forgot-password', [AuthController::class, 'forgot']);
 Route::post('/reset-password', [AuthController::class, 'reset']);
 
 
-    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'profile']);
-
     Route::apiResource('/miens', MienController::class);
     Route::apiResource('/theloais', TheLoaiController::class);
     Route::apiResource('/diadanhs', DiaDanhController::class);
@@ -48,11 +47,11 @@ Route::post('/reset-password', [AuthController::class, 'reset']);
     Route::apiResource('/baiviets', BaiVietController::class);
     Route::apiResource('NguoiDung',NguoiDungController::class);
 //route bài viết
+
 Route::post('BaivietUS',[BaiVietController::class,'BaivietUS']);
-Route::get('baiviettop5',[BaiVietController::class,'baiviettop5']);
+Route::middleware('auth:sanctum')->get('baiviettop5',[BaiVietController::class,'baiviettop5']);
 Route::get('BaiVietNhieuLike',[BaiVietController::class,'BaiVietNhieuLike']);
 Route::get('BVLienQuan/{id}',[BaiVietController::class,'BVLienQuan']);
-
     //route like
 Route::apiResource('Like',LikeController::class);
 Route::post('/XoaLike', [LikeController::class, 'XoaLike']);
@@ -67,5 +66,3 @@ Route::get('/danhsachkhachsan/{MaDiaDanh}', [CoTienIchController::class, 'show2'
 Route::get('/danhsachnhahang/{MaDiaDanh}', [CoTienIchController::class, 'show1']);
 
 //Test
-Route::apiResource('AnhBaiViet',AnhBaiVietController::class);
-

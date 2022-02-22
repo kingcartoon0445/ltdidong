@@ -1,11 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import '../../background.dart';
-import '../api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_flutter/class_chung.dart';
 import 'page_forgetPassword.dart';
 import 'page_register.dart';
-import 'package:http/http.dart' as http;
 import 'package:user_flutter/Provider/loginProvider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,11 +18,23 @@ class LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   bool _obsecureText = true;
   bool isLoading = false;
-
   login() {
     LoginProvider.signIn(context, txtEmail.text, txtPassword.text);
   }
-
+xet()async{
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  String tokens = (sharedPreferences.getString('token') ?? "");
+  int id=(sharedPreferences.getInt('id') ?? 0);
+  if(tokens!=""){
+    Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => LayTT(id, 2)),
+          (route) => false);
+  }
+}@override
+  initState() {
+    super.initState();
+    xet();
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -164,7 +173,7 @@ class LoginPageState extends State<LoginPage> {
                                       color: Colors.white,
                                     ),
                                     textInputAction: TextInputAction.done,
-                                    obscureText: true,
+                                    obscureText: _obsecureText?true:false,
                                   ),
                                 ),
                               ),

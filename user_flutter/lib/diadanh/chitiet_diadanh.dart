@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:maps_launcher/maps_launcher.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
 import 'package:user_flutter/class_chung.dart';
@@ -19,7 +17,6 @@ class ChiTietDiaDanh extends StatefulWidget {
 
 class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
   final DiaDanhObject DD;
-
   _ChiTietDiaDanhState({required this.DD});
   @override
   Widget build(BuildContext context) {
@@ -27,7 +24,7 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        child: CustomScrollView(center: centerKey, slivers: <Widget>[
+        child:Center(child:  CustomScrollView(center: centerKey, slivers: <Widget>[
           SliverList(
             key: centerKey,
             delegate: SliverChildListDelegate([
@@ -44,58 +41,70 @@ class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
             a: 1,
             ma: DD.Dd_Ma,
           ),
-        ]),
+        ],)),
       ),
       floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          FloatingActionButton.extended(
-            onPressed: () {
-              // Add your onPressed code here!
-            },
-            shape: RoundedRectangleBorder(
+           Container(
+  width: 100.0,
+  height: 50.0,
+  child: new RawMaterialButton(
+     shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-            backgroundColor: Colors.white,
-            label: Text(
-              "Đã đến",
+    elevation: 0.0,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+                   Text(
+              '200',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
                 color: Color(0xFF7D82BC),
               ),
             ),
-            icon: Icon(
-              Icons.check,
-              color: Color(0xFF7D82BC),
-            ),
-            heroTag: "fab1",
-          ),
-          FloatingActionButton.extended(
-            onPressed: () {
-              // Add your onPressed code here!
-              Navigator.push(
+             Icon(Icons.share, color: Color(0xFF7D82BC)),
+    ],),
+    onPressed: () { Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => ChiaSeBaiViet(
                             TTDD: DD,
-                          )));
-            },
-            shape: RoundedRectangleBorder(
+                          )));},
+  ),
+),
+        
+          Container(
+  width: 200.0,
+  height: 50.0,
+  child: new RawMaterialButton(
+     shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-            backgroundColor: Colors.white,
-            label: Text(
-              "200",
+    elevation: 0.0,fillColor: Color(0xFF7D82BC),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+                   Text(
+              '200',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
-                color: Color(0xFF7D82BC),
+                color: Colors.white,
               ),
             ),
-            icon: Icon(Icons.share, color: Color(0xFF7D82BC)),
-            heroTag: "fab3",
-          ),
+             Icon(Icons.share, color: Colors.white),
+    ],),
+    onPressed: () { Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ChiaSeBaiViet(
+                            TTDD: DD,
+                          )));},
+  ),
+)
         ],
       ),
     );
@@ -185,10 +194,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               ),
               Expanded(
                   child: TextButton(
-                onPressed: () => MapsLauncher.launchCoordinates(
-                    double.parse(DD.Dd_KinhDo),
-                    double.parse(DD.Dd_KinhDo),
-                    'Địa chỉ cần tìm'),
+                onPressed: () {},
                 child: Text(
                   DD.Dd_DiaChi,
                   overflow: TextOverflow.ellipsis,

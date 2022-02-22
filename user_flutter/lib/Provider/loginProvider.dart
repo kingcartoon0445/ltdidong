@@ -25,6 +25,19 @@ class LoginProvider {
     }
   }
 
+  static Future<bool> logout() async{
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
+    String url=https+'/logout';
+    final respones=await http.post(Uri.parse(url),headers: {
+       'Authorization': 'Bearer $tokens',
+    });
+    final jsonRespon=jsonDecode(respones.body);
+    if(jsonRespon['status']=='200'){
+      return true;
+    }else{return false;}
+  }
+
   static Future<int> register(BuildContext context, String HoTen, String Email,
       String sdt, String Matkhau, File img) async {
     String url = https + '/NguoiDung';
@@ -53,4 +66,6 @@ class LoginProvider {
       return 0;
     }
   }
+
+  
 }

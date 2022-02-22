@@ -78,7 +78,7 @@ final  snackBar = SnackBar(
                 // Some code to undo the change.
               },
             ),
-          );;
+          );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
    }
   }

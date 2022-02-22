@@ -29,8 +29,9 @@ class _DanhSachDiaDanhState extends State<DanhSachDiaDanh> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            RecommendDiaDanh(),
+            
             TatCaDiaDanh(),
+            RecommendDiaDanh(),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
