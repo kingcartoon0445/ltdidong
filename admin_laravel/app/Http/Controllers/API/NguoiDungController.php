@@ -83,7 +83,7 @@ class NguoiDungController extends Controller
         //
         $nguoidung=NguoiDung::where('id',$id)->first();
         if(Storage::disk('public')->exists($nguoidung->AnhNen)){
-            $anh = Storage::url($anh);
+            $nguoidung->AnhNen = Storage::url($nguoidung->AnhNen);
         }
         else{
             $nguoidung->AnhNen = Storage::url('images/no_image_holder.png');

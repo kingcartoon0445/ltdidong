@@ -127,7 +127,8 @@ if (result != null) {
     final success = await sharedPreferences.remove('thanhcong');
     String a="";
     print(files);
-   final result = await  BaiVietProvider.ThemBV(txtTieuDe.text, txtNoiDung.text, DD.Dd_Ma, id,rak,files);
+   final result = 
+   await  BaiVietProvider.ThemBV(txtTieuDe.text, txtNoiDung.text, DD.Dd_Ma, id,rak,files);
     a = (await sharedPreferences.getString('bvmoi'))!;
       if(result!='1'){
         setState(() {

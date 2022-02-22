@@ -207,7 +207,6 @@ class BaiVietController extends Controller
 
     public function baiviettop5()
     {
-        
         $listBaiViet = BaiViet::join('nguoi_dungs','MaNguoiDung','=','nguoi_dungs.id')
         ->join('dia_danhs','MaDiaDanh','=','dia_danhs.id')
         ->join('Views','MaBaiViet','=','bai_viets.id')
@@ -217,7 +216,6 @@ class BaiVietController extends Controller
         ->orderBy('view','desc')
         ->take(5)
         ->get();
-        
         foreach($listBaiViet as $baiViet){
             foreach($baiViet->anhBaiViets as $anhBaiViet){
                 if(Storage::disk('public')->exists($anhBaiViet->Anh)){

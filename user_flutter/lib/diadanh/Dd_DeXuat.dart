@@ -27,13 +27,8 @@ class _addDDState extends State<addDD> {
   Widget build(BuildContext context) {
     String selectedValue = "--Miền--";
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: Colors.white,
-        backgroundColor: Colors.white,
-        title:Center(child:Text('Đề xuất địa danh',style: cabin_B(context, Colors.black, 25.0),),) 
-      ),
-      body:
-       ListView(
+      
+      body: ListView(
         children: [
           Container(
             child: Column(
@@ -246,24 +241,23 @@ class _addDDState extends State<addDD> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(bottom: 50,right:30,left: 30),
-            child:ElevatedButton(
+            padding: EdgeInsets.only(bottom: 50, right: 30, left: 30),
+            child: ElevatedButton(
               child: Text("Đề xuất"),
               style: ElevatedButton.styleFrom(
-                 onPrimary: Colors.white,
-                 primary: Color(0xFF7D82BC),
-                 onSurface: Colors.grey,
-                 elevation: 20,
-                 minimumSize: Size(150,50),
-                 shadowColor: Colors.teal,
-                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-               ),
-              onPressed:() {
-
-              },
-            )
-         ,)
-          ],
+                onPrimary: Colors.white,
+                primary: Color(0xFF7D82BC),
+                onSurface: Colors.grey,
+                elevation: 20,
+                minimumSize: Size(150, 50),
+                shadowColor: Colors.teal,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+              ),
+              onPressed: () {},
+            ),
+          )
+        ],
       ),
     );
   }

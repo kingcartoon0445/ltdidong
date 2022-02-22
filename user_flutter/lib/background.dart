@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:user_flutter/Hoang/search/SearchPage.dart';
 import 'package:user_flutter/Object/nguoidungObject.dart';
 import 'package:user_flutter/Provider/NguoiDungProvider.dart';
 import 'package:user_flutter/Provider/loginProvider.dart';
 import 'package:user_flutter/baiviet/BaiViet.dart';
 import 'package:user_flutter/class_chung.dart';
+import 'package:user_flutter/diadanh/Dd_DeXuat.dart';
 import 'package:user_flutter/diadanh/baiviet_diadanh.dart';
 import 'package:user_flutter/diadanh/danhsach_diadanh.dart';
 import 'package:user_flutter/linhtinh/caidat.dart';
@@ -36,11 +38,12 @@ class _BackgroundState extends State<Background> {
         return DanhSachDiaDanh();
         break;
       case 2:
-        return BaiVietLienQuanDiaDanh();
+        return addDD();
         break;
     }
     return Text("null");
   }
+
   @override
   Widget build(BuildContext context) {
     String avt = ND.Nd_AnhNen;
@@ -49,7 +52,13 @@ class _BackgroundState extends State<Background> {
         backgroundColor: Colors.white,
         elevation: 0.0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+             Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchPage()),
+                            );
+          },
           icon: Image.asset(
             'assets/logo/logo.png',
             width: 50,
@@ -81,13 +90,14 @@ class _BackgroundState extends State<Background> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LayTT(ND.Nd_Ma,1)),
+                              MaterialPageRoute(
+                                  builder: (context) => LayTT(ND.Nd_Ma, 1)),
                             );
                           },
                           child: ListTile(
                             leading: CircleAvatar(
                               maxRadius: 30,
-                              backgroundImage: NetworkImage(httpsanh+avt),
+                              backgroundImage: NetworkImage(httpsanh +avt),
                             ),
                             title: Text(
                               ND.Nd_HovaTen,
@@ -102,7 +112,8 @@ class _BackgroundState extends State<Background> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LayTT(ND.Nd_Ma, 3)),
+                              MaterialPageRoute(
+                                  builder: (context) => LayTT(ND.Nd_Ma, 3)),
                             );
                           },
                           child: ListTile(
@@ -129,23 +140,21 @@ class _BackgroundState extends State<Background> {
                           width: double.infinity,
                           child: TextButton(
                             onPressed: () {
-                             if(LoginProvider.logout()==true){
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                  (route) => false);}
-                                  else{
-                                    final  snackBar = SnackBar(
-            content: const Text('Kết nối bị lỗi'),
-            action: SnackBarAction(
-              label: 'Undo',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
-          ); ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                  }
-                                 
+                              try{
+                                  LoginProvider.logout(contex);
+                              } catch(e) {
+                                final snackBar = SnackBar(
+                                  content: const Text('Kết nối bị lỗi'),
+                                  action: SnackBarAction(
+                                    label: 'Undo',
+                                    onPressed: () {
+                                      // Some code to undo the change.
+                                    },
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
                             },
                             child: ListTile(
                               leading: Icon(
@@ -170,8 +179,7 @@ class _BackgroundState extends State<Background> {
                   });
             },
             icon: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  httpsanh+avt),
+              backgroundImage: NetworkImage(httpsanh + avt),
             ),
           )
         ],
