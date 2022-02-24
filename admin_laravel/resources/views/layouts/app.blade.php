@@ -184,6 +184,12 @@
           reader.readAsDataURL(input.files[0]);
       }
     }
+
+    setInterval(myTimer, 1000);
+    function myTimer() {
+      const d = new Date();
+      document.getElementById("realtimer").innerHTML = d.toLocaleTimeString();
+    }
   </script>
 </body>
 </Html>

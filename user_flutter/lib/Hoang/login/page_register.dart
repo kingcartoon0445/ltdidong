@@ -41,10 +41,11 @@ class RegisterPageState extends State<RegisterPage> {
   }
 
   register() {
-   try{
-      LoginProvider.register(context, txtHoten.text, txtEmail.text, txtSDT.text, txtPassword.text,_image!).then((result) {
-      if (result == 1) {
-        final  snackBar = SnackBar(
+    try {
+      LoginProvider.register(context, txtHoten.text, txtEmail.text, txtSDT.text, txtPassword.text, _image!)
+          .then((result) {
+        if (result == 1) {
+          final snackBar = SnackBar(
             content: const Text('Tạo tài khoản thành công'),
             action: SnackBarAction(
               label: 'Undo',
@@ -52,11 +53,13 @@ class RegisterPageState extends State<RegisterPage> {
                 // Some code to undo the change.
               },
             ),
-          );;
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
-      }else{
-            final  snackBar = SnackBar(
+          );
+          ;
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.of(context)
+              .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
+        } else {
+          final snackBar = SnackBar(
             content: const Text('Email hoặc số điện thoại đã tồn tại'),
             action: SnackBarAction(
               label: 'Undo',
@@ -64,22 +67,23 @@ class RegisterPageState extends State<RegisterPage> {
                 // Some code to undo the change.
               },
             ),
-          );;
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
-    });
-   }catch(e){
-final  snackBar = SnackBar(
-            content: const Text('Kết nối bị lỗi'),
-            action: SnackBarAction(
-              label: 'Undo',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
           );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-   }
+          ;
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      });
+    } catch (e) {
+      final snackBar = SnackBar(
+        content: const Text('Kết nối bị lỗi'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   @override

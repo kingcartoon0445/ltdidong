@@ -21,20 +21,22 @@ class LoginPageState extends State<LoginPage> {
   login() {
     LoginProvider.signIn(context, txtEmail.text, txtPassword.text);
   }
-xet()async{
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  String tokens = (sharedPreferences.getString('token') ?? "");
-  int id=(sharedPreferences.getInt('id') ?? 0);
-  if(tokens!=""){
-    Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => LayTT(id, 2)),
-          (route) => false);
+
+  xet() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
+    int id = (sharedPreferences.getInt('id') ?? 0);
+    if (tokens != "") {
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LayTT(id, 2)), (route) => false);
+    }
   }
-}@override
+
+  @override
   initState() {
     super.initState();
     xet();
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -173,7 +175,7 @@ xet()async{
                                       color: Colors.white,
                                     ),
                                     textInputAction: TextInputAction.done,
-                                    obscureText: _obsecureText?true:false,
+                                    obscureText: _obsecureText ? true : false,
                                   ),
                                 ),
                               ),

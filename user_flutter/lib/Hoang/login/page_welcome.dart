@@ -73,7 +73,10 @@ class WelcomePageState extends State<WelcomePage> {
                     children: [
                       MaterialButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
                         },
                         minWidth: double.infinity,
                         height: 60,
@@ -93,7 +96,10 @@ class WelcomePageState extends State<WelcomePage> {
                       SizedBox(height: 20),
                       MaterialButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterPage()));
                         },
                         minWidth: double.infinity,
                         height: 60,
