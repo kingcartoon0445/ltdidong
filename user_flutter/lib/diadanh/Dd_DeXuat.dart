@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:user_flutter/colorplush.dart';
+import 'package:location/location.dart';
 
 class addDD extends StatefulWidget {
   const addDD({Key? key}) : super(key: key);
@@ -23,11 +24,23 @@ List<DropdownMenuItem<String>> get dropdownItems {
 class _addDDState extends State<addDD> {
   List<File> files = [];
   final txtMota = TextEditingController();
+  //kinh độ địa danh mới
+  double kinhdodd = 0;
+  //vĩ độ địa danh mới
+  double vidodd = 0;
+  Location location = new Location();
+  //kích hoạt truyền vị trí
+  late bool _isServicEnable;
+  //trạng thái truyền vị trí
+  late PermissionStatus _permissionGranted;
+  //dữ liệu truyền vị trí
+  late LocationData _locationData;
+
+  bool _isGetLocation = false;
   @override
   Widget build(BuildContext context) {
     String selectedValue = "--Miền--";
     return Scaffold(
-      
       body: ListView(
         children: [
           Container(
@@ -64,6 +77,7 @@ class _addDDState extends State<addDD> {
                   ),
                   child: TextFormField(
                     maxLines: 5,
+                    maxLength: 300,
                     controller: txtMota,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -137,72 +151,69 @@ class _addDDState extends State<addDD> {
                 Container(
                   padding: EdgeInsets.only(left: 80, right: 80, top: 20),
                   child: ElevatedButton(
-                    child: Text(
-                      "Lấy vị trí",
-                      style: cabin_B(context, Colors.white, 18.0),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      onPrimary: Colors.white,
-                      primary: Color(0xFF7D82BC),
-                      onSurface: Colors.grey,
-                      minimumSize: Size(150, 50),
-                      shadowColor: Colors.teal,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                    onPressed: () {},
-                  ),
+                      onPressed: () async {
+                        _isServicEnable = await location.serviceEnabled();
+                        if (!_isServicEnable) {
+                          _isServicEnable = await location.requestService();
+                          if (_isServicEnable) return;
+                        }
+                        _permissionGranted = await location.hasPermission();
+                        if (_permissionGranted == PermissionStatus.denied) {
+                          _permissionGranted =
+                              await location.requestPermission();
+                          if (_permissionGranted != PermissionStatus.granted)
+                            return;
+                        }
+                        _locationData = await location.getLocation();
+
+                        setState(() {
+                          _isGetLocation = true;
+                          kinhdodd = _locationData.longitude!;
+                          vidodd = _locationData.latitude!;
+                        });
+                      },
+                      child: Text('Lấy vị trí hiện tại')),
                 ),
-                Container(
-                  child: Text(
-                    'Khách sạn',
-                    style: cabin_B(context, Colors.black, 25.0),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 80, right: 80, top: 20),
-                  child: ElevatedButton(
-                    child: Text(
-                      "Thêm khách sạn +",
-                      style: cabin_B(context, Colors.white, 18.0),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      onPrimary: Colors.white,
-                      primary: Color(0xFF7D82BC),
-                      onSurface: Colors.grey,
-                      minimumSize: Size(150, 50),
-                      shadowColor: Colors.teal,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                Container(
-                  child: Text(
-                    'Nhà hàng',
-                    style: cabin_B(context, Colors.black, 25.0),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 80, right: 80, top: 20),
-                  child: ElevatedButton(
-                    child: Text(
-                      "Thêm nhà hàng +",
-                      style: cabin_B(context, Colors.white, 18.0),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      onPrimary: Colors.white,
-                      primary: Color(0xFF7D82BC),
-                      onSurface: Colors.grey,
-                      minimumSize: Size(150, 50),
-                      shadowColor: Colors.teal,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
+                _isGetLocation
+                    ? Container(
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              autocorrect: false,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                  labelText: 'Kinh độ địa danh'),
+                              initialValue: /* _isGetLocation
+                                  ? {_locationData.latitude}.toString()
+                                  : null,*/
+                                  vidodd.toString(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  kinhdodd = double.tryParse(newValue) ?? 0;
+                                });
+                              },
+                            ),
+                            TextFormField(
+                              autocorrect: false,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              keyboardType: TextInputType.number,
+                              decoration:
+                                  InputDecoration(labelText: 'Vĩ độ địa danh'),
+                              initialValue: /*_isGetLocation
+                                  ? _locationData.longitude.toString()
+                                  : null,*/
+                                  kinhdodd.toString(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  vidodd = double.tryParse(newValue) ?? 0;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    : Text('Vị trí hiện tại'),
                 Container(
                     child: Text(
                   'Thêm ảnh',
