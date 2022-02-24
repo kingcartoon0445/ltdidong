@@ -44,7 +44,7 @@ class _ChiTietTienIchState extends State<ChiTietTienIch> {
                           width: 5,
                         ),
                         Text(
-                          'Còn cái nịt',
+                          'test',
                           style: TextStyle(
                               fontSize: 30,
                               color: Colors.black,
@@ -65,7 +65,7 @@ class _ChiTietTienIchState extends State<ChiTietTienIch> {
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                            'Hong có địa chỉ đâu bé ơi',
+                            'Vung Tau',
                             style: TextStyle(fontSize: 20, color: Colors.black),
                           ),
                         ),
