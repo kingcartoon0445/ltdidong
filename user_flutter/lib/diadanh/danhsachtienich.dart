@@ -36,7 +36,7 @@ class _DanhSachTienTichState extends State<DanhSachTienTich> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ChiTietTienIch()),
+                                    builder: (context) => ChiTietTienIch(ti: Ti[index],)),
                               );
                             },
                             child: Container(

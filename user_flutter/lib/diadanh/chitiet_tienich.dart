@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:user_flutter/Object/TienIchObject.dart';
 
 class ChiTietTienIch extends StatefulWidget {
-  const ChiTietTienIch({Key? key}) : super(key: key);
+  TienIchObject ti;
+   ChiTietTienIch({Key? key,required this.ti}) : super(key: key);
 
   @override
-  _ChiTietTienIchState createState() => _ChiTietTienIchState();
+  _ChiTietTienIchState createState(){
+    return _ChiTietTienIchState(ti:ti);
+  }
 }
 
 class _ChiTietTienIchState extends State<ChiTietTienIch> {
+  TienIchObject ti;
+  _ChiTietTienIchState({required this.ti});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

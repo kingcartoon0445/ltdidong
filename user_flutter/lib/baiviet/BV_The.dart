@@ -78,10 +78,13 @@ class _cardState extends State<card> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
+                    width: 200,
+                    padding: EdgeInsets.only(left: 5),
                     child: Text(
                       BV.Bv_TieuDe,
                       style: cabin_B(context, Colors.black, 18.0),
                       softWrap: true,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ), //#5
                   ElevatedButton.icon(

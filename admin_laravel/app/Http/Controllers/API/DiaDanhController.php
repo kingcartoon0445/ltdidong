@@ -64,6 +64,58 @@ class DiaDanhController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'Ten' => 'required',
+            'MaMien' => 'required',
+            'KinhDo' => 'required',
+            'ViDo' => 'required',
+            'DiaChi' => 'required',
+            'MoTa' => 'required',
+            'theloais' => 'required',
+            'nd' => 'required',
+            'hinh' => 'max:5000',
+        ],[
+            'Ten.required' => 'Vui lòng nhập tên địa danh',
+            'MaMien.required' => 'Vui lòng chọn miền',
+            'KinhDo.required' => 'Vui lòng nhập kinh độ',
+            'ViDo.required' => 'Vui lòng nhập vĩ độ',
+            'DiaChi.required' => 'Vui lòng nhập địa chỉ',
+            'MoTa.required' => 'Vui lòng nhập mô tả',
+            'theloais.required' => 'Vui lòng chọn thể loại',
+            'nd.required'=>'thiếu người đề xuất',
+            'hinh.max' => 'Tối đa 5 MB',
+        ]);
+
+        $diaDanh = new DiaDanh;
+        $diaDanh->fill([
+            'Ten'=>$request->input('Ten'),
+            'MaMien'=>$request->input('MaMien'),
+            'KinhDo'=>$request->input('KinhDo'),
+            'ViDo'=>$request->input('ViDo'),
+            'MoTa'=>$request->input('MoTa'),
+            'DiaChi'=>$request->input('DiaChi'),
+            'AnhBia'=>'avt.png',
+            'TrangThai'=>'3',
+        ]);
+
+        $diaDanh->save();
+
+        if($request->hasFile('hinh')){
+            $diaDanh->AnhBia = $request->file('hinh')->store('images/diadanh/'.$diaDanh->id.'/cover', 'public');
+        }
+
+        if($request->hasFile('images')){
+            $files = $request->file('images');
+
+            foreach($files as $file){
+                $anhDiaDanh = new AnhDiaDanh;
+                $anhDiaDanh->fill([
+                    'MaDiaDanh'=>$diaDanh->id,
+                    'Anh'=>$file->store('images/diadanh/'.$diaDanh->id.'/images', 'public'),
+                ]);
+                $anhDiaDanh->save();
+            }}
+       
     }
 
     /**
