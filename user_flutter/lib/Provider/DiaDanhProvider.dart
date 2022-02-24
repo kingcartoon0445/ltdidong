@@ -77,4 +77,19 @@ class DiaDanhProvider {
     sharedPreferences.setString("bvmoi", jsonResponse);
     return jsonResponse.toString();
   }
+
+  static Future<String>KtraDD(int DD) async{
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
+    int id = (sharedPreferences.getInt('id') ?? 0);
+         String url = https+'/KtraDD/$id/$DD';
+    var response = await http.get(Uri.parse(url), headers: {
+      'Authorization': 'Bearer $tokens',
+    });
+    var jsons = json.decode(response.body);
+    String a = jsons['den'].toString();
+    return a;
+  }
+
 }

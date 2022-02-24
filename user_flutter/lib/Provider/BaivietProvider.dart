@@ -128,4 +128,47 @@ static Future<List<BaiVietObject>> BVNhieuLike() async {
     return paraseBaiViet(response.body);
   }
 
+static  suaBaiViet(int id,String TieuDe,String NoiDung,String MDD,String MND,String DanhGia, List<File> lstimg )async{
+ String url = https + '/baiviets';
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String tokens = (sharedPreferences.getString('token') ?? "");
+    /*Map body = {'TieuDe': TieuDe,'NoiDung':NoiDung,'MaDiaDanh':MDD.toString(),'MaNguoiDung':MND.toString(),'rating':DanhGia.toString()};
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response = await http.post(Uri.parse(url), body: body);
+     if (response.statusCode == 200) {
+       var jsonResponse = json.decode(response.body);
+       sharedPreferences.setString("thanhcong", jsonResponse['thanhcong']);
+     }
+    String thanhcong= (sharedPreferences.getString('thanhcong') ?? "w");
+    return thanhcong;*/
+
+      var lst = [];
+      Dio dio = new Dio();
+      for (var img in lstimg) {
+        print(lstimg.length);
+        print(img.path);
+        img.existsSync();
+        lst.add(await MultipartFile.fromFile(img.path));
+      }
+      FormData formData = new FormData.fromMap({
+        "images[]": await lst,
+        'TieuDe': TieuDe,
+        'NoiDung': NoiDung,
+        'MaDiaDanh': MDD.toString(),
+        'MaNguoiDung': MND.toString(),
+        'rating': DanhGia.toString()
+      });
+      final response = await dio.post(url,
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer $tokens',
+          }));
+      var jsonResponse;
+      if (response.statusCode == 200) {
+        jsonResponse = response.data.toString();
+      }
+      sharedPreferences.setString("bvmoi", jsonResponse);
+      return jsonResponse.toString();
+  
+}
 }

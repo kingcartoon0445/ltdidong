@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class NguoiDungController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -109,20 +110,12 @@ class NguoiDungController extends Controller
      * @param  \App\Models\NguoiDung  $nguoiDung
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $nguoiDung)
+    public function update(Request $request, int $id)
     {
         //
         $request->validate([
-            'TenDaiDien' => 'required|string',
-            'HoTen' => 'required|string',
-            'Email' => 'required|email|unique:nguoi_dungs,Email,'.$nguoiDung->id,
-            'SDT' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'hinh' => 'max:5000',
         ],[
-            'TenDaiDien.required' => 'Vui lòng nhập tên đại diện',
-            'HoTen.required' => 'Vui lòng nhập họ tên',
-            'Email.required' => 'Vui lòng nhập email',
-            'MatKhau.required' => 'Vui lòng nhập mật khẩu',
             'hinh.max' => 'Tối đa 5 MB',
         ]);
         
@@ -130,22 +123,14 @@ class NguoiDungController extends Controller
             if($request->hasFile('hinh')){
                 $nguoiDung->AnhNen = $request->file('hinh')->store('images/nguoidung/'.$nguoiDung->id, 'public');
             }
-
-            $nguoiDung->fill([
-                'TenDaiDien'=>$request->input('TenDaiDien'),
-                'HovaTen'=>$request->input('HoTen'),
-                'Email'=>$request->input('Email'),
-                'SDT'=>$request->input('SDT'),
-                'TrangThai'=>$request->input('TrangThai'),
-            ]);
-
-            $nguoiDung->save();
-
-            return Redirect::route('nguoiDung.index');
-        }catch (\Exception $e) {
-            if ($e->getCode() == 23000) {
-                // Deal with duplicate key error
-            }
+            $nguoidung = NguoiDung::find($id);
+        $nguoidung->update($request->all());
+                $response= [
+                    'data'=>$nguoidung
+                ];
+            return ['sua'=>'1'];
+        }catch (Exception $e) {
+             return['sua'=>'0'];
         }
     }
 

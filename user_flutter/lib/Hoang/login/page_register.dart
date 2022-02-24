@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:user_flutter/Hoang/api.dart';
 import 'package:user_flutter/Hoang/login/page_login.dart';
 import 'package:user_flutter/Provider/loginProvider.dart';
 
@@ -85,7 +84,8 @@ final  snackBar = SnackBar(
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Container(
+      child:  Stack(
       children: [
         Container(
           decoration: BoxDecoration(
@@ -96,11 +96,9 @@ final  snackBar = SnackBar(
             ),
           ),
         ),
-        Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-          ),
+      Container(
+        padding: EdgeInsets.only(top: 20),
+        child:    Scaffold(
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             child: SafeArea(
@@ -421,8 +419,8 @@ final  snackBar = SnackBar(
               ),
             ),
           ),
-        ),
-      ],
+        ),),
+      ],)
     );
   }
 }

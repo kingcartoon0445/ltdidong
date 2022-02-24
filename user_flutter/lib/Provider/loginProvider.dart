@@ -18,11 +18,33 @@ class LoginProvider {
     var jsonResponse;
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
+       if(jsonResponse["message"] == 'sai'){
+            var  snackBar = SnackBar(
+            content: const Text('Email hoặc mật khẩu không đúng!'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }else{
       sharedPreferences.setString("token", jsonResponse['token']);
       sharedPreferences.setInt("id", jsonResponse['id']);
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => LayTT(jsonResponse['id'], 2)),
-          (route) => false);
+          (route) => false);}
+      
+    }else{
+      var snackBar = SnackBar(
+            content: const Text('Email hoặc mật khẩu không đúng'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );ScaffoldMessenger.of(context).showSnackBar(snackBar); 
     }
   }
 

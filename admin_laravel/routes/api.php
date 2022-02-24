@@ -36,19 +36,20 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/forgot-password', [AuthController::class, 'forgot']);
 Route::post('/reset-password', [AuthController::class, 'reset']);
-
+Route::get('/demshare/{id}', [DiaDanhController::class, 'demshare']);
 
     Route::get('/profile', [AuthController::class, 'profile']);
-    Route::apiResource('/miens', MienController::class);
-    Route::apiResource('/theloais', TheLoaiController::class);
-    Route::apiResource('/diadanhs', DiaDanhController::class);
-    Route::apiResource('/tienichs', TienIchController::class);
-    Route::apiResource('/baiviets', BaiVietController::class);
-    Route::apiResource('nguoidungs',NguoiDungController::class);
+
 //route bài viết
     Route::middleware('auth:sanctum')->group(function () {
 Route::post('BaivietUS',[BaiVietController::class,'BaivietUS']);
-
+Route::get('KtraDD/{ND}/{DD}',[BaiVietController::class,'KtraDD']);
+Route::apiResource('/miens', MienController::class);
+Route::apiResource('/theloais', TheLoaiController::class);
+Route::apiResource('/diadanhs', DiaDanhController::class);
+Route::apiResource('/tienichs', TienIchController::class);
+Route::apiResource('/baiviets', BaiVietController::class);
+Route::apiResource('nguoidungs',NguoiDungController::class);
 
 Route::get('BaiVietNhieuLike',[BaiVietController::class,'BaiVietNhieuLike']);
 Route::get('BVLienQuan/{id}',[BaiVietController::class,'BVLienQuan']);

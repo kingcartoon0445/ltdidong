@@ -18,6 +18,7 @@ import 'Provider/ViewProvider.dart';
 import 'colorplush.dart';
 
 //HTTP
+
 //lệnh chạy php: php artisan serve --host 192.168.139.126 --port 8000
 String https = 'http://192.168.139.126:8000/api';
 String httpsanh = 'http://192.168.139.126:8000';

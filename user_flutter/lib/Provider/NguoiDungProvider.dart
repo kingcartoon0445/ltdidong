@@ -33,26 +33,18 @@ class NguoiDungProvider {
     return paraseNguoiDung(response.body);
   }
 
-  static sua(String tenDD, String email,String HoTen,String SDT,File AVT,String pw) async{
+  static sua(String tenDD, String email,String HoTen,String SDT) async{
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String url = https + '/nguoidungs';
+   
     String tokens = (sharedPreferences.getString('token') ?? "");
-    Map body = {'TenDaiDien': tenDD, 'HoTen': HoTen,'Email':email,'SDT':SDT,'MatKhau':pw};
+        int id = (sharedPreferences.getInt('id') ?? 0);
+
+     String url = https + '/nguoidungs/$id';
+    Map body = {'TenDaiDien': tenDD, 'HoTen': HoTen,'Email':email,'SDT':SDT,'_method':'PUT'};
+   Dio dio = new Dio();
+    var response = await http.post(Uri.parse(url), headers: <String, String>{'Accept': 'application/json'}, body: body);
     
-    FormData formData=new FormData.fromMap({
-      'TenDaiDien':tenDD,
-      'HoTen':HoTen,
-      'Email':email,
-      'SDT':SDT,
-      'MatKhau':pw,
-      'hinh': MultipartFile.fromFile(AVT.path)
-    });
-     Dio dio = new Dio();
-    final response=await dio.patch(url,
-          data: formData,
-          options: Options(headers: {
-            'Authorization': 'Bearer $tokens',
-          }));
+    print(response.body);
     }
 
 }

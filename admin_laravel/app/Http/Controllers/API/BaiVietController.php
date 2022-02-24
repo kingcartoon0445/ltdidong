@@ -156,20 +156,7 @@ class BaiVietController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([
-            'TieuDe' => 'required',
-            'NoiDung' => 'required',
-            'MaDiaDanh' => 'required',
-            'MaNguoiDung' => 'required',
-            'images' => 'max:5000',
-        ],[
-            'TieuDe.required' => 'Vui lòng nhập tiêu đề',
-            'NoiDung.required' => 'Vui lòng nhập nội dung',
-            'MaDiaDanh.required' => 'Vui lòng chọn địa danh',
-            'MaNguoiDung.required' => 'Vui lòng chọn người đăng',
-            'hinh.max' => 'Tối đa 5 MB',
-        ]);
-
+        
         if($request->hasFile('images')){
             $files = $request->file('images');
     
@@ -182,16 +169,12 @@ class BaiVietController extends Controller
                 $anhBaiViet->save();
             }
         }
+        $baiViet = BaiViet::find($id);
+        $baiViet->update($request->all());
+     
 
-        $baiViet->fill([
-            'TieuDe'=>$request->input('TieuDe'),
-            'NoiDung'=>$request->input('NoiDung'),
-            'MaDiaDanh'=>$request->input('MaDiaDanh'),
-            'MaNguoiDung'=>$request->input('MaNguoiDung'),
-            'TrangThai'=>$request->input('TrangThai'),
-        ]);
-
-        $baiViet->save();
+        return 1;
+        
     }
 
     /**
@@ -299,5 +282,11 @@ class BaiVietController extends Controller
         }
 
         return response()->json($listBaiViet, 200);
+    }
+
+    public function KtraDD(int $ND, int $DD){
+        $ktra= BaiViet:: where('MaNguoiDung',$ND)->where('MaDiaDanh',$DD)->get();
+        $ktra2=BaiViet::where('MaNguoiDung','0')->where('MaDiaDanh','0')->get();
+        if($ktra!=$ktra2)return ['den'=>'1'];else return['den'=>'0'];
     }
 }
