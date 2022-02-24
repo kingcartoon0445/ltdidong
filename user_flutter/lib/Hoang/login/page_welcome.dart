@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_flutter/class_chung.dart';
 import 'page_login.dart';
 import 'page_register.dart';
 
@@ -10,6 +12,20 @@ class WelcomePage extends StatefulWidget {
 }
 
 class WelcomePageState extends State<WelcomePage> {
+  xet()async{
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  String tokens = (sharedPreferences.getString('token') ?? "");
+  int id=(sharedPreferences.getInt('id') ?? 0);
+  if(tokens!=""){
+    Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => LayTT(id, 2)),
+          (route) => false);
+  }
+}@override
+  initState() {
+    super.initState();
+    xet();
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
