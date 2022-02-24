@@ -12,38 +12,38 @@ class LoginProvider {
     String url = https + '/login';
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map body = {'Email': email, 'MatKhau': password};
-    var response = await http.post(Uri.parse(url),
-        headers: <String, String>{'Accept': 'application/json'}, body: body);
+    var response = await http.post(Uri.parse(url), headers: <String, String>{'Accept': 'application/json'}, body: body);
     var jsonResponse;
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       sharedPreferences.setString("token", jsonResponse['token']);
       sharedPreferences.setInt("id", jsonResponse['id']);
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => LayTT(jsonResponse['id'], 2)),
-          (route) => false);
+      Navigator.of(context)
+          .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LayTT(jsonResponse['id'], 2)), (route) => false);
     }
   }
 
-  static Future<bool> logout() async{
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  static Future<bool> logout() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String tokens = (sharedPreferences.getString('token') ?? "");
-    String url=https+'/logout';
-    final respones=await http.post(Uri.parse(url),headers: {
-       'Authorization': 'Bearer $tokens',
+    String url = https + '/logout';
+    final respones = await http.post(Uri.parse(url), headers: {
+      'Authorization': 'Bearer $tokens',
     });
-    final jsonRespon=jsonDecode(respones.body);
-    if(jsonRespon['status']=='200'){
+    final jsonRespon = jsonDecode(respones.body);
+    if (jsonRespon['status'] == '200') {
       return true;
-    }else{return false;}
+    } else {
+      return false;
+    }
   }
 
-  static Future<int> register(BuildContext context, String HoTen, String Email,
-      String sdt, String Matkhau, File img) async {
+  static Future<int> register(
+      BuildContext context, String HoTen, String Email, String sdt, String Matkhau, File img) async {
     String url = https + '/NguoiDung';
     try {
-      var lst=[];
-      lst.add( await MultipartFile.fromFile(img.path));
+      var lst = [];
+      lst.add(await MultipartFile.fromFile(img.path));
       print(lst);
       Dio dio = new Dio();
       img.existsSync();
@@ -66,6 +66,4 @@ class LoginProvider {
       return 0;
     }
   }
-
-  
 }

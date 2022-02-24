@@ -65,8 +65,7 @@ class BaiVietController extends Controller
             'MaDiaDanh' => 'required',
             'MaNguoiDung' => 'required',
             'rating'=> 'required',
-            'images' => 'max:5000',
-            'images'=>'required'
+            'images' => 'required|max:5000',
         ],[
             'TieuDe.required' => 'Vui lòng nhập tiêu đề',
             'NoiDung.required' => 'Vui lòng nhập nội dung',

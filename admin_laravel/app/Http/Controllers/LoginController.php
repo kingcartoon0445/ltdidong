@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\NguoiDung;
+use App\Models\BaiViet;
+use App\Models\DiaDanh;
+use App\Models\TienIch;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +25,18 @@ class LoginController extends Controller
             $data->AnhNen = 'storage/images/no_image_holder.png';
         }
 
-        return view('index', ['LoggedUserInfo'=>$data]);
+        $tongBaiViet = BaiViet::count();
+        $tongTaiKhoan = NguoiDung::count();
+        $tongTienIch = TienIch::count();
+        $tongDiaDanh = DiaDanh::count();
+
+        return view('index', [
+            'LoggedUserInfo'=>$data,
+            'tongBaiViet'=>$tongBaiViet,
+            'tongTaiKhoan'=>$tongTaiKhoan,
+            'tongTienIch'=>$tongTienIch,
+            'tongDiaDanh'=>$tongDiaDanh,
+        ]);
     }
 
     public function register(){

@@ -35,38 +35,46 @@
           <div class="col-md-6 mb-4 stretch-card transparent">
             <div class="card card-tale">
               <div class="card-body">
-                <p class="mb-4">Today’s Bookings</p>
-                <p class="fs-30 mb-2">4006</p>
-                <p>10.00% (30 days)</p>
+                <p class="mb-4">Tổng bài viết</p>
+                <p class="fs-30 mb-2">{{$tongBaiViet}}</p>
               </div>
             </div>
           </div>
           <div class="col-md-6 mb-4 stretch-card transparent">
             <div class="card card-dark-blue">
               <div class="card-body">
-                <p class="mb-4">Total Bookings</p>
-                <p class="fs-30 mb-2">61344</p>
-                <p>22.00% (30 days)</p>
+                <p class="mb-4">Tổng địa danh</p>
+                <p class="fs-30 mb-2">{{$tongDiaDanh}}</p>
               </div>
             </div>
           </div>
         </div>
+
         <div class="row">
-          <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-            <div class="card card-light-blue">
+          <div class="col-md-6 mb-4 stretch-card transparent">
+            <div class="card card-tale">
               <div class="card-body">
-                <p class="mb-4">Number of Meetings</p>
-                <p class="fs-30 mb-2">34040</p>
-                <p>2.00% (30 days)</p>
+                <p class="mb-4">Tổng tài khoản</p>
+                <p class="fs-30 mb-2">{{$tongTaiKhoan}}</p>
               </div>
             </div>
           </div>
-          <div class="col-md-6 stretch-card transparent">
-            <div class="card card-light-danger">
+          <div class="col-md-6 mb-4 stretch-card transparent">
+            <div class="card card-dark-blue">
               <div class="card-body">
-                <p class="mb-4">Number of Clients</p>
-                <p class="fs-30 mb-2">47033</p>
-                <p>0.22% (30 days)</p>
+                <p class="mb-4">Tổng tiện ích</p>
+                <p class="fs-30 mb-2">{{$tongTienIch}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 mb-4 mb-lg-0 stretch-card transparent">
+            <div class="card card-light-blue">
+              <div class="card-body">
+                <p class="mb-4">Thời gian</p>
+                <p id="realtimer" class="fs-30 mb-2"></p>
               </div>
             </div>
           </div>
