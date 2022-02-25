@@ -39,12 +39,15 @@ class NguoiDungProvider {
     String tokens = (sharedPreferences.getString('token') ?? "");
         int id = (sharedPreferences.getInt('id') ?? 0);
 
-     String url = https + '/nguoidungs/$id';
-    Map body = {'TenDaiDien': tenDD, 'HoTen': HoTen,'Email':email,'SDT':SDT,'_method':'PUT'};
-   Dio dio = new Dio();
-    var response = await http.post(Uri.parse(url), headers: <String, String>{'Accept': 'application/json'}, body: body);
+     String url = https + '/nguoidungs/'+id.toString();
+    Map body = {'TenDaiDien': tenDD, 'HoTen': HoTen,'Email':email,'SDT':SDT};
+      var response = await http.put(Uri.parse(url), headers: <String, String>{'Accept': 'application/json'}, body: body);
     
-    print(response.body);
+    var jsonResponse;
+    if (response.statusCode == 200) {
+      jsonResponse = json.decode(response.body);
+      print("object");
+    }
     }
 
 }

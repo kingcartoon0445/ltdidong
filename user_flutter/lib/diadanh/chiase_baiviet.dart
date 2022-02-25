@@ -223,15 +223,48 @@ if (result != null) {
               ),
             ],
           ),
-          TextFormField(
-            controller: txtTieuDe,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Không được bỏ trống';
-              }
-            },
-            textAlign: TextAlign.start,
-          ),
+          Container(
+                  margin: EdgeInsets.all(12),
+                  height: 5 * 24.0,
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: TextFormField(
+                    maxLines: 5,
+                    maxLength: 40,
+                    controller: txtTieuDe,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Vui lòng nhập tiêu đề';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 20),
+                      border: InputBorder.none,
+                      hintText: 'Tiêu đề',
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black87,
+                    ),
+                    textInputAction: TextInputAction.next,
+                  ),
+                ),
+                
           SizedBox(
             height: 10,
           ),
@@ -246,17 +279,48 @@ if (result != null) {
               ),
             ],
           ),
-          TextFormField(
-            controller: txtNoiDung,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Không được bỏ trống';
-              }
-            },
-            textAlign: TextAlign.start,
-            maxLines: null,
-          ),
-          SizedBox(
+         Container(
+                  margin: EdgeInsets.all(12),
+                  height: 5 * 24.0,
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: TextFormField(
+                    maxLines: 5,
+                    maxLength: 300,
+                    controller: txtNoiDung,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Vui lòng nhập mô tả';
+                      }
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 20),
+                      border: InputBorder.none,
+                      hintText: 'Mô tả',
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black87,
+                    ),
+                    textInputAction: TextInputAction.next,
+                  ),
+                ),
+                SizedBox(
             height: 10,
           ),
           Row(

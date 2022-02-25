@@ -32,8 +32,20 @@ class _cardState extends State<card> {
       }
     });
   }
+  int id=0;
+    layid() async{
+SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     id = (sharedPreferences.getInt('id') ?? 0);
+  }
+  
 
   _cardState({required this.BV});
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    layid();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

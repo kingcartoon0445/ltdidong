@@ -12,7 +12,7 @@ class MienProvider {
   static mienthem(BuildContext context, String tenmien, int a) async {
     String url = https+'/Mien/' + a.toString();
     Map body = {'TenMien': tenmien};
-    var response = await http.put(Uri.parse(url), headers: <String, String>{'Accept': 'application/json'}, body: body);
+    var response = await http.put(Uri.parse(url), headers: <String, String>{'Accept': 'application/json; charset=UTF-8  '}, body: body);
     var jsonResponse;
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);

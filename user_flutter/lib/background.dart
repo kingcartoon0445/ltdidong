@@ -48,8 +48,9 @@ class _BackgroundState extends State<Background> {
   Widget build(BuildContext context) {
     String avt = ND.Nd_AnhNen;
     return Scaffold(
+      
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
@@ -210,7 +211,7 @@ class _BackgroundState extends State<Background> {
         ],
         color: Color(0xFF7d82bc),
         buttonBackgroundColor: Color(0xFF7D82BC),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (index) {

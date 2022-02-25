@@ -39,9 +39,6 @@ Future pickImage() async {
       }
     });}
   suathongtin(){
-    if(_image==null){
-      _image='huy.txt';
-    }
     NguoiDungProvider.sua(txtTen.text, txtEmail.text, txtHoTen.text, txtSDT.text);
   }
   @override
