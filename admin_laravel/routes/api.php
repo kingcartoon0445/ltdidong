@@ -36,20 +36,21 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/forgot-password', [AuthController::class, 'forgot']);
 Route::post('/reset-password', [AuthController::class, 'reset']);
+Route::get('/demshare/{id}', [DiaDanhController::class, 'demshare']);
 
-
-    Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'profile']);
-    Route::apiResource('/miens', MienController::class);
-    Route::apiResource('/theloais', TheLoaiController::class);
-    Route::apiResource('/diadanhs', DiaDanhController::class);
-    Route::apiResource('/tienichs', TienIchController::class);
-    Route::apiResource('/baiviets', BaiVietController::class);
-    Route::apiResource('NguoiDung',NguoiDungController::class);
-//route bài viết
 
+//route bài viết
+    Route::middleware('auth:sanctum')->group(function () {
 Route::post('BaivietUS',[BaiVietController::class,'BaivietUS']);
-Route::middleware('auth:sanctum')->get('baiviettop5',[BaiVietController::class,'baiviettop5']);
+Route::get('KtraDD/{ND}/{DD}',[BaiVietController::class,'KtraDD']);
+Route::apiResource('/miens', MienController::class);
+Route::apiResource('/theloais', TheLoaiController::class);
+Route::apiResource('/diadanhs', DiaDanhController::class);
+Route::apiResource('/tienichs', TienIchController::class);
+Route::apiResource('/baiviets', BaiVietController::class);
+Route::apiResource('nguoidungs',NguoiDungController::class);
+
 Route::get('BaiVietNhieuLike',[BaiVietController::class,'BaiVietNhieuLike']);
 Route::get('BVLienQuan/{id}',[BaiVietController::class,'BVLienQuan']);
     //route like
@@ -65,4 +66,11 @@ Route::apiResource('CoTienIch',CoTienIchController::class);
 Route::get('/danhsachkhachsan/{MaDiaDanh}', [CoTienIchController::class, 'show2']);
 Route::get('/danhsachnhahang/{MaDiaDanh}', [CoTienIchController::class, 'show1']);
 
-//Test
+//TestRoute::middleware('auth:sanctum')->group(function () {
+
+
+        // lấy thông tin user hiện tại
+        Route::get('baiviettop5',[BaiVietController::class,'baiviettop5']);
+       
+        Route::get('/logout', [AuthController::class, 'logout']);
+    });

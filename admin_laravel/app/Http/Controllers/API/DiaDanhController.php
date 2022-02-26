@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\DiaDanh;
 use App\Models\DanhGia;
+use App\Models\BaiViet;
 use App\Models\NguoiDung;
 use App\Models\Mien;
 use App\Models\AnhDiaDanh;
@@ -75,7 +76,7 @@ class DiaDanhController extends Controller
     {
         $diaDanh = DiaDanh::join('Miens','dia_danhs.MaMien','=','Miens.id')
         ->join('danh_gias','danh_gias.MaDiaDanh','=','dia_danhs.id')
-        ->where('dia_danhs.TrangThai',1)
+        ->where('dia_danhs.TrangThai',1)->where('dia_danhs.id',$id)
         ->orWhere('dia_danhs.TrangThai',0)
         ->orWhere('dia_danhs.TrangThai',2)
         ->select('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi',DanhGia::raw(" AVG(danh_gias.SoDanhGia) AS danhgia"))->groupBy('dia_danhs.id','dia_danhs.Ten','MaMien','TenMien','KinhDo','ViDo','MoTa','AnhBia','DiaChi')->where('dia_danhs.id',$id)->first();
@@ -120,5 +121,10 @@ class DiaDanhController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function demshare(int $id){
+        $dem= BaiViet::where('MaDiaDanh','=',$id)->select(BaiViet::raw('Count(id) as dem'))->get();
+        return $dem;
     }
 }
