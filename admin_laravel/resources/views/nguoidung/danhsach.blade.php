@@ -24,6 +24,7 @@
                 <thead>
                   <tr>
                     <th>Đại Diện</th>
+                    <th>Email</th>
                     <th>Họ tên</th>
                     <th>SĐT</th>
                     <th>Chức vụ</th>
@@ -35,6 +36,7 @@
                   @foreach($listnguoiDung as $nguoiDung)
                     <tr>
                         <td><img class="img-circle elevation-2" style="width:50px;height:50px;object-fit:cover" src="{{ $nguoiDung->AnhNen }}" alt=""> {{ $nguoiDung->TenDaiDien }}</td>
+                        <td>{{ $nguoiDung->Email }}</td>
                         <td>{{ $nguoiDung->HovaTen }}</td>
                         <td>{{ $nguoiDung->SDT }}</td>
                         <td>
