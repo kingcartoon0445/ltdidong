@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 
 class TienIch extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $guarded = [];
 

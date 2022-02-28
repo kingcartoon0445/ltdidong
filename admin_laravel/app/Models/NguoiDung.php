@@ -14,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 class NguoiDung extends Authenticatable
 {
 
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $guarded = [];
 }

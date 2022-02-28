@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Mien extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
     
     protected $guarded = [];
 }

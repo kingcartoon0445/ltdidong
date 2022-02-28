@@ -58,8 +58,8 @@ class AuthController extends Controller
 
         $nguoiDung = NguoiDung::where('Email', $data['Email'])->first();
 
-        //if(!$nguoiDung || !Hash::check($data['MatKhau'], $nguoiDung['MatKhau'])){
-          if(!$nguoiDung || ( $request->MatKhau != $nguoiDung->MatKhau)){
+        if(!$nguoiDung || !Hash::check($data['MatKhau'], $nguoiDung['MatKhau'])){
+          //if(!$nguoiDung || ( $request->MatKhau != $nguoiDung->MatKhau)){
             return response()->json(['message' => 'sai']
         );
         }

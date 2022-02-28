@@ -14,7 +14,7 @@ use App\Models\AnhBaiViet;
 
 class BaiViet extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $guarded = [];
 

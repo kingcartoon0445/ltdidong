@@ -15,7 +15,7 @@ use App\Models\TienIch;
 use App\Models\DanhGia;
 
 class DiaDanh extends Model
-{  use HasApiTokens, HasFactory, Notifiable;
+{  use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $guarded = [];
     

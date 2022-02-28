@@ -46,7 +46,7 @@
                         <td class="dt-center">
                           <div class="btn-group">
                             <button onclick="location.href='{{ route('baiViet.show', $baiViet) }}'" style="width: 50px; height: 30px" class="btn btn-outline-primary btn-fw"><i class="mdi mdi-eye"></i></button>
-                            <a href="{{ route('baiViet.edit', $baiViet) }}" type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>
+                            <button onclick="location.href='{{ route('baiViet.edit', $baiViet) }}'" type="button" style="width: 50px; height: 30px" class="btn btn-outline-warning btn-fw"><i class="mdi mdi-border-color"></i></a>
                             <button style="width: 50px; height: 30px" class="btn btn-outline-danger btn-fw" data-toggle="modal" data-target="#modal-delete{{ $baiViet->id }}"><i class="mdi mdi-cup"></i></button>
                           </div>
                         </td>
