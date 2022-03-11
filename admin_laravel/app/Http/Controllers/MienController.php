@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mien;
 use App\Models\NguoiDung;
+use App\Models\DiaDanh;
 
 use App\Http\Requests\StoreMienRequest;
 use App\Http\Requests\UpdateMienRequest;
@@ -131,6 +132,11 @@ class MienController extends Controller
     public function destroy(Mien $mien)
     {
         $mien->delete();
+        $listDiaDanh = DiaDanh::where('MaMien', $mien->id)->get();
+
+        foreach($listDiaDanh as $diaDanh){
+            $diaDanh->delete();
+        }
 
         return Redirect::route('mien.index');
     }
