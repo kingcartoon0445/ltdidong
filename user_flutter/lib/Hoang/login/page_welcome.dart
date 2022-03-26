@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_flutter/class_chung.dart';
 import 'page_login.dart';
 import 'page_register.dart';
 
@@ -10,6 +12,20 @@ class WelcomePage extends StatefulWidget {
 }
 
 class WelcomePageState extends State<WelcomePage> {
+  xet()async{
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  String tokens = (sharedPreferences.getString('token') ?? "");
+  int id=(sharedPreferences.getInt('id') ?? 0);
+  if(tokens!=""){
+    Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => LayTT(id, 2)),
+          (route) => false);
+  }
+}@override
+  initState() {
+    super.initState();
+    xet();
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -17,7 +33,7 @@ class WelcomePageState extends State<WelcomePage> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/imgs/login/welcome.jpg'),
+              image:NetworkImage('https://lh4.googleusercontent.com/-IvRh36k0tDs/XSB0e8MJlKI/AAAAAAAANs0/G2P9yUUgShkn-QLddt0laY417YAZ3gJkACEwYBhgL/s1600/tai-hinh-nen-phong-canh-dep-full-hd-mien-phi-100%2525-5.jpeg'),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
             ),

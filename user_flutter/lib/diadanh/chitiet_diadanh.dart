@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 import 'package:user_flutter/Object/diadanhObject.dart';
+import 'package:user_flutter/Provider/DiaDanhProvider.dart';
 import 'package:user_flutter/baiviet/ListBaiviet.dart';
 import 'package:user_flutter/class_chung.dart';
+import 'package:user_flutter/colorplush.dart';
 import 'package:user_flutter/diadanh/chiase_baiviet.dart';
 
 class ChiTietDiaDanh extends StatefulWidget {
@@ -18,93 +22,135 @@ class ChiTietDiaDanh extends StatefulWidget {
 class _ChiTietDiaDanhState extends State<ChiTietDiaDanh> {
   final DiaDanhObject DD;
   _ChiTietDiaDanhState({required this.DD});
+  bool daden = false;
+  void daDen() async {
+    String kt = '0';
+
+    DiaDanhProvider.KtraDD(DD.Dd_Ma).then((value) {
+      kt = value;
+
+      if (kt == '1') {
+        setState(() {
+          daden = true;
+        });
+      } else {
+        setState(() {
+          daden = false;
+        });
+      }
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    daDen();
+  }
+
   @override
   Widget build(BuildContext context) {
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        child:Center(child:  CustomScrollView(center: centerKey, slivers: <Widget>[
-          SliverList(
-            key: centerKey,
-            delegate: SliverChildListDelegate([
-              ThongTinChiTietDiaDanh(DD: DD),
-              Text(
-                'Bài viết về địa danh',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-            ]),
-          ),
-          Lst_baiviet(
-            a: 1,
-            ma: DD.Dd_Ma,
-          ),
-        ],)),
+        padding: EdgeInsets.only(left: 20),
+        child: Center(
+            child: CustomScrollView(
+          center: centerKey,
+          slivers: <Widget>[
+            SliverList(
+              key: centerKey,
+              delegate: SliverChildListDelegate([
+                ThongTinChiTietDiaDanh(DD: DD),
+                Text('Bài viết về địa danh',
+                    style: cabin_B(context, Color(0xFF7D82BC), 18.0)),
+              ]),
+            ),
+            Lst_baiviet(
+              a: 9,
+              ma: DD.Dd_Ma,
+            ),
+          ],
+        )),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-           Container(
-  width: 100.0,
-  height: 50.0,
-  child: new RawMaterialButton(
-     shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-    elevation: 0.0,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-                   Text(
-              '200',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-                color: Color(0xFF7D82BC),
-              ),
-            ),
-             Icon(Icons.share, color: Color(0xFF7D82BC)),
-    ],),
-    onPressed: () { Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ChiaSeBaiViet(
-                            TTDD: DD,
-                          )));},
-  ),
-),
-        
           Container(
-  width: 200.0,
-  height: 50.0,
-  child: new RawMaterialButton(
-     shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
-    elevation: 0.0,fillColor: Color(0xFF7D82BC),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-                   Text(
-              '200',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-                color: Colors.white,
+            width: 100.0,
+            height: 50.0,
+            child: new RawMaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+              elevation: 0.0,
+              fillColor: daden == true ? Color(0xFF7D82BC) : Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  daden == true
+                      ? Text('Đã đến',
+                          style: cabin_B(context, Colors.white, 13.0))
+                      : Text('Chưa đến',
+                          style: cabin_B(context, Color(0xFF7D82BC), 13.0)),
+                  daden == true
+                      ? SvgPicture.asset(
+                          'assets/imgs/svg/check.svg',
+                          height: 25,
+                          width: 25,
+                          color: Colors.white,
+                        )
+                      : SvgPicture.asset(
+                          'assets/imgs/svg/chuaden.svg',
+                          height: 25,
+                          width: 25,
+                          color: Color(0xFF7D82BC),
+                        )
+                ],
               ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChiaSeBaiViet(
+                              TTDD: DD,
+                            )));
+              },
             ),
-             Icon(Icons.share, color: Colors.white),
-    ],),
-    onPressed: () { Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ChiaSeBaiViet(
-                            TTDD: DD,
-                          )));},
-  ),
-)
+          ),
+          Container(
+            width: 200.0,
+            height: 50.0,
+            child: new RawMaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(color: Color(0xFF7D82BC), width: 3)),
+              elevation: 0.0,
+              fillColor: Color(0xFF7D82BC),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    '200',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Icon(Icons.share, color: Colors.white),
+                ],
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChiaSeBaiViet(
+                              TTDD: DD,
+                            )));
+              },
+            ),
+          )
         ],
       ),
     );
@@ -118,7 +164,7 @@ class AnhDiaDanh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.only(top: 35),
       child: SizedBox(
         width: double.maxFinite,
         height: 200,
@@ -132,15 +178,35 @@ class AnhDiaDanh extends StatelessWidget {
                 controller:
                     PageController(viewportFraction: 0.8, initialPage: 0),
                 itemCount: DD.ADD.length, //đếm ảnh
-                itemBuilder: (context, index) => Container(
-                  margin: EdgeInsets.only(right: 30),
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      image: DecorationImage(
-                        image: NetworkImage(httpsanh + DD.ADD[index].ADD_Anh),
-                        fit: BoxFit.cover,
-                      )),
+                itemBuilder: (context, index) => Stack(
+                  children: [
+                    Container(
+                      child: ListTile(
+                        trailing: Opacity(
+                            opacity: 0.5,
+                            child: Container(
+                              child: Text(
+                                (index + 1).toString() +
+                                    "/" +
+                                    (DD.ADD.length).toString(),
+                                style: cabin_B(context, Colors.white, 18.0),
+                              ),
+                              color: Color(0XFF030303),
+                            )),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 30),
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          image: DecorationImage(
+                            image:
+                                NetworkImage(httpsanh + DD.ADD[index].ADD_Anh),
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -176,9 +242,7 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
               Expanded(
                 child: Text(
                   DD.Dd_Ten,
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
+                  style: cabin_B(context, Color(0xFF7D82BC), 22.0),
                 ),
               )
             ],
@@ -186,24 +250,17 @@ class _ThongTinChiTietDiaDanhState extends State<ThongTinChiTietDiaDanh> {
           SizedBox(
             height: 10,
           ),
-          Row(
-            children: [
-              Icon(Icons.location_on, color: Color(0xFF7D82BC)),
-              SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                  child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  DD.Dd_DiaChi,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ))
-            ],
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(primary: Color(0xFF7D82BC)),
+            onPressed: () => MapsLauncher.launchCoordinates(
+              double.parse(DD.Dd_KinhDo),
+              double.parse(DD.Dd_ViDo),
+              'gg map here',
+            ),
+            icon: Icon(Icons.location_on, color: Colors.white),
+            label: Text(DD.Dd_DiaChi,
+                overflow: TextOverflow.ellipsis,
+                style: cabin_B(context, Colors.white, 16.0)),
           ),
           SizedBox(
             height: 10,

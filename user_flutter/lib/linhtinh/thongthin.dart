@@ -16,16 +16,30 @@ class thongtin extends StatefulWidget {
 }
 
 class _thongtinState extends State<thongtin> {
-  bool riengtu = true;
   NguoiDungObject ND;
   _thongtinState({required this.ND});
-  List<int> bottom = <int>[0, 1, 2, 3, 4, 5, 6, 7];
+bool riengtu=false;
+bool xet(){
+   if(ND.Nd_TrangThai == 3){
+        print(riengtu);
+      return false;
+   }else{   print(riengtu);
+      return true;
+   }
 
+
+}
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+     riengtu=xet();
+    });
+    
+  }
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      ND.Nd_TrangThai == 3 ? riengtu == false : riengtu == true;
-    });
 
     Size size = MediaQuery.of(context).size;
     const Key centerKey = ValueKey<String>('bottom-sliver-list');
@@ -142,10 +156,11 @@ class _thongtinState extends State<thongtin> {
                             child: SvgPicture.asset(
                               "assets/imgs/svg/khongthay.svg",
                               color: Color(0xFF7D82BC),
-                              height: 150,
-                              width: 150,
+                              height: 130,
+                              width: 130,
                             ),
                           )),
+                          Center(child: Text('Thông tin đã bị người dùng ẩn đi',style: cabin_B(context, Color(0xFF7D82BC), 20.0),))
                         ])),
 
                   //danh sách bài viết

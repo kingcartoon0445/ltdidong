@@ -11,7 +11,7 @@ class Lst_baiviet extends StatefulWidget {
   int a; int ma;
   
   Lst_baiviet({Key? key, required this.a,required this.ma}) : super(key: key);
-
+    
   @override
   _Lst_baivietState createState() {
     return _Lst_baivietState(a: a,ma:ma);

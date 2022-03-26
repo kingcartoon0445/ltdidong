@@ -65,126 +65,160 @@ class _ChiTietState extends State<ChiTiet> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-     const Key centerKey = ValueKey<String>('bottom-sliver-list');
+    const Key centerKey = ValueKey<String>('bottom-sliver-list');
     return Scaffold(
       backgroundColor: Colors.white,
-      body:CustomScrollView(center: centerKey,
-      slivers: <Widget>[
-        SliverList(key: centerKey,delegate: SliverChildListDelegate([
-          Stack(children: [
-          Container(
-              height: size.height * 227 / 640,
-              width: double.maxFinite,
-              decoration: BoxDecoration(),
-              child: PageView.builder(
-                
-                  itemCount: Bai.ABV.length,
-                  itemBuilder: (context, index) =>
-                  Container(
-                    width: double.maxFinite,
-                    decoration:  BoxDecoration(
-                        image: DecorationImage(
-                      image:NetworkImage(httpsanh+Bai.ABV[index].ABV_Anh),
-                      fit: BoxFit.cover,
-                    )),
-                  ),
-                ),
-            ),
-          Container(
-              margin: EdgeInsets.only(top: size.height * 0.3),
-              padding: EdgeInsets.only(top: 10),
-              height: size.height * 36 / 640,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25)),
-              ),),
-        ],),])),
-        SliverList(delegate: SliverChildListDelegate([
-          Container(color: Colors.white,child: Column(children: [
-            Container(
-                    child: ListTile(
-                        leading: Text(
-                          Bai.Bv_TieuDe,
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontFamily: 'Cabin_B',
-                              fontWeight: FontWeight.bold,
-                              overflow: TextOverflow.clip),
+      body: Container(
+        padding: EdgeInsets.only(top: 35),
+        child: CustomScrollView(
+          center: centerKey,
+          slivers: <Widget>[
+            SliverList(
+                key: centerKey,
+                delegate: SliverChildListDelegate([
+                  Stack(
+                    children: [
+                      Container(
+                        height: size.height * 227 / 640,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(),
+                        child: PageView.builder(
+                          itemCount: Bai.ABV.length,
+                          itemBuilder: (context, index) => Stack(
+                            children: [
+                             Container(
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  image: NetworkImage(
+                                      httpsanh + Bai.ABV[index].ABV_Anh),
+                                  fit: BoxFit.cover,
+                                )),
+                              ),
+                               Container(
+                                child: ListTile(
+                                  trailing: Opacity(
+                                      opacity: 0.5,
+                                      child: Container(
+                                        child: Text(
+                                          (index + 1).toString() +
+                                              "/" +
+                                              (Bai.ABV.length).toString(),
+                                          style: cabin_B(
+                                              context, Colors.white, 18.0),
+                                        ),
+                                        color: Color(0XFF030303),
+                                      )),
+                                ),
+                              ),
+                              
+                            ],
+                          ),
                         ),
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
-                              Icons.remove_red_eye_outlined,
-                              size: 24,
-                              color: Color(0xFF4C56CE),
-                            ),
-                            DemView(Bai.Bv_Ma, Color(0xFF828282), 15.0)
-                          ],
-                        )),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: size.height * 0.3),
+                        padding: EdgeInsets.only(top: 10),
+                        height: size.height * 36 / 640,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(25),
+                              topRight: Radius.circular(25)),
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
+                ])),
+            SliverList(
+                delegate: SliverChildListDelegate([
+              Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Container(
                       child: ListTile(
-                    leading: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    LayDD(Bai.Bv_MaDiaDanh)),
-                          );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.white, elevation: 0),
-                      icon: SvgPicture.asset(
-                        'assets/imgs/svg/gps1.svg',
-                        color: Color(0xFF4C56CE),
-                        height: size.height * 20 / 640,
-                        width: 20,
-                      ),
-                      label: Text(
-                        Bai.Bv_TenDD,
-                        style: cabin_B(context,Color(0xFF828282), 15.0),
-                      ),
+                          leading: Text(
+                            Bai.Bv_TieuDe,
+                            style: TextStyle(
+                                fontSize: 25,
+                                fontFamily: 'Cabin_B',
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.clip),
+                          ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(
+                                Icons.remove_red_eye_outlined,
+                                size: 24,
+                                color: Color(0xFF4C56CE),
+                              ),
+                              DemView(Bai.Bv_Ma, Color(0xFF828282), 15.0)
+                            ],
+                          )),
                     ),
-                    trailing: ElevatedButton.icon(
+                    Container(
+                        child: ListTile(
+                      leading: ElevatedButton.icon(
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    LayTT(Bai.Bv_MaNguoiDung,1)),
+                                builder: (context) => LayDD(Bai.Bv_MaDiaDanh)),
                           );
                         },
                         style: ElevatedButton.styleFrom(
                             primary: Colors.white, elevation: 0),
                         icon: SvgPicture.asset(
-                          'assets/imgs/svg/user1.svg',
-                          height: size.height * 20 / 640,
-                          width: size.width * 20 / 360,
+                          'assets/imgs/svg/gps1.svg',
                           color: Color(0xFF4C56CE),
+                          height: size.height * 20 / 640,
+                          width: 20,
                         ),
-                        label: Text(Bai.Bv_TenND,
-                            style: cabin_B(context,Color(0xFF828282), 15.0))),
-                  )),
-                  Padding(
-                            padding: EdgeInsets.only(
-                                right: 30, left: 30, top: 3, bottom: 90),
-                            child: Text(
-                              Bai.Bv_NoiDung,
-                              style: TextStyle(
-                                  fontFamily: 'Cabin_B',
-                                  overflow: TextOverflow.clip),
-                            ),
+                        label: Text(
+                          Bai.Bv_TenDD,
+                          style: cabin_B(context, Color(0xFF828282), 15.0),
+                        ),
+                      ),
+                      trailing: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LayTT(Bai.Bv_MaNguoiDung, 1)),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.white, elevation: 0),
+                          icon: SvgPicture.asset(
+                            'assets/imgs/svg/user1.svg',
+                            height: size.height * 20 / 640,
+                            width: size.width * 20 / 360,
+                            color: Color(0xFF4C56CE),
                           ),
-                        
-          ],),),
-        ])),
-      ],
+                          label: Text(Bai.Bv_TenND,
+                              style:
+                                  cabin_B(context, Color(0xFF828282), 15.0))),
+                    )),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          right: 30, left: 30, top: 3, bottom: 90),
+                      child: Text(
+                        Bai.Bv_NoiDung,
+                        style: TextStyle(
+                            fontFamily: 'Cabin_B', overflow: TextOverflow.clip),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ])),
+          ],
+        ),
       ),
-       floatingActionButton: Row(
+      floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

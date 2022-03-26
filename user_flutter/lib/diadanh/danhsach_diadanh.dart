@@ -35,15 +35,17 @@ class _DanhSachDiaDanhState extends State<DanhSachDiaDanh> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    TextButton(
+                ListTile(leading:TextButton(
                       onPressed: () {},
                       child: Text(
                         'Đề cử',
                         style: cabin_B(context, Colors.blue, 25.0)
                       ),
-                    ),
+                    ),trailing:TextButton(onPressed: (){}, child: Text('+'))  ,),
+                Row(
+                  children: [
+                    
+                    
                   ],
                 ),
                 DeCuDiaDanh(),

@@ -19,7 +19,21 @@ class CaiDat extends StatefulWidget {
 class _CaiDatState extends State<CaiDat> {
   final NguoiDungObject ND;
   _CaiDatState({required this.ND});
-  final controller1 = ValueNotifier<bool>(false);
+
+  ValueNotifier<bool> controller1 = ValueNotifier<bool>(false);
+   ValueNotifier<bool> xet(){
+    if(ND.Nd_TrangThai==3){
+     return ValueNotifier<bool>(false);
+    }else{
+      return ValueNotifier<bool>(true);
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller1= xet();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,7 +143,9 @@ class _CaiDatState extends State<CaiDat> {
                 ],
               ),
             ),
-            Container(
+            TextButton(onPressed: (){
+              
+            }, child:   Container(
               padding: EdgeInsets.all(10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,7 +170,8 @@ class _CaiDatState extends State<CaiDat> {
                 ],
               ),
             ),
-            Container(
+           ),
+           Container(
               padding: EdgeInsets.only(left: 300, right: 30),
               color: Colors.black,
               height: 2,

@@ -32,8 +32,20 @@ class _cardState extends State<card> {
       }
     });
   }
+  int id=0;
+    layid() async{
+SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     id = (sharedPreferences.getInt('id') ?? 0);
+  }
+  
 
   _cardState({required this.BV});
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    layid();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -78,10 +90,13 @@ class _cardState extends State<card> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
+                    width: 200,
+                    padding: EdgeInsets.only(left: 5),
                     child: Text(
                       BV.Bv_TieuDe,
                       style: cabin_B(context, Colors.black, 18.0),
                       softWrap: true,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ), //#5
                   ElevatedButton.icon(

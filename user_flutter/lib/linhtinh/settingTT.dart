@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:user_flutter/Object/nguoidungObject.dart';
+import 'package:user_flutter/Provider/NguoiDungProvider.dart';
 import 'package:user_flutter/class_chung.dart';
 import 'package:user_flutter/colorplush.dart';
 
@@ -21,12 +25,34 @@ class _settingTTState extends State<settingTT> {
   final txtTen = TextEditingController();
   final txtHoTen = TextEditingController();
   final txtSDT = TextEditingController();
+  String? _image;
+  
+Future pickImage() async {
+    final pick = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pick != null) {
+        _image = pick.path;
+      } else {
+        final snackBar = SnackBar(content: Text("Chưa chọn ảnh"), duration: Duration(microseconds: 400));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });}
+  suathongtin(){
+    NguoiDungProvider.sua(txtTen.text, txtEmail.text, txtHoTen.text, txtSDT.text);
+  }
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
     txtEmail.text = Nd.Nd_emai;
     txtHoTen.text = Nd.Nd_TenDaiDien;
     txtSDT.text = Nd.Nd_SDT;
     txtTen.text = Nd.Nd_TenDaiDien;
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -86,6 +112,7 @@ class _settingTTState extends State<settingTT> {
                                     TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
+                                           Navigator.pop(context);
                                         },
                                         child: Text(
                                           'Vẫn huỷ',
@@ -122,10 +149,17 @@ class _settingTTState extends State<settingTT> {
           margin: EdgeInsets.only(left: 30, right: 30, top: 10),
           child: Column(
             children: [
-              CircleAvatar(
-                backgroundColor: Colors.white,
+              InkWell(onTap: (){ pickImage();},
+              child: _image==null? CircleAvatar(
+                backgroundColor:  Colors.white,
                 backgroundImage: NetworkImage(httpsanh + Nd.Nd_AnhNen),
                 radius: 70,
+              ):CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 70,
+                backgroundImage: FileImage(File(_image!)),
+              ),
+
               ),
               TF(
                 text: 'Tên đại diện',
@@ -157,7 +191,9 @@ class _settingTTState extends State<settingTT> {
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    suathongtin();
+                  },
                   child: ListTile(
                     leading: SvgPicture.asset(
                       'assets/imgs/svg/checkbox.svg',

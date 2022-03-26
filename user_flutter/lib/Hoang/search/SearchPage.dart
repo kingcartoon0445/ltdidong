@@ -23,11 +23,8 @@ class SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
+      appBar: AppBar(
+        title:  Padding(
               padding: EdgeInsets.symmetric(vertical: 12),
               child: Container(
                 decoration: BoxDecoration(
@@ -62,7 +59,13 @@ class SearchPageState extends State<SearchPage> {
                 ),
               ),
             ),
-            Expanded(
+            
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           Expanded(
               child: ListView.builder(
                 itemCount: books.length,
                 itemBuilder: (context, index) {

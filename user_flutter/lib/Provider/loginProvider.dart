@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:user_flutter/Hoang/login/page_login.dart';
 import 'package:user_flutter/background.dart';
 import 'package:user_flutter/class_chung.dart';
 
@@ -12,38 +13,64 @@ class LoginProvider {
     String url = https + '/login';
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map body = {'Email': email, 'MatKhau': password};
-    var response = await http.post(Uri.parse(url), headers: <String, String>{'Accept': 'application/json'}, body: body);
+    var response = await http.post(Uri.parse(url),
+        headers: <String, String>{'Accept': 'application/json'}, body: body);
     var jsonResponse;
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
+       if(jsonResponse["message"] == 'sai'){
+            var  snackBar = SnackBar(
+            content: const Text('Email hoặc mật khẩu không đúng!'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }else{
       sharedPreferences.setString("token", jsonResponse['token']);
       sharedPreferences.setInt("id", jsonResponse['id']);
-      Navigator.of(context)
-          .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LayTT(jsonResponse['id'], 2)), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => LayTT(jsonResponse['id'], 2)),
+          (route) => false);}
+      
+    }else{
+      var snackBar = SnackBar(
+            content: const Text('Email hoặc mật khẩu không đúng'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );ScaffoldMessenger.of(context).showSnackBar(snackBar); 
     }
   }
 
-  static Future<bool> logout() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  static Future logout(BuildContext context,) async{
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String tokens = (sharedPreferences.getString('token') ?? "");
-    String url = https + '/logout';
-    final respones = await http.post(Uri.parse(url), headers: {
-      'Authorization': 'Bearer $tokens',
+    String url=https+'/logout';
+    final respones=await http.get(Uri.parse(url),headers: {
+       'Authorization': 'Bearer $tokens',
     });
-    final jsonRespon = jsonDecode(respones.body);
-    if (jsonRespon['status'] == '200') {
-      return true;
-    } else {
-      return false;
-    }
+    final jsonRespon=jsonDecode(respones.body); 
+    if(jsonRespon['status']=='200'){
+      Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()),
+                                    (route) => false);
+        sharedPreferences.remove('token');                            
+    }else{return false;}
   }
 
-  static Future<int> register(
-      BuildContext context, String HoTen, String Email, String sdt, String Matkhau, File img) async {
+  static Future<int> register(BuildContext context, String HoTen, String Email,
+      String sdt, String Matkhau, File img) async {
     String url = https + '/NguoiDung';
     try {
-      var lst = [];
-      lst.add(await MultipartFile.fromFile(img.path));
+      var lst=[];
+      lst.add( await MultipartFile.fromFile(img.path));
       print(lst);
       Dio dio = new Dio();
       img.existsSync();
@@ -66,4 +93,6 @@ class LoginProvider {
       return 0;
     }
   }
+
+  
 }
